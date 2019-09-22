@@ -2,13 +2,20 @@
 public class Jugador {
 int nroTurno;
 String personaje;
-int puntos;
+int puntos = 0;
 String objEfectos;
 int lugarTableroX;
 int lugarTableroY;
 String Nombre;
 
-public void setPuntos() {}
+public void setPuntos(int pto) {
+	puntos = pto;
+}
+
+public void sumarPuntos(int pto) {
+	puntos += pto;
+}
+
 public boolean usarObjeto() {
 	return true;
 }
@@ -21,8 +28,10 @@ public boolean crearSala() {
 public boolean salirSala() {
 	return true;
 }
-public boolean entrarEnSalir() {
+public boolean entrarEnSalir() { //Que es este?
 	return true;
 }
+
+
 
 }
