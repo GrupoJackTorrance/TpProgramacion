@@ -28,7 +28,7 @@ public boolean crearSala() {
 public boolean salirSala() {
 	return true;
 }
-public boolean entrarEnSalir() { //Que es este?
+public boolean entrarEnSala() {
 	return true;
 }
 
