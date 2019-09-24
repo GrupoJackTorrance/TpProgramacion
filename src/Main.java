@@ -17,13 +17,9 @@ public class Main {
 		
 		*/
 		Tablero tablero = new Tablero();
-		Jugador jugador= new Jugador(0, "pepe",0, 5, 9,0,0, "oepe");
-		if(tablero.puedeAvanzar(jugador, "arriba")) {
-			System.out.println("puede");
-		}
-		else
-			System.out.println("no puede");
-		
+		//nroTurno,personaje,puntos, lugarTableroX,lugarTableroY,posicionAnteriorX,posicionAnteriorY,nombre
+		Jugador jugador= new Jugador(0, "pepe",0, 0,3,0,2, "oepe");
+		tablero.avanzarJugador(jugador,1);
 
 	}
 

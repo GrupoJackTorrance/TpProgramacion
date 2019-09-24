@@ -166,24 +166,33 @@ public class Tablero {
 	*/
 	public boolean avanzarJugador(Jugador jugador , int cantidad ) {
 		
-		boolean esUnion=true;
 		
 		while(mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion()==false && cantidad>0) {
 			if(puedeAvanzar(jugador,"izquierda")) {
-				
+				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+				jugador.setLugarTableroY(jugador.getLugarTableroY()-1);
 			}
 			else if(puedeAvanzar(jugador,"derecha")) {
-				
+				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+				jugador.setLugarTableroY(jugador.getLugarTableroY()+1);
 			}
 			else if(puedeAvanzar(jugador,"arriba")) {
-				
+				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+				jugador.setLugarTableroX(jugador.getLugarTableroX()-1);
 			}
 			else if(puedeAvanzar(jugador,"abajo")) {
-				
+				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+				jugador.setLugarTableroX(jugador.getLugarTableroY()+1);
 			}
 			cantidad--;
-			
 		}
+		
+		if(cantidad==0) {
+			System.out.println("se avanzo la cantidad pedida:");
+		}
+		else
+			System.out.println("se llego a una union");
+		System.out.println("posicionActual: "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY());
 		
 	return true;
      }
@@ -197,20 +206,21 @@ public boolean puedeAvanzar(Jugador jugador,String direccion) {
 	int cantidadColumnas=mapa[0].length;
 	
 	if(direccion.equals("arriba") &&  posicionX>0 
-			&& posicionAnteriorX!=posicionX && posicionAnteriorY!=posicionY && mapa[posicionX-1][posicionY]!=null) {
+			&& posicionAnteriorX!=posicionX-1 && mapa[posicionX-1][posicionY]!=null) {
+		return true;
 		
 	}
 	else if(direccion.equals("abajo")&& posicionX+1<cantidadFilas
-			&& posicionAnteriorX!=posicionX && posicionAnteriorY!=posicionY && mapa[posicionX +1][posicionY]!=null ) {
+			&&posicionAnteriorX!=posicionX+1 && mapa[posicionX +1][posicionY]!=null ) {
 		return true;
 		
 	}
    else if(direccion.equals("izquierda") &&  posicionY>0
-		   && posicionAnteriorX!=posicionX && posicionAnteriorY!=posicionY && mapa[posicionX][posicionY-1]!=null) {
+		   &&posicionAnteriorY!=posicionY-1 && mapa[posicionX][posicionY-1]!=null) {
 		return true;
 	}
   else if(direccion.equals("derecha")&&  posicionY+1 <cantidadColumnas
-		  && posicionAnteriorX!=posicionX && posicionAnteriorY!=posicionY&& mapa[posicionX][posicionY+1]!=null) {
+		  &&posicionAnteriorY!=posicionY+1 && mapa[posicionX][posicionY+1]!=null) {
 	return true;
    }
   
