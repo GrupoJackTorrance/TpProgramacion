@@ -24,11 +24,16 @@ public boolean eliminarPartida() {
 	return true;
 }
 
-public boolean addJugadorPartida(Jugador j1) {
+public boolean addJugadorPartida(Jugador jugador) {
 
 	try {
-		if(!jugadores.contains(j1))
-			jugadores.add(j1);
+		if(!jugadores.contains(jugador)) {
+			jugador.setPosicionAnteriorX(0);
+		    jugador.setPosicionAnteriorY(0);
+		    jugador.setLugarTableroX(0);
+		    jugador.setLugarTableroY(0);
+			jugadores.add(jugador);
+		}
 		else
 			System.out.println("El jugador ya se encuentra añadido a la partida");
 	} catch (Exception e) {

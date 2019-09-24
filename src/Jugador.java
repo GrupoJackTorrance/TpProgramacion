@@ -96,8 +96,11 @@ public void setPuntos(int pto) {
 	puntos = pto;
 }
 
-public void sumarPuntos(int pto) {
-	puntos += pto;
+public void sumarPuntos(int puntos) {
+	this.puntos += puntos;
+}
+public void restarPuntos(int puntos) {
+	this.puntos-=puntos;
 }
 
 public boolean usarObjeto() {
@@ -107,6 +110,7 @@ public void elegirCaminoEnUnion() {
 	
 }
 public boolean crearSala() {
+	Sala sala= new Sala();
 	return true;
 }
 public boolean salirSala() {

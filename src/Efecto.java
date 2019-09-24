@@ -1,9 +1,23 @@
 
 public class Efecto {
 int id;
-public void efecto() {}
+String tipo;
 
-public static void dar1pto(Jugador j){
-	j.sumarPuntos(1);
+public Efecto(String tipo) {
+	this.tipo=tipo;
+}
+
+public void dar1pto(Jugador jugador){
+	jugador.sumarPuntos(1);
+}
+public void neutro(Jugador jugador) {
+	return;
+}
+public void restarPuntos(Jugador jugador) {
+	jugador.restarPuntos(1);
+	
+}
+public String getTipo() {
+	return this.tipo;
 }
 }

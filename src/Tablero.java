@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Tablero {
@@ -6,7 +8,11 @@ public class Tablero {
 	
 	String nombre;
 	Casilla mapa[][] = new Casilla [4][4];
-	
+	List<Jugador> jugadores = new LinkedList<Jugador>();
+	//        ----------  C O N S T R U C T O R---------------------
+	public Tablero(List <Jugador> jugadores) {
+		this.jugadores=jugadores;
+	}
 	
 	
 // 						 ------------	M E T O D O S    -------------
@@ -21,20 +27,22 @@ public class Tablero {
 		 Se hardcodeó para poder hacer las pruebas con un tablero que conozcamos, con bifurcaciones.
 		 */
 	
-		
-		mapa[0][0] = new Casilla(0,0, "Azul");
-		mapa[0][1] = new Casilla(0,1, "Blanco");
-		mapa[1][1] = new Casilla(1,1, "Blanco");
-		mapa[2][1] = new Casilla(2,1, "Blanco");
-		mapa[3][1] = new Casilla(3,1, "Azul");
-		mapa[4][1] = new Casilla(4,1, "Azul");
-		mapa[2][2] = new Casilla(2,2, "Azul");
-		mapa[4][2] = new Casilla(4,2, "Azul");
-		mapa[2][3] = new Casilla(2,3, "Rojo");
-		mapa[4][3] = new Casilla(4,3, "Verde");
-		mapa[2][4] = new Casilla(2,4, "Blanco");
-		mapa[3][4] = new Casilla(3,4, "Blanco");
-		mapa[4][4] = new Casilla(4,4, "Blanco");
+		Efecto efectoSumarPuntos= new Efecto("sumarPuntos");
+		Efecto sinEfecto= new Efecto("sinEfecto");
+		Efecto efectoRestarPuntos= new Efecto("restarPuntos");
+		mapa[0][0] = new Casilla(0,0, "blanco",sinEfecto);
+		mapa[0][1] = new Casilla(0,1, "verde",efectoSumarPuntos);
+		mapa[1][1] = new Casilla(1,1, "verde",efectoSumarPuntos);
+		mapa[2][1] = new Casilla(2,1, "blanco",sinEfecto);
+		mapa[3][1] = new Casilla(3,1, "rojo",efectoRestarPuntos);
+		mapa[4][1] = new Casilla(4,1, "verde",sinEfecto);
+		mapa[2][2] = new Casilla(2,2, "verde",efectoSumarPuntos);
+		mapa[4][2] = new Casilla(4,2, "verde",efectoSumarPuntos);
+		mapa[2][3] = new Casilla(2,3, "rojo",efectoRestarPuntos);
+		mapa[4][3] = new Casilla(4,3, "blanco",sinEfecto);
+		mapa[2][4] = new Casilla(2,4, "rojo",efectoRestarPuntos);
+		mapa[3][4] = new Casilla(3,4, "Blanco",sinEfecto);
+		mapa[4][4] = new Casilla(4,4, "azul",efectoSumarPuntos);
 	}
 	
 	
@@ -57,10 +65,10 @@ public class Tablero {
 			*casilleros que rodean al jugador, estén libres (instanciados)
 			*/ 
 
-			if((j<4 && i<4 && puedeAvanzar(i, j+1) && puedeAvanzar(i+1, j)) || 
-					(i<4 && j>1 && puedeAvanzar(i+1, j) && puedeAvanzar(i, j-1)) ||
+			if((j<mapa.length && i<mapa.length && puedeAvanzar(i, j+1) && puedeAvanzar(i+1, j)) || 
+					(i<mapa.length && j>1 && puedeAvanzar(i+1, j) && puedeAvanzar(i, j-1)) ||
 					(i>1 && j>1 && puedeAvanzar(i-1, j) && puedeAvanzar(i, j-1)) ||
-					(i>1 && j<4 && puedeAvanzar(i-1, j) && puedeAvanzar(i, j+1))
+					(i>1 && j<mapa.length && puedeAvanzar(i-1, j) && puedeAvanzar(i, j+1))
 					
 					) {
 				//le pido que ingrese las coordenadas a las que quiere ir

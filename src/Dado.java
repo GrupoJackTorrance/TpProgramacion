@@ -1,4 +1,10 @@
 
 public class Dado {
-int num;
+//int num;
+/*	
+public int generarNumero(){
+	//int num=Math.
+//	return num;
+}
+*/
 }
