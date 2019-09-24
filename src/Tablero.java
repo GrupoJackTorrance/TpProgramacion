@@ -7,7 +7,7 @@ public class Tablero {
 //  					 ------------	A T R I B U T O S    -------------
 	
 	String nombre;
-	Casilla mapa[][] = new Casilla [7][11];
+	Casilla mapa[][] = new Casilla [8][12];
 	List<Jugador> jugadores = new LinkedList<Jugador>();
 	//        ----------  C O N S T R U C T O R---------------------
 	public Tablero(List <Jugador> jugadores) {
@@ -30,62 +30,63 @@ public class Tablero {
 		Efecto efectoSumarPuntos= new Efecto("sumarPuntos"); //verde
 		Efecto sinEfecto= new Efecto("sinEfecto"); // blanco
 		Efecto efectoRestarPuntos= new Efecto("restarPuntos"); // rojo
-		mapa[0][0] = new Casilla(0,0, "blanco",sinEfecto);
-		mapa[0][1] = new Casilla(0,1, "blanco",sinEfecto);
-		mapa[0][2] = new Casilla(0,2, "blanco",sinEfecto);
-		mapa[0][3] = new Casilla(0,3, "verde",efectoSumarPuntos);
-		mapa[0][4] = new Casilla(0,4, "verde",efectoSumarPuntos);
-		mapa[0][5] = new Casilla(0,5, "rojo",efectoRestarPuntos);
-		mapa[0][6] = new Casilla(0,6, "verde",efectoSumarPuntos);
-		mapa[0][7] = new Casilla(0,7, "rojo",efectoRestarPuntos);
-		mapa[0][8] = new Casilla(0,8, "verde",efectoSumarPuntos);
-		mapa[0][9] = new Casilla(0,9, "blanco",sinEfecto);
-		mapa[0][10] = new Casilla(0,10, "verde",efectoSumarPuntos);
+		mapa[0][0] = new Casilla(0,0, "blanco",sinEfecto,false);
+		mapa[0][1] = new Casilla(0,1, "blanco",sinEfecto,false);
+		mapa[0][2] = new Casilla(0,2, "blanco",sinEfecto,false);
+		mapa[0][3] = new Casilla(0,3, "verde",efectoSumarPuntos,false);
+		mapa[0][4] = new Casilla(0,4, "verde",efectoSumarPuntos,false);
+		mapa[0][5] = new Casilla(0,5, "rojo",efectoRestarPuntos,true);
+		mapa[0][6] = new Casilla(0,6, "verde",efectoSumarPuntos,false);
+		mapa[0][7] = new Casilla(0,7, "rojo",efectoRestarPuntos,false);
+		mapa[0][8] = new Casilla(0,8, "verde",efectoSumarPuntos,false);
+		mapa[0][9] = new Casilla(0,9, "blanco",sinEfecto,false);
+		mapa[0][10] = new Casilla(0,10, "verde",efectoSumarPuntos,false);
 		
-		mapa[1][5] = new Casilla(1,5, "rojo",efectoRestarPuntos);
-		mapa[1][10] = new Casilla(1,10, "rojo",efectoRestarPuntos);
+		mapa[1][5] = new Casilla(1,5, "rojo",efectoRestarPuntos,false);
+		mapa[1][10] = new Casilla(1,10, "rojo",efectoRestarPuntos,false);
 		
-		mapa[2][5] = new Casilla(2,5, "verde",efectoSumarPuntos);
-		mapa[2][8] = new Casilla(2,8, "verde",efectoSumarPuntos);
-		mapa[2][9] = new Casilla(2,9, "blanco",sinEfecto);
-		mapa[2][10] = new Casilla(2,10, "blanco",sinEfecto);
-		mapa[2][11] = new Casilla(2,11, "rojo",efectoRestarPuntos);
+		mapa[2][5] = new Casilla(2,5, "verde",efectoSumarPuntos,false);
+		mapa[2][8] = new Casilla(2,8, "verde",efectoSumarPuntos,false);
+		mapa[2][9] = new Casilla(2,9, "blanco",sinEfecto,false);
+		mapa[2][10] = new Casilla(2,10, "blanco",sinEfecto,false);
+		mapa[2][11] = new Casilla(2,11, "rojo",efectoRestarPuntos,false);
 		
-		mapa[3][2] = new Casilla(3,2, "verde",efectoSumarPuntos);
-		mapa[3][3] = new Casilla(3,3, "verde",efectoSumarPuntos);
-		mapa[3][4] = new Casilla(3,4, "rojo",efectoRestarPuntos);
-		mapa[3][5] = new Casilla(3,5, "rojo",efectoRestarPuntos);
-		mapa[3][8] = new Casilla(3,8, "rojo",efectoRestarPuntos);
+		mapa[3][2] = new Casilla(3,2, "verde",efectoSumarPuntos,false);
+		mapa[3][3] = new Casilla(3,3, "verde",efectoSumarPuntos,false);
+		mapa[3][4] = new Casilla(3,4, "rojo",efectoRestarPuntos,false);
+		mapa[3][5] = new Casilla(3,5, "rojo",efectoRestarPuntos,true);
+		mapa[3][8] = new Casilla(3,8, "rojo",efectoRestarPuntos,false);
 		
-		mapa[4][2] = new Casilla(4,2, "blanco",sinEfecto);
-		mapa[4][5] = new Casilla(4,5, "blanco",sinEfecto);
-		mapa[4][8]= new Casilla(4,8,"verde",efectoSumarPuntos);
+		mapa[4][2] = new Casilla(4,2, "blanco",sinEfecto,false);
+		mapa[4][5] = new Casilla(4,5, "blanco",sinEfecto,false);
+		mapa[4][8]= new Casilla(4,8,"verde",efectoSumarPuntos,false);
 		
-		mapa[5][0] = new Casilla(5,0, "blanco",sinEfecto);
-		mapa[5][1] = new Casilla(5,1, "blanco",sinEfecto);
-		mapa[5][2] = new Casilla(5,2, "blanco",sinEfecto);
-		mapa[5][5] = new Casilla(5,5, "rojo",efectoRestarPuntos);
-		mapa[5][8] = new Casilla(5,8, "rojo",efectoRestarPuntos);
-		mapa[5][9] = new Casilla(5,9, "verde",efectoSumarPuntos);
-		mapa[5][10] = new Casilla(5,10, "blanco",sinEfecto);
-	    mapa[5][11] = new Casilla(5,11, "blanco",sinEfecto);
+		mapa[5][0] = new Casilla(5,0, "blanco",sinEfecto,false);
+		mapa[5][1] = new Casilla(5,1, "blanco",sinEfecto,false);
+		mapa[5][2] = new Casilla(5,2, "blanco",sinEfecto,false);
+		mapa[5][5] = new Casilla(5,5, "rojo",efectoRestarPuntos,false);
+		mapa[5][8] = new Casilla(5,8, "rojo",efectoRestarPuntos,false);
+		mapa[5][9] = new Casilla(5,9, "verde",efectoSumarPuntos,false);
+		mapa[5][10] = new Casilla(5,10, "blanco",sinEfecto,false);
+	    mapa[5][11] = new Casilla(5,11, "blanco",sinEfecto,false);
 	    
-		mapa[6][0] = new Casilla(6,0, "verde",efectoSumarPuntos);
-		mapa[6][5]= new Casilla(6,5, "verde",efectoSumarPuntos);
-		mapa[6][11]= new Casilla(6,11, "verde",efectoSumarPuntos);
+		mapa[6][0] = new Casilla(6,0, "verde",efectoSumarPuntos,false);
+		mapa[6][5]= new Casilla(6,5, "verde",efectoSumarPuntos,false);
+		mapa[6][11]= new Casilla(6,11, "verde",efectoSumarPuntos,false);
 		
-		mapa[7][0] = new Casilla(7,0, "verde",efectoSumarPuntos);
-		mapa[7][1] = new Casilla(7,1, "verde",efectoSumarPuntos);
-		mapa[7][2] = new Casilla(7,2, "verde",efectoSumarPuntos);
-		mapa[7][3] = new Casilla(7,3, "rojo",efectoRestarPuntos);
-		mapa[7][4] = new Casilla(7,4, "blanco",sinEfecto);
-		mapa[7][5] = new Casilla(7,5, "blanco",sinEfecto);
-		mapa[7][6] = new Casilla(7,6, "blanco",sinEfecto);
-		mapa[7][7] = new Casilla(7,7, "rojo",efectoRestarPuntos);
-		mapa[7][8] = new Casilla(7,8, "rojo",efectoRestarPuntos);
-		mapa[7][9] = new Casilla(7,9, "blanco",sinEfecto);
-		mapa[7][10] = new Casilla(7,10, "verde",efectoSumarPuntos);
-		mapa[7][11] = new Casilla(7,11, "verde",efectoSumarPuntos);
+		mapa[7][0] = new Casilla(7,0, "verde",efectoSumarPuntos,false);
+		mapa[7][1] = new Casilla(7,1, "verde",efectoSumarPuntos,false);
+		mapa[7][2] = new Casilla(7,2, "verde",efectoSumarPuntos,false);
+		mapa[7][3] = new Casilla(7,3, "rojo",efectoRestarPuntos,false);
+		mapa[7][4] = new Casilla(7,4, "blanco",sinEfecto,false);
+		mapa[7][5] = new Casilla(7,5, "blanco",sinEfecto,true);
+		mapa[7][6] = new Casilla(7,6, "blanco",sinEfecto,false);
+		mapa[7][7] = new Casilla(7,7, "rojo",efectoRestarPuntos,false);
+		mapa[7][8] = new Casilla(7,8, "rojo",efectoRestarPuntos,false);
+		mapa[7][9] = new Casilla(7,9, "blanco",sinEfecto,false);
+		mapa[7][10] = new Casilla(7,10, "verde",efectoSumarPuntos,false);
+		mapa[7][11] = new Casilla(7,11, "verde",efectoSumarPuntos,false);
+		
 	   
 	   
 	}
@@ -94,20 +95,20 @@ public class Tablero {
 	public int tirarDado(){
 		return 3; // Hardcodeado para las pruebas
 	}
-	
+	/* COMENTO ESTO PARA VER SI PUEDO DESARROLAR ESOS METODOS DE OTRA FORMA
 	public boolean avanzarJugador(int posiciones, Jugador miJugador) {
 		int posX=0, posY, i=0, j=0;;
 		Scanner in;
 		
 		while(posiciones>0) {
 			
-			/** Las variables i y j corresponden a las coordenadas de la posición del jugador 
-			*(x e y)
-			* Comienzo evaluando si hay alguna bifurcación a tomar. 
-			* Para esto, hay que chequear que no me salga de la matriz
-			*xq daría null pointer exception, y verificar alguno de los pares de 
-			*casilleros que rodean al jugador, estén libres (instanciados)
-			*/ 
+			// Las variables i y j corresponden a las coordenadas de la posición del jugador 
+			//(x e y)
+			// Comienzo evaluando si hay alguna bifurcación a tomar. 
+			//Para esto, hay que chequear que no me salga de la matriz
+		    //xq daría null pointer exception, y verificar alguno de los pares de 
+			//casilleros que rodean al jugador, estén libres (instanciados)
+			// 
 
 			if((j<mapa.length && i<mapa.length && puedeAvanzar(i, j+1) && puedeAvanzar(i+1, j)) || 
 					(i<mapa.length && j>1 && puedeAvanzar(i+1, j) && puedeAvanzar(i, j-1)) ||
@@ -154,14 +155,68 @@ public class Tablero {
 		return true;
 	}
 	
-	/* Este método sirve para que el algoritmo no te mande siempre para el mismo lado. Por defecto, está programado para mandar
-	al jugador a la derecha y abajo primero, pero si despues de una bifurcacion queres irte para la izquierda o para arriba, voy
-	a necesitar de este método que va a evitar que vuelva a la posicion anterior.*/
-	public boolean verificarPosAnterior(int x, int y) { 
+	// Este método sirve para que el algoritmo no te mande siempre para el mismo lado. Por defecto, está programado para mandar
+	//al jugador a la derecha y abajo primero, pero si despues de una bifurcacion queres irte para la izquierda o para arriba, voy
+	//a necesitar de este método que va a evitar que vuelva a la posicion anterior.
+	//public boolean verificarPosAnterior(int x, int y) { 
 		if(x == posicionAnteriorEnX && y == posicionAnteriorEnY)
 			return false;
 		return true;
 	}
+	*/
+	public boolean avanzarJugador(Jugador jugador , int cantidad ) {
+		
+		boolean esUnion=true;
+		
+		while(mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion()==false && cantidad>0) {
+			if(puedeAvanzar(jugador,"izquierda")) {
+				
+			}
+			else if(puedeAvanzar(jugador,"derecha")) {
+				
+			}
+			else if(puedeAvanzar(jugador,"arriba")) {
+				
+			}
+			else if(puedeAvanzar(jugador,"abajo")) {
+				
+			}
+			cantidad--;
+			
+		}
+		
+	return true;
+     }
+
+public boolean puedeAvanzar(Jugador jugador,String direccion) {
+	int posicionX=jugador.getLugarTableroX();
+	int posicionY=jugador.getLugarTableroY();
+	int posicionAnteriorX=jugador.getPosicionAnteriorX();
+	int posicionAnteriorY=jugador.getPosicionAnteriorY();
+	int cantidadFilas=mapa.length;
+	int cantidadColumnas=mapa[0].length;
+	
+	if(direccion.equals("arriba") &&  posicionX>0 
+			&& posicionAnteriorX!=posicionX && posicionAnteriorY!=posicionY && mapa[posicionX-1][posicionY]!=null) {
+		
+	}
+	else if(direccion.equals("abajo")&& posicionX+1<cantidadFilas
+			&& posicionAnteriorX!=posicionX && posicionAnteriorY!=posicionY && mapa[posicionX +1][posicionY]!=null ) {
+		return true;
+		
+	}
+   else if(direccion.equals("izquierda") &&  posicionY>0
+		   && posicionAnteriorX!=posicionX && posicionAnteriorY!=posicionY && mapa[posicionX][posicionY-1]!=null) {
+		return true;
+	}
+  else if(direccion.equals("derecha")&&  posicionY+1 <cantidadColumnas
+		  && posicionAnteriorX!=posicionX && posicionAnteriorY!=posicionY&& mapa[posicionX][posicionY+1]!=null) {
+	return true;
+   }
+  
+	return false;
+	
+}
 
 }
 
