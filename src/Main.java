@@ -18,8 +18,8 @@ public class Main {
 		*/
 		Tablero tablero = new Tablero();
 		//nroTurno,personaje,puntos, lugarTableroX,lugarTableroY,posicionAnteriorX,posicionAnteriorY,nombre
-		Jugador jugador= new Jugador(0, "pepe",0, 0,3,0,2, "oepe");
-		tablero.avanzarJugador(jugador,1);
+		Jugador jugador= new Jugador(0, "pepe",0, 0,6,0,5, "oepe");
+		tablero.avanzarJugador(jugador,23);
 
 	}
 

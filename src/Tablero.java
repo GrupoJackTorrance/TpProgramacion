@@ -51,7 +51,7 @@ public class Tablero {
 		mapa[2][8] = new Casilla(2,8, "verde",efectoSumarPuntos,false);
 		mapa[2][9] = new Casilla(2,9, "blanco",sinEfecto,false);
 		mapa[2][10] = new Casilla(2,10, "blanco",sinEfecto,false);
-		mapa[2][11] = new Casilla(2,11, "rojo",efectoRestarPuntos,false);
+		
 		
 		mapa[3][0] = new Casilla(3,0, "rojo",efectoRestarPuntos,false);
 		mapa[3][2] = new Casilla(3,2, "verde",efectoSumarPuntos,false);
@@ -173,20 +173,24 @@ public class Tablero {
 		
 		while(mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion()==false && cantidad>0) {
 			if(puedeAvanzar(jugador,"izquierda")) {
+				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroY(jugador.getLugarTableroY()-1);
 			}
 			else if(puedeAvanzar(jugador,"derecha")) {
+				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroY(jugador.getLugarTableroY()+1);
 			}
 			else if(puedeAvanzar(jugador,"arriba")) {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroX(jugador.getLugarTableroX()-1);
 			}
 			else if(puedeAvanzar(jugador,"abajo")) {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-				jugador.setLugarTableroX(jugador.getLugarTableroY()+1);
+				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+				jugador.setLugarTableroX(jugador.getLugarTableroX()+1);
 			}
 			cantidad--;
 		}
