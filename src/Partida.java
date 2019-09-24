@@ -1,20 +1,23 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class Partida {
 	
+	///int estado; PARA SABER SI UNA PARTIDA SE ENCUENTRA ACTIVA O NO
 	int rondaMax;
 	int puntosObjetivo;
 	
 	//Tablero de juego
 	 Tablero tablero;
 	 //Lista de jugadores
-	ArrayList<Jugador> jugadores;
+	 List<Jugador> jugadores = new LinkedList<Jugador>();
 	
 	int turno;
 	 
 	 //Generamos la partida
-	 public Partida(int rondaMax,int puntosObjetivo, int cantJugadores){
+	 public Partida(int rondaMax,int puntosObjetivo, int cantJugadores, List<Jugador> listaJugadores){
 		 
 		 //Se empieza del turno 0
 		 turno = 0;
@@ -26,7 +29,7 @@ public class Partida {
 		 this.rondaMax = rondaMax;
 		 
 		 //Construimos los jugadores de la partida
-		 crearJugadores(cantJugadores); 
+		 jugadores = listaJugadores;
 		 
 		 //Construimos el tablero de partida 
 		 tablero = new Tablero();
@@ -37,7 +40,7 @@ public class Partida {
 		 }
 	 }
 	 
-	 private void crearJugadores(int num_jugadores) {
+	/* private void crearJugadores(int num_jugadores) {
 		 //inicializamos jugadores;
 		 jugadores = new ArrayList<Jugador>(num_jugadores);
 		 
@@ -47,12 +50,12 @@ public class Partida {
 			 //metemos al jugador en la lista de jugadores de la partida
 			 jugadores.add(jugadores.size(),jugador);
 		 }
-	 }
+	 }*/
 	 
 	//Este metodo es para que lo llame ronda..para que juegue el jugador
 	 //faltaria el limite del tiempo del turno
 	 
-	 private int determinarOrdenTurno() { 
+	private int determinarOrdenTurno() { 
 		 //Comprobamos si ya ha terminado la partida o no 
 		 //if(tiempoTerminado() ) {
 			 ///Lanzamos la excexpión de que ya hay un ganador.

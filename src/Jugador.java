@@ -1,6 +1,6 @@
 
 public class Jugador {
-private int nroTurno;
+static private int nroTurno;
 private String personaje;
 private int puntos = 0;
 private String objEfectos;
@@ -8,6 +8,22 @@ private int lugarTableroX;
 private int lugarTableroY;
 private int posicionAnteriorX;
 private int posicionAnteriorY;
+private String Nombre;
+
+
+
+public Jugador(int nroTurno, String personaje, int puntos, int lugarTableroX, int lugarTableroY, int posicionAnteriorX,
+		int posicionAnteriorY, String nombre) {
+	this.nroTurno = nroTurno;
+	this.personaje = personaje;
+	this.puntos = puntos;
+	this.lugarTableroX = lugarTableroX;
+	this.lugarTableroY = lugarTableroY;
+	this.posicionAnteriorX = posicionAnteriorX;
+	this.posicionAnteriorY = posicionAnteriorY;
+	Nombre = nombre;
+}
+
 public int getNroTurno() {
 	return nroTurno;
 }
@@ -75,7 +91,6 @@ public void setNombre(String nombre) {
 public int getPuntos() {
 	return puntos;
 }
-String Nombre;
 
 public void setPuntos(int pto) {
 	puntos = pto;

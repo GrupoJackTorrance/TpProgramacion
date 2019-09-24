@@ -49,10 +49,14 @@ public class Tablero {
 		
 		while(posiciones>0) {
 			
-			// Las variables i y j corresponden a las coordenadas de la posición del jugador (x e y)
-			/* Comienzo evaluando si hay alguna bifurcación a tomar. Para esto, hay que chequear que no me salga de la matriz
-			xq daría null pointer exception, y verificar alguno de los pares de casilleros que rodean al jugador, estén libres (instanciados)*/ 
-			
+			/** Las variables i y j corresponden a las coordenadas de la posición del jugador 
+			*(x e y)
+			* Comienzo evaluando si hay alguna bifurcación a tomar. 
+			* Para esto, hay que chequear que no me salga de la matriz
+			*xq daría null pointer exception, y verificar alguno de los pares de 
+			*casilleros que rodean al jugador, estén libres (instanciados)
+			*/ 
+
 			if((j<4 && i<4 && puedeAvanzar(i, j+1) && puedeAvanzar(i+1, j)) || 
 					(i<4 && j>1 && puedeAvanzar(i+1, j) && puedeAvanzar(i, j-1)) ||
 					(i>1 && j>1 && puedeAvanzar(i-1, j) && puedeAvanzar(i, j-1)) ||
