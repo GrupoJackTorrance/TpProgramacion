@@ -19,7 +19,7 @@ public class Main {
 		Tablero tablero = new Tablero();
 		//nroTurno,personaje,puntos, lugarTableroX,lugarTableroY,posicionAnteriorX,posicionAnteriorY,nombre
 		Jugador jugador= new Jugador(0, "pepe",0, 0,6,0,5, "oepe");
-		tablero.avanzarJugador(jugador,23);
+		System.out.println(tablero.avanzarJugador(jugador,23));
 
 	}
 

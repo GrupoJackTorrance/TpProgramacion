@@ -168,7 +168,7 @@ public class Tablero {
 		return true;
 	}
 	*/
-	public boolean avanzarJugador(Jugador jugador , int cantidad ) {
+	public int avanzarJugador(Jugador jugador , int cantidad ) {
 		
 		
 		while(mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion()==false && cantidad>0) {
@@ -195,17 +195,10 @@ public class Tablero {
 			cantidad--;
 		}
 		
-		if(cantidad==0) {
-			System.out.println("se avanzo la cantidad pedida:");
-		}
-		else
-			System.out.println("se llego a una union");
-		System.out.println("posicionActual: "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY());
-		
-	return true;
+	return cantidad;
      }
 
-public boolean puedeAvanzar(Jugador jugador,String direccion) {
+private boolean puedeAvanzar(Jugador jugador,String direccion) {
 	int posicionX=jugador.getLugarTableroX();
 	int posicionY=jugador.getLugarTableroY();
 	int posicionAnteriorX=jugador.getPosicionAnteriorX();
