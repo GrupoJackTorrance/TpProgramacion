@@ -40,7 +40,8 @@ public class Turno{
 	            		turno++;//pasa al proximo turno
 	            		timer.cancel();
 	            	}
-	            	 break;      
+	            	 break;    
+	            	
 	        }
 	        
 	        n++;
