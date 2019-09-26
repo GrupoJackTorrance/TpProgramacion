@@ -13,14 +13,14 @@ public class Partida {
 	 Tablero tablero;
 	 //Lista de jugadores
 	 List<Jugador> jugadores = new LinkedList<Jugador>();
-	
-	int turno;
+	 
+	int turnos;
 	 
 	 //Generamos la partida
 	 public Partida(int rondaMax,int puntosObjetivo, int cantJugadores, List<Jugador> listaJugadores){
 		 
 		 //Se empieza del turno 0
-		 turno = 0;
+		 turnos = cantJugadores;
 		 
 		 //Se elige la cantidad de puntos para ganar
 		 this.puntosObjetivo = puntosObjetivo;
@@ -34,6 +34,9 @@ public class Partida {
 		 //Construimos el tablero de partida 
 		 tablero = new Tablero();
 		 
+		 //Construimos la ronda
+		 	Ronda ronda=new Ronda(cantJugadores);
+		 	
 		 //Ponemos a todos los jugadores para empezar
 		 for(int i=0; i<jugadores.size(); i++) {
 			//ACA NO SE COMO HACER..depende como este hecho casilla
@@ -54,7 +57,19 @@ public class Partida {
 	 
 	//Este metodo es para que lo llame ronda..para que juegue el jugador
 	 //faltaria el limite del tiempo del turno
-	 
+	
+
+	public void InicioPartida(Partida partida) {
+		 //Construimos la ronda
+		 	Ronda ronda=new Ronda(partida.getTurnos());
+		for(int i=0;i<rondaMax;i++) {
+			ronda.InicioRonda(partida.jugadores,partida.getTurnos(),partida.getTablero());
+			i++;
+		}
+		ronda.hayGanador(partida.getPuntosObjetivo(),partida.getTurnos(),partida.getJugadores()); 
+	 }
+	
+	/* 
 	private int determinarOrdenTurno() { 
 		 //Comprobamos si ya ha terminado la partida o no 
 		 //if(tiempoTerminado() ) {
@@ -69,12 +84,54 @@ public class Partida {
 			 turno = 0;
 
 		 return turno;
-	 }	 
-
-
-	public void elegirTablero() {
+	 }	 */
 	
+	
+	
+	public void elegirTablero() {
+		
 	}
+	
+		//PARA MOSTRAR Y MODIFICAR 
+		public int getTurnos() {
+			return turnos;
+		}
 
+		public int getRondaMax() {
+			return rondaMax;
+		}
+
+		public void setRondaMax(int rondaMax) {
+			this.rondaMax = rondaMax;
+		}
+
+		public int getPuntosObjetivo() {
+			return puntosObjetivo;
+		}
+
+		public void setPuntosObjetivo(int puntosObjetivo) {
+			this.puntosObjetivo = puntosObjetivo;
+		}
+
+		public Tablero getTablero() {
+			return tablero;
+		}
+
+		public void setTablero(Tablero tablero) {
+			this.tablero = tablero;
+		}
+
+		public List<Jugador> getJugadores() {
+			return jugadores;
+		}
+
+		public void setJugadores(List<Jugador> jugadores) {
+			this.jugadores = jugadores;
+		}
+
+		public void setTurnos(int turnos) {
+			this.turnos = turnos;
+		}
+		
 }
 
