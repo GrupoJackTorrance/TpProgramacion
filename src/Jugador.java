@@ -130,6 +130,9 @@ public boolean entrarEnSala(Sala sala) {
 	
 }
 
+public int tirarDado(){
+	return 3; // Hardcodeado para las pruebas
+}
 
 
 }
