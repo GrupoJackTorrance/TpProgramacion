@@ -24,6 +24,13 @@ public Jugador(int nroTurno, String personaje, int puntos, int lugarTableroX, in
 	Nombre = nombre;
 }
 
+@Override
+public String toString() {
+	return "Jugador [personaje=" + personaje + ", puntos=" + puntos + ", objEfectos=" + objEfectos + ", lugarTableroX="
+			+ lugarTableroX + ", lugarTableroY=" + lugarTableroY + ", posicionAnteriorX=" + posicionAnteriorX
+			+ ", posicionAnteriorY=" + posicionAnteriorY + ", Nombre=" + Nombre + "]";
+}
+
 public int getNroTurno() {
 	return nroTurno;
 }
@@ -92,8 +99,8 @@ public int getPuntos() {
 	return puntos;
 }
 
-public void setPuntos(int pto) {
-	puntos = pto;
+public void setPuntos(int puntos) {
+	this.puntos =puntos;
 }
 
 public void sumarPuntos(int puntos) {
@@ -108,16 +115,19 @@ public boolean usarObjeto() {
 }
 public void elegirCaminoEnUnion() {
 	
+	
 }
-public boolean crearSala() {
-	Sala sala= new Sala();
-	return true;
+public Sala crearSala(int puntosObjetivo,int maxPartidas) {
+	Sala sala= new Sala(this,puntosObjetivo,maxPartidas);
+	return sala;
 }
-public boolean salirSala() {
-	return true;
+public boolean salirSala(Sala sala) {
+	return sala.sacarJugadorPartida(this);
+	
 }
-public boolean entrarEnSala() {
-	return true;
+public boolean entrarEnSala(Sala sala) {
+	return sala.addJugadorPartida(this);
+	
 }
 
 

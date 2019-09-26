@@ -16,11 +16,9 @@ public class Main {
 		System.out.println(j1.puntos);
 		
 		*/
-		Tablero tablero = new Tablero();
-		//nroTurno,personaje,puntos, lugarTableroX,lugarTableroY,posicionAnteriorX,posicionAnteriorY,nombre
-		Jugador jugador= new Jugador(0, "pepe",0, 0,6,0,5, "oepe");
-		System.out.println(tablero.avanzarJugador(jugador,23));
-
+	    Jugador jugador= new Jugador(1,"pepe",0,0,0,0,0,"pepe");
+			Sala  sala =jugador.crearSala(10, 1);
+			sala.getJugadores();
 	}
 
 }
