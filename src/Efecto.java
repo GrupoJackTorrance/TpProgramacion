@@ -20,4 +20,8 @@ public void restarPuntos(Jugador jugador) {
 public String getTipo() {
 	return this.tipo;
 }
+
+public void darObjeto(Jugador jugador){
+	jugador.setObjEfectos(1);
+}
 }
