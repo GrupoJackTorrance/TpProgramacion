@@ -1,5 +1,6 @@
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -18,7 +19,7 @@ public class Turno{
 
 
 
-		public int turno (int turno, Jugador jugador,Tablero tablero,Scanner reader) throws Exception {
+		public int turno (int turno, Jugador jugador,Tablero tablero,Scanner reader,List<Jugador> listaJugadores) throws Exception {
 			    boolean termino=false;
 		        switch (turno) {
 		            case 1: 
@@ -44,28 +45,31 @@ public class Turno{
 		            					  		this.entrada = reader.nextInt();
 		            							advertencia++;
 		            							if(advertencia==50)
-		            								System.out.println("¡APURATE QUEDA POCO TIEMPO!");
+		            								System.out.println("APURATE QUEDA POCO TIEMPO!");
 		            							else if(advertencia==60) {
 		            									System.out.println("Se termino el tiempo de tu turno");
 		            									termino=true;
 		            							}
 		            						    //this.entrada=reader.nextInt();
 		      	            				  	if(entrada!=2) {
-		      	            					  if(entrada==1 && jugador.getObjEfectos()==1) 
-		      	            						  System.out.println("¡Utilizo poder!");
-		      	            					  else	if(entrada==0) {
-		      	            						  		System.out.println("Elegiste NO, termino tu turno");
-		      		            			    			termino=true;
-		      	            					  		}else {
-		      	            				  				System.out.println("Elegiste Si pero No tienes objetos para usar \nSe termino tu turno");
-		      	            				  		}
-		      	            					termino=true;
-		      	            				  }
-		            						}	
-		            				  if(entrada==2)
-		            					  termino=true;  
+		      	            					  if(entrada==1){
+		      	            						  int jugadorAtacado=(turno+1)%4; 
+		      	            						  if(!jugador.UsarObjeto(listaJugadores.get(jugadorAtacado)))
+		      	            							  System.out.println("No se pudo atacar porque no tiene objetos");
+		      	            						  else
+		      	            							  System.out.println("A atacado a:"+listaJugadores.get(jugadorAtacado).getNombre());
+		      	            					  } 
+		      	            					  if(entrada==0) {
+		      	            						  	System.out.println("Elegiste NO, termino tu turno");
+		      	            					  termino=true;
+		      	            					
+		      	            					  }
+		      	            				  	}	
+		      	            				  	if(entrada==2)
+		      	            				  		termino=true; 
+		            				  	}
 		            			  } catch (InputMismatchException ime){
-		            			    System.out.println("�Cuidado! Solo puedes insertar numeros. ");
+		            			    System.out.println("Cuidado! Solo puedes insertar numeros. ");
 		            			    //reader.next();
 		            			  }
 		            			} while (termino==false);
