@@ -50,11 +50,11 @@ public void setPersonaje(String personaje) {
 	this.personaje = personaje;
 }
 
-public String getObjEfectos() {
+public int getObjEfectos() {
 	return objEfectos;
 }
 
-public void setObjEfectos(String objEfectos) {
+public void setObjEfectos(int objEfectos) {
 	this.objEfectos = objEfectos;
 }
 
