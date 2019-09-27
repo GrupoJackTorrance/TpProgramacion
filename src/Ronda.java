@@ -11,18 +11,17 @@ public class Ronda {
 		this.cantTurnos = cantTurnos;
 	}
 
-	public void InicioRonda(List<Jugador> listaJugadores,int cantJugadores,Tablero tablero) {
+	public void InicioRonda(List<Jugador> listaJugadores,int cantJugadores,Tablero tablero,int puntosObjetivo ) {
 		this.turno=1;//Inicio el turno en 1
 		int j;//cantidad de jugadores, es para recorrer la lista de jugadores
 		Turno suTurno=null; 
-		while(this.turno<cantJugadores) {
+		while(this.turno<cantJugadores && hayGanador(puntosObjetivo,cantJugadores,listaJugadores)==null) {
 			suTurno=new Turno(this.turno);//inicializo un turno 
 			j=0;
 			while(!(listaJugadores.get(j).getNroTurno()==this.turno) && j<listaJugadores.size()) {//Si no estan ordenados en la lista los jugadores por turno
 				//si no encuentro al jugador con el numero de turno que corresponde 
 				j++;//sigo buscando
 			}
-			
 			this.turno=suTurno.turno(this.turno,listaJugadores.get(j),tablero);//Inicio turno	
 		}
 	}
