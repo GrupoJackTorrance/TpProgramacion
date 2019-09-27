@@ -29,13 +29,14 @@ public class Tablero {
 		Efecto efectoSumarPuntos= new Efecto("sumarPuntos"); //verde
 		Efecto sinEfecto= new Efecto("sinEfecto"); // blanco
 		Efecto efectoRestarPuntos= new Efecto("restarPuntos"); // rojo
+		Efecto efectoDarObjeto= new Efecto("objetoPoder"); // amarillo
 		mapa[0][0] = new Casilla(0,0, "blanco",sinEfecto,true);
 		mapa[0][1] = new Casilla(0,1, "blanco",sinEfecto,false);
-		mapa[0][2] = new Casilla(0,2, "blanco",sinEfecto,false);
+		mapa[0][2] = new Casilla(0,2, "amarillo",efectoDarObjeto,false);
 		mapa[0][3] = new Casilla(0,3, "verde",efectoSumarPuntos,false);
 		mapa[0][4] = new Casilla(0,4, "verde",efectoSumarPuntos,false);
 		mapa[0][5] = new Casilla(0,5, "rojo",efectoRestarPuntos,true);
-		mapa[0][6] = new Casilla(0,6, "verde",efectoSumarPuntos,false);
+		mapa[0][6] = new Casilla(0,6, "amarillo",efectoDarObjeto,false);
 		mapa[0][7] = new Casilla(0,7, "rojo",efectoRestarPuntos,false);
 		mapa[0][8] = new Casilla(0,8, "verde",efectoSumarPuntos,false);
 		mapa[0][9] = new Casilla(0,9, "blanco",sinEfecto,false);
@@ -46,27 +47,27 @@ public class Tablero {
 		mapa[1][10] = new Casilla(1,10, "rojo",efectoRestarPuntos,false);
 		
 		mapa[2][0] = new Casilla(2,0, "verde",efectoSumarPuntos,false);
-		mapa[2][5] = new Casilla(2,5, "verde",efectoSumarPuntos,false);
+		mapa[2][5] = new Casilla(2,5, "amarillo",efectoDarObjeto,false);
 		mapa[2][8] = new Casilla(2,8, "verde",efectoSumarPuntos,false);
 		mapa[2][9] = new Casilla(2,9, "blanco",sinEfecto,false);
-		mapa[2][10] = new Casilla(2,10, "blanco",sinEfecto,false);
+		mapa[2][10] = new Casilla(2,10, "amarillo",efectoDarObjeto,false);
 		
 		
 		mapa[3][0] = new Casilla(3,0, "rojo",efectoRestarPuntos,false);
 		mapa[3][2] = new Casilla(3,2, "verde",efectoSumarPuntos,false);
 		mapa[3][3] = new Casilla(3,3, "verde",efectoSumarPuntos,false);
-		mapa[3][4] = new Casilla(3,4, "rojo",efectoRestarPuntos,false);
+		mapa[3][4] = new Casilla(3,4, "amarillo",efectoDarObjeto,false);
 		mapa[3][5] = new Casilla(3,5, "rojo",efectoRestarPuntos,true);
 		mapa[3][8] = new Casilla(3,8, "rojo",efectoRestarPuntos,false);
 		
 		mapa[4][0] = new Casilla(1,10, "blanco",sinEfecto,false);
-		mapa[4][2] = new Casilla(4,2, "blanco",sinEfecto,false);
+		mapa[4][2] = new Casilla(4,2, "amarillo",efectoDarObjeto,false);
 		mapa[4][5] = new Casilla(4,5, "blanco",sinEfecto,false);
 		mapa[4][8]= new Casilla(4,8,"verde",efectoSumarPuntos,false);
 		
 		mapa[5][0] = new Casilla(5,0, "blanco",sinEfecto,true);
 		mapa[5][1] = new Casilla(5,1, "blanco",sinEfecto,false);
-		mapa[5][2] = new Casilla(5,2, "blanco",sinEfecto,false);
+		mapa[5][2] = new Casilla(5,2, "amarillo",efectoDarObjeto,false);
 		mapa[5][5] = new Casilla(5,5, "rojo",efectoRestarPuntos,false);
 		mapa[5][8] = new Casilla(5,8, "rojo",efectoRestarPuntos,false);
 		mapa[5][9] = new Casilla(5,9, "verde",efectoSumarPuntos,false);
@@ -74,16 +75,16 @@ public class Tablero {
 	    mapa[5][11] = new Casilla(5,11, "blanco",sinEfecto,false);
 	    
 		mapa[6][0] = new Casilla(6,0, "verde",efectoSumarPuntos,false);
-		mapa[6][5]= new Casilla(6,5, "verde",efectoSumarPuntos,false);
+		mapa[6][5]= new Casilla(6,5, "amarillo",efectoDarObjeto,false);
 		mapa[6][11]= new Casilla(6,11, "verde",efectoSumarPuntos,false);
 		
 		mapa[7][0] = new Casilla(7,0, "verde",efectoSumarPuntos,false);
 		mapa[7][1] = new Casilla(7,1, "verde",efectoSumarPuntos,false);
-		mapa[7][2] = new Casilla(7,2, "verde",efectoSumarPuntos,false);
+		mapa[7][2] = new Casilla(7,2, "amarillo",efectoDarObjeto,false);
 		mapa[7][3] = new Casilla(7,3, "rojo",efectoRestarPuntos,false);
 		mapa[7][4] = new Casilla(7,4, "blanco",sinEfecto,false);
 		mapa[7][5] = new Casilla(7,5, "blanco",sinEfecto,true);
-		mapa[7][6] = new Casilla(7,6, "blanco",sinEfecto,false);
+		mapa[7][6] = new Casilla(7,6, "amarillo",efectoDarObjeto,false);
 		mapa[7][7] = new Casilla(7,7, "rojo",efectoRestarPuntos,false);
 		mapa[7][8] = new Casilla(7,8, "rojo",efectoRestarPuntos,false);
 		mapa[7][9] = new Casilla(7,9, "blanco",sinEfecto,false);
