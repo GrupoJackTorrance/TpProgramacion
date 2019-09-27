@@ -1,6 +1,4 @@
 
-import java.util.List;
-
 
 public class Jugador implements Comparable<Jugador> {
 private int nroTurno;
@@ -125,11 +123,11 @@ public Sala crearSala(int puntosObjetivo,int maxPartidas) {
 	return sala;
 }
 public boolean salirSala(Sala sala) {
-	return sala.sacarJugadorSala(this);
+	return sala.sacarJugadorPartida(this);
 	
 }
 public boolean entrarEnSala(Sala sala) {
-	return sala.addJugadorSala(this);
+	return sala.addJugadorPartida(this);
 	
 }
 
@@ -149,13 +147,6 @@ public int compareTo(Jugador jugador2) {
     if(puntos == jugador2.puntos)
     	return this.getNombre().compareTo(jugador2.getNombre());
     return 0;
-}
-
-//Ordenar lista de jugadores 
-public List<Jugador> OrdenarporPuntos(List<Jugador> jugadores){
-	List<Jugador> arrayJugadores = jugadores;
-	arrayJugadores.sort((j1, j2) -> j1.compareTo(j2));
-	return arrayJugadores;
 }
 
 }
