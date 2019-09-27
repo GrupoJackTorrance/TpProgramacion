@@ -1,6 +1,8 @@
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Partida {
 	
@@ -30,15 +32,17 @@ public class Partida {
 	 
 	 /*******************************DESAROLLO DE PARTIDA******************************************/
 	public void InicioPartida() throws Exception {
+			Scanner reader= new Scanner(new File("AccionesJugadores.txt"));
 		 	this.tablero=this.elegirTablero(); //Designo tablero
 		 	this.posicionesInciales(this.getJugadores()); //Posicion Inicial
 		 	Ronda ronda=new Ronda(this.getTurnos()); //Creo la ronda
 		 	this.determinarOrdenTurno(this.getJugadores()); //Jugadores por turno
 		 	boolean terminaJuego=false;
 		 for(int i=0;i<rondaMax && terminaJuego==false;i++) { 
-			terminaJuego=ronda.InicioRonda(this.jugadores,this.getTablero(),this.getPuntosObjetivo());
+			terminaJuego=ronda.InicioRonda(this.jugadores,this.getTablero(),this.getPuntosObjetivo(),reader);
 			i++;
 		}
+		reader.close();
 		this.mostrarPosicionesFinales(); // Muestro Resultado final
 	 }
 	/***********************************************************************************************/
