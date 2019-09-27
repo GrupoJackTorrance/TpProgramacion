@@ -6,7 +6,7 @@ public class Jugador implements Comparable<Jugador> {
 private int nroTurno;
 private String personaje;
 private int puntos = 0;
-private String objEfectos;
+private int objEfectos;
 private int lugarTableroX;
 private int lugarTableroY;
 private int posicionAnteriorX;
