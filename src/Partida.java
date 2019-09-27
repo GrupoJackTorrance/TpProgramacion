@@ -29,17 +29,17 @@ public class Partida {
 	 
 	 
 	 /*******************************DESAROLLO DE PARTIDA******************************************/
-	public boolean InicioPartida(Partida partida) {
-		if(partida.getTurnos()==4) {
-		 	partida.tablero=partida.elegirTablero(); //Designo tablero
-		 	partida.posicionesInciales(partida.getJugadores()); //Posicion Inicial
-		 	Ronda ronda=new Ronda(partida.getTurnos()); //Creo la ronda
-		 	partida.determinarOrdenTurno(partida.getJugadores()); //Jugadores por turno
+	public boolean InicioPartida() {
+		if(this.getTurnos()==4) {
+		 	this.tablero=this.elegirTablero(); //Designo tablero
+		 	this.posicionesInciales(this.getJugadores()); //Posicion Inicial
+		 	Ronda ronda=new Ronda(this.getTurnos()); //Creo la ronda
+		 	this.determinarOrdenTurno(this.getJugadores()); //Jugadores por turno
 		for(int i=0;i<rondaMax;i++) {
-			ronda.InicioRonda(partida.jugadores,partida.getTurnos(),partida.getTablero(),partida.getPuntosObjetivo());
+			ronda.InicioRonda(this.jugadores,this.getTurnos(),this.getTablero(),this.getPuntosObjetivo());
 			i++;
 		}
-		partida.mostrarPosicionesFinales(partida.getJugadores()); // Muestro Resultado final
+		this.mostrarPosicionesFinales(); // Muestro Resultado final
 		return true;
 		}
 		return false;
@@ -64,9 +64,9 @@ public class Partida {
 	
 	
 	//Al finalizar el juego muestra el Resultado final
-	public void mostrarPosicionesFinales(List<Jugador> listaJugadores) {
-		List<Jugador> jugadores=listaJugadores.get(0).OrdenarporPuntos(listaJugadores);
-		for(int i=1;i<=listaJugadores.size();i++) {
+	public void mostrarPosicionesFinales() {
+		List<Jugador> jugadores=this.OrdenarporPuntos(this.jugadores);
+		for(int i=1;i<=this.jugadores.size();i++) {
 			System.out.println("Puesto"+i+": "+jugadores.get(i-1).getNombre()+" Personaje: "+ jugadores.get(i-1).getPersonaje()+"Puntos: "+jugadores.get(i-1).getPuntos());
 		}
 	}
@@ -121,5 +121,12 @@ public class Partida {
 			this.turnos = turnos;
 		}
 		
+		//Ordenar lista de jugadores 
+		public List<Jugador> OrdenarporPuntos(List<Jugador> jugadores){
+			List<Jugador> arrayJugadores = jugadores;
+			arrayJugadores.sort((j1, j2) -> j1.compareTo(j2));
+			return arrayJugadores;
+		}
+
 }
 
