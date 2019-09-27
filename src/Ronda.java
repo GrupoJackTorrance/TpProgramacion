@@ -20,7 +20,7 @@ public class Ronda {
 		while(this.turno<cantJugadores && GanadorporObjetivo(puntosObjetivo,cantJugadores,listaJugadores)==null) {
 			suTurno=new Turno(this.turno);//inicializo un turno 
 			//Si esta ordenado por turno la lista
-			this.turno=suTurno.turno(this.turno,listaJugadores.get(this.turno-1),tablero,reader);//Inicio turno	
+			this.turno=suTurno.turno(this.turno,listaJugadores.get(this.turno-1),tablero,reader,listaJugadores);//Inicio turno	
 			
 			//Si no estan ordenados en la lista los jugadores por turno 
 			/*int j=0;
