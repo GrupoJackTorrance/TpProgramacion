@@ -29,13 +29,13 @@ public class Partida {
 	 
 	 
 	 /*******************************DESAROLLO DE PARTIDA******************************************/
-	public boolean InicioPartida() {
+	public boolean InicioPartida() throws Exception {
 		if(this.getTurnos()==4) {
 		 	this.tablero=this.elegirTablero(); //Designo tablero
 		 	this.posicionesInciales(this.getJugadores()); //Posicion Inicial
 		 	Ronda ronda=new Ronda(this.getTurnos()); //Creo la ronda
 		 	this.determinarOrdenTurno(this.getJugadores()); //Jugadores por turno
-		for(int i=0;i<rondaMax;i++) {
+		for(int i=0;i<rondaMax;i++) { 
 			ronda.InicioRonda(this.jugadores,this.getTurnos(),this.getTablero(),this.getPuntosObjetivo());
 			i++;
 		}
