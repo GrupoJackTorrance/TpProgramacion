@@ -25,6 +25,11 @@ public Jugador(int nroTurno, String personaje, int puntos, int lugarTableroX, in
 	Nombre = nombre;
 }
 
+public Jugador(String personaje,String nombre) {
+	this.personaje = personaje;
+	Nombre = nombre;
+}
+
 @Override
 public String toString() {
 	return "Jugador [personaje=" + personaje + ", puntos=" + puntos + ", objEfectos=" + objEfectos + ", lugarTableroX="
