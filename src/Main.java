@@ -17,8 +17,10 @@ public class Main {
 		
 		*/
 	    Jugador jugador= new Jugador(1,"pepe",0,0,0,0,0,"pepe");
-			Sala  sala =jugador.crearSala(10, 1);
-			sala.getJugadores();
+	    int puntosobj = 10;
+			Sala  sala =jugador.crearSala(puntosobj, 1);
+			sala.addJugadorPartida(jugador);
+			
 	}
 
 }

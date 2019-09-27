@@ -63,4 +63,20 @@ public void getJugadores() {
 	}
 }
 
+public String getCreador(){
+	return creador;
+}
+
+public void setCreador(String creador){
+	this.creador= creador ;
+}
+
+public int getId() {
+	return id;
+}
+
+public void setId(int id) {
+	this.id = id;
+}
+
 }
