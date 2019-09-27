@@ -43,34 +43,36 @@ public class Turno{
 		            					  		Thread.sleep(1000);
 		            					  	//Entrada de teclado por archivo de texto (por el momento) 
 		            					  		this.entrada = reader.nextInt();
+		            							
+		            							if(entrada==2)
+		      	            				  		termino=false;
+		            						    //this.entrada=reader.nextInt();
+		            							else if(entrada!=2) {
+		      	            					  		if(entrada==1){
+		      	            					  			int jugadorAtacado=(turno+1)%4; 
+		      	            					  			if(!jugador.UsarObjeto(listaJugadores.get(jugadorAtacado))) {
+		      	            					  				System.out.println("No se pudo atacar porque no tiene objetos");
+		      	            					  				termino=true;
+		      	            					  			}
+		      	            					  			else {
+		      	            					  				System.out.println("A atacado a:"+listaJugadores.get(jugadorAtacado).getNombre());
+		      	            					  				termino=true;
+		      	            					  			}
+		      	            					  		} 
+		      	            					  		if(entrada==0) {
+		      	            					  			System.out.println("Elegiste NO, termino tu turno");
+		      	            					  			termino=true;
+		      	            					  		}
+		      	            					  	
+			            							}
 		            							advertencia++;
-		            							if(advertencia==50)
+		            							if(advertencia==10)
 		            								System.out.println("APURATE QUEDA POCO TIEMPO!");
-		            							else if(advertencia==60) {
+		            							else if(advertencia==20) {
 		            									System.out.println("Se termino el tiempo de tu turno");
 		            									termino=true;
-		            							}
-		            						    //this.entrada=reader.nextInt();
-		      	            				  	if(entrada!=2) {
-		      	            					  if(entrada==1){
-		      	            						  int jugadorAtacado=(turno+1)%4; 
-		      	            						  if(!jugador.UsarObjeto(listaJugadores.get(jugadorAtacado))) {
-		      	            							  System.out.println("No se pudo atacar porque no tiene objetos");
-		      	            							  termino=true;
-		      	            						  }
-		      	            						  else {
-		      	            							  System.out.println("A atacado a:"+listaJugadores.get(jugadorAtacado).getNombre());
-		      	            							  termino=true;
-		      	            						  }
-		      	            					  } 
-		      	            					  if(entrada==0) {
-		      	            						  	System.out.println("Elegiste NO, termino tu turno");
-		      	            					  termino=true;
-		      	            					
-		      	            					  }
 		      	            				  	}	
-		      	            				  	if(entrada==2)
-		      	            				  		termino=false; 
+		      	            				  	 
 		            				  	}
 		            			  } catch (InputMismatchException ime){
 		            			    System.out.println("Cuidado! Solo puedes insertar numeros. ");
