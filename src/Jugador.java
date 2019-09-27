@@ -1,6 +1,9 @@
 
-public class Jugador {
-static private int nroTurno;
+import java.util.List;
+
+
+public class Jugador implements Comparable<Jugador> {
+private int nroTurno;
 private String personaje;
 private int puntos = 0;
 private String objEfectos;
@@ -134,5 +137,25 @@ public int tirarDado(){
 	return 3; // Hardcodeado para las pruebas
 }
 
+//Para comparar jugadores por puntos y si son iguales por nombre
+@Override
+public int compareTo(Jugador jugador2) {
+	if (puntos < jugador2.puntos) {
+        return -1;
+    }
+    if (puntos > jugador2.puntos) {
+        return 1;
+    }
+    if(puntos == jugador2.puntos)
+    	return this.getNombre().compareTo(jugador2.getNombre());
+    return 0;
+}
+
+//Ordenar lista de jugadores 
+public List<Jugador> OrdenarporPuntos(List<Jugador> jugadores){
+	List<Jugador> arrayJugadores = jugadores;
+	arrayJugadores.sort((j1, j2) -> j1.compareTo(j2));
+	return arrayJugadores;
+}
 
 }
