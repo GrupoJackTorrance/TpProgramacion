@@ -17,7 +17,7 @@ public class Ronda {
 		Scanner reader= new Scanner(new File("AccionesJugadores.txt"));
 		this.turno=1;//Inicio el turno en 1
 		Turno suTurno=null; 
-		while(this.turno<cantJugadores && GanadorporObjetivo(puntosObjetivo,cantJugadores,listaJugadores)==null) {
+		while(this.turno<cantJugadores && GanadorporObjetivo(puntosObjetivo,cantJugadores,listaJugadores)==false) {
 			suTurno=new Turno(this.turno);//inicializo un turno 
 			//Si esta ordenado por turno la lista
 			this.turno=suTurno.turno(this.turno,listaJugadores.get(this.turno-1),tablero,reader,listaJugadores);//Inicio turno	
@@ -33,9 +33,7 @@ public class Ronda {
 			
 		}
 		reader.close();
-		if(GanadorporObjetivo(puntosObjetivo,cantJugadores,listaJugadores)!=null)
-			return true;
-		return false;
+		return GanadorporObjetivo(puntosObjetivo,cantJugadores,listaJugadores);
 	}
 	
 	
@@ -45,14 +43,15 @@ public class Ronda {
 	return true;
 	}
 
-	public Jugador GanadorporObjetivo(int puntosObjetivo, int cantJugadores, List<Jugador> listaJugadores){
+	public boolean GanadorporObjetivo(int puntosObjetivo, int cantJugadores, List<Jugador> listaJugadores){
 		int i=0;
-		while(i<cantJugadores)
+		while(i<cantJugadores) {
 			if(listaJugadores.get(i).getPuntos()>=puntosObjetivo) {
-				System.out.println("GANO JUGADOR"+listaJugadores.get(i).getNombre());
-				return listaJugadores.get(i);
+				return true;
 			}
-		return null;
+			i++;
+		}
+		return false;
 	}
      
 	
