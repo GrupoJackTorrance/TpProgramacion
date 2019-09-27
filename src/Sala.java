@@ -2,6 +2,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.internal.runners.model.EachTestNotifier;
+
 public class Sala {
 private int id;
 private int maxPartidas;
@@ -14,7 +16,7 @@ public Sala(Jugador jugador,int puntosObjetivo, int maxPartidas) {
 	this.puntosObjetivo=puntosObjetivo;
 	this.cantJugadores=1;
 	this.maxPartidas=maxPartidas;
-	addJugadorPartida(jugador);
+	addJugadorSala(jugador);
 }
 
 //Modificado: devuelve la partida creada
@@ -30,7 +32,7 @@ public boolean eliminarPartida(Partida partida) {
 	return true;
 }
 
-public boolean addJugadorPartida(Jugador jugador) {
+public boolean addJugadorSala(Jugador jugador) {
 
 	
 			if(!jugadores.contains(jugador)) {
@@ -45,26 +47,19 @@ public boolean addJugadorPartida(Jugador jugador) {
 	return false;	
 }
 
-public boolean sacarJugadorPartida(Jugador jugador) 
+public boolean sacarJugadorSala(Jugador jugador) 
 { 
-	Iterator it = jugadores.iterator();
-	boolean jugadorEliminado=false;
-	if(!jugadores.contains(jugador))
-		return jugadorEliminado;
-	while(it.hasNext()  && jugadorEliminado) {
-		it.next();
-		if(it.equals(jugador)) {
-			it.remove();
-			jugadorEliminado=true;
-		}
-	}
+
+		int index=jugadores.indexOf(jugador);
+		if(index==-1)
+			return false;
+		jugadores.remove(index);
+		
 	return true;
 }
 public void getJugadores() {
-	Iterator it= jugadores.iterator();
-	while(it.hasNext()) {
-		it.next();
-	  System.out.println(it);
+	for (Jugador jugador : jugadores) {
+		System.out.println(jugador);
 	}
 }
 
