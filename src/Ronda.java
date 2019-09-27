@@ -1,13 +1,10 @@
-import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 
 public class Ronda {
 	int turno;
 	int cantTurnos;
-	
-	
-	
+
 	public Ronda(int cantTurnos) {
 		super();
 		this.cantTurnos = cantTurnos;
@@ -36,12 +33,11 @@ public class Ronda {
 		
 		return GanadorporObjetivo(puntosObjetivo,this.cantTurnos,listaJugadores);
 	}
-	
-	
+
 	public boolean terminaRonda(int cantJugadores) {
-		if(this.turno<=cantJugadores)
+		if (this.turno <= cantJugadores)
 			return false;
-	return true;
+		return true;
 	}
 
 	public boolean GanadorporObjetivo(int puntosObjetivo, int cantJugadores, List<Jugador> listaJugadores){
@@ -54,7 +50,5 @@ public class Ronda {
 		}
 		return false;
 	}
-     
-	
-}	
 
+}
