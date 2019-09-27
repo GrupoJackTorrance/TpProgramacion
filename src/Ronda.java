@@ -13,11 +13,11 @@ public class Ronda {
 		this.cantTurnos = cantTurnos;
 	}
 
-	public boolean InicioRonda(List<Jugador> listaJugadores,int cantJugadores,Tablero tablero,int puntosObjetivo ) throws Exception {
+	public boolean InicioRonda(List<Jugador> listaJugadores,Tablero tablero,int puntosObjetivo ) throws Exception {
 		Scanner reader= new Scanner(new File("AccionesJugadores.txt"));
 		this.turno=1;//Inicio el turno en 1
 		Turno suTurno=null; 
-		while(this.turno<cantJugadores && GanadorporObjetivo(puntosObjetivo,cantJugadores,listaJugadores)==false) {
+		while(this.turno<this.cantTurnos && GanadorporObjetivo(puntosObjetivo,this.cantTurnos,listaJugadores)==false) {
 			suTurno=new Turno(this.turno);//inicializo un turno 
 			//Si esta ordenado por turno la lista
 			this.turno=suTurno.turno(this.turno,listaJugadores.get(this.turno-1),tablero,reader,listaJugadores);//Inicio turno	
@@ -33,7 +33,7 @@ public class Ronda {
 			
 		}
 		reader.close();
-		return GanadorporObjetivo(puntosObjetivo,cantJugadores,listaJugadores);
+		return GanadorporObjetivo(puntosObjetivo,this.cantTurnos,listaJugadores);
 	}
 	
 	
