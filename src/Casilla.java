@@ -20,12 +20,12 @@ public void aplicarEfecto(Jugador jugador) {
 	else if(tipo.equals("restarPuntos")) {
 		efecto.restarPuntos(jugador);
 	}
-	else {
-		efecto.neutro(jugador);
-	}
-			
-	
+	else if(tipo.equals("ObjetoPoder")) 
+			efecto.darObjeto(jugador);
+		 else
+			efecto.neutro(jugador);
 }
+			
 
 public String getColor(){
 	return color;
