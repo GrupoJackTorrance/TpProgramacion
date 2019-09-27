@@ -35,8 +35,8 @@ public class Partida {
 		 	Ronda ronda=new Ronda(this.getTurnos()); //Creo la ronda
 		 	this.determinarOrdenTurno(this.getJugadores()); //Jugadores por turno
 		 	boolean terminaJuego=false;
-		 for(int i=0;i<rondaMax && terminaJuego==false ;i++) { 
-			ronda.InicioRonda(this.jugadores,this.getTurnos(),this.getTablero(),this.getPuntosObjetivo());
+		 for(int i=0;i<rondaMax && terminaJuego==false;i++) { 
+			terminaJuego=ronda.InicioRonda(this.jugadores,this.getTurnos(),this.getTablero(),this.getPuntosObjetivo());
 			i++;
 		}
 		this.mostrarPosicionesFinales(); // Muestro Resultado final
