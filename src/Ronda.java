@@ -48,7 +48,7 @@ public class Ronda {
 	public Jugador GanadorporObjetivo(int puntosObjetivo, int cantJugadores, List<Jugador> listaJugadores){
 		int i=0;
 		while(i<cantJugadores)
-			if(listaJugadores.get(i).getPuntos()==puntosObjetivo) {
+			if(listaJugadores.get(i).getPuntos()>=puntosObjetivo) {
 				System.out.println("GANO JUGADOR"+listaJugadores.get(i).getNombre());
 				return listaJugadores.get(i);
 			}
