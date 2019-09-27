@@ -148,5 +148,13 @@ public int compareTo(Jugador jugador2) {
     	return this.getNombre().compareTo(jugador2.getNombre());
     return 0;
 }
+	
+public boolean UsarObjeto(Jugador atacado) {
+	if(this.objEfectos==1) {
+		atacado.puntos-=5;
+		return true;
+	}
+	return false;
+}
 
 }
