@@ -40,7 +40,6 @@ public class Partida {
 		 	boolean terminaJuego=false;
 		 for(int i=0;i<rondaMax && terminaJuego==false;i++) { 
 			terminaJuego=ronda.InicioRonda(this.jugadores,this.getTablero(),this.getPuntosObjetivo(),reader);
-			i++;
 		}
 		reader.close();
 		this.mostrarPosicionesFinales(); // Muestro Resultado final
