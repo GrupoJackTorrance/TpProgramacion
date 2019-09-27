@@ -164,29 +164,81 @@ public class Tablero {
 		return true;
 	}
 	*/
+
 	public int avanzarJugador(Jugador jugador , int cantidad ) {
+		int prox=0;
 		
-		
-		while(mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion()==false && cantidad>0) {
-			if(puedeAvanzar(jugador,"izquierda")) {
-				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-				jugador.setLugarTableroY(jugador.getLugarTableroY()-1);
+		while(cantidad>0) {
+			if(mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion()==false) {
+				if(puedeAvanzar(jugador,"izquierda")) {
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroY(jugador.getLugarTableroY()-1);
+					//System.out.println("Izq");
+				}
+				else if(puedeAvanzar(jugador,"derecha")) {
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroY(jugador.getLugarTableroY()+1);
+					//System.out.println("Der");
+				}
+				else if(puedeAvanzar(jugador,"arriba")) {
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroX(jugador.getLugarTableroX()-1);
+					//System.out.println("Arr");
+				}
+				else if(puedeAvanzar(jugador,"abajo")) {
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroX(jugador.getLugarTableroX()+1);
+					//System.out.println("Ab");
+				}
 			}
-			else if(puedeAvanzar(jugador,"derecha")) {
-				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-				jugador.setLugarTableroY(jugador.getLugarTableroY()+1);
-			}
-			else if(puedeAvanzar(jugador,"arriba")) {
-				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-				jugador.setLugarTableroX(jugador.getLugarTableroX()-1);
-			}
-			else if(puedeAvanzar(jugador,"abajo")) {
-				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-				jugador.setLugarTableroX(jugador.getLugarTableroX()+1);
+			else { // Hay una unión
+				System.out.println("Llegaste a una union de casilleros. Elegí el camino a seguir");
+				if(puedeAvanzar(jugador,"izquierda")) {
+					System.out.println("4-Ir hacia la izquierda");
+					prox=4; // La variable prox sirve como reemplazo del input del jugador. Es una especie de hardcodeo para que se tome un camino determinado dentro de la union 
+				}
+					
+				if(puedeAvanzar(jugador,"derecha")) {
+					System.out.println("6-Ir hacia la derecha");
+					prox=6;
+				}
+				if(puedeAvanzar(jugador,"arriba")) {
+					System.out.println("8-Ir hacia arriba");
+					prox=8;
+				}
+				if(puedeAvanzar(jugador,"abajo")) {
+					System.out.println("2-Ir hacia abajo");
+					prox=2;
+				}
+				
+				switch(prox) {
+
+				case 4:
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroY(jugador.getLugarTableroY()-1);
+					System.out.println("Se movio a la izquierda");break;//. Quedaste en en: "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY());break;
+				case 6:
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroY(jugador.getLugarTableroY()+1);
+					System.out.println("Se movio a la derecha");break;// Quedaste en: "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY());break;
+				case 8:
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroX(jugador.getLugarTableroX()-1);
+					System.out.println("Se movio arriba");break;// Quedaste en: "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY());break;
+				case 2:
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroX(jugador.getLugarTableroX()+1);
+					System.out.println("Se movio abajo");break;// Quedaste en: "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY());break;
+				}
+				
 			}
 			cantidad--;
 		}
