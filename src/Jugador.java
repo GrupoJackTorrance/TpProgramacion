@@ -123,11 +123,11 @@ public Sala crearSala(int puntosObjetivo,int maxPartidas) {
 	return sala;
 }
 public boolean salirSala(Sala sala) {
-	return sala.sacarJugadorPartida(this);
+	return sala.sacarJugadorSala(this);
 	
 }
 public boolean entrarEnSala(Sala sala) {
-	return sala.addJugadorPartida(this);
+	return sala.addJugadorSala(this);
 	
 }
 
