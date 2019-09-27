@@ -27,7 +27,7 @@ public class Main {
 		Jugador jugador3 = new Jugador("Rana", "pepe3");
 		Jugador jugador4 = new Jugador("Mono","pepe4");
 		int puntosobj = 15;
-		Sala sala = jugador1.crearSala(puntosobj, 1);
+		Sala sala = jugador1.crearSala(puntosobj, 2);
 		sala.addJugadorSala(jugador2);
 		sala.addJugadorSala(jugador3);
 		sala.addJugadorSala(jugador4);
