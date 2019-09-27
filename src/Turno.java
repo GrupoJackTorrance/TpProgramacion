@@ -65,7 +65,7 @@ public class Turno{
 		            				  if(entrada==2)
 		            					  termino=true;  
 		            			  } catch (InputMismatchException ime){
-		            			    System.out.println("¡Cuidado! Solo puedes insertar números. ");
+		            			    System.out.println("�Cuidado! Solo puedes insertar numeros. ");
 		            			    //reader.next();
 		            			  }
 		            			} while (termino==false);
