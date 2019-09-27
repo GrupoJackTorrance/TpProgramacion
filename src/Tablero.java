@@ -1,6 +1,5 @@
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Tablero {
 
@@ -95,10 +94,6 @@ public class Tablero {
 	   
 	}
 	
-
-	public int tirarDado(){
-		return 3; // Hardcodeado para las pruebas
-	}
 	/* COMENTO ESTO PARA VER SI PUEDO DESARROLAR ESOS METODOS DE OTRA FORMA
 	public boolean avanzarJugador(int posiciones, Jugador miJugador) {
 		int posX=0, posY, i=0, j=0;;
