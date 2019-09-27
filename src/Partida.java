@@ -36,7 +36,7 @@ public class Partida {
 		 	this.determinarOrdenTurno(this.getJugadores()); //Jugadores por turno
 		 	boolean terminaJuego=false;
 		 for(int i=0;i<rondaMax && terminaJuego==false;i++) { 
-			terminaJuego=ronda.InicioRonda(this.jugadores,this.getTurnos(),this.getTablero(),this.getPuntosObjetivo());
+			terminaJuego=ronda.InicioRonda(this.jugadores,this.getTablero(),this.getPuntosObjetivo());
 			i++;
 		}
 		this.mostrarPosicionesFinales(); // Muestro Resultado final
