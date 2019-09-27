@@ -29,20 +29,17 @@ public class Partida {
 	 
 	 
 	 /*******************************DESAROLLO DE PARTIDA******************************************/
-	public boolean InicioPartida() throws Exception {
-		if(this.getTurnos()==4) {
+	public void InicioPartida() throws Exception {
 		 	this.tablero=this.elegirTablero(); //Designo tablero
 		 	this.posicionesInciales(this.getJugadores()); //Posicion Inicial
 		 	Ronda ronda=new Ronda(this.getTurnos()); //Creo la ronda
 		 	this.determinarOrdenTurno(this.getJugadores()); //Jugadores por turno
-		for(int i=0;i<rondaMax;i++) { 
+		 	boolean terminaJuego=false;
+		 for(int i=0;i<rondaMax && terminaJuego==false ;i++) { 
 			ronda.InicioRonda(this.jugadores,this.getTurnos(),this.getTablero(),this.getPuntosObjetivo());
 			i++;
 		}
 		this.mostrarPosicionesFinales(); // Muestro Resultado final
-		return true;
-		}
-		return false;
 	 }
 	/***********************************************************************************************/
 	
