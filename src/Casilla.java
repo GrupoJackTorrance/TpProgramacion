@@ -20,7 +20,7 @@ public void aplicarEfecto(Jugador jugador) {
 	else if(tipo.equals("restarPuntos")) {
 		efecto.restarPuntos(jugador);
 	}
-	else if(tipo.equals("ObjetoPoder")) 
+	else if(tipo.equals("objetoPoder")) 
 			efecto.darObjeto(jugador);
 		 else
 			efecto.neutro(jugador);
