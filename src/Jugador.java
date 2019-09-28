@@ -119,9 +119,10 @@ public void restarPuntos(int puntos) {
 public boolean usarObjeto() {
 	return true;
 }
-public void elegirCaminoEnUnion() {
-	
-	
+public int elegirCaminoEnUnion(int x, int y) {
+		System.out.println("Llegaste a una union. Elegi hacia donde queres ir:");
+		System.out.println("X: "+x+" Y: "+y);
+		return x;
 }
 public Sala crearSala(int puntosObjetivo,int maxPartidas) {
 	Sala sala= new Sala(this,puntosObjetivo,maxPartidas);
