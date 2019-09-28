@@ -10,9 +10,9 @@ public class JugadorTest {
 	public void test() {
  //nroTurno, String personaje, int puntos, int lugarTableroX, int lugarTableroY, int posicionAnteriorX,
 	//			int posicionAnteriorY, String nombre
-	    Jugador jugador= new Jugador(1,"pepe",0,0,0,0,0,"pepe");
+	    Jugador jugador= new Jugador(1,"pepe",0,0,0,0,0,0,"pepe");
 		Sala  sala =jugador.crearSala(10, 1);
-		Jugador jugador2=new Jugador(2,"juan",0,0,0,0,0,"juan");
+		Jugador jugador2=new Jugador(2,"juan",0,0,0,0,0,0,"juan");
 		jugador2.entrarEnSala(sala);
 		sala.getJugadores();
 	}

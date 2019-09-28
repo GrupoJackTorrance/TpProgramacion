@@ -13,11 +13,12 @@ private String Nombre;
 
 
 
-public Jugador(int nroTurno, String personaje, int puntos, int lugarTableroX, int lugarTableroY, int posicionAnteriorX,
+public Jugador(int nroTurno, String personaje, int puntos,int objEfectos, int lugarTableroX, int lugarTableroY, int posicionAnteriorX,
 		int posicionAnteriorY, String nombre) {
 	this.nroTurno = nroTurno;
 	this.personaje = personaje;
 	this.puntos = puntos;
+	this.objEfectos=objEfectos;
 	this.lugarTableroX = lugarTableroX;
 	this.lugarTableroY = lugarTableroY;
 	this.posicionAnteriorX = posicionAnteriorX;
