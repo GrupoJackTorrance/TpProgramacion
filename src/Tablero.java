@@ -30,66 +30,66 @@ public class Tablero {
 		Efecto sinEfecto= new Efecto("sinEfecto"); // blanco
 		Efecto efectoRestarPuntos= new Efecto("restarPuntos"); // rojo
 		Efecto efectoDarObjeto= new Efecto("objetoPoder"); // amarillo
-		mapa[0][0] = new Casilla(0,0, "blanco",sinEfecto,true);
-		mapa[0][1] = new Casilla(0,1, "blanco",sinEfecto,false);
-		mapa[0][2] = new Casilla(0,2, "amarillo",efectoDarObjeto,false);
-		mapa[0][3] = new Casilla(0,3, "verde",efectoSumarPuntos,false);
-		mapa[0][4] = new Casilla(0,4, "verde",efectoSumarPuntos,false);
-		mapa[0][5] = new Casilla(0,5, "rojo",efectoRestarPuntos,true);
-		mapa[0][6] = new Casilla(0,6, "amarillo",efectoDarObjeto,false);
-		mapa[0][7] = new Casilla(0,7, "rojo",efectoRestarPuntos,false);
-		mapa[0][8] = new Casilla(0,8, "verde",efectoSumarPuntos,false);
-		mapa[0][9] = new Casilla(0,9, "blanco",sinEfecto,false);
-		mapa[0][10] = new Casilla(0,10, "verde",efectoSumarPuntos,false);
+		mapa[0][0] = new Casilla("blanco",sinEfecto,true);
+		mapa[0][1] = new Casilla("blanco",sinEfecto,false);
+		mapa[0][2] = new Casilla("amarillo",efectoDarObjeto,false);
+		mapa[0][3] = new Casilla("verde",efectoSumarPuntos,false);
+		mapa[0][4] = new Casilla("verde",efectoSumarPuntos,false);
+		mapa[0][5] = new Casilla("rojo",efectoRestarPuntos,true);
+		mapa[0][6] = new Casilla("amarillo",efectoDarObjeto,false);
+		mapa[0][7] = new Casilla("rojo",efectoRestarPuntos,false);
+		mapa[0][8] = new Casilla("verde",efectoSumarPuntos,false);
+		mapa[0][9] = new Casilla("blanco",sinEfecto,false);
+		mapa[0][10] = new Casilla("verde",efectoSumarPuntos,false);
 		
-		mapa[1][0]= new Casilla(1,0,"blanco",sinEfecto,false);
-		mapa[1][5] = new Casilla(1,5, "rojo",efectoRestarPuntos,false);
-		mapa[1][10] = new Casilla(1,10, "rojo",efectoRestarPuntos,false);
+		mapa[1][0]= new Casilla("blanco",sinEfecto,false);
+		mapa[1][5] = new Casilla("rojo",efectoRestarPuntos,false);
+		mapa[1][10] = new Casilla("rojo",efectoRestarPuntos,false);
 		
-		mapa[2][0] = new Casilla(2,0, "verde",efectoSumarPuntos,false);
-		mapa[2][5] = new Casilla(2,5, "amarillo",efectoDarObjeto,false);
-		mapa[2][8] = new Casilla(2,8, "verde",efectoSumarPuntos,false);
-		mapa[2][9] = new Casilla(2,9, "blanco",sinEfecto,false);
-		mapa[2][10] = new Casilla(2,10, "amarillo",efectoDarObjeto,false);
+		mapa[2][0] = new Casilla("verde",efectoSumarPuntos,false);
+		mapa[2][5] = new Casilla("amarillo",efectoDarObjeto,false);
+		mapa[2][8] = new Casilla("verde",efectoSumarPuntos,false);
+		mapa[2][9] = new Casilla("blanco",sinEfecto,false);
+		mapa[2][10] = new Casilla("amarillo",efectoDarObjeto,false);
 		
 		
-		mapa[3][0] = new Casilla(3,0, "rojo",efectoRestarPuntos,false);
-		mapa[3][2] = new Casilla(3,2, "verde",efectoSumarPuntos,false);
-		mapa[3][3] = new Casilla(3,3, "verde",efectoSumarPuntos,false);
-		mapa[3][4] = new Casilla(3,4, "amarillo",efectoDarObjeto,false);
-		mapa[3][5] = new Casilla(3,5, "rojo",efectoRestarPuntos,true);
-		mapa[3][8] = new Casilla(3,8, "rojo",efectoRestarPuntos,false);
+		mapa[3][0] = new Casilla("rojo",efectoRestarPuntos,false);
+		mapa[3][2] = new Casilla("verde",efectoSumarPuntos,false);
+		mapa[3][3] = new Casilla("verde",efectoSumarPuntos,false);
+		mapa[3][4] = new Casilla("amarillo",efectoDarObjeto,false);
+		mapa[3][5] = new Casilla("rojo",efectoRestarPuntos,true);
+		mapa[3][8] = new Casilla("rojo",efectoRestarPuntos,false);
 		
-		mapa[4][0] = new Casilla(1,10, "blanco",sinEfecto,false);
-		mapa[4][2] = new Casilla(4,2, "amarillo",efectoDarObjeto,false);
-		mapa[4][5] = new Casilla(4,5, "blanco",sinEfecto,false);
-		mapa[4][8]= new Casilla(4,8,"verde",efectoSumarPuntos,false);
+		mapa[4][0] = new Casilla("blanco",sinEfecto,false);
+		mapa[4][2] = new Casilla("amarillo",efectoDarObjeto,false);
+		mapa[4][5] = new Casilla("blanco",sinEfecto,false);
+		mapa[4][8]= new Casilla("verde",efectoSumarPuntos,false);
 		
-		mapa[5][0] = new Casilla(5,0, "blanco",sinEfecto,true);
-		mapa[5][1] = new Casilla(5,1, "blanco",sinEfecto,false);
-		mapa[5][2] = new Casilla(5,2, "amarillo",efectoDarObjeto,false);
-		mapa[5][5] = new Casilla(5,5, "rojo",efectoRestarPuntos,false);
-		mapa[5][8] = new Casilla(5,8, "rojo",efectoRestarPuntos,false);
-		mapa[5][9] = new Casilla(5,9, "verde",efectoSumarPuntos,false);
-		mapa[5][10] = new Casilla(5,10, "blanco",sinEfecto,false);
-	    mapa[5][11] = new Casilla(5,11, "blanco",sinEfecto,false);
+		mapa[5][0] = new Casilla("blanco",sinEfecto,true);
+		mapa[5][1] = new Casilla("blanco",sinEfecto,false);
+		mapa[5][2] = new Casilla("amarillo",efectoDarObjeto,false);
+		mapa[5][5] = new Casilla("rojo",efectoRestarPuntos,false);
+		mapa[5][8] = new Casilla("rojo",efectoRestarPuntos,false);
+		mapa[5][9] = new Casilla("verde",efectoSumarPuntos,false);
+		mapa[5][10] = new Casilla("blanco",sinEfecto,false);
+	    mapa[5][11] = new Casilla("blanco",sinEfecto,false);
 	    
-		mapa[6][0] = new Casilla(6,0, "verde",efectoSumarPuntos,false);
-		mapa[6][5]= new Casilla(6,5, "amarillo",efectoDarObjeto,false);
-		mapa[6][11]= new Casilla(6,11, "verde",efectoSumarPuntos,false);
+		mapa[6][0] = new Casilla("verde",efectoSumarPuntos,false);
+		mapa[6][5]= new Casilla("amarillo",efectoDarObjeto,false);
+		mapa[6][11]= new Casilla("verde",efectoSumarPuntos,false);
 		
-		mapa[7][0] = new Casilla(7,0, "verde",efectoSumarPuntos,false);
-		mapa[7][1] = new Casilla(7,1, "verde",efectoSumarPuntos,false);
-		mapa[7][2] = new Casilla(7,2, "amarillo",efectoDarObjeto,false);
-		mapa[7][3] = new Casilla(7,3, "rojo",efectoRestarPuntos,false);
-		mapa[7][4] = new Casilla(7,4, "blanco",sinEfecto,false);
-		mapa[7][5] = new Casilla(7,5, "blanco",sinEfecto,true);
-		mapa[7][6] = new Casilla(7,6, "amarillo",efectoDarObjeto,false);
-		mapa[7][7] = new Casilla(7,7, "rojo",efectoRestarPuntos,false);
-		mapa[7][8] = new Casilla(7,8, "rojo",efectoRestarPuntos,false);
-		mapa[7][9] = new Casilla(7,9, "blanco",sinEfecto,false);
-		mapa[7][10] = new Casilla(7,10, "verde",efectoSumarPuntos,false);
-		mapa[7][11] = new Casilla(7,11, "verde",efectoSumarPuntos,false);
+		mapa[7][0] = new Casilla("verde",efectoSumarPuntos,false);
+		mapa[7][1] = new Casilla("verde",efectoSumarPuntos,false);
+		mapa[7][2] = new Casilla("amarillo",efectoDarObjeto,false);
+		mapa[7][3] = new Casilla("rojo",efectoRestarPuntos,false);
+		mapa[7][4] = new Casilla("blanco",sinEfecto,false);
+		mapa[7][5] = new Casilla("blanco",sinEfecto,true);
+		mapa[7][6] = new Casilla("amarillo",efectoDarObjeto,false);
+		mapa[7][7] = new Casilla("rojo",efectoRestarPuntos,false);
+		mapa[7][8] = new Casilla("rojo",efectoRestarPuntos,false);
+		mapa[7][9] = new Casilla("blanco",sinEfecto,false);
+		mapa[7][10] = new Casilla("verde",efectoSumarPuntos,false);
+		mapa[7][11] = new Casilla("verde",efectoSumarPuntos,false);
 		
 	   
 	   
@@ -166,10 +166,8 @@ public class Tablero {
 	*/
 
 	public int avanzarJugador(Jugador jugador , int cantidad ) {
-		int prox=0;
 		
-		while(cantidad>0) { //&& mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion()==false) {
-			if(mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion()==false) {
+		while(cantidad>0 && mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion()==false) {
 				if(puedeAvanzar(jugador,"izquierda")) {
 					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
@@ -194,77 +192,18 @@ public class Tablero {
 					jugador.setLugarTableroX(jugador.getLugarTableroX()+1);
 					System.out.println("Ab");
 				}
-			}
-			else {
-				System.out.println("Quedaste en: "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY());
-				prox = jugador.elegirCaminoEnUnion(obtenerOpcionX(jugador), obtenerOpcionY(jugador));
-				
-				if(prox != jugador.getLugarTableroX()) {
-					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-					jugador.setLugarTableroX(prox);
-				}
-				else {
-					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-					jugador.setLugarTableroY(jugador.getLugarTableroY()+1);
-				}
-				System.out.println("Quedaste en: "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY());
-			}
-//			else { // Hay una unión
-//				System.out.println("Llegaste a una union de casilleros. Elegí el camino a seguir");
-//				if(puedeAvanzar(jugador,"izquierda")) {
-//					System.out.println("4-Ir hacia la izquierda");
-//					prox=4; // La variable prox sirve como reemplazo del input del jugador. Es una especie de hardcodeo para que se tome un camino determinado dentro de la union 
-//				}
-//					
-//				if(puedeAvanzar(jugador,"derecha")) {
-//					System.out.println("6-Ir hacia la derecha");
-//					prox=6;
-//				}
-//				if(puedeAvanzar(jugador,"arriba")) {
-//					System.out.println("8-Ir hacia arriba");
-//					prox=8;
-//				}
-//				if(puedeAvanzar(jugador,"abajo")) {
-//					System.out.println("2-Ir hacia abajo");
-//					prox=2;
-//				}
-//				
-//				switch(prox) {
-//
-//				case 4:
-//					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-//					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-//					jugador.setLugarTableroY(jugador.getLugarTableroY()-1);
-//					System.out.println("Se movio a la izquierda");break;//. Quedaste en en: "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY());break;
-//				case 6:
-//					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-//					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-//					jugador.setLugarTableroY(jugador.getLugarTableroY()+1);
-//					System.out.println("Se movio a la derecha");break;// Quedaste en: "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY());break;
-//				case 8:
-//					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-//					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-//					jugador.setLugarTableroX(jugador.getLugarTableroX()-1);
-//					System.out.println("Se movio arriba");break;// Quedaste en: "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY());break;
-//				case 2:
-//					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-//					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-//					jugador.setLugarTableroX(jugador.getLugarTableroX()+1);
-//					System.out.println("Se movio abajo");break;// Quedaste en: "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY());break;
-//				}
-//				
-//			}
+					
 			cantidad--;
 		}
 		
 	return cantidad;
      }
 
-	private int obtenerOpcionX(Jugador jugador) {
+	public int obtenerOpcionX(Jugador jugador) {
 		return puedeAvanzar(jugador,"arriba") ? jugador.getLugarTableroX()-1 : jugador.getLugarTableroX()+1;
 	}
 	
-	private int obtenerOpcionY(Jugador jugador) {
+	public int obtenerOpcionY(Jugador jugador) {
 		return puedeAvanzar(jugador,"izquierda") ? jugador.getLugarTableroY()-1 : jugador.getLugarTableroY()+1;
 	}
 
@@ -302,29 +241,4 @@ private boolean puedeAvanzar(Jugador jugador,String direccion) {
 
 }
 
-//
-//public class Tablero {
-//String nombre;
-//Casilla mapa[][];
-//
-//public void tirarDado() {}
-//
-//public boolean avanzarJugador() {
-//	return true;
-//}
-//
-//public boolean puedeAvanzar() {
-//	return true;
-//}
-//
-//public void crearMapa1(Casilla mapa[][]){ //mapa1 contiene 3 casilleros de 1 fila
-//	
-//	mapa[0][0] = new Casilla ();
-//	mapa[0][0].color = "azul";
-//	mapa[0][1] = new Casilla ();
-//	mapa[0][2] = new Casilla ();
-//	this.mapa = mapa;
-//	
-//}
-//
-//}
+
