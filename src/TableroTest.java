@@ -7,16 +7,21 @@ public class TableroTest {
 	@Test
 	public void test() {
 		Tablero tablero = new Tablero();
-		//nroTurno,personaje,puntos, lugarTableroX,lugarTableroY,posicionAnteriorX,posicionAnteriorY,nombre
-		Jugador jugador= new Jugador(0, "pepe",0, 0,6,0,5, "pepe");
-		Jugador jugador2=new Jugador(0,"pepe",0,0,1,0,0,"pepe");
-		//verifico que mueva hasta una union
-	    assertEquals(0,tablero.avanzarJugador(jugador,31));
-//		assertEquals(0,tablero.avanzarJugador(jugador2,3));
+		
+		Jugador jugador= new Jugador(0, "pepe",0, 0,1,0,0, "pepe");
+		
+		//verifico que devuelva cuanto le falta moverse
+	    assertEquals(1,tablero.avanzarJugador(jugador,5));
+
 		 
 		//verifico que mueve hasta la posicion correcta
 		assertEquals(0,jugador.getLugarTableroX());
-		assertEquals(7,jugador.getLugarTableroY());
+		assertEquals(5,jugador.getLugarTableroY());
+		
+		// verifico las opciones cuando llega a la Union
+		assertEquals(1,tablero.obtenerOpcionX(jugador));
+		assertEquals(6, tablero.obtenerOpcionY(jugador));
+		
 	}
 
 }

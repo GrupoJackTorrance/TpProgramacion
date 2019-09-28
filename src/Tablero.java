@@ -172,25 +172,21 @@ public class Tablero {
 					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 					jugador.setLugarTableroY(jugador.getLugarTableroY()-1);
-					System.out.println("Izq");
 				}
 				else if(puedeAvanzar(jugador,"derecha")) {
 					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 					jugador.setLugarTableroY(jugador.getLugarTableroY()+1);
-					System.out.println("Der");
 				}
 				else if(puedeAvanzar(jugador,"arriba")) {
 					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 					jugador.setLugarTableroX(jugador.getLugarTableroX()-1);
-					System.out.println("Arr");
 				}
 				else if(puedeAvanzar(jugador,"abajo")) {
 					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 					jugador.setLugarTableroX(jugador.getLugarTableroX()+1);
-					System.out.println("Ab");
 				}
 					
 			cantidad--;
