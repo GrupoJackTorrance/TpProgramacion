@@ -1,9 +1,9 @@
 
 public class Casilla {
 
-String color; //color diferenciara el efecto? supongo que nos va a servir para la parte gráfica 
-Efecto efecto;
-boolean esUnion;
+private String color; //color diferenciara el efecto? supongo que nos va a servir para la parte gráfica 
+private Efecto efecto;
+private boolean esUnion;
 public Casilla( String color,Efecto efecto,boolean esUnion) {
 
 	this.color=color;

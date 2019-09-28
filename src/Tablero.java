@@ -191,7 +191,8 @@ public class Tablero {
 					
 			cantidad--;
 		}
-		
+		if(cantidad==0)
+			 mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].aplicarEfecto(jugador);
 	return cantidad;
      }
 
