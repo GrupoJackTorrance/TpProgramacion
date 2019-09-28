@@ -120,8 +120,8 @@ public boolean usarObjeto() {
 	return true;
 }
 public void elegirCaminoEnUnion(int x, int y) {
-		this.posicionAnteriorX=x;
-		this.posicionAnteriorY=y;
+		this.posicionAnteriorX=this.lugarTableroX;
+		this.posicionAnteriorY=this.lugarTableroY;
 		this.lugarTableroX=x;
 		this.lugarTableroY=y;
 		
