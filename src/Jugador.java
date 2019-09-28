@@ -148,10 +148,10 @@ public int tirarDado(){
 @Override
 public int compareTo(Jugador jugador2) {
 	if (puntos < jugador2.puntos) {
-        return -1;
+        return 1;
     }
     if (puntos > jugador2.puntos) {
-        return 1;
+        return -1;
     }
     if(puntos == jugador2.puntos)
     	return this.getNombre().compareTo(jugador2.getNombre());
