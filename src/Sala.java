@@ -9,7 +9,7 @@ public class Sala {
 	private int maxPartidas;
 	private int cantJugadores;
 	private String creador;
-	private int puntosObjetivo;// Agregado por Daniel
+	private int puntosObjetivo;
 	List<Jugador> jugadores = new LinkedList<Jugador>();
 
 	
