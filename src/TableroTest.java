@@ -8,7 +8,7 @@ public class TableroTest {
 	public void test() {
 		Tablero tablero = new Tablero();
 		
-		Jugador jugador= new Jugador(0, "pepe",0, 0,1,0,0, "pepe");
+		Jugador jugador= new Jugador(0, "pepe",0,0, 0,1,0,0, "pepe");
 		
 		//verifico que devuelva cuanto le falta moverse
 	    assertEquals(1,tablero.avanzarJugador(jugador,5));
