@@ -7,7 +7,9 @@ import java.util.Scanner;
 
 public class Partida {
 
-	/************************************** PARAMETROS DE PARTIDA ***********************************/
+	/**************************************
+	 * PARAMETROS DE PARTIDA
+	 ***********************************/
 	// /int estado; PARA SABER SI UNA PARTIDA SE ENCUENTRA ACTIVA O NO
 	int rondaMax; // cantidad de rondas maximas para la partida
 	int puntosObjetivo; // cantidad de puntos para ganar
@@ -17,10 +19,11 @@ public class Partida {
 
 	/**********************************************************************************************/
 
-	/***************************** CONSTRUCTOR DE PARTIDA *******************************************/
+	/*****************************
+	 * CONSTRUCTOR DE PARTIDA
+	 *******************************************/
 	// Generamos la partida
-	public Partida(int rondaMax, int puntosObjetivo, int cantJugadores,
-			List<Jugador> listaJugadores) {
+	public Partida(int rondaMax, int puntosObjetivo, int cantJugadores, List<Jugador> listaJugadores) {
 		turnos = cantJugadores;
 		this.puntosObjetivo = puntosObjetivo;
 		this.rondaMax = rondaMax;
@@ -30,16 +33,18 @@ public class Partida {
 
 	/***********************************************************************************************/
 
-	/******************************* DESAROLLO DE PARTIDA ******************************************/
+	/*******************************
+	 * DESAROLLO DE PARTIDA
+	 ******************************************/
 	public void InicioPartida() throws Exception {
-			Scanner reader= new Scanner(new File("AccionesJugadores.txt"));
-		 	this.tablero=this.elegirTablero(); //Designo tablero
-		 	this.posicionesInciales(this.getJugadores()); //Posicion Inicial
-		 	Ronda ronda=new Ronda(this.getTurnos()); //Creo la ronda
-		 	this.determinarOrdenTurno(this.getJugadores()); //Jugadores por turno
-		 	boolean terminaJuego=false;
-		 for(int i=0;i<rondaMax && terminaJuego==false;i++) { 
-			terminaJuego=ronda.InicioRonda(this.jugadores,this.getTablero(),this.getPuntosObjetivo(),reader);
+		Scanner reader = new Scanner(new File("AccionesJugadores.txt"));
+		this.tablero = this.elegirTablero(); // Designo tablero
+		this.posicionesInciales(this.getJugadores()); // Posicion Inicial
+		Ronda ronda = new Ronda(this.getTurnos()); // Creo la ronda
+		this.determinarOrdenTurno(this.getJugadores()); // Jugadores por turno
+		boolean terminaJuego = false;
+		for (int i = 0; i < rondaMax && terminaJuego == false; i++) {
+			terminaJuego = ronda.InicioRonda(this.jugadores, this.getTablero(), this.getPuntosObjetivo(), reader);
 		}
 		reader.close();
 		this.mostrarPosicionesFinales(); // Muestro Resultado final
@@ -47,7 +52,9 @@ public class Partida {
 
 	/***********************************************************************************************/
 
-	/************************* FUNCIONES PARA EL DESARROLLO DE PARTIDA *******************************/
+	/*************************
+	 * FUNCIONES PARA EL DESARROLLO DE PARTIDA
+	 *******************************/
 	// Designa el orden de los turnos y tambien puntos iniciales para cada
 	// jugador equitativamente
 	private void determinarOrdenTurno(List<Jugador> listaJugadores) {
@@ -66,10 +73,8 @@ public class Partida {
 	public void mostrarPosicionesFinales() {
 		List<Jugador> jugadores = this.OrdenarporPuntos(this.jugadores);
 		for (int i = 1; i <= this.jugadores.size(); i++) {
-			System.out.println("Puesto" + i + ": "
-					+ jugadores.get(i - 1).getNombre() + " Personaje: "
-					+ jugadores.get(i - 1).getPersonaje() + "Puntos: "
-					+ jugadores.get(i - 1).getPuntos());
+			System.out.println("Puesto" + i + ": " + jugadores.get(i - 1).getNombre() + " Personaje: "
+					+ jugadores.get(i - 1).getPersonaje() + "Puntos: " + jugadores.get(i - 1).getPuntos());
 		}
 	}
 

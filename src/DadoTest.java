@@ -9,6 +9,6 @@ public class DadoTest {
 		Dado dado1 = new Dado();
 		dado1.setRandomGenerator(new RandomGeneratorStub(4));
 
-		Assert.assertEquals(4 , dado1.tirar());
+		Assert.assertEquals(4, dado1.tirar());
 	}
 }

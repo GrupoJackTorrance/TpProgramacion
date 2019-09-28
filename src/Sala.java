@@ -1,8 +1,5 @@
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.junit.internal.runners.model.EachTestNotifier;
 
 public class Sala {
 	private int id;
@@ -12,8 +9,9 @@ public class Sala {
 	private int puntosObjetivo;
 	List<Jugador> jugadores = new LinkedList<Jugador>();
 
-	
-	/****************************FUNCIONES DE SALA*******************************************************************/
+	/****************************
+	 * FUNCIONES DE SALA
+	 *******************************************************************/
 	public Sala(Jugador jugador, int puntosObjetivo, int maxPartidas) {
 		this.creador = jugador.getNombre();
 		this.puntosObjetivo = puntosObjetivo;
@@ -45,21 +43,24 @@ public class Sala {
 
 		return true;
 	}
-	
-	/****************************FUNCIONES DE PARTIDA*******************************************************************/
+
+	/****************************
+	 * FUNCIONES DE PARTIDA
+	 *******************************************************************/
 	// Modificado: devuelve la partida creada
-		public Partida crearPartida() {
-			Partida p1 = new Partida(maxPartidas, puntosObjetivo, cantJugadores,
-					jugadores);
-			return p1;
-		}
+	public Partida crearPartida() {
+		Partida p1 = new Partida(maxPartidas, puntosObjetivo, cantJugadores, jugadores);
+		return p1;
+	}
 
-		public boolean eliminarPartida(Partida partida) {
+	public boolean eliminarPartida(Partida partida) {
 
-			return true;
-		}
+		return true;
+	}
 
-	/****************************GET Y SET*******************************************************************/
+	/****************************
+	 * GET Y SET
+	 *******************************************************************/
 	public void getJugadores() {
 		for (Jugador jugador : jugadores) {
 			System.out.println(jugador);
@@ -77,14 +78,16 @@ public class Sala {
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public int getmaxPartidas() {
 		return maxPartidas;
 	}
-	
+
 	public void setmaxPartidas(int maxPartidas) {
-		 this.maxPartidas= maxPartidas ;
+		this.maxPartidas = maxPartidas;
 	}
-	public int getcantJugadores(){
+
+	public int getcantJugadores() {
 		return cantJugadores;
 	}
 }
