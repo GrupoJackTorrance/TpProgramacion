@@ -66,9 +66,9 @@ public class Turno{
 		      	            					  	
 			            							}
 		            							advertencia++;
-		            							if(advertencia==10)
+		            							if(advertencia==50)
 		            								System.out.println("APURATE QUEDA POCO TIEMPO!");
-		            							else if(advertencia==20) {
+		            							else if(advertencia==60) {
 		            									System.out.println("Se termino el tiempo de tu turno");
 		            									termino=true;
 		      	            				  	}	
