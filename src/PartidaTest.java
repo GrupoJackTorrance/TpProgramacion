@@ -1,9 +1,7 @@
 import static org.junit.Assert.*;
 
-import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 import org.junit.Test;
 
@@ -11,15 +9,14 @@ public class PartidaTest {
 
 	@Test
 	public void test() {
-		List<Jugador> listaJugadores = new LinkedList<Jugador>();
-		List<Jugador> listaJugadoresOrdenada = new LinkedList<Jugador>();
-		Jugador jugador= new Jugador(0, "Mario", 20, 0, 0, 1, 0, 0, "pepe");//20 puntos
-		Jugador jugador2 =  new Jugador(0, "Luigi", 15, 2, 0, 0, 0, 0, "Elmer");//15 puntos
-		Jugador jugador3 = new Jugador(3, "Kupa", 10, 0, 0, 0, 0, 0, "Juan");//10 puntos
-		listaJugadores.add(jugador);
-		listaJugadores.add(jugador2);
-		listaJugadores.add(jugador3);
-		Partida partida = new Partida(2, 5, 2, listaJugadores);
+		List<Jugador> jugadores = new LinkedList<Jugador>();
+		jugadores.add(new Jugador(2,"Perro",10,0,0,1,0,0,"pepe3"));
+		jugadores.add(new Jugador(1,"Mono",20,0,0,1,0,0,"pepe4"));
+		jugadores.add(new Jugador(3,"Rana",25,0,0,1,0,0,"pepe2"));
+		jugadores.add(new Jugador(4,"Orca",15,0,0,1,0,0,"pepe1"));
+		Partida partida = new Partida(10,30,4,jugadores);
+
+//		Partida partida = new Partida(2, 5, 2, listaJugadores);
 		
 				
 		try {
@@ -30,15 +27,15 @@ public class PartidaTest {
 			partida.setRondaMax(2);
 			assertEquals(2, partida.getRondaMax());
 			//Verifico que ordene bien los jugadores por puntos de menor a mayor
-			listaJugadoresOrdenada = partida.OrdenarporPuntos(listaJugadores);
-			assertEquals(listaJugadoresOrdenada.get(0), jugador3);
-			assertEquals(listaJugadoresOrdenada.get(1), jugador2);
-			assertEquals(listaJugadoresOrdenada.get(2), jugador);
+			partida.OrdenarporPuntos(jugadores);
+			assertEquals(jugadores.get(0).getNombre(),"pepe2");
+			assertEquals(jugadores.get(1).getNombre(),"pepe4");
+			assertEquals(jugadores.get(2).getNombre(),"pepe1");
+			assertEquals(jugadores.get(3).getNombre(),"pepe3");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 }
