@@ -29,6 +29,7 @@ public class Sala {
 			jugador.setLugarTableroY(0);
 			cantJugadores++;
 			return jugadores.add(jugador);
+
 		}
 
 		return false;

@@ -6,7 +6,7 @@ public class Ronda {
 	int cantTurnos;
 
 	public Ronda(int cantTurnos) {
-		super();
+		super(); // ¿Para que?
 		this.cantTurnos = cantTurnos;
 	}
 
@@ -41,6 +41,14 @@ public class Ronda {
 			i++;
 		}
 		return false;
+		
+		/* OTRA FORMA PARA HACERLO
+		for (Jugador jugador : listaJugadores) {
+			if(jugador.getPuntos()>=puntosObjetivo)
+				return true;
+		}
+		return false;
+		*/
 	}
 
 }

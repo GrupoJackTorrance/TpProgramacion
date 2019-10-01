@@ -23,7 +23,7 @@ public class Main {
 		 * dado, hace los movimientos,etc.) Despues de cada ronda, se verifica que no se
 		 * llego al objetivo y sigue jugando o determina jugador. termina la partida
 		 */
-		/*Jugador jugador1 = new Jugador(1, "pepe", 0, 1, 0, 0, 0, 0, "pepe");
+		Jugador jugador1 = new Jugador(1, "pepe", 0, 1, 0, 0, 0, 0, "pepe");
 		Jugador jugador2 = new Jugador("Dragon", "pepe2");
 		Jugador jugador3 = new Jugador("Rana", "pepe3");
 		Jugador jugador4 = new Jugador("Mono", "pepe4");
@@ -34,7 +34,10 @@ public class Main {
 		sala.addJugadorSala(jugador4);
 		Partida partida1 = sala.crearPartida();
 		partida1.InicioPartida();
-		*/
+		
+		
+		
+		/*
 		Jugador jugador1 = new Jugador(1,"pepe",0,0,0,5,1,5,"pepe");
 		List<Jugador> jugadores = new LinkedList<Jugador>();
 		jugadores.add(jugador1);
@@ -43,6 +46,9 @@ public class Main {
 		String [] opciones =tablero.obtenerOpciones(jugador1).split(" ");
 		for(int i=0;i<opciones.length;i++)
 			System.out.println(opciones[i] +" aca ");
+			
+			
+			*/
 		}
 
 }
