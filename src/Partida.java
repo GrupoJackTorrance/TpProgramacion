@@ -66,7 +66,7 @@ public class Partida {
 
 	// Asigno tablero a la partida
 	public Tablero elegirTablero() {
-		return new Tablero();
+		return new Tablero(jugadores);
 	}
 
 	// Al finalizar el juego muestra el Resultado final

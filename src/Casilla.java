@@ -14,15 +14,7 @@ public class Casilla {
 	}
 
 	public void aplicarEfecto(Jugador jugador) {
-		String tipo = efecto.getTipo();
-		if (tipo.equals("sumarPuntos")) {
-			efecto.dar1pto(jugador);
-		} else if (tipo.equals("restarPuntos")) {
-			efecto.restarPuntos(jugador);
-		} else if (tipo.equals("objetoPoder"))
-			efecto.darObjeto(jugador);
-		else
-			efecto.neutro(jugador);
+	efecto.accion(jugador);
 	}
 
 	public String getColor() {
