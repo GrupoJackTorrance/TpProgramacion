@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.List;
+
 public class Main {
 
 	public static void main(String[] args) throws Exception {
@@ -31,6 +34,21 @@ public class Main {
 		sala.addJugadorSala(jugador4);
 		Partida partida1 = sala.crearPartida();
 		partida1.InicioPartida();
-	}
+		
+		
+		
+		/*
+		Jugador jugador1 = new Jugador(1,"pepe",0,0,0,5,1,5,"pepe");
+		List<Jugador> jugadores = new LinkedList<Jugador>();
+		jugadores.add(jugador1);
+		Tablero tablero= new Tablero(jugadores);
+		// para ver las opciones de movimiento
+		String [] opciones =tablero.obtenerOpciones(jugador1).split(" ");
+		for(int i=0;i<opciones.length;i++)
+			System.out.println(opciones[i] +" aca ");
+			
+			
+			*/
+		}
 
 }

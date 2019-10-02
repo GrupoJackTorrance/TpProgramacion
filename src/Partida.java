@@ -24,10 +24,10 @@ public class Partida {
 	 *******************************************/
 	// Generamos la partida
 	public Partida(int rondaMax, int puntosObjetivo, int cantJugadores, List<Jugador> listaJugadores) {
-		turnos = cantJugadores;
+		this.turnos = cantJugadores;
 		this.puntosObjetivo = puntosObjetivo;
 		this.rondaMax = rondaMax;
-		jugadores = listaJugadores;
+		this.jugadores = listaJugadores;
 
 	}
 
@@ -39,9 +39,9 @@ public class Partida {
 	public void InicioPartida() throws Exception {
 		Scanner reader = new Scanner(new File("AccionesJugadores.txt"));
 		this.tablero = this.elegirTablero(); // Designo tablero
-		this.posicionesInciales(this.getJugadores()); // Posicion Inicial
-		Ronda ronda = new Ronda(this.getTurnos()); // Creo la ronda
-		this.determinarOrdenTurno(this.getJugadores()); // Jugadores por turno
+		//this.posicionesInciales(this.getJugadores()); // Posicion Inicial // NO HACE FALTA PORQUE LO SETEAMOS EN SALA
+		Ronda ronda = new Ronda(this.turnos); // Creo la ronda
+		determinarOrdenTurno(this.jugadores); // Jugadores por turno
 		boolean terminaJuego = false;
 		for (int i = 0; i < rondaMax && terminaJuego == false; i++) {
 			terminaJuego = ronda.InicioRonda(this.jugadores, this.getTablero(), this.getPuntosObjetivo(), reader);
@@ -58,15 +58,23 @@ public class Partida {
 	// Designa el orden de los turnos y tambien puntos iniciales para cada
 	// jugador equitativamente
 	private void determinarOrdenTurno(List<Jugador> listaJugadores) {
+		
 		for (int i = 0; i < listaJugadores.size(); i++) {
 			listaJugadores.get(i).setNroTurno(i + 1);
-			listaJugadores.get(i).setPuntos(10);
+			listaJugadores.get(i).setPuntos(10); // ¿Para que?
 		}
+		/* Otra forma de modificar los turnos 
+			int j=1;
+		for (Jugador jugador : listaJugadores) {
+			jugador.setNroTurno(j);
+			j++;
+		}
+		*/
 	}
 
 	// Asigno tablero a la partida
 	public Tablero elegirTablero() {
-		return new Tablero();
+		return new Tablero(jugadores);
 	}
 
 	// Al finalizar el juego muestra el Resultado final
