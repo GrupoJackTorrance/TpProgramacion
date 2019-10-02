@@ -12,6 +12,8 @@ public class Tablero {
 	// ---------- C O N S T R U C T O R---------------------
 	public Tablero(List<Jugador> jugadores) {
 		this.jugadores = jugadores;
+
+		
 	
 
 // 						 ------------	M E T O D O S    -------------
