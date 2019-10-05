@@ -23,7 +23,7 @@ public class Main {
 		 * dado, hace los movimientos,etc.) Despues de cada ronda, se verifica que no se
 		 * llego al objetivo y sigue jugando o determina jugador. termina la partida
 		 */
-		Jugador jugador1 = new Jugador(1, "pepe", 0, 1, 0, 0, 0, 0, "pepe");
+		Jugador jugador1 = new Jugador("pepe","pepe");
 		Jugador jugador2 = new Jugador("Dragon", "pepe2");
 		Jugador jugador3 = new Jugador("Rana", "pepe3");
 		Jugador jugador4 = new Jugador("Mono", "pepe4");

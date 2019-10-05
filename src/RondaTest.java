@@ -12,14 +12,14 @@ public class RondaTest {
 
 	@Test
 	public void test() throws IOException {
-		Tablero tablero = new Tablero();
 		List<Jugador> jugadores = new LinkedList<Jugador>();
 		int puntosObjetivo = 5;
 		Scanner reader = new Scanner(new File("AccionesJugadores.txt"));
-		jugadores.add(new Jugador(2, "Perro", 1, 0, 0, 1, 0, 0, "pepe3"));
-		jugadores.add(new Jugador(1, "Mono", 2, 0, 0, 1, 0, 0, "pepe4"));
-		jugadores.add(new Jugador(3, "Rana", 3, 0, 0, 1, 0, 0, "pepe2"));
-		jugadores.add(new Jugador(4, "Orca", 4, 0, 0, 1, 0, 0, "pepe1"));
+		jugadores.add(new Jugador("Perro","pepe3"));
+		jugadores.add(new Jugador("Mono","pepe4"));
+		jugadores.add(new Jugador("Rana","pepe2"));
+		jugadores.add(new Jugador("Orca","pepe1"));
+		Tablero tablero = new Tablero(jugadores);
 		Ronda ronda = new Ronda(4);
 
 		try {

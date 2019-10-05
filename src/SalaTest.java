@@ -7,9 +7,9 @@ public class SalaTest {
 	@Test
 	public void test() {
 		
-		Jugador jugador= new Jugador(1,"pep",0,0,0,0,0,0,"pep");
+		Jugador jugador= new Jugador("pep","pep");
 		Sala sala = new Sala(jugador,10,1);
-		Jugador jugador2= new Jugador(1,"pepy",0,0,0,0,0,0,"pepy");
+		Jugador jugador2= new Jugador("pepy","pepy");
 		try {
 			
 			assertEquals(true, sala.addJugadorSala(jugador2));

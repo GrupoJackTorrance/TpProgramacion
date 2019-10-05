@@ -4,6 +4,7 @@ import org.junit.Test;
 
 public class CasillaTest {
 	
+	@Before public void inicialize() {
 	Efecto efectoSumarPuntos = new EfectoSumarPuntos(1); // verde
 	Efecto sinEfecto = new EfectoNeutro(); // blanco
 	Efecto efectoRestarPuntos = new EfectoRestarPuntos(1); // rojo
@@ -12,8 +13,9 @@ public class CasillaTest {
 	Casilla casilla2 = new Casilla("rojo", efectoRestarPuntos, true);
 	Casilla casilla3 = new Casilla("amarillo", efectoDarObjeto, false);
 	Casilla casilla4 = new Casilla("verde", efectoSumarPuntos, false);
-	Jugador jugador = new Jugador(0, "pepe", 20, 0, 0, 1, 0, 0, "pepe");
-	
+	Jugador jugador = new Jugador("pepe","pepe");
+	jugador.setPuntos(20);
+	}
 	@Test
 	public void aplicaEfectoDarObjetoTest() {
 		
@@ -26,6 +28,7 @@ public class CasillaTest {
 		
 		casilla2.aplicarEfecto(jugador);
 		// veo que se haya aplicado el efecto de restar puntos al jugador
+		System.out.println( jugador.getPuntos());
 		Assert.assertEquals(19, jugador.getPuntos());
 	}
 	@Test
@@ -33,7 +36,7 @@ public class CasillaTest {
 		
 		casilla4.aplicarEfecto(jugador);
 		// veo que se haya aplicado el efecto de sumar puntos al jugador
-		System.out.println(jugador.getPuntos());
+		//System.out.println(jugador.getPuntos());
 		Assert.assertEquals(21, jugador.getPuntos());
 	}
 	@Test

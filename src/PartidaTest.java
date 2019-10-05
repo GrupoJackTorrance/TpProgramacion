@@ -10,10 +10,14 @@ public class PartidaTest {
 	@Test
 	public void test() {
 		List<Jugador> jugadores = new LinkedList<Jugador>();
-		jugadores.add(new Jugador(2, "Perro", 10, 0, 0, 1, 0, 0, "pepe3"));
-		jugadores.add(new Jugador(1, "Mono", 20, 0, 0, 1, 0, 0, "pepe4"));
-		jugadores.add(new Jugador(3, "Rana", 25, 0, 0, 1, 0, 0, "pepe2"));
-		jugadores.add(new Jugador(4, "Orca", 15, 0, 0, 1, 0, 0, "pepe1"));
+		Jugador jugador1=new Jugador("Perro","pepe3");
+		Jugador jugador2=new Jugador("Mono","pepe4");
+		Jugador jugador3=new Jugador("Rana","pepe2");
+		Jugador jugado4=new Jugador( "Orca", "pepe1");
+		jugadores.add(jugador1);
+		jugadores.add(jugador2);
+		jugadores.add(jugador3);
+		jugadores.add(jugado4);
 		Partida partida = new Partida(10, 30, 4, jugadores);
 
 		try {

@@ -9,12 +9,12 @@ public class TableroTest {
 
 	@Test
 	public void test() {
-		Jugador jugador1 = new Jugador(1,"pepe",0,0,0,0,0,0,"pepe");
+		Jugador jugador1 = new Jugador("pepe","pepe");
 		List<Jugador> jugadores = new LinkedList<Jugador>();
 		jugadores.add(jugador1);
 		Tablero tablero = new Tablero(jugadores);
 
-		Jugador jugador = new Jugador(0, "pepe", 2, 0, 0, 1, 0, 0, "pepe");
+		Jugador jugador = new Jugador("pepe","pepe");
 
 		// verifico que devuelva cuanto le falta moverse
 		assertEquals(2, tablero.avanzarJugador(jugador, 6));

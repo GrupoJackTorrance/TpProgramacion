@@ -8,31 +8,22 @@ public class Jugador implements Comparable<Jugador> {
 	private int lugarTableroY;
 	private int posicionAnteriorX;
 	private int posicionAnteriorY;
-	private String Nombre;
+	private String nombre;
 
-	public Jugador(int nroTurno, String personaje, int puntos, int objEfectos, int lugarTableroX, int lugarTableroY,
-			int posicionAnteriorX, int posicionAnteriorY, String nombre) {
-		this.nroTurno = nroTurno;
+	public Jugador(String personaje,String nombre) {
+		
 		this.personaje = personaje;
-		this.puntos = puntos;
-		this.objEfectos = objEfectos;
-		this.lugarTableroX = lugarTableroX;
-		this.lugarTableroY = lugarTableroY;
-		this.posicionAnteriorX = posicionAnteriorX;
-		this.posicionAnteriorY = posicionAnteriorY;
-		Nombre = nombre;
+		this.puntos = 0;
+		this.objEfectos=0;
+		this.nombre = nombre;
 	}
 
-	public Jugador(String personaje, String nombre) {
-		this.personaje = personaje;
-		Nombre = nombre;
-	}
 
 	@Override
 	public String toString() {
 		return "Jugador [personaje=" + personaje + ", puntos=" + puntos + ", objEfectos=" + objEfectos
 				+ ", lugarTableroX=" + lugarTableroX + ", lugarTableroY=" + lugarTableroY + ", posicionAnteriorX="
-				+ posicionAnteriorX + ", posicionAnteriorY=" + posicionAnteriorY + ", Nombre=" + Nombre + "]";
+				+ posicionAnteriorX + ", posicionAnteriorY=" + posicionAnteriorY + ", Nombre=" + nombre + "]";
 	}
 
 	public int getNroTurno() {
@@ -92,15 +83,15 @@ public class Jugador implements Comparable<Jugador> {
 	}
 
 	public String getNombre() {
-		return Nombre;
+		return this.nombre;
 	}
 
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
 
 	public int getPuntos() {
-		return puntos;
+		return this.puntos;
 	}
 
 	public void setPuntos(int puntos) {
@@ -112,7 +103,7 @@ public class Jugador implements Comparable<Jugador> {
 	}
 
 	public void restarPuntos(int puntos) {
-		this.puntos -= puntos;
+		this.puntos= this.puntos-Math.max(0,this.puntos-puntos);
 	}
 
 	public boolean usarObjeto() {
