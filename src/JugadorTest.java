@@ -1,4 +1,3 @@
-
 import org.junit.Test;
 
 public class JugadorTest {
