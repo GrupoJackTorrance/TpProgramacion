@@ -19,7 +19,7 @@ public class RondaTest {
 		jugadores.add(new Jugador("Mono","pepe4"));
 		jugadores.add(new Jugador("Rana","pepe2"));
 		jugadores.add(new Jugador("Orca","pepe1"));
-		Tablero tablero = new Tablero(jugadores);
+		Tablero tablero = new TableroNormal(jugadores);
 		Ronda ronda = new Ronda(4);
 
 		try {
