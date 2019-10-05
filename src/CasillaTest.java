@@ -3,17 +3,26 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CasillaTest {
-	
-	@Before public void inicialize() {
-	Efecto efectoSumarPuntos = new EfectoSumarPuntos(1); // verde
-	Efecto sinEfecto = new EfectoNeutro(); // blanco
-	Efecto efectoRestarPuntos = new EfectoRestarPuntos(1); // rojo
-	Efecto efectoDarObjeto = new EfectoDarObjeto(); // amarillo
-	Casilla casilla = new Casilla("blanco", sinEfecto, true);
-	Casilla casilla2 = new Casilla("rojo", efectoRestarPuntos, true);
-	Casilla casilla3 = new Casilla("amarillo", efectoDarObjeto, false);
-	Casilla casilla4 = new Casilla("verde", efectoSumarPuntos, false);
-	Jugador jugador = new Jugador("pepe","pepe");
+	Efecto efectoSumarPuntos;
+	Efecto sinEfecto ;
+	Efecto efectoRestarPuntos;
+	Efecto efectoDarObjeto;
+	Casilla casilla ;
+	Casilla casilla2;
+	Casilla casilla3;
+	Casilla casilla4;
+	Jugador jugador ;
+	@Before //sirve para que antes de hacer cada test se empiece desde el escenario elegido
+	public void inicialize() {
+	efectoSumarPuntos = new EfectoSumarPuntos(1); // verde
+	sinEfecto = new EfectoNeutro(); // blanco
+	efectoRestarPuntos = new EfectoRestarPuntos(1); // rojo
+	efectoDarObjeto = new EfectoDarObjeto(); // amarillo
+	casilla = new Casilla("blanco", sinEfecto, true);
+	casilla2 = new Casilla("rojo", efectoRestarPuntos, true);
+	casilla3 = new Casilla("amarillo", efectoDarObjeto, false);
+	casilla4 = new Casilla("verde", efectoSumarPuntos, false);
+	jugador = new Jugador("pepe","pepe");
 	jugador.setPuntos(20);
 	}
 	@Test
@@ -28,7 +37,7 @@ public class CasillaTest {
 		
 		casilla2.aplicarEfecto(jugador);
 		// veo que se haya aplicado el efecto de restar puntos al jugador
-		System.out.println( jugador.getPuntos());
+	
 		Assert.assertEquals(19, jugador.getPuntos());
 	}
 	@Test
@@ -36,7 +45,7 @@ public class CasillaTest {
 		
 		casilla4.aplicarEfecto(jugador);
 		// veo que se haya aplicado el efecto de sumar puntos al jugador
-		//System.out.println(jugador.getPuntos());
+		
 		Assert.assertEquals(21, jugador.getPuntos());
 	}
 	@Test
