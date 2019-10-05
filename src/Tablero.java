@@ -120,13 +120,13 @@ public class Tablero {
 	public String obtenerOpciones(Jugador jugador) {
 		String opciones="";
 		if(puedeAvanzar(jugador,"arriba"))
-			opciones="arriba ";
+			opciones=(jugador.getLugarTableroX()-1)+" "+jugador.getLugarTableroY()+ " arriba ";
 		if(puedeAvanzar(jugador,"abajo"))
-			opciones=opciones+"abajo ";
+			opciones=opciones+" "+jugador.getLugarTableroX()+1+" "+jugador.getLugarTableroY()+ " abajo ";
 		if(puedeAvanzar(jugador,"derecha"))
-			opciones=opciones+"derecha ";
+			opciones=opciones+" "+jugador.getLugarTableroX()+" "+jugador.getLugarTableroY()+1+ " derecha ";
 		if(puedeAvanzar(jugador,"izquierda"))
-			opciones=opciones+"izquierda ";
+			opciones=opciones+" "+jugador.getLugarTableroX()+1+" "+(jugador.getLugarTableroY()-1)+ " izquierda ";
 		return opciones;
 	}
 
