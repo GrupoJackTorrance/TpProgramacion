@@ -55,12 +55,17 @@ public class Main {
 		jugadores.add(jugador2);
 		jugadores.add(jugador3);
 		jugadores.add(jugador4);
-	//	Minijuego mini=new Minijuego(jugadores);
-	//	mini.iniciarMinijuego();
-		JMiniJuego d=new JMiniJuego(jugadores);
-		d.main(args);
+
 	
-	
+
+		Minijuego mini=new Minijuego(jugadores);
+		//mini.iniciarMinijuego();
+		
+	for (Jugador jugador : jugadores) {
+		System.out.println(jugador.getPuntos());
+	}
+	//JMinijuego miniJuego= new JMinijuego();
+
 	
 		}
 

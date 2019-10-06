@@ -46,7 +46,7 @@ public class Turno {
 							else if (entrada != 2) {
 								if (entrada == 1) {
 									int jugadorAtacado = (turno + 1) % 4;
-									if (!jugador.UsarObjeto(listaJugadores.get(jugadorAtacado))) {
+									if (!jugador.usarObjeto(listaJugadores.get(jugadorAtacado))) {
 										System.out.println("No se pudo atacar porque no tiene objetos");
 										termino = true;
 									} else {
