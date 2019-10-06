@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class Main {
 		Jugador jugador2 = new Jugador("Dragon", "pepe2");
 		Jugador jugador3 = new Jugador("Rana", "pepe3");
 		Jugador jugador4 = new Jugador("Mono", "pepe4");
-		int puntosobj = 15;
+		/*int puntosobj = 15;
 		Sala sala = jugador1.crearSala(puntosobj, 2);
 		sala.addJugadorSala(jugador2);
 		sala.addJugadorSala(jugador3);
@@ -49,6 +50,19 @@ public class Main {
 			
 			
 			*/
+		List<Jugador> jugadores=new LinkedList<Jugador>();
+		jugadores.add(jugador1);
+		jugadores.add(jugador2);
+		jugadores.add(jugador3);
+		jugadores.add(jugador4);
+		Minijuego mini=new Minijuego(jugadores);
+		//mini.iniciarMinijuego();
+		
+	for (Jugador jugador : jugadores) {
+		System.out.println(jugador.getPuntos());
+	}
+	JMinijuego miniJuego= new JMinijuego();
+	
 		}
 
 }
