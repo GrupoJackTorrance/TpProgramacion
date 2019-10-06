@@ -44,6 +44,8 @@ public abstract class Tablero {
 		}
 		if (cantidad == 0)
 			mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].aplicarEfecto(jugador);
+		
+		jugador.update();
 		return cantidad;
 	}
 

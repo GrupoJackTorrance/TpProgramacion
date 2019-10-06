@@ -1,4 +1,3 @@
-
 public class Jugador implements Comparable<Jugador> {
 	private int nroTurno;
 	private String personaje;
@@ -9,6 +8,7 @@ public class Jugador implements Comparable<Jugador> {
 	private int posicionAnteriorX;
 	private int posicionAnteriorY;
 	private String nombre;
+	Personaje miPersonaje;
 
 	public Jugador(String personaje,String nombre) {
 		
@@ -16,6 +16,7 @@ public class Jugador implements Comparable<Jugador> {
 		this.puntos = 0;
 		this.objEfectos=0;
 		this.nombre = nombre;
+		this.miPersonaje = new Personaje (nombre, 100, 100, 10);
 	}
 
 
@@ -153,6 +154,10 @@ public class Jugador implements Comparable<Jugador> {
 			return true;
 		}
 		return false;
+	}
+	
+	public void update() {
+		miPersonaje.actualizarCoordenadasGraficas(lugarTableroX, lugarTableroY);
 	}
 
 }
