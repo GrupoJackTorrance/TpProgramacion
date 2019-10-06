@@ -103,11 +103,7 @@ public class Jugador implements Comparable<Jugador> {
 	}
 
 	public void restarPuntos(int puntos) {
-		this.puntos= this.puntos-Math.max(0,this.puntos-puntos);
-	}
-
-	public boolean usarObjeto() {
-		return true;
+		this.puntos = Math.max(0, this.puntos - puntos);
 	}
 
 	public void elegirCaminoEnUnion(int x, int y) {
@@ -151,7 +147,7 @@ public class Jugador implements Comparable<Jugador> {
 		return 0;
 	}
 
-	public boolean UsarObjeto(Jugador atacado) {
+	public boolean usarObjeto(Jugador atacado) {
 		if (this.objEfectos == 1) {
 			atacado.puntos -= 5;
 			return true;
