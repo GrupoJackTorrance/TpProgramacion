@@ -23,7 +23,7 @@ public class TableroTest {
 		jugador.setPosicionAnteriorX(0);
 		jugador.setPosicionAnteriorY(0);
 		jugadores.add(jugador);
-		tablero = new Tablero(jugadores);
+		tablero = new TableroNormal(jugadores);
 
 	}
 
