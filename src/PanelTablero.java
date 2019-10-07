@@ -16,7 +16,7 @@ public class PanelTablero extends JPanel{
 
 	ArrayList <Personaje> personajes = new ArrayList<>();
 
-	public PanelTablero(Personaje personaje) {
+	public PanelTablero(/*Personaje personaje*/) {
 		personajes.add(new Personaje ("Rata", 100, 100, 10));
 		personajes.add(new Personaje ("Serpiente", 200, 100, 10));
 		personajes.add(new Personaje ("Tarantula", 100, 200, 10));
@@ -24,11 +24,14 @@ public class PanelTablero extends JPanel{
 	}
 
 	public void paintComponent(Graphics g) {
-		g.setColor(Color.YELLOW);
-		g.fillOval((int) personaje.getX(), (int) personaje.getY(), (int) personaje.getRadio(),
-				(int) personaje.getRadio());
+		int i;
+		for (i=0; i<personajes.size(); i++) {
+			g.setColor(Color.YELLOW);
+			g.fillOval((int) personajes.get(i).getX(), (int) personajes.get(i).getY(), (int) personajes.get(i).getRadio(),
+					(int) personajes.get(i).getRadio());
+		}
 	}
-	
+
 	public Personaje getPersonaje(String nombrePersonaje) {
 		int i=0;
 		
@@ -39,6 +42,6 @@ public class PanelTablero extends JPanel{
 	}
 	
 	public void moverPersonaje(Personaje personaje) {
-		this.personaje = personaje;
+		this.personaje = personaje;//hace un for buscando al personaje 
 	}
 }

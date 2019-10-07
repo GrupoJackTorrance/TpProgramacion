@@ -50,7 +50,5 @@ public class Personaje{
 	public void actualizarCoordenadasGraficas(int lugarTableroX, int lugarTableroY) {
 		this.x=(double)lugarTableroX;
 		this.y=(double)lugarTableroY;
-		
-		
 	}
 }

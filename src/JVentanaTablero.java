@@ -47,33 +47,9 @@ public class JVentanaTablero extends JFrame{
 		this.setVisible(true);
 	}
 	
-	public void setMovimiento(KeyEvent evento){
-		Personaje nuevo = contentPanel.getPersonaje();
-		
-		if(evento.getKeyCode() == KeyEvent.VK_LEFT) {
-			nuevo.desplazarHorizontalmente(-5);
-			contentPanel.moverPersonaje(nuevo);
-		}
-		if(evento.getKeyCode() == KeyEvent.VK_RIGHT) {
-			nuevo.desplazarHorizontalmente(5);
-			contentPanel.moverPersonaje(nuevo);
-		}
-		if(evento.getKeyCode() == KeyEvent.VK_UP) {
-			nuevo.desplazarVerticalmente(-5);
-			contentPanel.moverPersonaje(nuevo);
-		}
-		if(evento.getKeyCode() == KeyEvent.VK_DOWN) {
-			nuevo.desplazarVerticalmente(5);
-			contentPanel.moverPersonaje(nuevo);
-		}
-		repaint();
-	}
-	
-	public void reubicarPersonaje(Personaje nuevo){
-		//Personaje nuevo = contentPanel.getPersonaje();
-		
-		contentPanel.moverPersonaje(nuevo);
-		
+//	public void setMovimiento(KeyEvent evento){
+//		Personaje nuevo = contentPanel.getPersonaje();
+//		
 //		if(evento.getKeyCode() == KeyEvent.VK_LEFT) {
 //			nuevo.desplazarHorizontalmente(-5);
 //			contentPanel.moverPersonaje(nuevo);
@@ -90,6 +66,14 @@ public class JVentanaTablero extends JFrame{
 //			nuevo.desplazarVerticalmente(5);
 //			contentPanel.moverPersonaje(nuevo);
 //		}
+//		repaint();
+//	}
+	
+	public void reubicarPersonaje(Personaje nuevo){
+		//Personaje nuevo = contentPanel.getPersonaje();
+		
+		contentPanel.moverPersonaje(nuevo);
+
 		repaint();
 	}
 	

@@ -112,7 +112,7 @@ public class Jugador implements Comparable<Jugador> {
 		this.posicionAnteriorY = this.lugarTableroY;
 		this.lugarTableroX = x;
 		this.lugarTableroY = y;
-
+		this.update();
 	}
 
 	public Sala crearSala(int puntosObjetivo, int maxPartidas) {
