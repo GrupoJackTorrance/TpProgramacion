@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,11 +24,11 @@ public class Main {
 		 * dado, hace los movimientos,etc.) Despues de cada ronda, se verifica que no se
 		 * llego al objetivo y sigue jugando o determina jugador. termina la partida
 		 */
-		Jugador jugador1 = new Jugador("pepe","pepe");
-		Jugador jugador2 = new Jugador("Dragon", "pepe2");
-		Jugador jugador3 = new Jugador("Rana", "pepe3");
-		Jugador jugador4 = new Jugador("Mono", "pepe4");
-		int puntosobj = 15;
+		Jugador jugador1 = new Jugador("pepe","jugador1");
+		Jugador jugador2 = new Jugador("Dragon", "jugador2");
+		Jugador jugador3 = new Jugador("Rana", "jugador3");
+		Jugador jugador4 = new Jugador("Mono", "jugador4");
+		/*int puntosobj = 15;
 		Sala sala = jugador1.crearSala(puntosobj, 2);
 		sala.addJugadorSala(jugador2);
 		sala.addJugadorSala(jugador3);
@@ -47,8 +48,25 @@ public class Main {
 		for(int i=0;i<opciones.length;i++)
 			System.out.println(opciones[i] +" aca ");
 			
+				*/
 			
-			*/
-		}
+		List<Jugador> jugadores=new LinkedList<Jugador>();
+		jugadores.add(jugador1);
+		jugadores.add(jugador2);
+		jugadores.add(jugador3);
+		jugadores.add(jugador4);
+
+	
+
+		Minijuego mini=new Minijuego(jugadores);
+		//mini.iniciarMinijuego();
+		
+	for (Jugador jugador : jugadores) {
+		System.out.println(jugador.getPuntos());
+	}
+	JMiniJuego minijuego= new JMiniJuego(jugadores);
+	minijuego.main(args);
+	
+	}
 
 }

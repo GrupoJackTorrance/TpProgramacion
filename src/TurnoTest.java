@@ -20,7 +20,7 @@ public class TurnoTest {
 		listaJugadores.add(new Jugador("Mono","pepe4"));
 		listaJugadores.add(new Jugador("Rana","pepe2"));
 		listaJugadores.add(new Jugador("Orca","pepe1"));
-		Tablero tablero = new Tablero(listaJugadores);
+		Tablero tablero = new TableroNormal(listaJugadores);
 
 		try {
 			// Verificar que le devuelva el turno siguiente que le paso
