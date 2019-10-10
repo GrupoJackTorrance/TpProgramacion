@@ -40,6 +40,7 @@ public class Sala {
 		int index = jugadores.indexOf(jugador);
 		if (index == -1)
 			return false;
+		cantJugadores--;
 		jugadores.remove(index);
 
 		return true;

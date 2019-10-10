@@ -9,7 +9,6 @@ public class Turno {
 	int entrada = 2;
 
 	public Turno(int numeroTurno, int delay) {
-		super();
 		this.numeroTurno = numeroTurno;
 		this.delay = delay;// Tiempo de turno
 	}
