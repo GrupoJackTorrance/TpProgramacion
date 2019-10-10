@@ -5,6 +5,7 @@ public abstract class Tablero {
 	protected String nombre;
 	protected Casilla  mapa[][];
 	protected List<Jugador> jugadores=new LinkedList<Jugador>();
+	VentanaTablero ventanaTablero;
 
 
 
@@ -14,12 +15,13 @@ public abstract class Tablero {
 		this.jugadores = jugadores;
 		// EfectoSumarPuntos verde
 		// EfectoRestarPuntos rojo
-		// EfectoNeutro blanco
+		// EfectoNeutro azul
 		// EfectoDarObjeto amarillo
+		ventanaTablero=new VentanaTablero("tablero", 20, 20,this);
 	
 	}
 	
-	public int avanzarJugador(Jugador jugador, int cantidad) {
+	public int avanzarJugador(Jugador jugador, int cantidad) throws InterruptedException {
 
 		while (cantidad > 0 && mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion() == false) {
 			if (puedeAvanzar(jugador, "izquierda")) {
@@ -39,13 +41,12 @@ public abstract class Tablero {
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroX(jugador.getLugarTableroX() + 1);
 			}
-
+			this.ventanaTablero.miLamina.repaint();
+			Thread.sleep(2000);
 			cantidad--;
 		}
 		if (cantidad == 0)
 			mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].aplicarEfecto(jugador);
-		
-		jugador.update();
 		return cantidad;
 	}
 
@@ -116,5 +117,7 @@ public abstract class Tablero {
 		return false;
 
 	}
-
+	public List<Jugador> getJugadores() {
+		return this.jugadores;
+	}
 }
