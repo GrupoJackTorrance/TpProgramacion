@@ -15,7 +15,7 @@ public class Maint {
 		jugador2.setLugarTableroY(0);
 		jugador2.setPosicionAnteriorX(2);
 		jugador2.setPosicionAnteriorY(0);
-		Jugador jugador3 = new Jugador("pepe","pepe");
+		Jugador jugador3 = new Jugador("pepe3","pepe");
 		jugador3.setLugarTableroX(5);
 		jugador3.setLugarTableroY(5);
 		jugador3.setPosicionAnteriorX(4);
