@@ -3,6 +3,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 
@@ -19,11 +20,12 @@ public class MiniJuegoAlaSuerte extends Minijuego {
 	public MiniJuegoAlaSuerte(List<Jugador> jugadores) {
 		this.jugadores=jugadores;
 		this.cantJugados=jugadores.size();
-	   this. ventana=new VentanaMiniJuego("minijuego", 100, 100,this);
+		this. ventana=new VentanaMiniJuego("minijuego", 100, 100,this);
 		this.ventana.setVisible(true);
 		this.ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		   this.numeroSorteado=sortearNumero();
-		   this.ventana.getPanel().setearNombreDeTurnoJugador(jugadores.get(0).getNombre());
+		this.numeroSorteado=sortearNumero();
+		
+		this.ventana.getPanel().setearNombreDeTurnoJugador(jugadores.get(0).getNombre());
 	
 	}
 	
@@ -59,10 +61,10 @@ public class MiniJuegoAlaSuerte extends Minijuego {
 		this.i++;
 		this.cantJugados--;
 		if(this.cantJugados==0) {
-			recompensaCastigo();		
+			recompensaCastigo();
 			this.ventana.getPanel().mostrarResultados(this.jugadores);
+			this.ventana.getPanel().mostrarNumero(numeroSorteado);
 			this.ventana.getPanel().mostrarNumeroSorteado(numeroSorteado);
-			
 		}
 	if(this.cantJugados!=0)
 			this.ventana.getPanel().setearNombreDeTurnoJugador(this.jugadores.get(i).getNombre());
