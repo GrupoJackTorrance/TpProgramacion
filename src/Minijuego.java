@@ -10,7 +10,7 @@ public class Minijuego {
 	private String modalidad;
 	private String[] resultados;
 	private List <Jugador> jugadores;
-	VentanaInicioMiniJuego ventana;
+	VentanaMiniJuego ventana;
  int numeroSorteado;
 	
 	int i=0;
@@ -19,7 +19,7 @@ public class Minijuego {
 	public Minijuego(List<Jugador> jugadores) {
 		this.jugadores=jugadores;
 		this.cantJugados=jugadores.size();
-	   this. ventana=new VentanaInicioMiniJuego("minijuego", 100, 100,this);
+	   this. ventana=new VentanaMiniJuego("minijuego", 100, 100,this);
 		this.ventana.setVisible(true);
 		this.ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		   this.numeroSorteado=sortearNumero();

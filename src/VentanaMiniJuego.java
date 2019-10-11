@@ -8,20 +8,22 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class VentanaInicioMiniJuego extends JFrame {
-	PanelVentanaMiniJuego panelInicio;
-	public VentanaInicioMiniJuego(String titulo,int x , int y,Minijuego mini) {
+public class VentanaMiniJuego extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	PanelMiniJuego panelInicio;
+	public VentanaMiniJuego(String titulo,int x , int y,Minijuego mini) {
 		setLocation(x, y);
 		setSize(950,400);
 		setTitle(titulo);
-		this.panelInicio=new PanelVentanaMiniJuego(mini);
+		this.panelInicio=new PanelMiniJuego(mini);
 		add(panelInicio);
-		
-		//visibilizarModalidad();
-		
+				
 	
 	}
-	public  PanelVentanaMiniJuego getPanel() {
+	public  PanelMiniJuego getPanel() {
 		return this.panelInicio;
 	}
 
