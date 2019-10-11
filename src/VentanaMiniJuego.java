@@ -9,23 +9,19 @@ import javax.swing.JTextField;
 
 
 public class VentanaMiniJuego extends JFrame {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	PanelMiniJuegoAlaSuerte panelInicio;
 	public VentanaMiniJuego(String titulo,int x , int y,MiniJuegoAlaSuerte mini) {
 		setLocation(x, y);
 		setSize(950,400);
-		setTitle(titulo);
+		setTitle("Mini Juego: A la Suerte");
 		this.panelInicio=new PanelMiniJuegoAlaSuerte(mini);
-		add(panelInicio);
-				
-	
+		getContentPane().add(panelInicio);
 	}
+	
 	public PanelMiniJuegoAlaSuerte getPanel() {
 		return this.panelInicio;
 	}
 
-	
 }
