@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class PanelMiniJuego extends JPanel {
+public class PanelMiniJuegoAlaSuerte extends JPanel {
 	/**
 	 * 
 	 */
@@ -40,7 +40,7 @@ public class PanelMiniJuego extends JPanel {
 	private MiniJuegoAlaSuerte mini;
 	
 
-	public  PanelMiniJuego(MiniJuegoAlaSuerte mini) {
+	public  PanelMiniJuegoAlaSuerte(MiniJuegoAlaSuerte mini) {
 		this.mini=mini;
 		add(boton1);
 		add(boton2);
