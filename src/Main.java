@@ -58,7 +58,7 @@ public class Main {
 
 	
 
-		Minijuego mini=new Minijuego(jugadores);
+		Minijuego mini=new MiniJuegoAlaSuerte(jugadores);
 		//mini.iniciarMinijuego();
 		
 	for (Jugador jugador : jugadores) {
