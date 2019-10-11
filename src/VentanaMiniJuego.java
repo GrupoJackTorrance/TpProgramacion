@@ -13,17 +13,17 @@ public class VentanaMiniJuego extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	PanelMiniJuego panelInicio;
+	PanelMiniJuegoAlaSuerte panelInicio;
 	public VentanaMiniJuego(String titulo,int x , int y,MiniJuegoAlaSuerte mini) {
 		setLocation(x, y);
 		setSize(950,400);
 		setTitle(titulo);
-		this.panelInicio=new PanelMiniJuego(mini);
+		this.panelInicio=new PanelMiniJuegoAlaSuerte(mini);
 		add(panelInicio);
 				
 	
 	}
-	public  PanelMiniJuego getPanel() {
+	public PanelMiniJuegoAlaSuerte getPanel() {
 		return this.panelInicio;
 	}
 
