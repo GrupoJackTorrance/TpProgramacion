@@ -37,10 +37,10 @@ public class PanelMiniJuego extends JPanel {
 	private JLabel turnoJugador=new JLabel("");
 	private JLabel turnoDe=new JLabel("Turno de:");
 	
-	private AlaSuerte mini;
+	private MiniJuegoAlaSuerte mini;
 	
 
-	public  PanelMiniJuego(AlaSuerte mini) {
+	public  PanelMiniJuego(MiniJuegoAlaSuerte mini) {
 		this.mini=mini;
 		add(boton1);
 		add(boton2);
