@@ -16,7 +16,7 @@ public class PanelMiniJuego extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private	JButton botonAceptarModalidad=new JButton("aceptar");
 	private JButton boton1=new JButton("1");
-private	JButton boton2=new JButton("2");
+	private	JButton boton2=new JButton("2");
 	private JButton boton3=new JButton("3");
 	private	JButton boton4=new JButton("4");
 	private JButton boton5=new JButton("5");
@@ -37,10 +37,10 @@ private	JButton boton2=new JButton("2");
 	private JLabel turnoJugador=new JLabel("");
 	private JLabel turnoDe=new JLabel("Turno de:");
 	
-	private 	Minijuego mini;
+	private AlaSuerte mini;
 	
 
-	public  PanelMiniJuego(Minijuego mini) {
+	public  PanelMiniJuego(AlaSuerte mini) {
 		this.mini=mini;
 		add(boton1);
 		add(boton2);
