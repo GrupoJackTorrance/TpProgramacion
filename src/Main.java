@@ -64,7 +64,7 @@ public class Main {
 	for (Jugador jugador : jugadores) {
 		System.out.println(jugador.getPuntos());
 	}
-	JMiniJuego minijuego= new JMiniJuego(jugadores);
+	
 
 	
 	}
