@@ -28,7 +28,7 @@ public class Main {
 		Jugador jugador2 = new Jugador("Dragon", "jugador2");
 		Jugador jugador3 = new Jugador("Rana", "jugador3");
 		Jugador jugador4 = new Jugador("Mono", "jugador4");
-		/*int puntosobj = 15;
+		int puntosobj = 15;
 		Sala sala = jugador1.crearSala(puntosobj, 2);
 		sala.addJugadorSala(jugador2);
 		sala.addJugadorSala(jugador3);
@@ -50,7 +50,7 @@ public class Main {
 			
 				*/
 			
-		List<Jugador> jugadores=new LinkedList<Jugador>();
+	/*	List<Jugador> jugadores=new LinkedList<Jugador>();
 		jugadores.add(jugador1);
 		jugadores.add(jugador2);
 		jugadores.add(jugador3);
@@ -63,7 +63,7 @@ public class Main {
 		
 	for (Jugador jugador : jugadores) {
 		System.out.println(jugador.getPuntos());
-	}
+	}*/
 	
 
 	

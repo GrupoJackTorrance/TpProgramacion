@@ -26,6 +26,7 @@ public class Turno {
 			int cantidad = jugador.tirarDado();
 			tablero.avanzarJugador(jugador, cantidad);
 			// luego de tirar el dado y avanzar en casillero
+			int entrada = tablero.deseaAtacar();//Para preguntar si el jugador quiere atacar o no
 			while (termino == false) {
 				int advertencia = 0;
 				System.out.println("DESEA REALIZAR USAR UN OBJETO:");

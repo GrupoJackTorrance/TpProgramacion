@@ -1,11 +1,17 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public abstract class Tablero {
 	protected String nombre;
 	protected Casilla  mapa[][];
 	protected List<Jugador> jugadores=new LinkedList<Jugador>();
-
 
 
 	// ---------- C O N S T R U C T O R---------------------
@@ -112,7 +118,11 @@ public abstract class Tablero {
 		}
 
 		return false;
-
+	}
+	
+	public int deseaAtacar() throws InterruptedException {
+		TableroGrafico tab = new TableroGrafico();
+		return tab.deseaAtacarVentana();
 	}
 
 }
