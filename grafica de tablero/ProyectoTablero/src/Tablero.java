@@ -23,7 +23,8 @@ public abstract class Tablero {
 	
 	public int avanzarJugador(Jugador jugador, int cantidad) throws InterruptedException {
 
-		while (cantidad > 0 && mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion() == false) {
+		while (cantidad > 0 /*&& mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion() == false*/) {
+			if(mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion() == false) {
 			if (puedeAvanzar(jugador, "izquierda")) {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
@@ -45,8 +46,9 @@ public abstract class Tablero {
 				jugador.setLugarTableroX(jugador.getLugarTableroX() + 1);
 				this.ventanaTablero.miLamina.movimientoJugador(jugador,"abajo");
 			}
-			
-			
+			}
+			else
+				this.ventanaTablero.miLamina.mostrarOpciones(obtenerOpciones(jugador), jugador);
 			cantidad--;
 		}
 		if (cantidad == 0)

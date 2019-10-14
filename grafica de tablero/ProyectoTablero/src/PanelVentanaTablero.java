@@ -19,6 +19,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import paquete.JugadorQAvanza;
+
 public class PanelVentanaTablero  extends JPanel{
 	Tablero tablero;
 	List<Jugador>jugadores;
@@ -90,7 +92,6 @@ private class PixelJugador{
 		this.pixelY=pixelY;
 	}
 	
-	
 }
 public void movimientoJugador(Jugador jugador,String direccion) throws InterruptedException {
 	
@@ -136,6 +137,128 @@ public void movimientoJugador(Jugador jugador,String direccion) throws Interrupt
 		}
 	}
 				
+}
+
+public void mostrarOpciones(String[] direcciones, JugadorQAvanza jugador) throws InterruptedException {
+	int i=1;
+	
+	//--------------C R E A C I O N     DE      B O T O N E S-----------------------
+		JButton btnArriba = new JButton("Arriba");
+		JButton btnAbajo = new JButton("Abajo");
+		JButton btnDerecha = new JButton("Derecha");
+		JButton btnIzquierda = new JButton("Izquierda");
+		
+		btnArriba.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroX(jugador.getLugarTableroX() - 1);
+					movimientoJugador(jugador, "arriba");
+					
+					btnArriba.setVisible(false);
+					btnAbajo.setVisible(false);
+					btnDerecha.setVisible(false);
+					btnIzquierda.setVisible(false);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		btnAbajo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroX(jugador.getLugarTableroX() + 1);
+					movimientoJugador(jugador, "abajo");
+					btnArriba.setVisible(false);
+					btnAbajo.setVisible(false);
+					btnDerecha.setVisible(false);
+					btnIzquierda.setVisible(false);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		btnDerecha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroY(jugador.getLugarTableroY() + 1);
+					movimientoJugador(jugador, "derecha");
+					btnArriba.setVisible(false);
+					btnAbajo.setVisible(false);
+					btnDerecha.setVisible(false);
+					btnIzquierda.setVisible(false);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		btnIzquierda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroY(jugador.getLugarTableroY() - 1);
+					movimientoJugador(jugador, "izquierda");
+					btnArriba.setVisible(false);
+					btnAbajo.setVisible(false);
+					btnDerecha.setVisible(false);
+					btnIzquierda.setVisible(false);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+	
+		repaint();
+		
+		for (String string : direcciones) {
+			if(i%3==0 && string != null) {
+				if(string.equals("arriba")) {
+					btnArriba.setVisible(true);
+					btnArriba.setBounds(300, 500, 89, 23);
+					add(btnArriba);
+				}
+				if(string.equals("abajo")) {
+					btnAbajo.setVisible(true);
+					btnAbajo.setBounds(300, 600, 89, 23);
+					add(btnAbajo);
+				}
+					
+				if(string.equals("izquierda")) {
+					btnIzquierda.setVisible(true);
+					btnIzquierda.setBounds(200, 550, 89, 23);	
+					add(btnIzquierda);
+				}
+					
+				if(string.equals("derecha")) {
+					btnDerecha.setVisible(true);
+					btnDerecha.setBounds(400, 550, 89, 23);
+					add(btnDerecha);
+				}
+					
+			}	
+			
+			i++;
+		}
+		Thread.sleep(5000);
+		btnArriba.setVisible(false);
+		btnAbajo.setVisible(false);
+		btnDerecha.setVisible(false);
+		btnIzquierda.setVisible(false);
+	}
+
 }
 
 }
