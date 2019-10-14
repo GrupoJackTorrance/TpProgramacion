@@ -31,13 +31,13 @@ public class TurnoTest {
 	public void comprobarTurnoTest() throws Exception{
 		//Verificar que le devuelva el turno siguiente que le paso
 		//Se verifican las opciones cuando es con objeto o no
-		assertEquals(2, turno.turno(1, listaJugadores.get(0), tablero, reader, listaJugadores));
+		assertEquals(2, turno.turno(1, listaJugadores.get(0), tablero, listaJugadores));
 		
 		listaJugadores.get(1).setObjEfectos(1);
-		assertEquals(3, turno.turno(2, listaJugadores.get(1), tablero, reader, listaJugadores));
+		assertEquals(3, turno.turno(2, listaJugadores.get(1), tablero,  listaJugadores));
 		
 		listaJugadores.get(2).setObjEfectos(1);
-		assertEquals(4, turno.turno(3, listaJugadores.get(2), tablero, reader, listaJugadores));
+		assertEquals(4, turno.turno(3, listaJugadores.get(2), tablero, listaJugadores));
 		
 		// Verifico que setee bien el turno del jugador
 		turno.setNumeroTurno(2);

@@ -7,4 +7,5 @@ public abstract class Minijuego {
 	
 	public abstract String informarModalidad();
 	public abstract void recompensaCastigo();
+	
 }

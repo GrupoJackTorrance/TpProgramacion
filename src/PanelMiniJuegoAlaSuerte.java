@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -197,13 +198,17 @@ public class PanelMiniJuegoAlaSuerte extends JPanel {
 				repaint();
 			}
 			if(e.getSource()==botonAceptarResultados) {
-				System.exit(0);
+				mini.cerrarMiniJuego();
+				synchronized(mini){
+						mini.notify();
+				}
 			}
 			
 		}
 		
 	}
-	private void visibilizarModalidad() {
+	
+	public void visibilizarModalidad() {
 		System.out.println("mostrando modalidad");
 		txtpnEnEsteMinijuego.setVisible(true);
 		boton1.setVisible(false);

@@ -26,7 +26,10 @@ public class MiniJuegoAlaSuerte extends Minijuego {
 		this.numeroSorteado=sortearNumero();
 		
 		this.ventana.getPanel().setearNombreDeTurnoJugador(jugadores.get(0).getNombre());
+	}
 	
+	public void cerrarMiniJuego() {
+		this.ventana.dispose();
 	}
 	
 	public String informarModalidad() {

@@ -4,14 +4,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import com.sun.org.apache.xml.internal.security.keys.storage.implementations.SingleCertificateResolver;
 
 public abstract class Tablero {
 	protected String nombre;
 	protected Casilla  mapa[][];
 	protected List<Jugador> jugadores=new LinkedList<Jugador>();
+	VentanaPregunta ventana;
 
 
 	// ---------- C O N S T R U C T O R---------------------
@@ -120,9 +124,11 @@ public abstract class Tablero {
 		return false;
 	}
 	
-	public int deseaAtacar() throws InterruptedException {
-		TableroGrafico tab = new TableroGrafico();
-		return tab.deseaAtacarVentana();
+	public int deseaAtacar(Jugador jugador) throws InterruptedException {
+		ventana = new VentanaPregunta();
+		this.ventana.setVisible(true);
+		//this.ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		return ventana.ataque(jugador);
 	}
-
+	
 }
