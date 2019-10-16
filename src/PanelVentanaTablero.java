@@ -155,10 +155,10 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 					jugador.setLugarTableroX(jugador.getLugarTableroX() - 1);
 					movimientoJugador(jugador, "arriba");
 					
-					btnArriba.setVisible(false);
-					btnAbajo.setVisible(false);
-					btnDerecha.setVisible(false);
-					btnIzquierda.setVisible(false);
+//					btnArriba.setVisible(false);
+//					btnAbajo.setVisible(false);
+//					btnDerecha.setVisible(false);
+//					btnIzquierda.setVisible(false);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -173,10 +173,10 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 					jugador.setLugarTableroX(jugador.getLugarTableroX() + 1);
 					movimientoJugador(jugador, "abajo");
-					btnArriba.setVisible(false);
-					btnAbajo.setVisible(false);
-					btnDerecha.setVisible(false);
-					btnIzquierda.setVisible(false);
+//					btnArriba.setVisible(false);
+//					btnAbajo.setVisible(false);
+//					btnDerecha.setVisible(false);
+//					btnIzquierda.setVisible(false);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -191,10 +191,10 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 					jugador.setLugarTableroY(jugador.getLugarTableroY() + 1);
 					movimientoJugador(jugador, "derecha");
-					btnArriba.setVisible(false);
-					btnAbajo.setVisible(false);
-					btnDerecha.setVisible(false);
-					btnIzquierda.setVisible(false);
+//					btnArriba.setVisible(false);
+//					btnAbajo.setVisible(false);
+//					btnDerecha.setVisible(false);
+//					btnIzquierda.setVisible(false);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -209,16 +209,30 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 					jugador.setLugarTableroY(jugador.getLugarTableroY() - 1);
 					movimientoJugador(jugador, "izquierda");
-					btnArriba.setVisible(false);
-					btnAbajo.setVisible(false);
-					btnDerecha.setVisible(false);
-					btnIzquierda.setVisible(false);
+//					btnArriba.setVisible(false);
+//					btnAbajo.setVisible(false);
+//					btnDerecha.setVisible(false);
+//					btnIzquierda.setVisible(false);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
+		
+		btnArriba.setBounds(300, 500, 89, 23);
+		add(btnArriba);
+		btnAbajo.setBounds(300, 600, 89, 23);
+		add(btnAbajo);
+		btnIzquierda.setBounds(200, 550, 89, 23);	
+		add(btnIzquierda);
+		btnDerecha.setBounds(400, 550, 89, 23);
+		add(btnDerecha);
+		
+		btnArriba.setVisible(false);
+		btnAbajo.setVisible(false);
+		btnDerecha.setVisible(false);
+		btnIzquierda.setVisible(false);
 	
 		repaint();
 		
@@ -226,25 +240,25 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 			if(i%3==0 && string != null) {
 				if(string.equals("arriba")) {
 					btnArriba.setVisible(true);
-					btnArriba.setBounds(300, 500, 89, 23);
-					add(btnArriba);
+//					btnArriba.setBounds(300, 500, 89, 23);
+//					add(btnArriba);
 				}
 				if(string.equals("abajo")) {
 					btnAbajo.setVisible(true);
-					btnAbajo.setBounds(300, 600, 89, 23);
-					add(btnAbajo);
+//					btnAbajo.setBounds(300, 600, 89, 23);
+//					add(btnAbajo);
 				}
 					
 				if(string.equals("izquierda")) {
 					btnIzquierda.setVisible(true);
-					btnIzquierda.setBounds(200, 550, 89, 23);	
-					add(btnIzquierda);
+//					btnIzquierda.setBounds(200, 550, 89, 23);	
+//					add(btnIzquierda);
 				}
 					
 				if(string.equals("derecha")) {
 					btnDerecha.setVisible(true);
-					btnDerecha.setBounds(400, 550, 89, 23);
-					add(btnDerecha);
+//					btnDerecha.setBounds(400, 550, 89, 23);
+//					add(btnDerecha);
 				}
 					
 			}	
