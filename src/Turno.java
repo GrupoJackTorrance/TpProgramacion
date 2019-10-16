@@ -3,18 +3,19 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class Turno {
 	int numeroTurno;
 	int delay;
 	int entrada = 2;
 
 	public Turno(int numeroTurno, int delay) {
-		super();
 		this.numeroTurno = numeroTurno;
 		this.delay = delay;// Tiempo de turno
 	}
 
-	public int turno(int turno, Jugador jugador, Tablero tablero, Scanner reader, List<Jugador> listaJugadores)
+	public int turno(int turno, Jugador jugador, Tablero tablero, List<Jugador> listaJugadores)
 			throws Exception {
 		boolean termino = false;
 		switch (turno) {
@@ -27,58 +28,43 @@ public class Turno {
 			int cantidad = jugador.tirarDado();
 			tablero.avanzarJugador(jugador, cantidad);
 			// luego de tirar el dado y avanzar en casillero
+			int entrada = tablero.deseaAtacar(jugador);//Para preguntar si el jugador quiere atacar o no
 			while (termino == false) {
-				int advertencia = 0;
-				System.out.println("DESEA REALIZAR USAR UN OBJETO:");
-				System.out.println("1-Utilizar Poder");
-				System.out.println("0-No gracias,Termina turno");
 				do {
 					try {
 
 						while (termino == false) {
-							Thread.sleep(1000);
-							// Entrada de teclado por archivo de texto (por el momento)
-							this.entrada = reader.nextInt();
-
 							if (entrada == 2)
-								termino = false;
-							// this.entrada=reader.nextInt();
+								termino = true;
 							else if (entrada != 2) {
 								if (entrada == 1) {
-									int jugadorAtacado = (turno + 1) % 4;
+									int jugadorAtacado = (turno) % 4;
 									if (!jugador.usarObjeto(listaJugadores.get(jugadorAtacado))) {
-										System.out.println("No se pudo atacar porque no tiene objetos");
+										JOptionPane.showMessageDialog(null, "No se pudo atacar a "+ listaJugadores.get(jugadorAtacado).getNombre() +" porque no tiene objetos");
 										termino = true;
 									} else {
-										System.out.println(
-												"A atacado a:" + listaJugadores.get(jugadorAtacado).getNombre());
+										//JOptionPane.showMessageDialog(null, "Ha atacado a: " + listaJugadores.get(jugadorAtacado).getNombre());
 										termino = true;
 									}
 								}
 								if (entrada == 0) {
-									System.out.println("Elegiste NO, termino tu turno");
 									termino = true;
 								}
 
 							}
-							advertencia++;
-							if (advertencia == 50)
-								System.out.println("APURATE QUEDA POCO TIEMPO!");
-							else if (advertencia == 60) {
-								System.out.println("Se termino el tiempo de tu turno");
-								termino = true;
-							}
-
 						}
+						System.out.println("*********************************************");
+						System.out.println("****************PROXIMO TURNO****************");
+						System.out.println("*********************************************");
 					} catch (InputMismatchException ime) {
 						System.out.println("Cuidado! Solo puedes insertar numeros. ");
-						// reader.next();
+						ime.printStackTrace();
 					}
 				} while (termino == false);
 
 			}
 
-			if (termino = true) {
+			if (termino == true) {
 				turno++;
 			}
 			break;
@@ -87,6 +73,7 @@ public class Turno {
 		if (turno == 5) {
 			turno = 1;
 		}
+		
 		return turno;
 	}
 

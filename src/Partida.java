@@ -16,6 +16,8 @@ public class Partida {
 	Tablero tablero; // Tablero de juego
 	List<Jugador> jugadores = new LinkedList<Jugador>(); // Lista de jugadores
 	int turnos; // Cantidad de turnos que va haber segun los jugadores que haya
+	static boolean terminaMiniJuego = false;
+
 
 	/**********************************************************************************************/
 
@@ -37,19 +39,31 @@ public class Partida {
 	 * DESAROLLO DE PARTIDA
 	 ******************************************/
 	public void InicioPartida() throws Exception {
-		Scanner reader = new Scanner(new File("AccionesJugadores.txt"));
 		this.tablero = this.elegirTablero(); // Designo tablero
 		//this.posicionesInciales(this.getJugadores()); // Posicion Inicial // NO HACE FALTA PORQUE LO SETEAMOS EN SALA
 		Ronda ronda = new Ronda(this.turnos); // Creo la ronda
 		determinarOrdenTurno(this.jugadores); // Jugadores por turno
 		boolean terminaJuego = false;
 		for (int i = 0; i < rondaMax && terminaJuego == false; i++) {
-			terminaJuego = ronda.InicioRonda(this.jugadores, this.getTablero(), this.getPuntosObjetivo(), reader);
+			terminaJuego = ronda.InicioRonda(this.jugadores, this.getTablero(), this.getPuntosObjetivo());
+			if(terminaJuego == false) {
+				Minijuego mini = new MiniJuegoAlaSuerte(this.jugadores);
+				synchronized(mini){
+					if(terminaMiniJuego==false)
+						mini.wait();
+				}
+				System.out.println("Hola");
+				synchronized(mini){
+					if(terminaMiniJuego==true)
+						mini.notify();
+				}
+			}
+			
 		}
-		reader.close();
 		this.mostrarPosicionesFinales(); // Muestro Resultado final
 	}
-
+		
+	
 	/***********************************************************************************************/
 
 	/*************************

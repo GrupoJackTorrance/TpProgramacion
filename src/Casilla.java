@@ -1,4 +1,5 @@
 
+
 public class Casilla {
 
 	private String color; // color diferenciara el efecto? supongo que nos va a servir para la parte
