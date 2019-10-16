@@ -62,30 +62,26 @@ public class VentanaPregunta extends JFrame{
 			super.paintComponent(grafico);
 			this.setBounds(0, 0, 400, 400);
 			
-			ataca.setBounds(50, 150, 100, 30);
+			ataca.setBounds(50, 220, 100, 30);
 			ataca.setBackground(SystemColor.window);
 
-			noAtaca.setBounds(200, 150, 150, 30);
+			noAtaca.setBounds(200, 220, 150, 30);
 			noAtaca.setBackground(SystemColor.window);
 
-			cronometro.setBounds(5, 5, 200, 30);
-			cronometro.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-			cronometro.setForeground(new Color(102, 204, 204));
+			cronometro.setBounds(25, 25, 300, 30);
+			cronometro.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20 ));
+			cronometro.setForeground(new Color(0, 0, 0));
 			
-			pregunta.setBounds(15, 50, 350, 50);
-			pregunta.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-			pregunta.setForeground(new Color(102, 204, 204));
+			pregunta.setBounds(15, 70, 350, 50);
+			pregunta.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
+			pregunta.setForeground(new Color(0, 0, 0));
 			
 			opcion.setBounds(10, 10, 350, 200);
 			opcion.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
-			opcion.setForeground(new Color(102, 204, 204));
-
-			mensaje = "tiempo restante: ";
-
-			//Dimension height = getSize();			
+			opcion.setForeground(new Color(0, 0, 0));
 
 			//Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
-			ImageIcon Img = new ImageIcon(getClass().getResource("fondo.jpg")); 
+			ImageIcon Img = new ImageIcon(getClass().getResource("fondo_ataque.jpg")); 
 			
 			//se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
 			grafico.drawImage(Img.getImage(), 0, 0, 400, 300, null);
@@ -95,15 +91,17 @@ public class VentanaPregunta extends JFrame{
 		public int deseaAtacarVentana(Jugador jugador) throws InterruptedException {
 			
 			int cont = 10;
+			mensaje = "TIEMPO RESTANTE: ";
 			opcion.setVisible(false);
 			this.setVisible(true);
-			pregunta.setText("Jugador: " + jugador.getNombre() + "\n\r escoja una opción");
+			pregunta.setText( jugador.getNombre().toUpperCase() + "\n\r escoja una opción");
 			while(cont>=0 && resp==2) {
 				Thread.sleep(1000);
 				cronometro.setText(mensaje + cont);
 				if(cont==3)
-					mensaje = "TE QUEDA POCO TIEMPO!!    ";
+					mensaje = "TE QUEDA POCO TIEMPO!  ";
 				cont--;
+				System.out.println(mensaje);
 			}
 			if(resp == 0) {
 				pregunta.setVisible(false);
