@@ -1,13 +1,13 @@
-
+import java.awt.Color;
 
 public class Casilla {
 
-	private String color; // color diferenciara el efecto? supongo que nos va a servir para la parte
+	private Color color; // color diferenciara el efecto? supongo que nos va a servir para la parte
 							// gráfica
 	private Efecto efecto;
 	private boolean esUnion;
 
-	public Casilla(String color, Efecto efecto, boolean esUnion) {
+	public Casilla(Color color, Efecto efecto, boolean esUnion) {
 
 		this.color = color;
 		this.efecto = efecto;
@@ -18,7 +18,7 @@ public class Casilla {
 	efecto.accion(jugador);
 	}
 
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 

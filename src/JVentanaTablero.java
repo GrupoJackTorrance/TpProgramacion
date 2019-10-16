@@ -18,6 +18,7 @@ public class JVentanaTablero extends JFrame{
 	private PanelTablero contentPanel;
 	private JLabel lbl, lblUser;
 	
+	//EN PRINCIPIO ESTA CLASE NO SE ESTÁ USANDO. LA DEJO POR LAS DUDAS.
 	public JVentanaTablero(String user) {
 		//setModal(true);
 		contentPanel = new PanelTablero();
@@ -40,7 +41,7 @@ public class JVentanaTablero extends JFrame{
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				setMovimiento(arg0);
+				//setMovimiento(arg0);
 			}
 		});
 		

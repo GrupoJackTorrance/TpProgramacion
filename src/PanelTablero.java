@@ -1,5 +1,4 @@
 import javax.swing.JFrame;
-import pqt.*;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -11,7 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 
-
+//EN PRINCIPIO ESTA CLASE NO SE ESTÁ USANDO. LA DEJO POR LAS DUDAS.
 public class PanelTablero extends JPanel{
 
 	ArrayList <Personaje> personajes = new ArrayList<>();
@@ -42,6 +41,6 @@ public class PanelTablero extends JPanel{
 	}
 	
 	public void moverPersonaje(Personaje personaje) {
-		this.personaje = personaje;//hace un for buscando al personaje 
+		//this.personaje = personaje;//hace un for buscando al personaje 
 	}
 }
