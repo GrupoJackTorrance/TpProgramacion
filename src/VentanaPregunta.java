@@ -101,7 +101,6 @@ public class VentanaPregunta extends JFrame{
 				if(cont==3)
 					mensaje = "TE QUEDA POCO TIEMPO!  ";
 				cont--;
-				System.out.println(mensaje);
 			}
 			if(resp == 0) {
 				pregunta.setVisible(false);
