@@ -52,7 +52,6 @@ public class Partida {
 					if(terminaMiniJuego==false)
 						mini.wait();
 				}
-				System.out.println("Hola");
 				synchronized(mini){
 					if(terminaMiniJuego==true)
 						mini.notify();

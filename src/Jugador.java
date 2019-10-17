@@ -2,7 +2,7 @@
 public class Jugador implements Comparable<Jugador> {
 	private int nroTurno;
 	private String personaje;
-	private int puntos = 0;
+	private int puntos;
 	private int objEfectos;
 	private int lugarTableroX;
 	private int lugarTableroY;
@@ -130,7 +130,8 @@ public class Jugador implements Comparable<Jugador> {
 	}
 
 	public int tirarDado() {
-		return 3; // Hardcodeado para las pruebas
+		Dado dado=new Dado(); 
+		return dado.tirar();
 	}
 
 	// Para comparar jugadores por puntos y si son iguales por nombre

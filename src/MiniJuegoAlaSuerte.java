@@ -74,6 +74,4 @@ public class MiniJuegoAlaSuerte extends Minijuego {
 
 	}
 
-	
-	
 }
