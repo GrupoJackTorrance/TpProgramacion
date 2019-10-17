@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.sun.org.apache.xml.internal.security.keys.storage.implementations.SingleCertificateResolver;
+//import com.sun.org.apache.xml.internal.security.keys.storage.implementations.SingleCertificateResolver;
 
 public abstract class Tablero {
 	protected String nombre;
