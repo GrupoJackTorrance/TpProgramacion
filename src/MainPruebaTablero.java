@@ -1,6 +1,9 @@
 import java.util.LinkedList;
 import java.util.List;
 
+//import paquete.TableroNormalQAvanza;
+//import paquete.TableroQAvanza;
+
 public class MainPruebaTablero {
 
 	public static void main(String[] args) throws InterruptedException {
@@ -33,8 +36,16 @@ public class MainPruebaTablero {
 		jugadores.add(jugador4);
 		
 		Tablero tablero = new TableroNormal(jugadores);
-		Thread.sleep(10000);
-		tablero.avanzarJugador(jugador3, 3);
+		Thread.sleep(2000);
+		tablero.avanzarJugador(jugador3, 10);
+		Thread.sleep(2000);
+		tablero.avanzarJugador(jugador1, 10);
+		Thread.sleep(2000);
+		tablero.avanzarJugador(jugador3, 10);
+		Thread.sleep(2000);
+		tablero.avanzarJugador(jugador2, 10);
+		Thread.sleep(2000);
+		tablero.avanzarJugador(jugador4, 10);
 	}
 	
 

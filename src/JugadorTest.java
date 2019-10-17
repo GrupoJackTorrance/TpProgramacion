@@ -41,10 +41,14 @@ public class JugadorTest {
 	
 	@Test
 	public void comprobarSalaTest() {
-		//Compruebo que se genere la Sala, y haya 2 jugadores
+		//Compruebo que se genere la Sala 
 		Sala sala = jugador.crearSala(10, 1);
 		jugador2.entrarEnSala(sala);
-		sala.getJugadores();
+		//Compruebo que un jugador entre a la Sala
+		Assert.assertEquals(2, sala.getcantJugadores());
+		jugador2.salirSala(sala);
+		//Compruebo que un jugador salga de la Sala
+		Assert.assertEquals(1, sala.getcantJugadores());
 	}
 
 }

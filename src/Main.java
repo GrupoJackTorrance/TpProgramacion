@@ -28,7 +28,9 @@ public class Main {
 		Jugador jugador2 = new Jugador("Dragon", "jugador2");
 		Jugador jugador3 = new Jugador("Rana", "jugador3");
 		Jugador jugador4 = new Jugador("Mono", "jugador4");
-		/*int puntosobj = 15;
+		jugador1.setObjEfectos(1);
+		jugador3.setObjEfectos(1);
+		int puntosobj = 50;
 		Sala sala = jugador1.crearSala(puntosobj, 2);
 		sala.addJugadorSala(jugador2);
 		sala.addJugadorSala(jugador3);
@@ -50,22 +52,23 @@ public class Main {
 			
 				*/
 			
-		List<Jugador> jugadores=new LinkedList<Jugador>();
+	/*	List<Jugador> jugadores=new LinkedList<Jugador>();
 		jugadores.add(jugador1);
 		jugadores.add(jugador2);
 		jugadores.add(jugador3);
 		jugadores.add(jugador4);
+		
 
 	
 
-		Minijuego mini=new Minijuego(jugadores);
+		Minijuego mini=new MiniJuegoAlaSuerte(jugadores);
 		//mini.iniciarMinijuego();
 		
 	for (Jugador jugador : jugadores) {
 		System.out.println(jugador.getPuntos());
 	}
-	JMiniJuego minijuego= new JMiniJuego(jugadores);
-	minijuego.main(args);
+	*/
+
 	
 	}
 

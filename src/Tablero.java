@@ -1,12 +1,22 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import com.sun.org.apache.xml.internal.security.keys.storage.implementations.SingleCertificateResolver;
 
 public abstract class Tablero {
 	protected String nombre;
 	protected Casilla  mapa[][];
 	protected List<Jugador> jugadores=new LinkedList<Jugador>();
-	VentanaTablero ventanaTablero;
 
+	VentanaTablero ventanaTablero;
 
 
 	// ---------- C O N S T R U C T O R---------------------
@@ -23,28 +33,35 @@ public abstract class Tablero {
 	
 	public int avanzarJugador(Jugador jugador, int cantidad) throws InterruptedException {
 
-		while (cantidad > 0 && mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion() == false) {
+		while (cantidad > 0 /*&& mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion() == false*/) {
+			if(mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion() == false) {
 			if (puedeAvanzar(jugador, "izquierda")) {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroY(jugador.getLugarTableroY() - 1);
+				this.ventanaTablero.miLamina.movimientoJugador(jugador,"izquierda");
 			} else if (puedeAvanzar(jugador, "derecha")) {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroY(jugador.getLugarTableroY() + 1);
+				this.ventanaTablero.miLamina.movimientoJugador(jugador,"derecha");
 			} else if (puedeAvanzar(jugador, "arriba")) {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroX(jugador.getLugarTableroX() - 1);
+				this.ventanaTablero.miLamina.movimientoJugador(jugador,"arriba");
 			} else if (puedeAvanzar(jugador, "abajo")) {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroX(jugador.getLugarTableroX() + 1);
+				this.ventanaTablero.miLamina.movimientoJugador(jugador,"abajo");
 			}
-			this.ventanaTablero.miLamina.repaint();
-			Thread.sleep(2000);
+			}
+			else
+				this.ventanaTablero.miLamina.mostrarOpciones(obtenerOpciones(jugador), jugador);
 			cantidad--;
 		}
+		
 		if (cantidad == 0)
 			mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].aplicarEfecto(jugador);
 		return cantidad;
@@ -115,9 +132,10 @@ public abstract class Tablero {
 		}
 
 		return false;
-
 	}
+
 	public List<Jugador> getJugadores() {
 		return this.jugadores;
 	}
+
 }

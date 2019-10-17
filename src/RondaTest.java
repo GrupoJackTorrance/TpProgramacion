@@ -40,7 +40,7 @@ public class RondaTest {
 	@Test
 	public void verificarInicioRondaTest() throws Exception{
 		// Verificar que se pueda iniciar la ronda
-		assertEquals(false, ronda.InicioRonda(jugadores, tablero, puntosObjetivo, reader));
+		assertEquals(false, ronda.InicioRonda(jugadores, tablero, puntosObjetivo));
 		// Verificar que termine la ronda cuando el turno sea mayor a la cantidad de
 		// jugadores
 		assertEquals(true, ronda.terminaRonda(3));

@@ -47,8 +47,9 @@ public class Personaje{
 //		this.y+=delta_y;
 //	}
 
-	public void actualizarCoordenadasGraficas(int lugarTableroX, int lugarTableroY) {
-		this.x=(double)lugarTableroX;
-		this.y=(double)lugarTableroY;
-	}
+	//Esto no se usa por ahora
+//	public void actualizarCoordenadasGraficas(int lugarTableroX, int lugarTableroY) {
+//		this.x=(double)lugarTableroX;
+//		this.y=(double)lugarTableroY;
+//	}
 }
