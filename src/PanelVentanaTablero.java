@@ -19,15 +19,39 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+
+
 public class PanelVentanaTablero extends JPanel{
 	Tablero tablero;
 	List<Jugador>jugadores;
 	Graphics2D g2;
+	JButton btnArriba = new JButton("Arriba");
+	JButton btnAbajo = new JButton("Abajo");
+	JButton btnDerecha = new JButton("Derecha");
+	JButton btnIzquierda = new JButton("Izquierda");
 	PixelJugador [] jugadoresGraficos;
+	Jugador jugador;
 	double anchoAlturaCasilla=50;
 	double ubicacionX=40;
 	double ubicacionY=60;
 	public PanelVentanaTablero(Tablero tablero) {
+		btnAbajo.setLocation(200, 200);
+		btnIzquierda.setLocation(150, 200);
+		btnDerecha.setLocation(100, 200);
+		btnArriba.setLocation(2500, 200);
+		btnArriba.setVisible(false);
+		btnAbajo.setVisible(false);
+		btnIzquierda.setVisible(false);
+		btnDerecha.setVisible(false);
+		Botones botonesListener=new Botones();
+		btnDerecha.addActionListener(botonesListener);
+		btnIzquierda.addActionListener(botonesListener);
+		btnAbajo.addActionListener(botonesListener);
+		btnArriba.addActionListener(botonesListener);
+		add(btnAbajo);
+		add(btnArriba);
+		add(btnDerecha);
+		add(btnIzquierda);
 		this.tablero=tablero;
 		this.jugadores=tablero.getJugadores();
 		jugadoresGraficos=new PixelJugador[this.jugadores.size()];
@@ -165,123 +189,30 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 	int i=1;
 	
 	//--------------C R E A C I O N     DE      B O T O N E S-----------------------
-		JButton btnArriba = new JButton("Arriba");
-		JButton btnAbajo = new JButton("Abajo");
-		JButton btnDerecha = new JButton("Derecha");
-		JButton btnIzquierda = new JButton("Izquierda");
-		
-		btnArriba.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-					jugador.setLugarTableroX(jugador.getLugarTableroX() - 1);
-					movimientoJugador(jugador, "arriba");
-					
-//					btnArriba.setVisible(false);
-//					btnAbajo.setVisible(false);
-//					btnDerecha.setVisible(false);
-//					btnIzquierda.setVisible(false);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-		
-		btnAbajo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-					jugador.setLugarTableroX(jugador.getLugarTableroX() + 1);
-					movimientoJugador(jugador, "abajo");
-//					btnArriba.setVisible(false);
-//					btnAbajo.setVisible(false);
-//					btnDerecha.setVisible(false);
-//					btnIzquierda.setVisible(false);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-		
-		btnDerecha.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-					jugador.setLugarTableroY(jugador.getLugarTableroY() + 1);
-					movimientoJugador(jugador, "derecha");
-//					btnArriba.setVisible(false);
-//					btnAbajo.setVisible(false);
-//					btnDerecha.setVisible(false);
-//					btnIzquierda.setVisible(false);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-		
-		btnIzquierda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-					jugador.setLugarTableroY(jugador.getLugarTableroY() - 1);
-					movimientoJugador(jugador, "izquierda");
-//					btnArriba.setVisible(false);
-//					btnAbajo.setVisible(false);
-//					btnDerecha.setVisible(false);
-//					btnIzquierda.setVisible(false);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-		
-		btnArriba.setBounds(300, 500, 89, 23);
-		add(btnArriba);
-		btnAbajo.setBounds(300, 600, 89, 23);
-		add(btnAbajo);
-		btnIzquierda.setBounds(200, 550, 89, 23);	
-		add(btnIzquierda);
-		btnDerecha.setBounds(400, 550, 89, 23);
-		add(btnDerecha);
-		
-		btnArriba.setVisible(false);
-		btnAbajo.setVisible(false);
-		btnDerecha.setVisible(false);
-		btnIzquierda.setVisible(false);
-	
-		repaint();
+	this.jugador=jugador;		
 		
 		for (String string : direcciones) {
 			if(i%3==0 && string != null) {
 				if(string.equals("arriba")) {
 					btnArriba.setVisible(true);
-//					btnArriba.setBounds(300, 500, 89, 23);
-//					add(btnArriba);
+					btnArriba.setBounds(250, 300, 89, 23);
+					add(btnArriba);
 				}
 				if(string.equals("abajo")) {
 					btnAbajo.setVisible(true);
-//					btnAbajo.setBounds(300, 600, 89, 23);
-//					add(btnAbajo);
+					btnAbajo.setBounds(280, 300, 89, 23);
+					add(btnAbajo);
 				}
 					
 				if(string.equals("izquierda")) {
 					btnIzquierda.setVisible(true);
-//					btnIzquierda.setBounds(200, 550, 89, 23);	
-//					add(btnIzquierda);
+				   btnIzquierda.setBounds(150, 300, 89, 23);	
+					add(btnIzquierda);
 				}
 					
 				if(string.equals("derecha")) {
 					btnDerecha.setVisible(true);
-//					btnDerecha.setBounds(400, 550, 89, 23);
-//					add(btnDerecha);
+				
 				}
 					
 			}	
@@ -289,11 +220,89 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 			i++;
 		}
 		Thread.sleep(5000);
-		btnArriba.setVisible(false);
 		btnAbajo.setVisible(false);
+		btnArriba.setVisible(false);
 		btnDerecha.setVisible(false);
 		btnIzquierda.setVisible(false);
+		
 	}
+class Botones implements ActionListener{
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource()==btnArriba) {
+			jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+			jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+			jugador.setLugarTableroX(jugador.getLugarTableroX() - 1);
+			try {
+				movimientoJugador(jugador, "arriba");
+			} catch (InterruptedException e1) {
+				// TODO Bloque catch generado automáticamente
+				e1.printStackTrace();
+			}
+			
+			btnArriba.setVisible(false);
+			btnAbajo.setVisible(false);
+			btnDerecha.setVisible(false);
+			btnIzquierda.setVisible(false);
+			
+		}
+		if(e.getSource()==btnAbajo) {
+			jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+			jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+			jugador.setLugarTableroX(jugador.getLugarTableroX() +1);
+			try {
+				movimientoJugador(jugador, "abajo");
+			} catch (InterruptedException e1) {
+				// TODO Bloque catch generado automáticamente
+				e1.printStackTrace();
+			}
+			
+			btnArriba.setVisible(false);
+			btnAbajo.setVisible(false);
+			btnDerecha.setVisible(false);
+			btnIzquierda.setVisible(false);
+			
+		}
+		 if(e.getSource()==btnDerecha) {
+			 jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+				jugador.setLugarTableroY(jugador.getLugarTableroY() + 1);
+				try {
+					movimientoJugador(jugador, "derecha");
+				} catch (InterruptedException e1) {
+					// TODO Bloque catch generado automáticamente
+					e1.printStackTrace();
+				}
+				
+				btnArriba.setVisible(false);
+				btnAbajo.setVisible(false);
+				btnDerecha.setVisible(false);
+				btnIzquierda.setVisible(false);
+		
+		}
+		if(e.getSource()==btnIzquierda) {
+			jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+			jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+			jugador.setLugarTableroY(jugador.getLugarTableroY() - 1);
+			try {
+				movimientoJugador(jugador, "izquierda");
+			} catch (InterruptedException e1) {
+				// TODO Bloque catch generado automáticamente
+				e1.printStackTrace();
+			}
+			
+			btnArriba.setVisible(false);
+			btnAbajo.setVisible(false);
+			btnDerecha.setVisible(false);
+			btnIzquierda.setVisible(false);
+			
+		}
+		
+	}
+	
+}
 
 }
 

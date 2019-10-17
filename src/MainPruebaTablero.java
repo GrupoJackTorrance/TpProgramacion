@@ -16,7 +16,7 @@ public class MainPruebaTablero {
 		Jugador jugador2 = new Jugador("pepe","pepe");
 		jugador2.setLugarTableroX(3);
 		jugador2.setLugarTableroY(0);
-		jugador2.setPosicionAnteriorX(0);
+		jugador2.setPosicionAnteriorX(2);
 		jugador2.setPosicionAnteriorY(0);
 		Jugador jugador3 = new Jugador("pepe","pepe");
 		jugador3.setLugarTableroX(5);
@@ -26,8 +26,8 @@ public class MainPruebaTablero {
 		Jugador jugador4 = new Jugador("pepe","pepe");
 		jugador4.setLugarTableroX(7);
 		jugador4.setLugarTableroY(10);
-		jugador4.setPosicionAnteriorX(0);
-		jugador4.setPosicionAnteriorY(0);
+		jugador4.setPosicionAnteriorX(7);
+		jugador4.setPosicionAnteriorY(9);
 
 		List<Jugador> jugadores= new LinkedList<Jugador>();
 		jugadores.add(jugador1);
