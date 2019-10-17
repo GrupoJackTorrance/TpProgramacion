@@ -40,6 +40,7 @@ public void paintComponent(Graphics g) {
 	super.paintComponent(g);
 	g2= (Graphics2D)g;
 
+	
 	setBackground(Color.lightGray);
 	
 	Rectangle2D rectangulo=new Rectangle2D.Double(120,100,anchoAlturaCasilla,anchoAlturaCasilla);
@@ -66,6 +67,28 @@ public void paintComponent(Graphics g) {
 				
 			
 			}
+			
+			int v=0;
+			Rectangle2D figJugadorP=new Rectangle2D.Double(120,100,anchoAlturaCasilla/2,anchoAlturaCasilla/2);
+			for (PixelJugador jugador : jugadoresGraficos) {
+				figJugadorP.setFrame(215,490+v, anchoAlturaCasilla/4, anchoAlturaCasilla/4);
+				g2.setPaint(Color.BLACK);
+				g2.fill(figJugadorP);		
+				v+=30;
+			
+			}
+			g2.setColor(Color.DARK_GRAY);
+			g2.setFont(new Font("Dialog", Font.BOLD, 14));
+			
+			
+			for (int k = 0, y=0; k < jugadores.size(); k++,y+=30) {
+				g2.drawString(jugadores.get(k).getNombre()+"         Score   " + 
+			jugadores.get(k).getPuntos() , 250, 500+y);
+				
+				
+			}
+			
+			
 			
 		
 		}
