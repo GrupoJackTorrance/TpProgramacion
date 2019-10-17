@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,10 +20,10 @@ public class CasillaTest {
 	sinEfecto = new EfectoNeutro(); // blanco
 	efectoRestarPuntos = new EfectoRestarPuntos(1); // rojo
 	efectoDarObjeto = new EfectoDarObjeto(); // amarillo
-	casilla = new Casilla("blanco", sinEfecto, true);
-	casilla2 = new Casilla("rojo", efectoRestarPuntos, true);
-	casilla3 = new Casilla("amarillo", efectoDarObjeto, false);
-	casilla4 = new Casilla("verde", efectoSumarPuntos, false);
+	casilla = new Casilla(Color.GRAY, sinEfecto, true);
+	casilla2 = new Casilla(Color.RED, efectoRestarPuntos, true);
+	casilla3 = new Casilla(Color.YELLOW, efectoDarObjeto, false);
+	casilla4 = new Casilla(Color.GREEN, efectoSumarPuntos, false);
 	jugador = new Jugador("pepe","pepe");
 	jugador.setPuntos(20);
 	}
