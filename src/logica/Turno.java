@@ -7,9 +7,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Turno {
-	int numeroTurno;
-	int delay;
-	int entrada = 2;
+	private int numeroTurno;
+	private int delay;
+	private int entrada = 2;
 	
 
 	public Turno(int numeroTurno, int delay) {

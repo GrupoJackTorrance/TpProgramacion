@@ -13,7 +13,7 @@ import java.awt.Graphics;
 //EN PRINCIPIO ESTA CLASE NO SE ESTÁ USANDO. LA DEJO POR LAS DUDAS.
 public class PanelTablero extends JPanel{
 
-	ArrayList <Personaje> personajes = new ArrayList<>();
+	private ArrayList <Personaje> personajes = new ArrayList<>();
 
 	public PanelTablero(/*Personaje personaje*/) {
 		personajes.add(new Personaje ("Rata", 100, 100, 10));

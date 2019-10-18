@@ -16,7 +16,7 @@ public abstract class Tablero {
 
 
 	protected List<Jugador> jugadores=new LinkedList<Jugador>();
-	VentanaPregunta ventana;
+	private VentanaPregunta ventana;
 	private VentanaTablero ventanaTablero;
 
 
@@ -59,7 +59,7 @@ public abstract class Tablero {
 			}
 			}
 			else
-				this.getVentanaTablero().getPanelTablero().mostrarOpciones(obtenerOpciones(jugador), jugador);
+				this.getVentanaTablero().getPanelTablero().mostrarOpciones(obtenerOpciones(jugador), jugador,cantidad);
 			
 			cantidad--;
 		}

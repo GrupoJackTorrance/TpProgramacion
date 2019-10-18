@@ -9,7 +9,7 @@ public class Jugador implements Comparable<Jugador> {
 	private int posicionAnteriorX;
 	private int posicionAnteriorY;
 	private String nombre;
-	Personaje miPersonaje;
+	private Personaje miPersonaje;
 
 	public Jugador(String personaje,String nombre) {
 		
@@ -153,9 +153,11 @@ public class Jugador implements Comparable<Jugador> {
 	public boolean usarObjeto(Jugador atacado) {
 		if (this.objEfectos == 1 && atacado.getPuntos()-5>0) {
 			atacado.puntos -= 5;
+			this.objEfectos=0;
 			return true;
 		}else if(atacado.getPuntos()-5<0){
 			atacado.setPuntos(0);
+			this.objEfectos=0;
 			return true;
 		}
 		return false;

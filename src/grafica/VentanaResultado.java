@@ -17,7 +17,7 @@ import logica.Jugador;
 
 
 public class VentanaResultado extends JFrame {
-	PanelResultado panelResultado;
+	private PanelResultado panelResultado;
 	
 	public VentanaResultado() {
 		this.setBounds(200, 200, 400, 300);

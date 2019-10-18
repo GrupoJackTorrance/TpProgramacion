@@ -17,10 +17,9 @@ public class Main {
 		Jugador jugador2 = new Jugador("Dragon", "Maria46a");
 		Jugador jugador3 = new Jugador("Rana", "Julian32");
 		Jugador jugador4 = new Jugador("Mono", "Marlen16");
-		jugador1.setObjEfectos(1);
-		jugador3.setObjEfectos(1);
-		int puntosobj = 15;
-		Sala sala = jugador1.crearSala(puntosobj, 2);
+	
+		int puntosobj = 40;
+		Sala sala = jugador1.crearSala(puntosobj, 20);
 		sala.addJugadorSala(jugador2);
 		sala.addJugadorSala(jugador3);
 		sala.addJugadorSala(jugador4);

@@ -1,6 +1,6 @@
 package logica;
 public class Personaje{
-	String nombre;
+	private String nombre;
 	private double x, y;
 	private int radio;
 	

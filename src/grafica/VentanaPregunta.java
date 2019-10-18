@@ -18,7 +18,7 @@ import logica.Jugador;
 public class VentanaPregunta extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-	PanelPregunta panelPregunta;
+	private PanelPregunta panelPregunta;
 	
 	public VentanaPregunta() {
 		this.setBounds(200, 200, 400, 300);

@@ -11,12 +11,12 @@ public class MiniJuegoAlaSuerte extends Minijuego {
 	private String modalidad;
 	private String[] resultados;
 	private List <Jugador> jugadores;
-	VentanaMiniJuego ventana;
-	int numeroSorteado;
+	private VentanaMiniJuego ventana;
+	private int numeroSorteado;
 	
-	int i=0;
-	int cantJugados;
-	int [] numerosIngresados=new int [4];
+	private int i=0;
+	private int cantJugados;
+	private int [] numerosIngresados=new int [4];
 	public MiniJuegoAlaSuerte(List<Jugador> jugadores) {
 		this.jugadores=jugadores;
 		this.cantJugados=jugadores.size();

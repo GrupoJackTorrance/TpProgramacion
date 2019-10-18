@@ -9,7 +9,7 @@ import logica.MiniJuegoAlaSuerte;
 public class VentanaMiniJuego extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	PanelMiniJuegoAlaSuerte panelInicio;
+	private PanelMiniJuegoAlaSuerte panelInicio;
 	public VentanaMiniJuego(String titulo,int x , int y, MiniJuegoAlaSuerte mini) {
 		setLocation(x, y);
 		setSize(950,400);

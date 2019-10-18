@@ -25,24 +25,26 @@ import logica.Tablero;
 
 public class PanelVentanaTablero extends JPanel {
 
-	Tablero tablero;
+	private Tablero tablero;
 
-	List<Jugador> jugadores;
-	Graphics2D g2;
-	JButton btnArriba = new JButton("Arriba");
-	JButton btnAbajo = new JButton("Abajo");
-	JButton btnDerecha = new JButton("Derecha");
-	JButton btnIzquierda = new JButton("Izquierda");
-	PixelJugador[] jugadoresGraficos;
-	Jugador jugador;
-	double anchoAlturaCasilla = 50;
-	double ubicacionX = 40;
-	double ubicacionY = 100;
+	private List<Jugador> jugadores;
+	private Graphics2D g2;
+	
+	private JButton btnArriba = new JButton("Arriba");
+	private JButton btnAbajo = new JButton("Abajo");
+	private JButton btnDerecha = new JButton("Derecha");
+	private JButton btnIzquierda = new JButton("Izquierda");
+	private PixelJugador[] jugadoresGraficos;
+	private Jugador jugador;
+	private double anchoAlturaCasilla = 50;
+	private double ubicacionX = 40;
+	private double ubicacionY = 100;
 	private JLabel turnoDe = new JLabel("Turno de: ");
 	private JLabel textdado = new JLabel("");
 	private JLabel turnoJugador = new JLabel("");
 	private JLabel elegirLado = new JLabel("Que camino quieres seguir?");
 	private JLabel objetos= new JLabel("");
+
 
 	public PanelVentanaTablero(Tablero tablero) {
 		
@@ -231,13 +233,15 @@ public class PanelVentanaTablero extends JPanel {
 
 	}
 
-	public void mostrarOpciones(String[] direcciones, Jugador jugador) throws InterruptedException {
+	public void mostrarOpciones(String[] direcciones, Jugador jugador,int cantidad) throws InterruptedException {
 		int i = 1;
 
 		
 		this.jugador = jugador;
 		add(elegirLado);
+		elegirLado.setText(elegirLado.getText()+" te quedan "+cantidad + " movimientos");
 		elegirLado.setVisible(true);
+		
 		for (String string : direcciones) {
 			if (i % 3 == 0 && string != null) {
 				if (string.equals("arriba")) {
@@ -289,6 +293,7 @@ public class PanelVentanaTablero extends JPanel {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroX(jugador.getLugarTableroX() - 1);
+				elegirLado.setText("Que camino quieres seguir?");
 
 				elegirLado.setVisible(false);
 				btnArriba.setVisible(false);
@@ -313,7 +318,7 @@ public class PanelVentanaTablero extends JPanel {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroX(jugador.getLugarTableroX() + 1);
-
+				elegirLado.setText("Que camino quieres seguir?");
 				elegirLado.setVisible(false);
 				btnArriba.setVisible(false);
 				btnAbajo.setVisible(false);
@@ -333,6 +338,7 @@ public class PanelVentanaTablero extends JPanel {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroY(jugador.getLugarTableroY() + 1);
+				elegirLado.setText("Que camino quieres seguir?");
 				btnArriba.setVisible(false);
 				btnAbajo.setVisible(false);
 				btnDerecha.setVisible(false);
@@ -353,7 +359,7 @@ public class PanelVentanaTablero extends JPanel {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroY(jugador.getLugarTableroY() - 1);
-
+				elegirLado.setText("Que camino quieres seguir?");
 				elegirLado.setVisible(false);
 				btnArriba.setVisible(false);
 				btnAbajo.setVisible(false);

@@ -1,6 +1,6 @@
 package logica;
 public class EfectoRestarPuntos extends Efecto {
-	int cantidad;
+	private int cantidad;
 	public EfectoRestarPuntos(int cantidad) {
 		this.cantidad=cantidad;
 	}

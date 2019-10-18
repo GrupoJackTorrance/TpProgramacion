@@ -13,13 +13,13 @@ public class Partida {
 	 * PARAMETROS DE PARTIDA
 	 ***********************************/
 	// /int estado; PARA SABER SI UNA PARTIDA SE ENCUENTRA ACTIVA O NO
-	int rondaMax; // cantidad de rondas maximas para la partida
-	int puntosObjetivo; // cantidad de puntos para ganar
-	Tablero tablero; // Tablero de juego
-	List<Jugador> jugadores = new LinkedList<Jugador>(); // Lista de jugadores
-	int turnos; // Cantidad de turnos que va haber segun los jugadores que haya
-	static boolean terminaMiniJuego = false;
-	VentanaResultado resultados;
+	private int rondaMax; // cantidad de rondas maximas para la partida
+	private int puntosObjetivo; // cantidad de puntos para ganar
+	private Tablero tablero; // Tablero de juego
+	private List<Jugador> jugadores = new LinkedList<Jugador>(); // Lista de jugadores
+	private int turnos; // Cantidad de turnos que va haber segun los jugadores que haya
+	private static boolean terminaMiniJuego = false;
+	private VentanaResultado resultados;
 
 
 	/**********************************************************************************************/

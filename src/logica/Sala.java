@@ -8,7 +8,7 @@ public class Sala {
 	private int cantJugadores;
 	private String creador;
 	private int puntosObjetivo;
-	List<Jugador> jugadores = new LinkedList<Jugador>();
+	private List<Jugador> jugadores = new LinkedList<Jugador>();
 
 	/****************************
 	 * FUNCIONES DE SALA

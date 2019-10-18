@@ -4,9 +4,9 @@ import java.util.List;
 
 
 public class Ronda {
-	int turno;
-	int cantTurnos;
-	int contadorTurnos;
+	private int turno;
+	private int cantTurnos;
+	private int contadorTurnos;
 
 	public Ronda(int cantTurnos) {
 		this.cantTurnos = cantTurnos;
