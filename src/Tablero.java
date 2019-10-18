@@ -134,16 +134,16 @@ public abstract class Tablero {
 
 		return false;
 	}
-
-	public List<Jugador> getJugadores() {
-		return this.jugadores;
-	}
-	
 	public int deseaAtacar(Jugador jugador) throws InterruptedException {
 		ventana = new VentanaPregunta();
 		this.ventana.setVisible(true);
 		//this.ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		return ventana.ataque(jugador);
+	}
+	
+
+	public List<Jugador> getJugadores() {
+		return this.jugadores;
 	}
 	
 

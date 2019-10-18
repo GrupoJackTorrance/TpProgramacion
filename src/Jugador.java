@@ -20,6 +20,69 @@ public class Jugador implements Comparable<Jugador> {
 	}
 
 
+
+
+	public void sumarPuntos(int puntos) {
+		this.puntos += puntos;
+	}
+
+	public void restarPuntos(int puntos) {
+		this.puntos = Math.max(0, this.puntos - puntos);
+	}
+
+	public void elegirCaminoEnUnion(int x, int y) {
+		this.posicionAnteriorX = this.lugarTableroX;
+		this.posicionAnteriorY = this.lugarTableroY;
+		this.lugarTableroX = x;
+		this.lugarTableroY = y;
+		//this.update();
+	}
+
+	public Sala crearSala(int puntosObjetivo, int maxPartidas) {
+		Sala sala = new Sala(this, puntosObjetivo, maxPartidas);
+		return sala;
+	}
+
+	public boolean salirSala(Sala sala) {
+		return sala.sacarJugadorSala(this);
+
+	}
+
+	public boolean entrarEnSala(Sala sala) {
+		return sala.addJugadorSala(this);
+
+	}
+
+	public int tirarDado() {
+		Dado dado=new Dado(); 
+		return dado.tirar();
+	}
+
+	// Para comparar jugadores por puntos y si son iguales por nombre
+	@Override
+	public int compareTo(Jugador jugador2) {
+		if (puntos < jugador2.puntos) {
+			return 1;
+		}
+		if (puntos > jugador2.puntos) {
+			return -1;
+		}
+		if (puntos == jugador2.puntos)
+			return this.getNombre().compareTo(jugador2.getNombre());
+		return 0;
+	}
+
+	public boolean usarObjeto(Jugador atacado) {
+		if (this.objEfectos == 1 && atacado.getPuntos()-5>0) {
+			atacado.puntos -= 5;
+			return true;
+		}else if(atacado.getPuntos()-5<0){
+			atacado.setPuntos(0);
+			return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public String toString() {
 		return "Jugador [personaje=" + personaje + ", puntos=" + puntos + ", objEfectos=" + objEfectos
@@ -27,6 +90,10 @@ public class Jugador implements Comparable<Jugador> {
 				+ posicionAnteriorX + ", posicionAnteriorY=" + posicionAnteriorY + ", Nombre=" + nombre + "]";
 	}
 
+	//Esto no se uso por ahora
+//	public void update() {
+//		miPersonaje.actualizarCoordenadasGraficas(lugarTableroX, lugarTableroY);
+//	}
 	public int getNroTurno() {
 		return nroTurno;
 	}
@@ -98,71 +165,5 @@ public class Jugador implements Comparable<Jugador> {
 	public void setPuntos(int puntos) {
 		this.puntos = puntos;
 	}
-
-	public void sumarPuntos(int puntos) {
-		this.puntos += puntos;
-	}
-
-	public void restarPuntos(int puntos) {
-		this.puntos = Math.max(0, this.puntos - puntos);
-	}
-
-	public void elegirCaminoEnUnion(int x, int y) {
-		this.posicionAnteriorX = this.lugarTableroX;
-		this.posicionAnteriorY = this.lugarTableroY;
-		this.lugarTableroX = x;
-		this.lugarTableroY = y;
-		//this.update();
-	}
-
-	public Sala crearSala(int puntosObjetivo, int maxPartidas) {
-		Sala sala = new Sala(this, puntosObjetivo, maxPartidas);
-		return sala;
-	}
-
-	public boolean salirSala(Sala sala) {
-		return sala.sacarJugadorSala(this);
-
-	}
-
-	public boolean entrarEnSala(Sala sala) {
-		return sala.addJugadorSala(this);
-
-	}
-
-	public int tirarDado() {
-		Dado dado=new Dado(); 
-		return dado.tirar();
-	}
-
-	// Para comparar jugadores por puntos y si son iguales por nombre
-	@Override
-	public int compareTo(Jugador jugador2) {
-		if (puntos < jugador2.puntos) {
-			return 1;
-		}
-		if (puntos > jugador2.puntos) {
-			return -1;
-		}
-		if (puntos == jugador2.puntos)
-			return this.getNombre().compareTo(jugador2.getNombre());
-		return 0;
-	}
-
-	public boolean usarObjeto(Jugador atacado) {
-		if (this.objEfectos == 1 && atacado.getPuntos()-5>0) {
-			atacado.puntos -= 5;
-			return true;
-		}else if(atacado.getPuntos()-5<0){
-			atacado.setPuntos(0);
-			return true;
-		}
-		return false;
-	}
-	
-	//Esto no se uso por ahora
-//	public void update() {
-//		miPersonaje.actualizarCoordenadasGraficas(lugarTableroX, lugarTableroY);
-//	}
 
 }
