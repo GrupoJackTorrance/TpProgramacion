@@ -82,10 +82,10 @@ public class PanelVentanaTablero extends JPanel {
 		setBackground(Color.lightGray);
 
 		elegirLado.setLocation(200, 3);
-		btnAbajo.setBounds(250,30,89,23);
-		btnIzquierda.setBounds(300,30, 89, 23);
-		btnDerecha.setBounds(350, 30,89,23);
-		btnArriba.setBounds(400,30,89,23);
+		btnAbajo.setLocation(500,30);
+		btnIzquierda.setLocation(410, 5);
+		btnDerecha.setLocation(570, 5);
+		btnArriba.setLocation(500, 5);
 	
 
 		textdado.setLocation(10, 25);
