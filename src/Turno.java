@@ -9,6 +9,7 @@ public class Turno {
 	int numeroTurno;
 	int delay;
 	int entrada = 2;
+	
 
 	public Turno(int numeroTurno, int delay) {
 		this.numeroTurno = numeroTurno;
@@ -25,7 +26,9 @@ public class Turno {
 		case 4:
 			System.out.println("Empieza turno");
 			System.out.println("Juega jugador: " + turno);
+			tablero.ventanaTablero.miLamina.setearTurnoJugador(jugador);
 			int cantidad = jugador.tirarDado();
+			tablero.ventanaTablero.miLamina.mostrardado(cantidad);
 			tablero.avanzarJugador(jugador, cantidad);
 			// luego de tirar el dado y avanzar en casillero
 			int entrada = tablero.deseaAtacar(jugador);//Para preguntar si el jugador quiere atacar o no

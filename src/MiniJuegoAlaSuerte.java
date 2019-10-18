@@ -12,7 +12,7 @@ public class MiniJuegoAlaSuerte extends Minijuego {
 	private String[] resultados;
 	private List <Jugador> jugadores;
 	VentanaMiniJuego ventana;
- int numeroSorteado;
+	int numeroSorteado;
 	
 	int i=0;
 	int cantJugados;
@@ -46,9 +46,9 @@ public class MiniJuegoAlaSuerte extends Minijuego {
 	public void recompensaCastigo() {
 		for (int i=0; i<numerosIngresados.length;i++) {
 			if(this.numerosIngresados[i]==this.numeroSorteado)
-				this.jugadores.get(i).sumarPuntos(20);
+				this.jugadores.get(i).sumarPuntos(10);
 			else
-				this.jugadores.get(i).restarPuntos(20);
+				this.jugadores.get(i).restarPuntos(1);
 				
 		}
 	}

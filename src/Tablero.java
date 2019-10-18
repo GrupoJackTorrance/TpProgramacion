@@ -15,7 +15,7 @@ public abstract class Tablero {
 	protected String nombre;
 	protected Casilla  mapa[][];
 	protected List<Jugador> jugadores=new LinkedList<Jugador>();
-
+	VentanaPregunta ventana;
 	VentanaTablero ventanaTablero;
 
 
@@ -138,5 +138,13 @@ public abstract class Tablero {
 	public List<Jugador> getJugadores() {
 		return this.jugadores;
 	}
+	
+	public int deseaAtacar(Jugador jugador) throws InterruptedException {
+		ventana = new VentanaPregunta();
+		this.ventana.setVisible(true);
+		//this.ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		return ventana.ataque(jugador);
+	}
+	
 
 }

@@ -136,7 +136,7 @@ public class PanelMiniJuegoAlaSuerte extends JPanel {
 		
 		txtpnEnEsteMinijuego.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
 		txtpnEnEsteMinijuego.setForeground(new Color(102, 204, 204));
-		txtpnEnEsteMinijuego.setText("A la Suerte:\r\nEn este minijuego se va a sortear un numero \r\ndel 1 al 6. Cada jugador debe ingresar un \r\nn\u00FAmero: los jugadores que acierten \r\nvan a recirbir puntos, \r\nlos que no aciertan van a perder puntos. \r\nSi nadie acierta, no reciben castigo.\r\nEl jugador que no ingrese un n\u00FAmero\r\nva a sercastigado con la quita de \r\npuntos");
+		txtpnEnEsteMinijuego.setText("A la Suerte:\r\nEn este minijuego se va a sortear un numero \r\ndel 1 al 6. Cada jugador debe ingresar un \r\nn\u00FAmero: los jugadores que acierten \r\nvan a recirbir puntos, \r\nlos que no aciertan van a perder puntos. \r\nSi nadie acierta, no reciben castigo.\r\nEl jugador que no ingrese un n\u00FAmero\r\nva a ser castigado con la quita de \r\npuntos");
 		txtpnEnEsteMinijuego.setOpaque(false);
 		
 		jugador1.setFont(new Font("Courier",Font.BOLD,35));

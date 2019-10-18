@@ -24,13 +24,13 @@ public class Main {
 		 * dado, hace los movimientos,etc.) Despues de cada ronda, se verifica que no se
 		 * llego al objetivo y sigue jugando o determina jugador. termina la partida
 		 */
-		Jugador jugador1 = new Jugador("pepe","jugador1");
-		Jugador jugador2 = new Jugador("Dragon", "jugador2");
-		Jugador jugador3 = new Jugador("Rana", "jugador3");
-		Jugador jugador4 = new Jugador("Mono", "jugador4");
+		Jugador jugador1 = new Jugador("pepe","Pedro264");
+		Jugador jugador2 = new Jugador("Dragon", "Maria46a");
+		Jugador jugador3 = new Jugador("Rana", "Julian32");
+		Jugador jugador4 = new Jugador("Mono", "Marlen16");
 		jugador1.setObjEfectos(1);
 		jugador3.setObjEfectos(1);
-		int puntosobj = 50;
+		int puntosobj = 15;
 		Sala sala = jugador1.crearSala(puntosobj, 2);
 		sala.addJugadorSala(jugador2);
 		sala.addJugadorSala(jugador3);

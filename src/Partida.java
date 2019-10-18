@@ -17,6 +17,7 @@ public class Partida {
 	List<Jugador> jugadores = new LinkedList<Jugador>(); // Lista de jugadores
 	int turnos; // Cantidad de turnos que va haber segun los jugadores que haya
 	static boolean terminaMiniJuego = false;
+	VentanaResultado resultados;
 
 
 	/**********************************************************************************************/
@@ -59,6 +60,11 @@ public class Partida {
 			}
 			
 		}
+		this.OrdenarporPuntos(jugadores);
+		this.tablero.ventanaTablero.dispose();
+		this.resultados= new VentanaResultado();
+		this.resultados.setVisible(true);
+		this.resultados.resultadosVentana(jugadores);
 		this.mostrarPosicionesFinales(); // Muestro Resultado final
 	}
 		
@@ -71,7 +77,6 @@ public class Partida {
 	// Designa el orden de los turnos y tambien puntos iniciales para cada
 	// jugador equitativamente
 	private void determinarOrdenTurno(List<Jugador> listaJugadores) {
-		
 		for (int i = 0; i < listaJugadores.size(); i++) {
 			listaJugadores.get(i).setNroTurno(i + 1);
 			listaJugadores.get(i).setPuntos(10); // ¿Para que?
