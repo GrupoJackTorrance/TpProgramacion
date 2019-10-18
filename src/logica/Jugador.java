@@ -21,6 +21,8 @@ public class Jugador implements Comparable<Jugador> {
 	}
 
 
+
+	
 	@Override
 	public String toString() {
 		return "Jugador [personaje=" + personaje + ", puntos=" + puntos + ", objEfectos=" + objEfectos
@@ -28,6 +30,10 @@ public class Jugador implements Comparable<Jugador> {
 				+ posicionAnteriorX + ", posicionAnteriorY=" + posicionAnteriorY + ", Nombre=" + nombre + "]";
 	}
 
+	//Esto no se uso por ahora
+//	public void update() {
+//		miPersonaje.actualizarCoordenadasGraficas(lugarTableroX, lugarTableroY);
+//	}
 	public int getNroTurno() {
 		return nroTurno;
 	}
@@ -99,6 +105,7 @@ public class Jugador implements Comparable<Jugador> {
 	public void setPuntos(int puntos) {
 		this.puntos = puntos;
 	}
+
 
 	public void sumarPuntos(int puntos) {
 		this.puntos += puntos;

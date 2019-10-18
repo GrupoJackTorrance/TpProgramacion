@@ -8,7 +8,11 @@ public class Sala {
 	private int cantJugadores;
 	private String creador;
 	private int puntosObjetivo;
+
 	private List<Jugador> jugadores = new LinkedList<Jugador>();
+
+	private Partida p1;
+
 
 	/****************************
 	 * FUNCIONES DE SALA
@@ -52,7 +56,7 @@ public class Sala {
 	 *******************************************************************/
 	// Modificado: devuelve la partida creada
 	public Partida crearPartida() {
-		Partida p1 = new Partida(maxPartidas, puntosObjetivo, cantJugadores, jugadores);
+		 p1 = new Partida(maxPartidas, puntosObjetivo, cantJugadores, jugadores);
 		return p1;
 	}
 

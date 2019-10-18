@@ -4,9 +4,12 @@ import java.util.List;
 
 
 public class Ronda {
+
 	private int turno;
 	private int cantTurnos;
 	private int contadorTurnos;
+
+	Turno suTurno;
 
 	public Ronda(int cantTurnos) {
 		this.cantTurnos = cantTurnos;
@@ -15,7 +18,7 @@ public class Ronda {
 	public boolean InicioRonda(List<Jugador> listaJugadores, Tablero tablero, int puntosObjetivo)
 			throws Exception {
 		this.turno = 1;// Inicio el turno en 1
-		Turno suTurno = null;
+		suTurno = null;
 		contadorTurnos = 0;
 		while (contadorTurnos < this.cantTurnos && GanadorporObjetivo(puntosObjetivo, this.cantTurnos, listaJugadores) == false) {
 			suTurno = new Turno(this.turno);// inicializo un turno

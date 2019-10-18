@@ -13,6 +13,7 @@ public class Partida {
 	 * PARAMETROS DE PARTIDA
 	 ***********************************/
 	// /int estado; PARA SABER SI UNA PARTIDA SE ENCUENTRA ACTIVA O NO
+
 	private int rondaMax; // cantidad de rondas maximas para la partida
 	private int puntosObjetivo; // cantidad de puntos para ganar
 	private Tablero tablero; // Tablero de juego
@@ -20,6 +21,8 @@ public class Partida {
 	private int turnos; // Cantidad de turnos que va haber segun los jugadores que haya
 	private static boolean terminaMiniJuego = false;
 	private VentanaResultado resultados;
+	private Ronda ronda; 
+
 
 
 	/**********************************************************************************************/
@@ -44,7 +47,7 @@ public class Partida {
 	public void InicioPartida() throws Exception {
 		this.tablero = this.elegirTablero(); // Designo tablero
 		//this.posicionesInciales(this.getJugadores()); // Posicion Inicial // NO HACE FALTA PORQUE LO SETEAMOS EN SALA
-		Ronda ronda = new Ronda(this.turnos); // Creo la ronda
+		ronda = new Ronda(this.turnos); // Creo la ronda
 		determinarOrdenTurno(this.jugadores); // Jugadores por turno
 		boolean terminaJuego = false;
 		for (int i = 0; i < rondaMax && terminaJuego == false; i++) {
@@ -117,6 +120,12 @@ public class Partida {
 	}
 
 	/***********************************************************************************************/
+	// Ordenar lista de jugadores
+	public List<Jugador> OrdenarporPuntos(List<Jugador> jugadores) {
+		List<Jugador> arrayJugadores = jugadores;
+		arrayJugadores.sort((j1, j2) -> j1.compareTo(j2));
+		return arrayJugadores;
+	}
 
 	// PARA MOSTRAR Y MODIFICAR
 	public int getTurnos() {
@@ -159,11 +168,5 @@ public class Partida {
 		this.turnos = turnos;
 	}
 
-	// Ordenar lista de jugadores
-	public List<Jugador> OrdenarporPuntos(List<Jugador> jugadores) {
-		List<Jugador> arrayJugadores = jugadores;
-		arrayJugadores.sort((j1, j2) -> j1.compareTo(j2));
-		return arrayJugadores;
-	}
 
 }

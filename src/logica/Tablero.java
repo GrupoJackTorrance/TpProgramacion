@@ -135,11 +135,6 @@ public abstract class Tablero {
 
 		return false;
 	}
-
-	public List<Jugador> getJugadores() {
-		return this.jugadores;
-	}
-	
 	public int deseaAtacar(Jugador jugador) throws InterruptedException {
 		ventana = new VentanaPregunta();
 		this.ventana.setVisible(true);
@@ -148,6 +143,11 @@ public abstract class Tablero {
 
 	public VentanaTablero getVentanaTablero() {
 		return ventanaTablero;
+	}
+	
+
+	public List<Jugador> getJugadores() {
+		return this.jugadores;
 	}
 	
 
