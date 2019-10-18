@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -16,7 +17,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -34,12 +37,17 @@ public class PanelVentanaTablero extends JPanel{
 	double anchoAlturaCasilla=50;
 	double ubicacionX=40;
 	double ubicacionY=60;
+	private JLabel turnoDe=new JLabel("Turno de:");
+	private JLabel dado=new JLabel("Salio el:");
+	private int altura=477;
+	private JLabel turnoJugador=new JLabel("");
 	
 	public PanelVentanaTablero(Tablero tablero) {
 		btnAbajo.setLocation(200, 200);
 		btnIzquierda.setLocation(150, 200);
 		btnDerecha.setLocation(100, 200);
 		btnArriba.setLocation(2500, 200);
+		
 		btnArriba.setVisible(false);
 		btnAbajo.setVisible(false);
 		btnIzquierda.setVisible(false);
@@ -53,6 +61,11 @@ public class PanelVentanaTablero extends JPanel{
 		add(btnArriba);
 		add(btnDerecha);
 		add(btnIzquierda);
+		add(turnoDe);
+		
+		//add(dado);
+		add(turnoJugador);
+		
 		this.tablero=tablero;
 		this.jugadores=tablero.getJugadores();
 		jugadoresGraficos=new PixelJugador[this.jugadores.size()];
@@ -64,10 +77,12 @@ public class PanelVentanaTablero extends JPanel{
 public void paintComponent(Graphics g) {
 	super.paintComponent(g);
 	g2= (Graphics2D)g;
-
 	
 	setBackground(Color.lightGray);
+	//dado.setLocation(550,487);
 	
+	turnoDe.setLocation(500,500);
+	turnoJugador.setLocation(570,500);
 	Rectangle2D rectangulo=new Rectangle2D.Double(120,100,anchoAlturaCasilla,anchoAlturaCasilla);
 	int filasMapa=tablero.mapa.length;
 	int columnasMapa=tablero.mapa[0].length;
@@ -126,7 +141,6 @@ public void paintComponent(Graphics g) {
 			}
 			g2.setColor(Color.DARK_GRAY);
 			g2.setFont(new Font("Dialog", Font.BOLD, 14));
-			
 			
 			for (int k = 0, y=0; k < jugadores.size(); k++,y+=30) {
 				g2.drawString(jugadores.get(k).getNombre()+"         Score   " + 
@@ -227,13 +241,13 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 					
 				if(string.equals("izquierda")) {
 					btnIzquierda.setVisible(true);
-				   btnIzquierda.setBounds(150, 300, 89, 23);	
+					btnIzquierda.setBounds(150, 300, 89, 23);	
 					add(btnIzquierda);
 				}
 					
 				if(string.equals("derecha")) {
+					btnAbajo.setBounds(280, 300, 89, 23);
 					btnDerecha.setVisible(true);
-				
 				}
 					
 			}	
@@ -323,7 +337,14 @@ class Botones implements ActionListener{
 		
 	}
 	
+	
 }
+
+	public void setearTurnoJugador(Jugador jugador) {
+		turnoDe.setVisible(true);
+		turnoJugador.setText(jugador.getNombre());
+		turnoJugador.setVisible(true);
+	}
 
 }
 
