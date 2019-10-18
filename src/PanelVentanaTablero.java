@@ -42,6 +42,8 @@ public class PanelVentanaTablero extends JPanel{
 	private JLabel turnoJugador=new JLabel("");
 	private JLabel elegirLado=new JLabel("Que camino quieres seguir?");
 	
+	
+	
 	public PanelVentanaTablero(Tablero tablero) {
 		
 		btnArriba.setVisible(false);
@@ -58,6 +60,7 @@ public class PanelVentanaTablero extends JPanel{
 		add(btnDerecha);
 		add(btnIzquierda);
 		add(turnoDe);
+		
 		
 		add(textdado);
 		
@@ -94,6 +97,7 @@ public void paintComponent(Graphics g) {
 	turnoJugador.setFont(new Font("Tahoma", Font.BOLD , 15));
 	
 	Rectangle2D rectangulo=new Rectangle2D.Double(120,100,anchoAlturaCasilla,anchoAlturaCasilla);
+	
 	int filasMapa=tablero.mapa.length;
 	int columnasMapa=tablero.mapa[0].length;
 	
@@ -109,7 +113,7 @@ public void paintComponent(Graphics g) {
 			}
 			
 			//dibujo a los jugadores
-			Rectangle2D figJugador=new Rectangle2D.Double(120,100,anchoAlturaCasilla/2,anchoAlturaCasilla/2);
+			Ellipse2D figJugador = new Ellipse2D.Double(120,100,anchoAlturaCasilla/2,anchoAlturaCasilla/2);
 			int h=0;
 			for (PixelJugador jugador : jugadoresGraficos) {
 				figJugador.setFrame(jugador.pixelX,jugador.pixelY, anchoAlturaCasilla/2, anchoAlturaCasilla/2);
@@ -130,7 +134,7 @@ public void paintComponent(Graphics g) {
 			
 			int v=0;
 			h=0;
-			Rectangle2D figJugadorP=new Rectangle2D.Double(120,100,anchoAlturaCasilla/2,anchoAlturaCasilla/2);
+			Ellipse2D figJugadorP = new Ellipse2D.Double(120,100,anchoAlturaCasilla/2,anchoAlturaCasilla/2);
 			for (PixelJugador jugador : jugadoresGraficos) {
 				figJugadorP.setFrame(215,490+v, anchoAlturaCasilla/4, anchoAlturaCasilla/4);
 				if(h==0) {
@@ -264,7 +268,7 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 			
 			i++;
 		}
-		Thread.sleep(5000);
+		Thread.sleep(6000);
 		elegirLado.setVisible(false);
 		btnAbajo.setVisible(false);
 		btnArriba.setVisible(false);
@@ -284,7 +288,6 @@ class Botones implements ActionListener{
 			try {
 				movimientoJugador(jugador, "arriba");
 			} catch (InterruptedException e1) {
-				// TODO Bloque catch generado automáticamente
 				e1.printStackTrace();
 			}
 			elegirLado.setVisible(false);
@@ -301,7 +304,6 @@ class Botones implements ActionListener{
 			try {
 				movimientoJugador(jugador, "abajo");
 			} catch (InterruptedException e1) {
-				// TODO Bloque catch generado automáticamente
 				e1.printStackTrace();
 			}
 			elegirLado.setVisible(false);
@@ -318,7 +320,6 @@ class Botones implements ActionListener{
 				try {
 					movimientoJugador(jugador, "derecha");
 				} catch (InterruptedException e1) {
-					// TODO Bloque catch generado automáticamente
 					e1.printStackTrace();
 				}
 				elegirLado.setVisible(false);
@@ -335,7 +336,6 @@ class Botones implements ActionListener{
 			try {
 				movimientoJugador(jugador, "izquierda");
 			} catch (InterruptedException e1) {
-				// TODO Bloque catch generado automáticamente
 				e1.printStackTrace();
 			}
 			elegirLado.setVisible(false);
@@ -357,10 +357,7 @@ class Botones implements ActionListener{
 		turnoJugador.setVisible(true);
 	}
 
-	public void muestraPosiciones(List<Jugador> jugadores2) {
-		
-		
-	}
+	
 
 	public void mostrardado(int cantidad) {
 		textdado.setText("Dado: "+cantidad);
