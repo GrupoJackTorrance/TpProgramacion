@@ -88,8 +88,6 @@ public void paintComponent(Graphics g) {
 				figJugador.setFrame(jugador.pixelX,jugador.pixelY, anchoAlturaCasilla/2, anchoAlturaCasilla/2);
 				g2.setPaint(Color.BLACK);
 				g2.fill(figJugador);		
-				
-			
 			}
 			
 			int v=0;
