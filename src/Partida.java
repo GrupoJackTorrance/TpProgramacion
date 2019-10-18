@@ -59,7 +59,9 @@ public class Partida {
 			}
 			
 		}
-		this.tablero.ventanaTablero.miLamina.muestraPosiciones(this.jugadores);
+		this.OrdenarporPuntos(jugadores);
+		this.tablero.ventanaTablero.dispose();
+		//this.tablero.mostrarResultadofinales();
 		this.mostrarPosicionesFinales(); // Muestro Resultado final
 	}
 		
@@ -93,6 +95,7 @@ public class Partida {
 
 	// Al finalizar el juego muestra el Resultado final
 	public void mostrarPosicionesFinales() {
+		
 		List<Jugador> jugadores = this.OrdenarporPuntos(this.jugadores);
 		for (int i = 1; i <= this.jugadores.size(); i++) {
 			System.out.println("Puesto" + i + ": " + jugadores.get(i - 1).getNombre() + " Personaje: "
