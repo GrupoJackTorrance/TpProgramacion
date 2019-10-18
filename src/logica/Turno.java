@@ -34,7 +34,10 @@ public class Turno {
 			tablero.avanzarJugador(jugador, cantidad);
 			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
 			// luego de tirar el dado y avanzar en casillero
-			int entrada = tablero.deseaAtacar(jugador);//Para preguntar si el jugador quiere atacar o no
+			if(jugador.getObjEfectos()==1) {
+				int entrada = tablero.deseaAtacar(jugador);//Para preguntar si el jugador quiere atacar o no
+			}else
+				termino=true;
 			while (termino == false) {
 				do {
 					try {
