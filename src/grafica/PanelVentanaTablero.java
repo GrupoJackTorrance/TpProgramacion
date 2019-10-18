@@ -37,7 +37,7 @@ public class PanelVentanaTablero extends JPanel {
 	Jugador jugador;
 	double anchoAlturaCasilla = 50;
 	double ubicacionX = 40;
-	double ubicacionY = 60;
+	double ubicacionY = 100;
 	private JLabel turnoDe = new JLabel("Turno de: ");
 	private JLabel textdado = new JLabel("");
 	private JLabel turnoJugador = new JLabel("");
@@ -82,10 +82,10 @@ public class PanelVentanaTablero extends JPanel {
 		setBackground(Color.lightGray);
 
 		elegirLado.setLocation(200, 3);
-		btnAbajo.setLocation(500,30);
-		btnIzquierda.setLocation(410, 5);
-		btnDerecha.setLocation(570, 5);
-		btnArriba.setLocation(500, 5);
+		btnAbajo.setLocation(300,55);
+		btnIzquierda.setLocation(210, 30);
+		btnDerecha.setLocation(370, 30);
+		btnArriba.setLocation(300, 30);
 	
 
 		textdado.setLocation(10, 25);
@@ -100,6 +100,7 @@ public class PanelVentanaTablero extends JPanel {
 		turnoJugador.setFont(new Font("Tahoma", Font.BOLD, 15));
 
 		Rectangle2D rectangulo = new Rectangle2D.Double(120, 100, anchoAlturaCasilla, anchoAlturaCasilla);
+		//Rectangle2D rectangulo = new Rectangle2D.Double(120, 100, anchoAlturaCasilla, anchoAlturaCasilla);
 
 		int filasMapa = this.tablero.getMapa().length;
 		int columnasMapa =this.tablero.getMapa()[0].length;
@@ -140,7 +141,7 @@ public class PanelVentanaTablero extends JPanel {
 				h = 0;
 				Ellipse2D figJugadorP = new Ellipse2D.Double(120, 100, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2);
 				for (PixelJugador jugador : jugadoresGraficos) {
-					figJugadorP.setFrame(215, 490 + v, anchoAlturaCasilla / 4, anchoAlturaCasilla / 4);
+					figJugadorP.setFrame(215, 540 + v, anchoAlturaCasilla / 4, anchoAlturaCasilla / 4);
 					if (h == 0) {
 						g2.setPaint(Color.BLUE);
 						h++;
@@ -162,7 +163,7 @@ public class PanelVentanaTablero extends JPanel {
 
 				for (int k = 0, y = 0; k < jugadores.size(); k++, y += 30) {
 					g2.drawString(jugadores.get(k).getNombre() + "         Puntos   " + jugadores.get(k).getPuntos(),
-							250, 500 + y);
+							250, 550 + y);
 				}
 
 			}
