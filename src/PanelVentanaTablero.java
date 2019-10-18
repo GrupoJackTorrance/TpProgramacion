@@ -34,6 +34,7 @@ public class PanelVentanaTablero extends JPanel{
 	double anchoAlturaCasilla=50;
 	double ubicacionX=40;
 	double ubicacionY=60;
+	
 	public PanelVentanaTablero(Tablero tablero) {
 		btnAbajo.setLocation(200, 200);
 		btnIzquierda.setLocation(150, 200);
@@ -84,17 +85,41 @@ public void paintComponent(Graphics g) {
 			
 			//dibujo a los jugadores
 			Rectangle2D figJugador=new Rectangle2D.Double(120,100,anchoAlturaCasilla/2,anchoAlturaCasilla/2);
+			int h=0;
 			for (PixelJugador jugador : jugadoresGraficos) {
 				figJugador.setFrame(jugador.pixelX,jugador.pixelY, anchoAlturaCasilla/2, anchoAlturaCasilla/2);
-				g2.setPaint(Color.BLACK);
+				if(h==0) {
+					g2.setPaint(Color.BLUE);
+					h++;
+				}else if(h==1) {
+					g2.setPaint(Color.ORANGE);
+					h++;
+				}else if(h==2) {
+					g2.setPaint(Color.PINK);
+					h++;
+				}else {
+					g2.setPaint(Color.WHITE);
+				}
 				g2.fill(figJugador);		
 			}
 			
 			int v=0;
+			h=0;
 			Rectangle2D figJugadorP=new Rectangle2D.Double(120,100,anchoAlturaCasilla/2,anchoAlturaCasilla/2);
 			for (PixelJugador jugador : jugadoresGraficos) {
 				figJugadorP.setFrame(215,490+v, anchoAlturaCasilla/4, anchoAlturaCasilla/4);
-				g2.setPaint(Color.BLACK);
+				if(h==0) {
+					g2.setPaint(Color.BLUE);
+					h++;
+				}else if(h==1) {
+					g2.setPaint(Color.ORANGE);
+					h++;
+				}else if(h==2) {
+					g2.setPaint(Color.PINK);
+					h++;
+				}else {
+					g2.setPaint(Color.WHITE);
+				}
 				g2.fill(figJugadorP);		
 				v+=30;
 			
@@ -105,7 +130,7 @@ public void paintComponent(Graphics g) {
 			
 			for (int k = 0, y=0; k < jugadores.size(); k++,y+=30) {
 				g2.drawString(jugadores.get(k).getNombre()+"         Score   " + 
-			jugadores.get(k).getPuntos() , 250, 500+y);
+				jugadores.get(k).getPuntos() , 250, 500+y);
 				
 				
 			}
