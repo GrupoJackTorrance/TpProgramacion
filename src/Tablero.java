@@ -33,7 +33,7 @@ public abstract class Tablero {
 	
 	public int avanzarJugador(Jugador jugador, int cantidad) throws InterruptedException {
 
-		while (cantidad > 0 /*&& mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion() == false*/) {
+		while (cantidad > 0 ) {
 			if(mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion() == false) {
 			if (puedeAvanzar(jugador, "izquierda")) {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
@@ -65,6 +65,7 @@ public abstract class Tablero {
 		
 		if (cantidad == 0)
 			mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].aplicarEfecto(jugador);
+			this.ventanaTablero.miLamina.repaint();
 		return cantidad;
 	}
 

@@ -76,10 +76,11 @@ public class PanelVentanaTablero extends JPanel {
 		setBackground(Color.lightGray);
 
 		elegirLado.setLocation(200, 3);
-		btnAbajo.setLocation(500, 30);
-		btnIzquierda.setLocation(410, 5);
-		btnDerecha.setLocation(570, 5);
-		btnArriba.setLocation(500, 5);
+		btnAbajo.setBounds(250,30,89,23);
+		btnIzquierda.setBounds(300,30, 89, 23);
+		btnDerecha.setBounds(350, 30,89,23);
+		btnArriba.setBounds(400,30,89,23);
+	
 
 		textdado.setLocation(10, 25);
 		turnoDe.setLocation(10, 5);
@@ -225,7 +226,7 @@ public class PanelVentanaTablero extends JPanel {
 	public void mostrarOpciones(String[] direcciones, Jugador jugador) throws InterruptedException {
 		int i = 1;
 
-		// --------------C R E A C I O N DE B O T O N E S-----------------------
+		
 		this.jugador = jugador;
 		add(elegirLado);
 		elegirLado.setVisible(true);
@@ -233,19 +234,19 @@ public class PanelVentanaTablero extends JPanel {
 			if (i % 3 == 0 && string != null) {
 				if (string.equals("arriba")) {
 					btnArriba.setVisible(true);
-					btnArriba.setBounds(250, 300, 89, 23);
-					add(btnArriba);
+				//	btnArriba.setBounds(250, 300, 89, 23);
+				//	add(btnArriba);
 				}
 				if (string.equals("abajo")) {
 					btnAbajo.setVisible(true);
-					btnAbajo.setBounds(280, 300, 89, 23);
-					add(btnAbajo);
+				//	btnAbajo.setBounds(280, 300, 89, 23);
+				//	add(btnAbajo);
 				}
 
 				if (string.equals("izquierda")) {
 					btnIzquierda.setVisible(true);
-					btnIzquierda.setBounds(150, 300, 89, 23);
-					add(btnIzquierda);
+				//	btnIzquierda.setBounds(150, 300, 89, 23);
+				//	add(btnIzquierda);
 				}
 
 				if (string.equals("derecha")) {
