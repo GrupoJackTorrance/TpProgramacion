@@ -20,10 +20,10 @@ public class CasillaTest {
 	sinEfecto = new EfectoNeutro(); // blanco
 	efectoRestarPuntos = new EfectoRestarPuntos(1); // rojo
 	efectoDarObjeto = new EfectoDarObjeto(); // amarillo
-	casilla = new Casilla("Blanco", sinEfecto, true);
-	casilla2 = new Casilla("Rojo", efectoRestarPuntos, true);
-	casilla3 = new Casilla("Amarillo", efectoDarObjeto, false);
-	casilla4 = new Casilla("Verde", efectoSumarPuntos, false);
+	casilla = new Casilla(Color.GRAY, sinEfecto, true);
+	casilla2 = new Casilla(Color.RED, efectoRestarPuntos, true);
+	casilla3 = new Casilla(Color.YELLOW, efectoDarObjeto, false);
+	casilla4 = new Casilla(Color.GREEN, efectoSumarPuntos, false);
 	jugador = new Jugador("pepe","pepe");
 	jugador.setPuntos(20);
 	}
