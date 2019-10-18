@@ -8,22 +8,22 @@ public class MainPruebaTablero {
 
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Apéndice de método generado automáticamente
-		Jugador jugador1 = new Jugador("pepe","pepe");
+		Jugador jugador1 = new Jugador("jugador1","jugador1");
 		jugador1.setLugarTableroX(0);
 		jugador1.setLugarTableroY(0);
 		jugador1.setPosicionAnteriorX(0);
 		jugador1.setPosicionAnteriorY(0);
-		Jugador jugador2 = new Jugador("pepe","pepe");
+		Jugador jugador2 = new Jugador("jugador2","jugador2");
 		jugador2.setLugarTableroX(3);
 		jugador2.setLugarTableroY(0);
 		jugador2.setPosicionAnteriorX(2);
 		jugador2.setPosicionAnteriorY(0);
-		Jugador jugador3 = new Jugador("pepe","pepe");
+		Jugador jugador3 = new Jugador("jugador3","jugador3");
 		jugador3.setLugarTableroX(5);
 		jugador3.setLugarTableroY(5);
 		jugador3.setPosicionAnteriorX(4);
 		jugador3.setPosicionAnteriorY(5);
-		Jugador jugador4 = new Jugador("pepe","pepe");
+		Jugador jugador4 = new Jugador("jugador4","jugador4");
 		jugador4.setLugarTableroX(7);
 		jugador4.setLugarTableroY(10);
 		jugador4.setPosicionAnteriorX(7);
@@ -37,15 +37,24 @@ public class MainPruebaTablero {
 		
 		Tablero tablero = new TableroNormal(jugadores);
 		Thread.sleep(2000);
-		tablero.avanzarJugador(jugador3, 10);
-		Thread.sleep(2000);
 		tablero.avanzarJugador(jugador1, 10);
-		Thread.sleep(2000);
-		tablero.avanzarJugador(jugador3, 10);
 		Thread.sleep(2000);
 		tablero.avanzarJugador(jugador2, 10);
 		Thread.sleep(2000);
+		tablero.avanzarJugador(jugador3, 10);
+		Thread.sleep(2000);
 		tablero.avanzarJugador(jugador4, 10);
+		Thread.sleep(2000);
+		
+	
+		tablero.avanzarJugador(jugador1, 10);
+		Thread.sleep(2000);
+		tablero.avanzarJugador(jugador2, 10);
+		Thread.sleep(2000);
+		tablero.avanzarJugador(jugador3, 10);
+		Thread.sleep(2000);
+		tablero.avanzarJugador(jugador4, 10);
+		Thread.sleep(2000);
 	}
 	
 

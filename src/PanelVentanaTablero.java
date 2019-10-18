@@ -219,11 +219,15 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 			
 			i++;
 		}
-		Thread.sleep(5000);
+	/*	Thread.sleep(5000);
 		btnAbajo.setVisible(false);
 		btnArriba.setVisible(false);
 		btnDerecha.setVisible(false);
 		btnIzquierda.setVisible(false);
+		*/
+		synchronized (jugador) {
+			jugador.wait();
+		}
 		
 	}
 class Botones implements ActionListener{
@@ -235,6 +239,10 @@ class Botones implements ActionListener{
 			jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 			jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 			jugador.setLugarTableroX(jugador.getLugarTableroX() - 1);
+			btnArriba.setVisible(false);
+			btnAbajo.setVisible(false);
+			btnDerecha.setVisible(false);
+			btnIzquierda.setVisible(false);
 			try {
 				movimientoJugador(jugador, "arriba");
 			} catch (InterruptedException e1) {
@@ -242,16 +250,19 @@ class Botones implements ActionListener{
 				e1.printStackTrace();
 			}
 			
-			btnArriba.setVisible(false);
-			btnAbajo.setVisible(false);
-			btnDerecha.setVisible(false);
-			btnIzquierda.setVisible(false);
+			synchronized (jugador) {
+				jugador.notify();
+			}
 			
 		}
 		if(e.getSource()==btnAbajo) {
 			jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 			jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 			jugador.setLugarTableroX(jugador.getLugarTableroX() +1);
+			btnArriba.setVisible(false);
+			btnAbajo.setVisible(false);
+			btnDerecha.setVisible(false);
+			btnIzquierda.setVisible(false);
 			try {
 				movimientoJugador(jugador, "abajo");
 			} catch (InterruptedException e1) {
@@ -259,16 +270,19 @@ class Botones implements ActionListener{
 				e1.printStackTrace();
 			}
 			
-			btnArriba.setVisible(false);
-			btnAbajo.setVisible(false);
-			btnDerecha.setVisible(false);
-			btnIzquierda.setVisible(false);
 			
+			synchronized (jugador) {
+				jugador.notify();
+			}
 		}
 		 if(e.getSource()==btnDerecha) {
 			 jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroY(jugador.getLugarTableroY() + 1);
+				btnArriba.setVisible(false);
+				btnAbajo.setVisible(false);
+				btnDerecha.setVisible(false);
+				btnIzquierda.setVisible(false);
 				try {
 					movimientoJugador(jugador, "derecha");
 				} catch (InterruptedException e1) {
@@ -276,16 +290,19 @@ class Botones implements ActionListener{
 					e1.printStackTrace();
 				}
 				
-				btnArriba.setVisible(false);
-				btnAbajo.setVisible(false);
-				btnDerecha.setVisible(false);
-				btnIzquierda.setVisible(false);
+				synchronized (jugador) {
+					jugador.notify();
+				}
 		
 		}
 		if(e.getSource()==btnIzquierda) {
 			jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 			jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 			jugador.setLugarTableroY(jugador.getLugarTableroY() - 1);
+			btnArriba.setVisible(false);
+			btnAbajo.setVisible(false);
+			btnDerecha.setVisible(false);
+			btnIzquierda.setVisible(false);
 			try {
 				movimientoJugador(jugador, "izquierda");
 			} catch (InterruptedException e1) {
@@ -293,11 +310,9 @@ class Botones implements ActionListener{
 				e1.printStackTrace();
 			}
 			
-			btnArriba.setVisible(false);
-			btnAbajo.setVisible(false);
-			btnDerecha.setVisible(false);
-			btnIzquierda.setVisible(false);
-			
+			synchronized (jugador) {
+				jugador.notify();
+			}
 		}
 		
 	}

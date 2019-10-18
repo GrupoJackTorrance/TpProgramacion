@@ -59,6 +59,7 @@ public abstract class Tablero {
 			}
 			else
 				this.ventanaTablero.miLamina.mostrarOpciones(obtenerOpciones(jugador), jugador);
+			
 			cantidad--;
 		}
 		
