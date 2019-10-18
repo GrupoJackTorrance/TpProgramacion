@@ -38,18 +38,5 @@ public class Personaje{
 	public void setRadio(int radio) {
 		this.radio = radio;
 	}
-	
-//	public void desplazarHorizontalmente(double delta_x) {
-//		this.x+=delta_x;
-//	}
-//	
-//	public void desplazarVerticalmente(double delta_y) {
-//		this.y+=delta_y;
-//	}
 
-	//Esto no se usa por ahora
-//	public void actualizarCoordenadasGraficas(int lugarTableroX, int lugarTableroY) {
-//		this.x=(double)lugarTableroX;
-//		this.y=(double)lugarTableroY;
-//	}
 }
