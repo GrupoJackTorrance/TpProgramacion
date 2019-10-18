@@ -28,6 +28,7 @@ public class Turno {
 			System.out.println("Juega jugador: " + turno);
 			tablero.ventanaTablero.miLamina.setearTurnoJugador(jugador);
 			int cantidad = jugador.tirarDado();
+			tablero.ventanaTablero.miLamina.mostrardado(cantidad);
 			tablero.avanzarJugador(jugador, cantidad);
 			// luego de tirar el dado y avanzar en casillero
 			int entrada = tablero.deseaAtacar(jugador);//Para preguntar si el jugador quiere atacar o no
