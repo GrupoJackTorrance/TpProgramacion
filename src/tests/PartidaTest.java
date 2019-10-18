@@ -68,10 +68,5 @@ public class PartidaTest {
 		assertEquals(0,jugadores.get(3).getLugarTableroY());
 		
 	}
-	
-	//@Test
-	//public void InicioPartidaTest() {
-	//	
-	//}
 
 }
