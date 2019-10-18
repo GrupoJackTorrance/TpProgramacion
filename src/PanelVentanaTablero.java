@@ -38,15 +38,11 @@ public class PanelVentanaTablero extends JPanel{
 	double ubicacionX=40;
 	double ubicacionY=60;
 	private JLabel turnoDe=new JLabel("Turno de:");
-	private JLabel dado=new JLabel("Salio el:");
+	private JLabel textdado=new JLabel("");
 	private int altura=477;
 	private JLabel turnoJugador=new JLabel("");
 	
 	public PanelVentanaTablero(Tablero tablero) {
-		btnAbajo.setLocation(200, 200);
-		btnIzquierda.setLocation(150, 200);
-		btnDerecha.setLocation(100, 200);
-		btnArriba.setLocation(2500, 200);
 		
 		btnArriba.setVisible(false);
 		btnAbajo.setVisible(false);
@@ -63,7 +59,8 @@ public class PanelVentanaTablero extends JPanel{
 		add(btnIzquierda);
 		add(turnoDe);
 		
-		//add(dado);
+		add(textdado);
+		
 		add(turnoJugador);
 		
 		this.tablero=tablero;
@@ -79,10 +76,16 @@ public void paintComponent(Graphics g) {
 	g2= (Graphics2D)g;
 	
 	setBackground(Color.lightGray);
-	//dado.setLocation(550,487);
 	
+	btnAbajo.setLocation(100,5);
+	btnIzquierda.setLocation(100, 5);
+	btnDerecha.setLocation(170, 5);
+	btnArriba.setLocation(100, 5);
+	
+	textdado.setLocation(500,520);
 	turnoDe.setLocation(500,500);
 	turnoJugador.setLocation(570,500);
+	
 	Rectangle2D rectangulo=new Rectangle2D.Double(120,100,anchoAlturaCasilla,anchoAlturaCasilla);
 	int filasMapa=tablero.mapa.length;
 	int columnasMapa=tablero.mapa[0].length;
@@ -344,6 +347,15 @@ class Botones implements ActionListener{
 		turnoDe.setVisible(true);
 		turnoJugador.setText(jugador.getNombre());
 		turnoJugador.setVisible(true);
+	}
+
+	public void muestraPosiciones(List<Jugador> jugadores2) {
+		
+		
+	}
+
+	public void mostrardado(int cantidad) {
+		textdado.setText("Dado: "+cantidad);
 	}
 
 }
