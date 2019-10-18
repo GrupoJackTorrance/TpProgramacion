@@ -42,6 +42,7 @@ public class PanelVentanaTablero extends JPanel {
 	private JLabel textdado = new JLabel("");
 	private JLabel turnoJugador = new JLabel("");
 	private JLabel elegirLado = new JLabel("Que camino quieres seguir?");
+	private JLabel objetos= new JLabel("");
 
 	public PanelVentanaTablero(Tablero tablero) {
 		
@@ -59,6 +60,7 @@ public class PanelVentanaTablero extends JPanel {
 		add(btnDerecha);
 		add(btnIzquierda);
 		add(turnoDe);
+		add(objetos);
 
 		add(textdado);
 
@@ -89,6 +91,7 @@ public class PanelVentanaTablero extends JPanel {
 		textdado.setLocation(10, 25);
 		turnoDe.setLocation(10, 5);
 		turnoJugador.setLocation(90, 5);
+		objetos.setLocation(10, 45);
 		textdado.setOpaque(false);
 		turnoDe.setOpaque(false);
 		turnoJugador.setOpaque(false);
@@ -380,5 +383,9 @@ public class PanelVentanaTablero extends JPanel {
 			textdado.setText("Dado: " + cantidad);
 		}
 
+		public void setearObjetos(Jugador jugador) {
+			objetos.setText("Objetos: "+jugador.getObjEfectos()+" ");
+			objetos.setVisible(true);
+		}
 	
 }
