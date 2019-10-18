@@ -100,6 +100,8 @@ public class PanelVentanaTablero extends JPanel {
 		textdado.setFont(new Font("Tahoma", Font.BOLD, 15));
 		turnoDe.setFont(new Font("Tahoma", Font.BOLD, 15));
 		turnoJugador.setFont(new Font("Tahoma", Font.BOLD, 15));
+		elegirLado.setFont(new Font("Tahoma", Font.BOLD, 15));
+		objetos.setFont(new Font("Tahoma", Font.BOLD, 15));
 
 		Rectangle2D rectangulo = new Rectangle2D.Double(120, 100, anchoAlturaCasilla, anchoAlturaCasilla);
 		//Rectangle2D rectangulo = new Rectangle2D.Double(120, 100, anchoAlturaCasilla, anchoAlturaCasilla);
