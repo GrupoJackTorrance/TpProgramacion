@@ -1,18 +1,14 @@
 package grafica;
-import javax.swing.JFrame;
+
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+
 
 import logica.Personaje;
 
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
 
 //EN PRINCIPIO ESTA CLASE NO SE ESTÁ USANDO. LA DEJO POR LAS DUDAS.
 public class PanelTablero extends JPanel{

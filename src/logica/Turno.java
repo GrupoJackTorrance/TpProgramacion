@@ -1,7 +1,8 @@
 package logica;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
+
+
 
 import javax.swing.JOptionPane;
 
@@ -26,9 +27,9 @@ public class Turno {
 		case 4:
 			System.out.println("Empieza turno");
 			System.out.println("Juega jugador: " + turno);
-			tablero.ventanaTablero.miLamina.setearTurnoJugador(jugador);
+			tablero.getVentanaTablero().getPanelTablero().setearTurnoJugador(jugador);
 			int cantidad = jugador.tirarDado();
-			tablero.ventanaTablero.miLamina.mostrardado(cantidad);
+			tablero.getVentanaTablero().getPanelTablero().mostrardado(cantidad);
 			tablero.avanzarJugador(jugador, cantidad);
 			// luego de tirar el dado y avanzar en casillero
 			int entrada = tablero.deseaAtacar(jugador);//Para preguntar si el jugador quiere atacar o no

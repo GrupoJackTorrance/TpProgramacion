@@ -2,7 +2,7 @@ package logica;
 import java.util.List;
 
 import java.awt.Color;
-import java.util.List;
+
 
 
 public class TableroNormal  extends Tablero {
@@ -10,7 +10,7 @@ public class TableroNormal  extends Tablero {
 	public TableroNormal(List<Jugador> jugadores) {
 		super(jugadores);
 		super.mapa=new Casilla[8][12];
-		super.mapa[0][0] = new Casilla(Color.GRAY, new EfectoNeutro(), true);
+		super.mapa[0][0] = new Casilla(Color.GRAY, new EfectoNeutro(), false);
 		super.mapa[0][1] = new Casilla(Color.RED, new EfectoRestarPuntos(1), false);
 		super.mapa[0][2] = new Casilla(Color.GREEN, new EfectoSumarPuntos(1), false);
 		super.mapa[0][3] = new Casilla(Color.RED, new EfectoRestarPuntos(1), false);
@@ -70,4 +70,12 @@ public class TableroNormal  extends Tablero {
 		super.mapa[7][10] = new Casilla(Color.RED, new EfectoRestarPuntos(1), false);
 		super.mapa[7][11] = new Casilla(Color.GREEN, new EfectoSumarPuntos(1), false);
 	}
+
+	@Override
+	public Casilla[][] getMapa() {
+		
+		return  super.mapa;
+	}
+
+	
 }

@@ -1,6 +1,6 @@
 package grafica;
 import java.awt.Color;
-import java.awt.Dimension;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.SystemColor;
@@ -84,7 +84,7 @@ public class VentanaPregunta extends JFrame{
 			opcion.setForeground(new Color(0, 0, 0));
 
 			//Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
-			ImageIcon Img = new ImageIcon(getClass().getResource("fondo_ataque.jpg")); 
+			ImageIcon Img = new ImageIcon(getClass().getResource("../fondo_ataque.jpg")); 
 			
 			//se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
 			grafico.drawImage(Img.getImage(), 0, 0, 400, 300, null);

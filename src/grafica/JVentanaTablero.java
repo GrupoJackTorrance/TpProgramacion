@@ -1,22 +1,20 @@
 package grafica;
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+
 import javax.swing.border.EmptyBorder;
 
 import logica.Personaje;
 
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
+
 import javax.swing.JDialog;
 
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.ActionEvent;
+
 
 public class JVentanaTablero extends JFrame{
 	private PanelTablero contentPanel;

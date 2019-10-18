@@ -1,9 +1,13 @@
 package tests;
 import java.awt.Color;
+import logica.*;
+
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+
 
 public class CasillaTest {
 	Efecto efectoSumarPuntos;

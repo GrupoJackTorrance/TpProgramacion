@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
-
+import logica.*;
 public class RondaTest {
 	List<Jugador> jugadores = new LinkedList<Jugador>();
 	int puntosObjetivo;

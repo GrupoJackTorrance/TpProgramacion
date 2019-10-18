@@ -1,14 +1,8 @@
 package logica;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import grafica.VentanaPregunta;
 import grafica.VentanaTablero;
@@ -16,11 +10,14 @@ import grafica.VentanaTablero;
 //import com.sun.org.apache.xml.internal.security.keys.storage.implementations.SingleCertificateResolver;
 
 public abstract class Tablero {
-	protected String nombre;
+	private String nombre;
 	protected Casilla  mapa[][];
+	public abstract Casilla[][] getMapa();
+
+
 	protected List<Jugador> jugadores=new LinkedList<Jugador>();
 	VentanaPregunta ventana;
-	VentanaTablero ventanaTablero;
+	private VentanaTablero ventanaTablero;
 
 
 	// ---------- C O N S T R U C T O R---------------------
@@ -43,33 +40,33 @@ public abstract class Tablero {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroY(jugador.getLugarTableroY() - 1);
-				this.ventanaTablero.miLamina.movimientoJugador(jugador,"izquierda");
+				this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador,"izquierda");
 			} else if (puedeAvanzar(jugador, "derecha")) {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroY(jugador.getLugarTableroY() + 1);
-				this.ventanaTablero.miLamina.movimientoJugador(jugador,"derecha");
+				this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador,"derecha");
 			} else if (puedeAvanzar(jugador, "arriba")) {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroX(jugador.getLugarTableroX() - 1);
-				this.ventanaTablero.miLamina.movimientoJugador(jugador,"arriba");
+				this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador,"arriba");
 			} else if (puedeAvanzar(jugador, "abajo")) {
 				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
 				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
 				jugador.setLugarTableroX(jugador.getLugarTableroX() + 1);
-				this.ventanaTablero.miLamina.movimientoJugador(jugador,"abajo");
+				this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador,"abajo");
 			}
 			}
 			else
-				this.ventanaTablero.miLamina.mostrarOpciones(obtenerOpciones(jugador), jugador);
+				this.getVentanaTablero().getPanelTablero().mostrarOpciones(obtenerOpciones(jugador), jugador);
 			
 			cantidad--;
 		}
 		
 		if (cantidad == 0)
 			mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].aplicarEfecto(jugador);
-			this.ventanaTablero.miLamina.repaint();
+			this.getVentanaTablero().getPanelTablero().repaint();
 		return cantidad;
 	}
 
@@ -149,6 +146,10 @@ public abstract class Tablero {
 		this.ventana.setVisible(true);
 		//this.ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		return ventana.ataque(jugador);
+	}
+
+	public VentanaTablero getVentanaTablero() {
+		return ventanaTablero;
 	}
 	
 

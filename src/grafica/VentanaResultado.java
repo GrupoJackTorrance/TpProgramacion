@@ -78,7 +78,7 @@ public class VentanaResultado extends JFrame {
 			resultado.setForeground(new Color(0, 0, 0));
 
 			//Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
-			ImageIcon Img = new ImageIcon(getClass().getResource("fondoJuego.jpg")); 
+			ImageIcon Img = new ImageIcon(getClass().getResource("../fondoJuego.jpg")); 
 			
 			//se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
 			grafico.drawImage(Img.getImage(), 0, 0, 400, 300, null);

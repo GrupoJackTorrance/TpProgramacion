@@ -8,6 +8,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import logica.Jugador;
+import logica.Tablero;
+import logica.TableroNormal;
+
 public class TableroTest {
 
 	List<Jugador> jugadores;

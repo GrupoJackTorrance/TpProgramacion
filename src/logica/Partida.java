@@ -1,9 +1,9 @@
 package logica;
-import java.io.File;
+
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
+
 
 import grafica.VentanaResultado;
 
@@ -63,7 +63,7 @@ public class Partida {
 			
 		}
 		this.OrdenarporPuntos(jugadores);
-		this.tablero.ventanaTablero.dispose();
+		this.tablero.getVentanaTablero().dispose();
 		this.resultados= new VentanaResultado();
 		this.resultados.setVisible(true);
 		this.resultados.resultadosVentana(jugadores);
@@ -109,6 +109,8 @@ public class Partida {
 	// Todos empiezan de la posicion X:0 Y:0
 	public void posicionesInciales(List<Jugador> listaJugadores) {
 		for (int i = 0; i < listaJugadores.size(); i++) {
+			listaJugadores.get(i).setPosicionAnteriorX(1);
+			listaJugadores.get(i).setPosicionAnteriorY(0);
 			listaJugadores.get(i).setLugarTableroX(0);
 			listaJugadores.get(i).setLugarTableroY(0);
 		}

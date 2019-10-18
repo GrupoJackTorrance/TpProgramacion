@@ -1,5 +1,6 @@
 package tests;
 import static org.junit.Assert.*;
+import logica.*;
 
 import java.io.File;
 import java.util.LinkedList;

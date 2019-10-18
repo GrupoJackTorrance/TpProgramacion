@@ -3,6 +3,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import logica.Jugador;
+import logica.Sala;
+
 public class JugadorTest {
 	Jugador jugador;
 	Jugador jugador2;

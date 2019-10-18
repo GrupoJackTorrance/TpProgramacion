@@ -1,33 +1,32 @@
 package grafica;
 import java.awt.Color;
-import java.awt.Dimension;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Ellipse2D.Double;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
+
 import java.awt.geom.Rectangle2D;
-import java.io.File;
-import java.io.IOException;
-import java.util.LinkedList;
+
+
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import logica.Casilla;
 import logica.Jugador;
 import logica.Tablero;
 
 public class PanelVentanaTablero extends JPanel {
+
 	Tablero tablero;
+
 	List<Jugador> jugadores;
 	Graphics2D g2;
 	JButton btnArriba = new JButton("Arriba");
@@ -45,7 +44,7 @@ public class PanelVentanaTablero extends JPanel {
 	private JLabel elegirLado = new JLabel("Que camino quieres seguir?");
 
 	public PanelVentanaTablero(Tablero tablero) {
-
+		
 		btnArriba.setVisible(false);
 		btnAbajo.setVisible(false);
 		btnIzquierda.setVisible(false);
@@ -66,6 +65,7 @@ public class PanelVentanaTablero extends JPanel {
 		add(turnoJugador);
 
 		this.tablero = tablero;
+		
 		this.jugadores = tablero.getJugadores();
 		jugadoresGraficos = new PixelJugador[this.jugadores.size()];
 		for (int i = 0; i < jugadoresGraficos.length; i++) {
@@ -76,7 +76,7 @@ public class PanelVentanaTablero extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g2 = (Graphics2D) g;
-
+		
 		setBackground(Color.lightGray);
 
 		elegirLado.setLocation(200, 3);
@@ -98,16 +98,16 @@ public class PanelVentanaTablero extends JPanel {
 
 		Rectangle2D rectangulo = new Rectangle2D.Double(120, 100, anchoAlturaCasilla, anchoAlturaCasilla);
 
-		int filasMapa = tablero.mapa.length;
-		int columnasMapa = tablero.mapa[0].length;
-
+		int filasMapa = this.tablero.getMapa().length;
+		int columnasMapa =this.tablero.getMapa()[0].length;
+		
 		// dibujo el tablero
 		for (int i = 0; i < filasMapa; i++) {
 			for (int j = 0; j < columnasMapa; j++) {
 				rectangulo.setFrame(ubicacionX + (j * anchoAlturaCasilla), ubicacionY + (i * anchoAlturaCasilla),
 						anchoAlturaCasilla, anchoAlturaCasilla);
-				if (tablero.mapa[i][j] != null) {
-					g2.setPaint(tablero.mapa[i][j].getColor());
+				if (this.tablero.getMapa()[i][j] != null) {
+					g2.setPaint(this.tablero.getMapa()[i][j].getColor());
 					g2.fill(rectangulo);
 					g2.setPaint(Color.BLACK);
 					g2.draw(rectangulo);
@@ -297,6 +297,7 @@ public class PanelVentanaTablero extends JPanel {
 				} catch (InterruptedException e1) {
 					// TODO Bloque catch generado automáticamente
 					e1.printStackTrace();
+					
 				}
 
 				synchronized (jugador) {

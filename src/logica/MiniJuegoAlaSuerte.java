@@ -1,10 +1,7 @@
 package logica;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
 
-import javax.swing.ImageIcon;
+import java.util.List;
+
 import javax.swing.JFrame;
 
 import grafica.VentanaMiniJuego;

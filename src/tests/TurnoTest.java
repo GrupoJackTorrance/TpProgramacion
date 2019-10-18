@@ -11,6 +11,11 @@ import java.util.Scanner;
 import org.junit.Before;
 import org.junit.Test;
 
+import logica.Jugador;
+import logica.Tablero;
+import logica.TableroNormal;
+import logica.Turno;
+
 public class TurnoTest {
 	Turno turno;
 	Scanner reader;

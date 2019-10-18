@@ -1,7 +1,7 @@
 package grafica;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -46,7 +46,7 @@ public class PanelMiniJuegoAlaSuerte extends JPanel {
 	private JLabel jugador4=new JLabel("");
 	private JLabel turnoJugador=new JLabel("");
 	private JLabel turnoDe=new JLabel("Turno de:");
-	private ImageIcon imagen = new ImageIcon(getClass().getResource("fondo.jpg"));
+	private ImageIcon imagen = new ImageIcon(getClass().getResource("../fondo.jpg"));
 	private MiniJuegoAlaSuerte mini;
 	
 
