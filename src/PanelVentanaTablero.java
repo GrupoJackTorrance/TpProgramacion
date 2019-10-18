@@ -37,10 +37,10 @@ public class PanelVentanaTablero extends JPanel{
 	double anchoAlturaCasilla=50;
 	double ubicacionX=40;
 	double ubicacionY=60;
-	private JLabel turnoDe=new JLabel("Turno de:");
+	private JLabel turnoDe=new JLabel("Turno de: ");
 	private JLabel textdado=new JLabel("");
-	private int altura=477;
 	private JLabel turnoJugador=new JLabel("");
+	private JLabel elegirLado=new JLabel("Que camino quieres seguir?");
 	
 	public PanelVentanaTablero(Tablero tablero) {
 		
@@ -77,14 +77,21 @@ public void paintComponent(Graphics g) {
 	
 	setBackground(Color.lightGray);
 	
-	btnAbajo.setLocation(100,5);
-	btnIzquierda.setLocation(100, 5);
-	btnDerecha.setLocation(170, 5);
-	btnArriba.setLocation(100, 5);
+	elegirLado.setLocation(200, 3);
+	btnAbajo.setLocation(500,30);
+	btnIzquierda.setLocation(410, 5);
+	btnDerecha.setLocation(570, 5);
+	btnArriba.setLocation(500, 5);
 	
-	textdado.setLocation(500,520);
-	turnoDe.setLocation(500,500);
-	turnoJugador.setLocation(570,500);
+	textdado.setLocation(10,25);
+	turnoDe.setLocation(10,5);
+	turnoJugador.setLocation(90,5);
+	textdado.setOpaque(false);
+	turnoDe.setOpaque(false);
+	turnoJugador.setOpaque(false);
+	textdado.setFont(new Font("Tahoma", Font.BOLD , 15));
+	turnoDe.setFont(new Font("Tahoma", Font.BOLD , 15));
+	turnoJugador.setFont(new Font("Tahoma", Font.BOLD , 15));
 	
 	Rectangle2D rectangulo=new Rectangle2D.Double(120,100,anchoAlturaCasilla,anchoAlturaCasilla);
 	int filasMapa=tablero.mapa.length;
@@ -146,7 +153,7 @@ public void paintComponent(Graphics g) {
 			g2.setFont(new Font("Dialog", Font.BOLD, 14));
 			
 			for (int k = 0, y=0; k < jugadores.size(); k++,y+=30) {
-				g2.drawString(jugadores.get(k).getNombre()+"         Score   " + 
+				g2.drawString(jugadores.get(k).getNombre()+"         Puntos   " + 
 				jugadores.get(k).getPuntos() , 250, 500+y);
 			}
 			
@@ -228,7 +235,8 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 	
 	//--------------C R E A C I O N     DE      B O T O N E S-----------------------
 	this.jugador=jugador;		
-		
+		add(elegirLado);
+		elegirLado.setVisible(true);
 		for (String string : direcciones) {
 			if(i%3==0 && string != null) {
 				if(string.equals("arriba")) {
@@ -249,7 +257,6 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 				}
 					
 				if(string.equals("derecha")) {
-					btnAbajo.setBounds(280, 300, 89, 23);
 					btnDerecha.setVisible(true);
 				}
 					
@@ -258,6 +265,7 @@ public void mostrarOpciones(String[] direcciones, Jugador jugador) throws Interr
 			i++;
 		}
 		Thread.sleep(5000);
+		elegirLado.setVisible(false);
 		btnAbajo.setVisible(false);
 		btnArriba.setVisible(false);
 		btnDerecha.setVisible(false);
@@ -279,7 +287,7 @@ class Botones implements ActionListener{
 				// TODO Bloque catch generado automáticamente
 				e1.printStackTrace();
 			}
-			
+			elegirLado.setVisible(false);
 			btnArriba.setVisible(false);
 			btnAbajo.setVisible(false);
 			btnDerecha.setVisible(false);
@@ -296,7 +304,7 @@ class Botones implements ActionListener{
 				// TODO Bloque catch generado automáticamente
 				e1.printStackTrace();
 			}
-			
+			elegirLado.setVisible(false);
 			btnArriba.setVisible(false);
 			btnAbajo.setVisible(false);
 			btnDerecha.setVisible(false);
@@ -313,7 +321,7 @@ class Botones implements ActionListener{
 					// TODO Bloque catch generado automáticamente
 					e1.printStackTrace();
 				}
-				
+				elegirLado.setVisible(false);
 				btnArriba.setVisible(false);
 				btnAbajo.setVisible(false);
 				btnDerecha.setVisible(false);
@@ -330,7 +338,7 @@ class Botones implements ActionListener{
 				// TODO Bloque catch generado automáticamente
 				e1.printStackTrace();
 			}
-			
+			elegirLado.setVisible(false);
 			btnArriba.setVisible(false);
 			btnAbajo.setVisible(false);
 			btnDerecha.setVisible(false);
