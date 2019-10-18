@@ -131,8 +131,6 @@ public void paintComponent(Graphics g) {
 			for (int k = 0, y=0; k < jugadores.size(); k++,y+=30) {
 				g2.drawString(jugadores.get(k).getNombre()+"         Score   " + 
 				jugadores.get(k).getPuntos() , 250, 500+y);
-				
-				
 			}
 			
 			
