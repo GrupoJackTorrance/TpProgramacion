@@ -45,13 +45,6 @@ public class Ronda {
 		}
 		return false;
 		
-		/* OTRA FORMA PARA HACERLO
-		for (Jugador jugador : listaJugadores) {
-			if(jugador.getPuntos()>=puntosObjetivo)
-				return true;
-		}
-		return false;
-		*/
 	}
 
 }
