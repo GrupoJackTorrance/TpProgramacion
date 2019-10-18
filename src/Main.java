@@ -31,7 +31,7 @@ public class Main {
 		jugador1.setObjEfectos(1);
 		jugador3.setObjEfectos(1);
 		int puntosobj = 50;
-		Sala sala = jugador1.crearSala(puntosobj, 2);
+		Sala sala = jugador1.crearSala(puntosobj, 10);
 		sala.addJugadorSala(jugador2);
 		sala.addJugadorSala(jugador3);
 		sala.addJugadorSala(jugador4);
