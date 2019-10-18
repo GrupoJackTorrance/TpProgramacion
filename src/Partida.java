@@ -59,6 +59,7 @@ public class Partida {
 			}
 			
 		}
+		this.tablero.ventanaTablero.miLamina.muestraPosiciones(this.jugadores);
 		this.mostrarPosicionesFinales(); // Muestro Resultado final
 	}
 		
