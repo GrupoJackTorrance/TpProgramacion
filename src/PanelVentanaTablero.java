@@ -149,7 +149,7 @@ public void movimientoJugador(Jugador jugador,String direccion) throws Interrupt
 	if(direccion.equals("arriba")) {
 		inicio=jugadoresGraficos[indexJugador].pixelY;
 		fin=jugadoresGraficos[indexJugador].pixelY-anchoAlturaCasilla;
-		for(double j=inicio;j>fin;j--) {
+		for(double j=inicio;j>=fin;j--) {
 			jugadoresGraficos[indexJugador].setearUbicaciones(jugadoresGraficos[indexJugador].pixelX,j);
 			repaint();
 			Thread.sleep(millis);
@@ -158,7 +158,7 @@ public void movimientoJugador(Jugador jugador,String direccion) throws Interrupt
 	else if(direccion.equals("abajo")) {
 		inicio=jugadoresGraficos[indexJugador].pixelY;
 		fin=jugadoresGraficos[indexJugador].pixelY+anchoAlturaCasilla;
-		for(double j=inicio;j<fin;j++) {
+		for(double j=inicio;j<=fin;j++) {
 			jugadoresGraficos[indexJugador].setearUbicaciones(jugadoresGraficos[indexJugador].pixelX,j);
 			repaint();
 			Thread.sleep(millis);
@@ -167,7 +167,7 @@ public void movimientoJugador(Jugador jugador,String direccion) throws Interrupt
 	else if(direccion.equals("izquierda")) {
 		inicio=jugadoresGraficos[indexJugador].pixelX;
 		fin = jugadoresGraficos[indexJugador].pixelX-anchoAlturaCasilla;
-		for(double j=inicio;j>fin;j--) {
+		for(double j=inicio;j>=fin;j--) {
 			jugadoresGraficos[indexJugador].setearUbicaciones(j,jugadoresGraficos[indexJugador].pixelY);
 			repaint();
 			Thread.sleep(millis);
@@ -176,7 +176,7 @@ public void movimientoJugador(Jugador jugador,String direccion) throws Interrupt
 	else if(direccion.equals("derecha")) {
 		inicio=jugadoresGraficos[indexJugador].pixelX;
 		fin=jugadoresGraficos[indexJugador].pixelX+anchoAlturaCasilla;
-		for(double j=inicio;j<fin;j++) {
+		for(double j=inicio;j<=fin;j++) {
 			jugadoresGraficos[indexJugador].setearUbicaciones(j,jugadoresGraficos[indexJugador].pixelY);
 			repaint();
 			Thread.sleep(millis);
