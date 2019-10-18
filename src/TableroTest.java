@@ -28,7 +28,7 @@ public class TableroTest {
 	}
 
 	@Test
-	public void devuelveCantidadFaltanteTest() {
+	public void devuelveCantidadFaltanteTest() throws InterruptedException {
 
 		// verifico que devuelva cuanto le falta moverse
 		assertEquals(2, tablero.avanzarJugador(jugador, 6));
@@ -36,7 +36,7 @@ public class TableroTest {
 	}
 
 	@Test
-	public void mueveCorrectamenteTest() {
+	public void mueveCorrectamenteTest() throws InterruptedException {
 		// verifico que mueve hasta la posicion correcta
 		tablero.avanzarJugador(jugador, 6);
 		assertEquals(0, jugador.getLugarTableroX());
