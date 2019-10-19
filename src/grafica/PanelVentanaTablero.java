@@ -19,7 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import logica.Casilla;
+
 import logica.Jugador;
 import logica.Tablero;
 

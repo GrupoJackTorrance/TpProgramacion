@@ -29,7 +29,7 @@ public class SalaTest {
 			assertEquals(true, sala.addJugadorSala(jugador2));
 			assertEquals(true, sala.addJugadorSala(jugador3));
 			
-			//No se puede agrgar al jugador2 nuevamente
+			//No se puede agregar al jugador2 nuevamente
 			assertEquals(false, sala.addJugadorSala(jugador2));
 			
 			assertEquals(true, sala.sacarJugadorSala(jugador2));

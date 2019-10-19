@@ -22,7 +22,7 @@ public class CasillaTest {
 	@Before //sirve para que antes de hacer cada test se empiece desde el escenario elegido
 	public void inicialize() {
 	efectoSumarPuntos = new EfectoSumarPuntos(1); // verde
-	sinEfecto = new EfectoNeutro(); // blanco
+	sinEfecto = new EfectoNeutro(); // gris
 	efectoRestarPuntos = new EfectoRestarPuntos(1); // rojo
 	efectoDarObjeto = new EfectoDarObjeto(); // amarillo
 	casilla = new Casilla(Color.GRAY, sinEfecto, true);

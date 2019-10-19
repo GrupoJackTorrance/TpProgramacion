@@ -16,7 +16,6 @@ public class Main {
 		Jugador jugador1 = new Jugador("pepe","Pedro264");
 		Jugador jugador2 = new Jugador("Dragon", "Maria46a");
 		Jugador jugador3 = new Jugador("Rana", "Julian32");
-
 		Jugador jugador4 = new Jugador("Mono", "Marlen16");
 	
 		int puntosobj = 40;
