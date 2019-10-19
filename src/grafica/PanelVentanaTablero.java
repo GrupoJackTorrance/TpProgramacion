@@ -81,7 +81,7 @@ public class PanelVentanaTablero extends JPanel {
 		super.paintComponent(g);
 		g2 = (Graphics2D) g;
 		
-		setBackground(Color.lightGray);
+		setBackground(new Color(174,174,65));
 
 		elegirLado.setLocation(200, 3);
 		btnAbajo.setLocation(300,55);
@@ -162,8 +162,8 @@ public class PanelVentanaTablero extends JPanel {
 					v += 30;
 
 				}
-				g2.setColor(Color.DARK_GRAY);
-				g2.setFont(new Font("Dialog", Font.BOLD, 14));
+				g2.setColor(Color.BLACK);
+				g2.setFont(new Font("Tahoma", Font.BOLD, 16));
 
 				for (int k = 0, y = 0; k < jugadores.size(); k++, y += 30) {
 					g2.drawString(jugadores.get(k).getNombre() + "         Puntos   " + jugadores.get(k).getPuntos(),
