@@ -1,6 +1,6 @@
 package grafica;
 import java.awt.Color;
-
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -14,7 +14,7 @@ import java.awt.geom.Rectangle2D;
 
 import java.util.List;
 
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -41,6 +41,7 @@ public class PanelVentanaTablero extends JPanel {
 	private double ubicacionY = 100;
 	private JLabel turnoDe = new JLabel("Turno de: ");
 	private JLabel textdado = new JLabel("");
+	private JLabel textPuntos = new JLabel("");
 	private JLabel turnoJugador = new JLabel("");
 	private JLabel elegirLado = new JLabel("Que camino quieres seguir?");
 	private JLabel objetos= new JLabel("");
@@ -65,6 +66,8 @@ public class PanelVentanaTablero extends JPanel {
 		add(objetos);
 
 		add(textdado);
+		
+		add(textPuntos);
 
 		add(turnoJugador);
 
@@ -93,13 +96,18 @@ public class PanelVentanaTablero extends JPanel {
 		textdado.setLocation(10, 25);
 		turnoDe.setLocation(10, 5);
 		turnoJugador.setLocation(90, 5);
+		
 		objetos.setLocation(10, 45);
 		textdado.setOpaque(false);
 		turnoDe.setOpaque(false);
 		turnoJugador.setOpaque(false);
+		
+		textPuntos.setFont(new Font("Tahoma", Font.BOLD, 30));
 		textdado.setFont(new Font("Tahoma", Font.BOLD, 15));
 		turnoDe.setFont(new Font("Tahoma", Font.BOLD, 15));
 		turnoJugador.setFont(new Font("Tahoma", Font.BOLD, 15));
+		
+		
 		elegirLado.setFont(new Font("Tahoma", Font.BOLD, 15));
 		objetos.setFont(new Font("Tahoma", Font.BOLD, 15));
 
@@ -166,8 +174,10 @@ public class PanelVentanaTablero extends JPanel {
 				g2.setFont(new Font("Tahoma", Font.BOLD, 16));
 
 				for (int k = 0, y = 0; k < jugadores.size(); k++, y += 30) {
-					g2.drawString(jugadores.get(k).getNombre() + "         Puntos   " + jugadores.get(k).getPuntos(),
+					g2.drawString(jugadores.get(k).getNombre() + "         Puntos   " + jugadores.get(k).getPuntos() + "   ",
 							250, 550 + y);
+					textPuntos.setLocation(510, 480 + y);
+					
 				}
 
 			}
@@ -390,6 +400,17 @@ public class PanelVentanaTablero extends JPanel {
 
 		public void mostrardado(int cantidad) {
 			textdado.setText("Dado: " + cantidad);
+		}
+		
+		public void mostrarModificacionPts(int cantidad) throws InterruptedException {
+			if(cantidad > 0)
+				textPuntos.setText("+ " + cantidad);
+			else
+				textPuntos.setText(" " + cantidad);
+			textPuntos.setVisible(true);
+			Thread.sleep(1200);
+			textPuntos.setVisible(false);
+			
 		}
 
 		public void setearObjetos(Jugador jugador) {
