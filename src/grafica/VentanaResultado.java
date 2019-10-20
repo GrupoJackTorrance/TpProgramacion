@@ -2,11 +2,15 @@ package grafica;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -77,11 +81,16 @@ public class VentanaResultado extends JFrame {
 			resultado.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
 			resultado.setForeground(new Color(0, 0, 0));
 
-			//Se selecciona la imagen que tenemos en el paquete de la //ruta del programa
-			ImageIcon Img = new ImageIcon(getClass().getResource("../fondoJuego.jpg")); 
-			
+		
 			//se dibuja la imagen que tenemos en el paquete Images //dentro de un panel
-			grafico.drawImage(Img.getImage(), 0, 0, 400, 300, null);
+			Image img=null;
+			try {
+				img = ImageIO.read(new File("./fondos/fondoJuego.jpg"));
+			} catch (IOException e) {
+				System.out.println("no se encuentra la imagen para el fondo de Resultados");
+
+			}
+			grafico.drawImage(img, 0, 0, 400, 300, null);
 			setOpaque(false);
 		}
 		

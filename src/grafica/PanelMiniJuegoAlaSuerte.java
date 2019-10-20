@@ -5,11 +5,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -46,7 +50,8 @@ public class PanelMiniJuegoAlaSuerte extends JPanel {
 	private JLabel jugador4=new JLabel("");
 	private JLabel turnoJugador=new JLabel("");
 	private JLabel turnoDe=new JLabel("Turno de:");
-	private ImageIcon imagen = new ImageIcon(getClass().getResource("../fondo.jpg"));
+	private Image img=null;
+
 	private MiniJuegoAlaSuerte mini;
 	
 
@@ -58,6 +63,12 @@ public class PanelMiniJuegoAlaSuerte extends JPanel {
 		add(boton4);
 		add(boton5);
 		add(boton6);
+		try {
+			img = ImageIO.read(new File("./fondos/fondo.jpg"));
+		} catch (IOException e) {
+			System.out.println("no se encuentra la imagen para el fondo de miniJuego A la suerte");
+
+		}
 		
 		//Boton para aceptar la modalidad y pasar al mini juego
 		add(btnAceptar);
@@ -136,7 +147,7 @@ public class PanelMiniJuegoAlaSuerte extends JPanel {
 		dadoresultado.setForeground(new Color(102, 204, 204));
 		
 		Dimension height = getSize();
-		g.drawImage(imagen.getImage(), 0, 0, height.width, height.height, null);
+		g.drawImage(img, 0, 0, height.width, height.height, null);
 		
 		txtpnEnEsteMinijuego.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
 		txtpnEnEsteMinijuego.setForeground(new Color(102, 204, 204));
