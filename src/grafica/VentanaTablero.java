@@ -11,7 +11,7 @@ public class VentanaTablero extends JFrame {
 	public VentanaTablero(String titulo, int x, int y, Tablero tablero) {
 		setVisible(true);
 		setLocation(x,y);
-		setSize(700, 700);
+		setSize(850, 700);
 		setTitle(titulo);
 		panelTablero=new PanelVentanaTablero(tablero);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
