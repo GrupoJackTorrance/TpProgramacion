@@ -28,9 +28,13 @@ public class Turno {
 		case 4:
 			System.out.println("Empieza turno");
 			System.out.println("Juega jugador: " + turno);
+			tablero.getVentanaTablero().getPanelTablero().empiezaTurno(jugador);
 			tablero.getVentanaTablero().getPanelTablero().setearTurnoJugador(jugador);
+			
 			puntosAnteriores = jugador.getPuntos(); //PUNTOS DEL JUGADOR ANTES DE TIRAR EL DADO
-			int cantidad = jugador.tirarDado();
+			
+			int cantidad = tablero.getVentanaTablero().getPanelTablero().tiraDado(jugador);
+			//int cantidad = jugador.tirarDado();
 			tablero.getVentanaTablero().getPanelTablero().mostrardado(cantidad);
 			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
 			tablero.avanzarJugador(jugador, cantidad);
@@ -38,11 +42,8 @@ public class Turno {
 				tablero.getVentanaTablero().getPanelTablero().mostrarModificacionPts(jugador.getPuntos() - puntosAnteriores);
 			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
 			// luego de tirar el dado y avanzar en casillero
-			if(jugador.getObjEfectos()==1) {
-				 entrada = tablero.deseaAtacar(jugador);//Para preguntar si el jugador quiere atacar o no
-			}else {
-				termino=true;
-			}
+			
+			entrada = tablero.deseaAtacar(jugador);//Para preguntar si el jugador quiere atacar o no 
 			while (termino == false) {
 				do {
 					try {
@@ -53,7 +54,6 @@ public class Turno {
 							else if (entrada != 2) {
 								if (entrada == 1) {
 									int jugadorAtacado = (turno) % 4;
-									puntosAnteriores = listaJugadores.get(jugadorAtacado).getPuntos(); //PUNTOS DEL JUGADOR ANTES DE SER ATACAD
 									if (!jugador.usarObjeto(listaJugadores.get(jugadorAtacado))) {
 										JOptionPane.showMessageDialog(null, "No se pudo atacar a "+ listaJugadores.get(jugadorAtacado).getNombre() +" porque no tiene objetos");
 										termino = true;
