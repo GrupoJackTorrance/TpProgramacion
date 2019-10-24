@@ -33,7 +33,7 @@ public class Turno {
 			
 			puntosAnteriores = jugador.getPuntos(); //PUNTOS DEL JUGADOR ANTES DE TIRAR EL DADO
 			
-			int cantidad = tablero.getVentanaTablero().getPanelTablero().tiraDado(jugador);
+			int cantidad = tablero.getVentanaTablero().getPanelTablero().tirodado(jugador);
 			//int cantidad = jugador.tirarDado();
 			tablero.getVentanaTablero().getPanelTablero().mostrardado(cantidad);
 			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
