@@ -29,6 +29,7 @@ public class PanelVentanaTablero extends JPanel {
 
 	private List<Jugador> jugadores;
 	private Graphics2D g2;
+	private int cantidadDado;
 	
 	private JButton btnArriba = new JButton("Arriba");
 	private JButton btnAbajo = new JButton("Abajo");
@@ -52,6 +53,7 @@ public class PanelVentanaTablero extends JPanel {
 	private JLabel moneda = new JLabel("");
 	private JLabel numerodado = new JLabel("");
 	private JLabel tirodado = new JLabel("Tiro dado");
+	private JButton btntirodado = new JButton("Tiro dado");
 	private ImageIcon imagen2 = new ImageIcon(getClass().getResource("../moneda2.jpg"));
 
 	public PanelVentanaTablero(Tablero tablero) {
@@ -60,11 +62,14 @@ public class PanelVentanaTablero extends JPanel {
 		btnAbajo.setVisible(false);
 		btnIzquierda.setVisible(false);
 		btnDerecha.setVisible(false);
+		tirodado.setVisible(false);
+		btntirodado.setVisible(false);
 		Botones botonesListener = new Botones();
 		btnDerecha.addActionListener(botonesListener);
 		btnIzquierda.addActionListener(botonesListener);
 		btnAbajo.addActionListener(botonesListener);
 		btnArriba.addActionListener(botonesListener);
+		btntirodado.addActionListener(botonesListener);
 		add(btnAbajo);
 		add(btnArriba);
 		add(btnDerecha);
@@ -79,6 +84,8 @@ public class PanelVentanaTablero extends JPanel {
 		add(dado);
 		add(textPuntos);
 		add(numerodado);
+		//boton para tirar dado
+		add(btntirodado);
 
 		add(turnoJugador);
 
@@ -100,12 +107,16 @@ public class PanelVentanaTablero extends JPanel {
 		btnIzquierda.setLocation(210, 30);
 		btnDerecha.setLocation(370, 30);
 		btnArriba.setLocation(300, 30);
+		
+		btntirodado.setLocation(500,55);
+		
 	
 		textTurno.setLocation(400, 0);
 		textTurnoJugador.setLocation(400, 40);
 		
 		
 		textdado.setLocation(10, 25);
+		
 		turnoDe.setLocation(10, 5);
 		turnoJugador.setLocation(90, 5);
 		objetos.setLocation(10, 45);
@@ -327,7 +338,6 @@ public class PanelVentanaTablero extends JPanel {
 				try {
 					movimientoJugador(jugador, "arriba");
 				} catch (InterruptedException e1) {
-					// TODO Bloque catch generado automáticamente
 					e1.printStackTrace();
 					
 				}
@@ -397,9 +407,22 @@ public class PanelVentanaTablero extends JPanel {
 				synchronized (jugador) {
 					jugador.notify();
 				}
-
+				
 			}
-
+			if (e.getSource() == btntirodado) {
+				btntirodado.setVisible(false);
+				
+				try {
+					cantidadDado=tiraDado2(jugador);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				synchronized (jugador) {
+					jugador.notify();
+				}
+			}
+			
+			
 		}
 	}
 
@@ -448,23 +471,36 @@ public class PanelVentanaTablero extends JPanel {
 			textTurnoJugador.setVisible(false);
 		}
 		
-		public int tiraDado(Jugador jugador) throws InterruptedException {
-			tirodado.setLocation(jugador.getLugarTableroX()-10, jugador.getLugarTableroY()-10);
+		public int tiraDado2(Jugador jugador) throws InterruptedException {
+			int cantidad=jugador.tirarDado();
+			return cantidad;
+		}
+		
+		public int tirodado(Jugador jugador) throws InterruptedException {
+			this.jugador=jugador;
+			btntirodado.setVisible(true);
+			
+			synchronized (jugador) {
+				jugador.wait();
+			}
+			tirodado.setLocation(500,55);
 			tirodado.setVisible(true);
 			dado.setIcon(new ImageIcon("gif_mario.gif"));
-			dado.setLocation(jugador.getLugarTableroX(), jugador.getLugarTableroY());
+			dado.setLocation(500,60);
 			dado.setVisible(true);
-			int cantidad=jugador.tirarDado();
 			Thread.sleep(2000);
-			numerodado.setText(cantidad+" ");
-			numerodado.setLocation(jugador.getLugarTableroX(), jugador.getLugarTableroY());
+			tirodado.setText("Avanza");
+			numerodado.setText(cantidadDado+" ");
+			numerodado.setLocation(500,60);
 			dado.setVisible(false);
 			numerodado.setVisible(true);
 			Thread.sleep(1000);
 			tirodado.setVisible(false);
 			numerodado.setVisible(false);
-			return cantidad;
+			tirodado.setText("Tiro dado");
+			return cantidadDado;
 		}
+		
 		
 		
 		
