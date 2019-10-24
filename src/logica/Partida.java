@@ -45,6 +45,7 @@ public class Partida {
 	 * DESAROLLO DE PARTIDA
 	 ******************************************/
 	public void InicioPartida() throws Exception {
+		int j=0;
 		this.tablero = this.elegirTablero(); // Designo tablero
 		//this.posicionesInciales(this.getJugadores()); // Posicion Inicial // NO HACE FALTA PORQUE LO SETEAMOS EN SALA
 		ronda = new Ronda(this.turnos); // Creo la ronda
@@ -53,7 +54,14 @@ public class Partida {
 		for (int i = 0; i < rondaMax && terminaJuego == false; i++) {
 			terminaJuego = ronda.InicioRonda(this.jugadores, this.getTablero(), this.getPuntosObjetivo());
 			if(terminaJuego == false) {
-				Minijuego mini = new MiniJuegoAlaSuerte(this.jugadores);
+				Minijuego mini;
+				if(j%2==0)
+				{
+					mini= new MiniJuegoAlaSuerte(this.jugadores);
+				}else {
+					mini= new MiniJuegoPalabras(this.jugadores);
+				}
+				 j++;
 				synchronized(mini){
 					if(terminaMiniJuego==false)
 						mini.wait();
