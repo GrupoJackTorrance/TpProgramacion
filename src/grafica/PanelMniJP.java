@@ -51,7 +51,7 @@ public class PanelMniJP extends JPanel {
 	private JLabel cant = new JLabel("");
 	private int bandera = 0;
 	private MiniJuegoPalabras mini;
-	private int tiempor=20; 
+	private int tiempor=30; 
 
 	public PanelMniJP(MiniJuegoPalabras mini) {
 		this.mini=mini;
@@ -153,8 +153,8 @@ public class PanelMniJP extends JPanel {
 		botonAceptarResultados.setSize(200, 50);
 		campo.setFont(new Font("Courier",Font.BOLD,40));
 		campo.setLocation(120, 150);
-		campo.setForeground(Color.RED);
-		campo.setBackground(Color.BLUE);
+		campo.setForeground(Color.DARK_GRAY);
+		campo.setBackground(Color.GREEN);
 		
 	}
 
@@ -288,6 +288,7 @@ public class PanelMniJP extends JPanel {
 				{
 					timer.cancel();
 					mini.Falso();
+					campo.setText("");
 				}
 
 				if(bandera==1)

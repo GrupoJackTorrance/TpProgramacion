@@ -19,7 +19,7 @@ public class MiniJuegoPalabras extends Minijuego{
 	private int cantJugados;
 	private int [] CantDePalabras=new int [4];
 	
-	private int tiemporeset=20;
+	private int tiemporeset=30;
 	private int mayor=0;
 	private String [] vec= {
 			"Anticonstitucionalmente",
