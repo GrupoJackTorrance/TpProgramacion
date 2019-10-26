@@ -153,43 +153,60 @@ public class PanelVentanaTablero extends JPanel {
 				}
 
 				// dibujo a los jugadores
-				Ellipse2D figJugador = new Ellipse2D.Double(120, 100, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2);
+				//Ellipse2D figJugador = new Ellipse2D.Double(120, 100, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2);
+				
+				//
+				ImageIcon buho = new ImageIcon("./buho.jpg");
+				ImageIcon rana = new ImageIcon("./rana.jpg");
+				ImageIcon ave = new ImageIcon("./ave.jpg");
+				ImageIcon gato = new ImageIcon("./gato.jpg");
+				//g2.drawImage(player.getImage(), 120, 100, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
+				//
+				
 				int h = 0;
 				for (PixelJugador jugador : jugadoresGraficos) {
-					figJugador.setFrame(jugador.pixelX, jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2);
+					//figJugador.setFrame(jugador.pixelX, jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2);
 					if (h == 0) {
-						g2.setPaint(Color.BLUE);
+						//g2.setPaint(Color.BLUE);
+						g2.drawImage(buho.getImage(),(int)jugador.pixelX, (int)jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
 						h++;
 					} else if (h == 1) {
-						g2.setPaint(Color.ORANGE);
+						//g2.setPaint(Color.ORANGE);
+						g2.drawImage(rana.getImage(),(int)jugador.pixelX, (int)jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
 						h++;
 					} else if (h == 2) {
-						g2.setPaint(Color.PINK);
+						//g2.setPaint(Color.PINK);
+						g2.drawImage(ave.getImage(),(int)jugador.pixelX, (int)jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
 						h++;
 					} else {
-						g2.setPaint(Color.WHITE);
+						//g2.setPaint(Color.WHITE);
+						g2.drawImage(gato.getImage(),(int)jugador.pixelX, (int)jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
 					}
-					g2.fill(figJugador);
+					//g2.fill(figJugador);
 				}
 
 				int v = 0;
 				h = 0;
 				Ellipse2D figJugadorP = new Ellipse2D.Double(120, 100, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2);
 				for (PixelJugador jugador : jugadoresGraficos) {
-					figJugadorP.setFrame(30 + v, 600 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4);
+					//figJugadorP.setFrame(30 + v, 600 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4);
 					if (h == 0) {
-						g2.setPaint(Color.BLUE);
+						//g2.setPaint(Color.BLUE);
+						g2.drawImage(buho.getImage(),30 + v, 600 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4, null);
 						h++;
 					} else if (h == 1) {
-						g2.setPaint(Color.ORANGE);
+						//g2.setPaint(Color.ORANGE);
+						g2.drawImage(rana.getImage(),30 + v, 600 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4, null);
 						h++;
 					} else if (h == 2) {
-						g2.setPaint(Color.PINK);
+						//g2.setPaint(Color.PINK);
+						g2.drawImage(ave.getImage(),30 + v, 600 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4, null);
 						h++;
 					} else {
-						g2.setPaint(Color.WHITE);
+						//g2.setPaint(Color.WHITE);
+						g2.drawImage(gato.getImage(),30 + v, 600 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4, null);
 					}
-					g2.fill(figJugadorP);
+					//g2.fill(figJugadorP);
 					v += 200;
 
 				}
@@ -232,6 +249,8 @@ public class PanelVentanaTablero extends JPanel {
 		double fin;
 		// muevo al jugador pixel por pixel desde el inicio hasta el fin
 		if (direccion.equals("arriba")) {
+			if(jugadoresGraficos[indexJugador].pixelX%5!=0 || jugadoresGraficos[indexJugador].pixelY % 5 !=0)
+				reestablecer(jugadoresGraficos[indexJugador], indexJugador);
 			inicio = jugadoresGraficos[indexJugador].pixelY;
 			fin = jugadoresGraficos[indexJugador].pixelY - anchoAlturaCasilla;
 			for (double j = inicio; j >= fin; j--) {
@@ -239,7 +258,13 @@ public class PanelVentanaTablero extends JPanel {
 				repaint();
 				Thread.sleep(millis);
 			}
+			for (PixelJugador jugador2 : jugadoresGraficos) {
+				mismaPosicion(jugador2, jugadoresGraficos[indexJugador], indexJugador);
+				repaint();
+			}
 		} else if (direccion.equals("abajo")) {
+			if(jugadoresGraficos[indexJugador].pixelX%5!=0 || jugadoresGraficos[indexJugador].pixelY % 5 !=0)
+				reestablecer(jugadoresGraficos[indexJugador], indexJugador);
 			inicio = jugadoresGraficos[indexJugador].pixelY;
 			fin = jugadoresGraficos[indexJugador].pixelY + anchoAlturaCasilla;
 			for (double j = inicio; j <= fin; j++) {
@@ -247,7 +272,13 @@ public class PanelVentanaTablero extends JPanel {
 				repaint();
 				Thread.sleep(millis);
 			}
+			for (PixelJugador jugador2 : jugadoresGraficos) {
+				mismaPosicion(jugador2, jugadoresGraficos[indexJugador], indexJugador);
+				repaint();
+			}
 		} else if (direccion.equals("izquierda")) {
+			if(jugadoresGraficos[indexJugador].pixelX%5!=0 || jugadoresGraficos[indexJugador].pixelY % 5 !=0)
+				reestablecer(jugadoresGraficos[indexJugador], indexJugador);
 			inicio = jugadoresGraficos[indexJugador].pixelX;
 			fin = jugadoresGraficos[indexJugador].pixelX - anchoAlturaCasilla;
 			for (double j = inicio; j >= fin; j--) {
@@ -255,7 +286,13 @@ public class PanelVentanaTablero extends JPanel {
 				repaint();
 				Thread.sleep(millis);
 			}
+			for (PixelJugador jugador2 : jugadoresGraficos) {
+				mismaPosicion(jugador2, jugadoresGraficos[indexJugador], indexJugador);
+				repaint();
+			}
 		} else if (direccion.equals("derecha")) {
+			if(jugadoresGraficos[indexJugador].pixelX%5!=0 || jugadoresGraficos[indexJugador].pixelY % 5 !=0)
+				reestablecer(jugadoresGraficos[indexJugador], indexJugador);
 			inicio = jugadoresGraficos[indexJugador].pixelX;
 			fin = jugadoresGraficos[indexJugador].pixelX + anchoAlturaCasilla;
 			for (double j = inicio; j <= fin; j++) {
@@ -263,8 +300,35 @@ public class PanelVentanaTablero extends JPanel {
 				repaint();
 				Thread.sleep(millis);
 			}
+			
+			for (PixelJugador jugador2 : jugadoresGraficos) {
+				mismaPosicion(jugador2, jugadoresGraficos[indexJugador], indexJugador);
+				repaint();
+			}
 		}
 
+	}
+	
+	public void reestablecer(PixelJugador jugadorActual, int index) {
+		switch(index) {
+			case 1:jugadorActual.setearUbicaciones(jugadorActual.pixelX-6, jugadorActual.pixelY);break;
+			case 2:jugadorActual.setearUbicaciones(jugadorActual.pixelX+6, jugadorActual.pixelY);break;
+			case 3:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY-6);break;
+			case 4:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY+6);break;
+			default:;break;
+		}
+	}
+	
+	public void mismaPosicion(PixelJugador jugadorComp, PixelJugador jugadorActual, int index) {
+		if(jugadorComp.pixelX == jugadorActual.pixelX && jugadorComp.pixelY == jugadorActual.pixelY && jugadorActual!=jugadorComp) {
+			switch(index) {
+			case 1:jugadorActual.setearUbicaciones(jugadorActual.pixelX+6, jugadorActual.pixelY);break;
+			case 2:jugadorActual.setearUbicaciones(jugadorActual.pixelX-6, jugadorActual.pixelY);break;
+			case 3:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY+6);break;
+			case 4:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY-6);break;
+			default:;break;
+			}
+		}
 	}
 
 	public void mostrarOpciones(String[] direcciones, Jugador jugador,int cantidad) throws InterruptedException {

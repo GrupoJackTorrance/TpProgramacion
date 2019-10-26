@@ -12,7 +12,7 @@ import grafica.VentanaTablero;
 public abstract class Tablero {
 	private String nombre;
 	protected Casilla  mapa[][];
-	public abstract Casilla[][] getMapa();
+	public abstract Casilla[][] getMapa(); 
 
 
 	protected List<Jugador> jugadores=new LinkedList<Jugador>();

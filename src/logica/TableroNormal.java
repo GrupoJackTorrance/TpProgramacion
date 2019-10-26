@@ -74,7 +74,7 @@ public class TableroNormal  extends Tablero {
 	}
 
 	@Override
-	public Casilla[][] getMapa() {
+	public Casilla[][] getMapa() { 
 		
 		return  super.mapa;
 	}

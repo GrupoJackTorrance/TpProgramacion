@@ -1,6 +1,6 @@
 package logica;
 import java.io.*;
-import sun.audio.*;
+//import sun.audio.*;
 
 public class Main {
 
@@ -26,12 +26,12 @@ public class Main {
 		sala.addJugadorSala(jugador3);
 		sala.addJugadorSala(jugador4);
 		Partida partida1 = sala.crearPartida();
-		String sonido="sonidos/playing_the_game.wav";
-		InputStream in= new FileInputStream(sonido);
-		AudioStream audio= new AudioStream(in);
-		AudioPlayer.player.start(audio);
+//		String sonido="sonidos/playing_the_game.wav";
+//		InputStream in= new FileInputStream(sonido);
+//		AudioStream audio= new AudioStream(in);
+//		AudioPlayer.player.start(audio);
 		partida1.InicioPartida();
-		AudioPlayer.player.stop(audio);
+//		AudioPlayer.player.stop(audio);
 	
 	}
 
