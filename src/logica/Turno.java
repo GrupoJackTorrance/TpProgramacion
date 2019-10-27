@@ -39,7 +39,7 @@ public class Turno {
 			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
 			tablero.avanzarJugador(jugador, cantidad);
 			if(puntosAnteriores != jugador.getPuntos())
-				tablero.getVentanaTablero().getPanelTablero().mostrarModificacionPts(jugador.getPuntos() - puntosAnteriores);
+				tablero.getVentanaTablero().getPanelTablero().mostrarModificacionPts(jugador.getPuntos() - puntosAnteriores,jugador);
 			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
 			// luego de tirar el dado y avanzar en casillero
 			
@@ -60,7 +60,7 @@ public class Turno {
 									} else {
 										//JOptionPane.showMessageDialog(null, "Ha atacado a: " + listaJugadores.get(jugadorAtacado).getNombre());
 										termino = true;
-										tablero.getVentanaTablero().getPanelTablero().mostrarModificacionPts(listaJugadores.get(jugadorAtacado).getPuntos() - puntosAnteriores);
+										tablero.getVentanaTablero().getPanelTablero().mostrarModificacionPts(puntosAnteriores-listaJugadores.get(jugadorAtacado).getPuntos(),listaJugadores.get(jugadorAtacado));
 									}
 								}
 								if (entrada == 0) {
