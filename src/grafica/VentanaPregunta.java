@@ -121,7 +121,7 @@ public class VentanaPregunta extends JFrame{
 			ObjDescuentaPuntos obj1 =  new ObjDescuentaPuntos();
 			this.setVisible(true);
 			pregunta.setText( jugador.getNombre().toUpperCase() + "\n\r escoja una opción");
-			btnObjetoDescontarPuntos.setText("Descuenta " + " -" + obj1.getPuntosParaDescontar() + " puntos al siguiente jugador");
+			btnObjetoDescontarPuntos.setText("Descuenta "  + obj1.getPuntosParaDescontar() + " puntos al siguiente jugador");
 			btnObjetoDuplicarPuntaje.setText("Duplica tus puntos X2");
 			btnObjetoRobarPuntos.setText("Roba 8 puntos al siguiente jugador");
 			if(jugador.getObj1().getIdObjeto()==1 || jugador.getObj2().getIdObjeto()==1 || jugador.getObj3().getIdObjeto()==1)
