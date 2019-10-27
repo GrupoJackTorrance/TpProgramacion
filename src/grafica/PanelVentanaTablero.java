@@ -250,7 +250,7 @@ public class PanelVentanaTablero extends JPanel {
 	public void movimientoJugador(Jugador jugador, String direccion) throws InterruptedException {
 
 		int indexJugador = jugadores.indexOf(jugador);
-		long millis = (25);
+		long millis = (15);
 		double inicio;
 		double fin;
 		// muevo al jugador pixel por pixel desde el inicio hasta el fin
@@ -559,7 +559,7 @@ public class PanelVentanaTablero extends JPanel {
 			}
 			tirodado.setLocation(500,55);
 			tirodado.setVisible(true);
-			dado.setIcon(new ImageIcon("gif_mario.gif"));
+			dado.setIcon(new ImageIcon(getClass().getResource("../Imagenes/gif_mario.gif")));
 			dado.setLocation(500,60);
 			dado.setVisible(true);
 			Thread.sleep(2000);
