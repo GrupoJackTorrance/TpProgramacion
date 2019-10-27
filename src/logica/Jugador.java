@@ -1,9 +1,14 @@
 package logica;
+
+import java.util.List;
+
 public class Jugador implements Comparable<Jugador> {
 	private int nroTurno;
 	private String personaje;
 	private int puntos;
-	private int objEfectos;
+	private EfectoDarObjeto obj1;
+	private EfectoDarObjeto obj2;
+	private EfectoDarObjeto obj3;
 	private int lugarTableroX;
 	private int lugarTableroY;
 	private int posicionAnteriorX;
@@ -15,7 +20,9 @@ public class Jugador implements Comparable<Jugador> {
 		
 		this.personaje = personaje;
 		this.puntos = 0;
-		this.objEfectos=0;
+		this.obj1 = new ObjSinEfecto();
+		this.obj2 = new ObjSinEfecto();
+		this.obj3 = new ObjSinEfecto();
 		this.nombre = nombre;
 		this.miPersonaje = new Personaje (nombre, 100, 100, 10);
 	}
@@ -25,7 +32,7 @@ public class Jugador implements Comparable<Jugador> {
 	
 	@Override
 	public String toString() {
-		return "Jugador [personaje=" + personaje + ", puntos=" + puntos + ", objEfectos=" + objEfectos
+		return "Jugador [personaje=" + personaje + ", puntos=" + puntos + ", objEfectos=" + obj1
 				+ ", lugarTableroX=" + lugarTableroX + ", lugarTableroY=" + lugarTableroY + ", posicionAnteriorX="
 				+ posicionAnteriorX + ", posicionAnteriorY=" + posicionAnteriorY + ", Nombre=" + nombre + "]";
 	}
@@ -50,13 +57,51 @@ public class Jugador implements Comparable<Jugador> {
 		this.personaje = personaje;
 	}
 
-	public int getObjEfectos() {
-		return objEfectos;
+	public EfectoDarObjeto getObjEfectos() {
+		if(this.obj1.getIdObjeto()!=0)	
+			return this.obj1;
+		else if(this.obj2.getIdObjeto()!=0)
+			return this.obj2;
+		else 
+			return this.obj3;
+	}
+	
+	
+	public EfectoDarObjeto getObj2() {
+		return obj2;
 	}
 
-	public void setObjEfectos(int objEfectos) {
-		this.objEfectos = objEfectos;
+	public EfectoDarObjeto getObj3() {
+		return obj3;
 	}
+
+
+	public EfectoDarObjeto getObj1() {
+		return obj1;
+	}
+
+	public void setObj1(EfectoDarObjeto obj1) {
+		this.obj1 = obj1;
+	}
+
+
+	public void setObjEfectos(EfectoDarObjeto objEfectos) {
+		if(this.obj1.getIdObjeto() ==0)
+			setObj1(objEfectos);
+		else if(this.obj2.getIdObjeto() ==0)	
+			setObj2(objEfectos);
+		else	
+			setObj3(objEfectos);
+	}
+
+	public void setObj2(EfectoDarObjeto obj2) {
+		this.obj2 = obj2;
+	}
+
+	public void setObj3(EfectoDarObjeto obj3) {
+		this.obj3 = obj3;
+	}
+
 
 	public int getLugarTableroX() {
 		return lugarTableroX;
@@ -157,18 +202,23 @@ public class Jugador implements Comparable<Jugador> {
 		return 0;
 	}
 
-	public boolean usarObjeto(Jugador atacado) {
-		if (this.objEfectos == 1 && atacado.getPuntos()-5>0) {
-			atacado.puntos -= 5;
-			this.objEfectos=0;
-			return true;
-		}else if(atacado.getPuntos()-5<0){
-			atacado.setPuntos(0);
-			this.objEfectos=0;
-			return true;
+	public boolean usarObjeto(Jugador atacado, List <Jugador> listaJugadores, int obj) {
+		if(this.getObj1().getIdObjeto() == obj) {
+			this.getObj1().aplicarObj(atacado, listaJugadores);
+			this.setObj1(new ObjSinEfecto());
 		}
-		return false;
+		if(this.getObj2().getIdObjeto() == obj) {
+			this.getObj2().aplicarObj(atacado, listaJugadores);	
+			this.setObj2(new ObjSinEfecto());
+		}
+		if(this.getObj3().getIdObjeto() == obj) {
+			this.getObj3().aplicarObj(atacado, listaJugadores);		
+			this.setObj3(new ObjSinEfecto());
+		}
+		return true;
+		
 	}
+	
 	
 	//Esto no se uso por ahora
 //	public void update() {

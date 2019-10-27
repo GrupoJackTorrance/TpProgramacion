@@ -38,35 +38,31 @@ public class Turno {
 			tablero.getVentanaTablero().getPanelTablero().mostrardado(cantidad);
 			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
 			tablero.avanzarJugador(jugador, cantidad);
-			if(puntosAnteriores != jugador.getPuntos())
+			if(puntosAnteriores != jugador.getPuntos()) 
 				tablero.getVentanaTablero().getPanelTablero().mostrarModificacionPts(jugador.getPuntos() - puntosAnteriores,jugador);
 			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
 			// luego de tirar el dado y avanzar en casillero
-			
-			entrada = tablero.deseaAtacar(jugador);//Para preguntar si el jugador quiere atacar o no 
+			int idObj;
+			if(jugador.getObjEfectos().getIdObjeto()!=0)
+				idObj = tablero.deseaAtacar(jugador);//Para preguntar si el jugador quiere atacar o no
+			else
+				idObj = 0;
 			while (termino == false) {
 				do {
 					try {
 
 						while (termino == false) {
-							if (entrada == 2)
+							if (idObj == 999 || idObj == 0)
 								termino = true;
-							else if (entrada != 2) {
-								if (entrada == 1) {
-									int jugadorAtacado = (turno) % 4;
-									if (!jugador.usarObjeto(listaJugadores.get(jugadorAtacado))) {
+							else  {
+									int jugadorAtacado = (turno) % listaJugadores.size();
+									if (!jugador.usarObjeto(listaJugadores.get(jugadorAtacado), listaJugadores, idObj)) {
 										JOptionPane.showMessageDialog(null, "No se pudo atacar a "+ listaJugadores.get(jugadorAtacado).getNombre() +" porque no tiene objetos");
 										termino = true;
 									} else {
-										//JOptionPane.showMessageDialog(null, "Ha atacado a: " + listaJugadores.get(jugadorAtacado).getNombre());
 										termino = true;
-										tablero.getVentanaTablero().getPanelTablero().mostrarModificacionPts(puntosAnteriores-listaJugadores.get(jugadorAtacado).getPuntos(),listaJugadores.get(jugadorAtacado));
+										//tablero.getVentanaTablero().getPanelTablero().mostrarModificacionPts(listaJugadores.get(jugadorAtacado).getPuntos() - puntosAnteriores);
 									}
-								}
-								if (entrada == 0) {
-									termino = true;
-								}
-
 							}
 						}
 						System.out.println("*********************************************");

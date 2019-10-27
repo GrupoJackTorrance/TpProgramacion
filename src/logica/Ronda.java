@@ -24,7 +24,7 @@ public class Ronda {
 			suTurno = new Turno(this.turno);// inicializo un turno
 			// Si esta ordenado por turno la lista
 			this.turno = suTurno.turno(this.turno, listaJugadores.get(this.turno - 1), tablero,  listaJugadores);// Inicio
-																														// turno
+			tablero.getVentanaTablero().getPanelTablero().repaint();
 			contadorTurnos++;
 		}
 		return GanadorporObjetivo(puntosObjetivo, this.cantTurnos, listaJugadores);

@@ -1,20 +1,26 @@
 package tests;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import logica.Jugador;
+import logica.ObjDescuentaPuntos;
 import logica.Sala;
 
 public class JugadorTest {
 	Jugador jugador;
 	Jugador jugador2;
+	List <Jugador> listaJugadores;
 	@Before //sirve para que antes de hacer cada test se empiece desde el escenario elegido
 	public void inicialize() {
 		jugador = new Jugador("pepe","pepe");
 		jugador2 = new Jugador("juan","juan");
 		jugador.setPuntos(20);
 		jugador2.setPuntos(20);
+		listaJugadores.add(jugador);
+		listaJugadores.add(jugador2);
 	}
 
 	@Test
@@ -36,10 +42,10 @@ public class JugadorTest {
 	@Test
 	public void ataqueConObjetoAJugadorTest(){
 		//Compruebo que jugador no tenga objetos
-		Assert.assertEquals(false, jugador.usarObjeto(jugador2));
-		jugador.setObjEfectos(1);
+		///Assert.assertEquals(false, jugador.usarObjeto(jugador2, listaJugadores));
+		jugador.setObjEfectos(new ObjDescuentaPuntos());
 		//Agrego un objeto a jugador y ataco a jugador 2..el ataque quita 5 puntos
-		Assert.assertEquals(true, jugador.usarObjeto(jugador2));
+		Assert.assertEquals(true, jugador.usarObjeto(jugador2, listaJugadores,jugador.getObjEfectos().getIdObjeto()));
 		Assert.assertEquals(15, jugador2.getPuntos());
 	}
 	

@@ -531,7 +531,14 @@ public class PanelVentanaTablero extends JPanel {
 
 
 		public void setearObjetos(Jugador jugador) {
-			objetos.setText("Objetos: "+jugador.getObjEfectos()+" ");
+			String mensaje = "";
+			if(jugador.getObj1().getIdObjeto()!= 0)
+				mensaje+= jugador.getObj1().getNombreObjeto();
+			if(jugador.getObj2().getIdObjeto()!= 0)
+				mensaje+= " , " + jugador.getObj2().getNombreObjeto();
+			if(jugador.getObj3().getIdObjeto()!= 0)
+				mensaje+= " , " + jugador.getObj3().getNombreObjeto();
+			objetos.setText("Objetos: " + mensaje);
 			objetos.setVisible(true);
 		}
 	

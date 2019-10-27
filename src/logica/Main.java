@@ -18,6 +18,15 @@ public class Main {
 		Jugador jugador2 = new Jugador("Dragon", "Maria46a");
 		Jugador jugador3 = new Jugador("Rana", "Julian32");
 		Jugador jugador4 = new Jugador("Mono", "Marlen16");
+		
+		EfectoDarObjeto robaPuntos = new ObjRobarPuntos();
+		EfectoDarObjeto duplicaPuntaje = new ObjDuplicarPuntaje();
+		EfectoDarObjeto descuentaPuntos = new ObjDescuentaPuntos();
+		jugador1.setObjEfectos(descuentaPuntos);
+		jugador2.setObjEfectos(duplicaPuntaje);
+		jugador3.setObjEfectos(robaPuntos);
+		jugador4.setObjEfectos(robaPuntos);
+		jugador1.setObjEfectos(duplicaPuntaje);
 	
 		int puntosobj = 40;
 		Sala sala = jugador1.crearSala(puntosobj, 20);

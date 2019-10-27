@@ -24,7 +24,7 @@ public class CasillaTest {
 	efectoSumarPuntos = new EfectoSumarPuntos(1); // verde
 	sinEfecto = new EfectoNeutro(); // gris
 	efectoRestarPuntos = new EfectoRestarPuntos(1); // rojo
-	efectoDarObjeto = new EfectoDarObjeto(); // amarillo
+	efectoDarObjeto = new ObjSinEfecto(); // amarillo
 	casilla = new Casilla(Color.GRAY, sinEfecto, true);
 	casilla2 = new Casilla(Color.RED, efectoRestarPuntos, true);
 	casilla3 = new Casilla(Color.YELLOW, efectoDarObjeto, false);
@@ -37,7 +37,7 @@ public class CasillaTest {
 		
 		casilla3.aplicarEfecto(jugador);
 		// veo que se haya aplicado el efecto dar Objeto al jugador
-		Assert.assertEquals(1, jugador.getObjEfectos());
+		Assert.assertEquals(0, jugador.getObjEfectos().getIdObjeto());
 	}
 	@Test
 	public void aplicaEfectoRestarPuntosTest() {
