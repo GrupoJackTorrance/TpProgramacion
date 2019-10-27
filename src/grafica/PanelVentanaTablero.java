@@ -37,7 +37,7 @@ public class PanelVentanaTablero extends JPanel {
 	private JButton btnIzquierda = new JButton("Izquierda");
 	private PixelJugador[] jugadoresGraficos;
 	private Jugador jugador;
-	private int anchoAlturaCasilla = 60;
+	private int anchoAlturaCasilla = 80;
 	private int ubicacionX = 40;
 	private int ubicacionY = 100;
 	private JLabel turnoDe = new JLabel("Turno de: ");
@@ -48,13 +48,17 @@ public class PanelVentanaTablero extends JPanel {
 	private JLabel turnoJugador = new JLabel("");
 	private JLabel elegirLado = new JLabel("Que camino quieres seguir?");
 	private JLabel objetos= new JLabel("");
-	private ImageIcon imagen = new ImageIcon(getClass().getResource("../fondoLejos.jpg"));
 	private JLabel dado = new JLabel("");
 	private JLabel moneda = new JLabel("");
 	private JLabel numerodado = new JLabel("");
 	private JLabel tirodado = new JLabel("Tiro dado");
 	private JButton btntirodado = new JButton("Tiro dado");
-	private ImageIcon imagen2 = new ImageIcon(getClass().getResource("../moneda2.jpg"));
+	private ImageIcon imagen2 = new ImageIcon(getClass().getResource("../Imagenes/moneda2.png"));
+	private ImageIcon imagen = new ImageIcon(getClass().getResource("../Imagenes/fondoLejos.jpg"));
+	private ImageIcon buho; 
+	private ImageIcon rana; 
+	private ImageIcon ave;
+	private ImageIcon gato; 
 
 	public PanelVentanaTablero(Tablero tablero) {
 		
@@ -114,6 +118,8 @@ public class PanelVentanaTablero extends JPanel {
 		textTurno.setLocation(400, 0);
 		textTurnoJugador.setLocation(400, 40);
 		
+		textPuntos.setLocation(400, 20);
+		moneda.setLocation(550,1);
 		
 		textdado.setLocation(10, 25);
 		
@@ -156,10 +162,10 @@ public class PanelVentanaTablero extends JPanel {
 				//Ellipse2D figJugador = new Ellipse2D.Double(120, 100, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2);
 				
 				//
-				ImageIcon buho = new ImageIcon("./buho.jpg");
-				ImageIcon rana = new ImageIcon("./rana.jpg");
-				ImageIcon ave = new ImageIcon("./ave.jpg");
-				ImageIcon gato = new ImageIcon("./gato.jpg");
+				buho = new ImageIcon(getClass().getResource("../Imagenes/Luigi.png"));
+				rana = new ImageIcon(getClass().getResource("../Imagenes/Mario.png"));
+				ave = new ImageIcon(getClass().getResource("../Imagenes/Wario.png"));
+				gato = new ImageIcon(getClass().getResource("../Imagenes/Yoshi.png"));
 				//g2.drawImage(player.getImage(), 120, 100, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
 				//
 				
@@ -192,19 +198,19 @@ public class PanelVentanaTablero extends JPanel {
 					//figJugadorP.setFrame(30 + v, 600 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4);
 					if (h == 0) {
 						//g2.setPaint(Color.BLUE);
-						g2.drawImage(buho.getImage(),30 + v, 600 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4, null);
+						g2.drawImage(buho.getImage(),30 + v, 750 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4, null);
 						h++;
 					} else if (h == 1) {
 						//g2.setPaint(Color.ORANGE);
-						g2.drawImage(rana.getImage(),30 + v, 600 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4, null);
+						g2.drawImage(rana.getImage(),30 + v, 750 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4, null);
 						h++;
 					} else if (h == 2) {
 						//g2.setPaint(Color.PINK);
-						g2.drawImage(ave.getImage(),30 + v, 600 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4, null);
+						g2.drawImage(ave.getImage(),30 + v, 750 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4, null);
 						h++;
 					} else {
 						//g2.setPaint(Color.WHITE);
-						g2.drawImage(gato.getImage(),30 + v, 600 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4, null);
+						g2.drawImage(gato.getImage(),30 + v, 750 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4, null);
 					}
 					//g2.fill(figJugadorP);
 					v += 200;
@@ -214,9 +220,9 @@ public class PanelVentanaTablero extends JPanel {
 				g2.setFont(new Font("Tahoma", Font.BOLD, 16));
 
 				for (int k = 0, y = 0; k < jugadores.size(); k++, y += 200) {
-					g2.drawString(jugadores.get(k).getNombre()+" ",50 + y, 615);
-					g2.drawImage(imagen2.getImage(), 50 + y, 615,null);
-					g2.drawString(" "+jugadores.get(k).getPuntos(),80 + y, 635);
+					g2.drawString(jugadores.get(k).getNombre()+" ",50 + y, 765);
+					g2.drawImage(imagen2.getImage(), 50 + y, 765,null);
+					g2.drawString(" "+jugadores.get(k).getPuntos(),80 + y, 785);
 				}
 
 			}
@@ -311,10 +317,10 @@ public class PanelVentanaTablero extends JPanel {
 	
 	public void reestablecer(PixelJugador jugadorActual, int index) {
 		switch(index) {
-			case 1:jugadorActual.setearUbicaciones(jugadorActual.pixelX-6, jugadorActual.pixelY);break;
-			case 2:jugadorActual.setearUbicaciones(jugadorActual.pixelX+6, jugadorActual.pixelY);break;
-			case 3:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY-6);break;
-			case 4:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY+6);break;
+			case 1:jugadorActual.setearUbicaciones(jugadorActual.pixelX-15, jugadorActual.pixelY);break;
+			case 2:jugadorActual.setearUbicaciones(jugadorActual.pixelX+15, jugadorActual.pixelY);break;
+			case 3:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY-15);break;
+			case 4:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY+15);break;
 			default:;break;
 		}
 	}
@@ -322,10 +328,10 @@ public class PanelVentanaTablero extends JPanel {
 	public void mismaPosicion(PixelJugador jugadorComp, PixelJugador jugadorActual, int index) {
 		if(jugadorComp.pixelX == jugadorActual.pixelX && jugadorComp.pixelY == jugadorActual.pixelY && jugadorActual!=jugadorComp) {
 			switch(index) {
-			case 1:jugadorActual.setearUbicaciones(jugadorActual.pixelX+6, jugadorActual.pixelY);break;
-			case 2:jugadorActual.setearUbicaciones(jugadorActual.pixelX-6, jugadorActual.pixelY);break;
-			case 3:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY+6);break;
-			case 4:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY-6);break;
+			case 1:jugadorActual.setearUbicaciones(jugadorActual.pixelX+15, jugadorActual.pixelY);break;
+			case 2:jugadorActual.setearUbicaciones(jugadorActual.pixelX-15, jugadorActual.pixelY);break;
+			case 3:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY+15);break;
+			case 4:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY-15);break;
 			default:;break;
 			}
 		}
@@ -500,18 +506,22 @@ public class PanelVentanaTablero extends JPanel {
 			textdado.setText("Dado: " + cantidad);
 		}
 
-		public void mostrarModificacionPts(int cantidad) throws InterruptedException {
+		public void mostrarModificacionPts(int cantidad, Jugador jugador) throws InterruptedException {
 			textPuntos.setLocation(400, 20);
 			textPuntos.setOpaque(false);
 			textPuntos.setFont(new Font("Tahoma", Font.BOLD, 30));
 			moneda.setOpaque(false);
-			moneda.setIcon(new ImageIcon(getClass().getResource("../moneda2.jpg")));
-			moneda.setLocation(400,20);
+			moneda.setSize(10, 10);
+			moneda.setLocation(100,850);
+			textPuntos.setText(jugador.getNombre()+" ");
 			moneda.setVisible(true);
-			if(cantidad > 0)
-				textPuntos.setText("+" + cantidad);
-			else
-				textPuntos.setText(" " + cantidad);
+			if(cantidad == 5) {
+				textPuntos.setText(jugador.getNombre()+" ");
+				moneda.setIcon(new ImageIcon(getClass().getResource("../Imagenes/resta5.png")));
+			}else if( cantidad == 1) {
+					moneda.setIcon(new ImageIcon(getClass().getResource("../Imagenes/suma1.png")));
+				}else
+					moneda.setIcon(new ImageIcon(getClass().getResource("../Imagenes/resta1.png")));
 			textPuntos.setVisible(true);
 			Thread.sleep(1200);
 			textPuntos.setVisible(false);
