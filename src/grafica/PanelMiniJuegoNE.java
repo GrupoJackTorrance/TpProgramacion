@@ -2,6 +2,7 @@ package grafica;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -55,6 +56,9 @@ public class PanelMiniJuegoNE extends JPanel {
 	private JLabel turnoJugador = new JLabel("");
 	private JLabel turnoDe = new JLabel("Turno de:");
 	private Image img = null;
+	private JLabel explotaste = new JLabel("");
+	private JLabel nombexplotaste = new JLabel("");
+	private JLabel gano = new JLabel("");
 
 	private MiniJuegoNoExplotes mini;
 	private int bandera = 0;
@@ -73,7 +77,7 @@ public class PanelMiniJuegoNE extends JPanel {
 		add(boton8);
 		add(boton9);
 		try {
-			img = ImageIO.read(new File("./fondos/fondo.jpg"));
+			img = ImageIO.read(new File("./fondos/fondobomba.jpg"));
 		} catch (IOException e) {
 			System.out
 					.println("no se encuentra la imagen para el fondo de miniJuego A la suerte");
@@ -88,8 +92,8 @@ public class PanelMiniJuegoNE extends JPanel {
 		// Texto de Modalidad
 
 		add(txtpnEnEsteMinijuego, BorderLayout.CENTER);
-
-
+		add(nombexplotaste);
+		add(explotaste);
 		add(textoResultado);
 		add(elijaNum);
 		add(turnoJugador);
@@ -98,9 +102,9 @@ public class PanelMiniJuegoNE extends JPanel {
 		add(jugador3);
 		add(jugador4);
 		add(turnoDe);
-		
 		add(tiempo);
-
+		add(gano);
+		
 		visibilizarModalidad();
 		Botones botonesListener = new Botones();
 		btnAceptar.addActionListener(botonesListener);
@@ -126,21 +130,21 @@ public class PanelMiniJuegoNE extends JPanel {
 		turnoJugador.setFont(new Font("Courier", Font.BOLD, 45));
 		elijaNum.setFont(new Font("Courier", Font.BOLD, 45));
 		turnoDe.setFont(new Font("Courier", Font.BOLD, 45));
-		turnoDe.setForeground(new Color(102, 204, 204));
+		turnoDe.setForeground(new Color(236, 255, 8));
 		turnoDe.setLocation(150, 10);
 		turnoJugador.setLocation(450, 10);
-		turnoJugador.setForeground(new Color(102, 204, 204));
+		turnoJugador.setForeground(new Color(236, 255, 8));
 		elijaNum.setLocation(150, 70);
-		elijaNum.setForeground(new Color(102, 204, 204));
-		boton1.setLocation(200, 150);
-		boton2.setLocation(350, 150);
-		boton3.setLocation(500, 150);
-		boton4.setLocation(200, 250);
-		boton5.setLocation(350, 250);
-		boton6.setLocation(500, 250);
-		boton7.setLocation(200, 350);
-		boton8.setLocation(350, 350);
-		boton9.setLocation(500, 350);
+		elijaNum.setForeground(new Color(236, 255, 8));
+		boton1.setLocation(100, 150);
+		boton2.setLocation(250, 150);
+		boton3.setLocation(400, 150);
+		boton4.setLocation(100, 250);
+		boton5.setLocation(250, 250);
+		boton6.setLocation(400, 250);
+		boton7.setLocation(100, 350);
+		boton8.setLocation(250, 350);
+		boton9.setLocation(400, 350);
 		boton1.setSize(100, 50);
 		boton2.setSize(100, 50);
 		boton3.setSize(100, 50);
@@ -150,10 +154,22 @@ public class PanelMiniJuegoNE extends JPanel {
 		boton7.setSize(100, 50);
 		boton8.setSize(100, 50);
 		boton9.setSize(100, 50);
+		
+		gano.setLocation(600, 10);
+		gano.setFont(new Font("Courier", Font.BOLD, 35));
+		gano.setForeground(new Color(236, 255, 8));
+		
+		nombexplotaste.setLocation(600, 250);
+		nombexplotaste.setFont(new Font("Courier", Font.BOLD, 35));
+		nombexplotaste.setForeground(new Color(236, 255, 8));
+		
+		explotaste.setLocation(600, 200);
+		explotaste.setFont(new Font("Courier", Font.BOLD, 35));
+		explotaste.setForeground(new Color(236, 255, 8));
 
 		tiempo.setFont(new Font("Courier",Font.BOLD,45));
-		tiempo.setLocation(150, 450);
-	    tiempo.setForeground(Color.RED);
+		tiempo.setLocation(200, 450);
+	    tiempo.setForeground(Color.YELLOW);
 	    
 		btnAceptar.setBackground(SystemColor.window);
 		btnAceptar.setIcon(new ImageIcon("1234.jpg"));
@@ -163,13 +179,8 @@ public class PanelMiniJuegoNE extends JPanel {
 
 		txtpnEnEsteMinijuego.setFont(new Font("Tahoma",
 				Font.BOLD | Font.ITALIC, 20));
-		txtpnEnEsteMinijuego.setForeground(new Color(102, 204, 204));
-		txtpnEnEsteMinijuego
-				.setText("En este minijuego, la meta es no explotar!\n"
-						+ "Cada jugador tomara turnos eligiendo un detonador.\n"
-						+ "-Cada detonador tiene una posibilidad de hacer explotar la dinamita que tiene\n"
-						+ "-Los ultimos jugadores vivos ganaran puntos. Los que explotan perderan puntos.\n"
-						+ "-El jugador que no elige a tiempo será castigado con la quita de puntos");
+		txtpnEnEsteMinijuego.setForeground(new Color(236, 255, 8));
+		txtpnEnEsteMinijuego.setText(mini.informarModalidad());
 		txtpnEnEsteMinijuego.setOpaque(false);
 
 		jugador1.setFont(new Font("Courier", Font.BOLD, 35));
@@ -178,17 +189,17 @@ public class PanelMiniJuegoNE extends JPanel {
 		jugador4.setFont(new Font("Courier", Font.BOLD, 35));
 
 		textoResultado.setFont(new Font("Courier", Font.BOLD, 40));
-		textoResultado.setForeground(new Color(102, 204, 204));
+		textoResultado.setForeground(new Color(236, 255, 8));
 		textoResultado.setLocation(200, 50);
 
 		jugador1.setLocation(200, 100);
 		jugador2.setLocation(200, 150);
 		jugador3.setLocation(200, 200);
 		jugador4.setLocation(200, 250);
-		jugador1.setForeground(new Color(102, 204, 204));
-		jugador2.setForeground(new Color(102, 204, 204));
-		jugador3.setForeground(new Color(102, 204, 204));
-		jugador4.setForeground(new Color(102, 204, 204));
+		jugador1.setForeground(new Color(236, 255, 8));
+		jugador2.setForeground(new Color(236, 255, 8));
+		jugador3.setForeground(new Color(236, 255, 8));
+		jugador4.setForeground(new Color(236, 255, 8));
 		botonAceptarResultados.setLocation(500, 175);
 		botonAceptarResultados.setSize(200, 50);
 
@@ -304,10 +315,13 @@ public class PanelMiniJuegoNE extends JPanel {
 	}
 
 	public void detonadorActivado(JButton boton) {
-		boton.setVisible(false);
+		boton.setVisible(false);	
 	}
+	
 
-	public void mostrarResultados(List<Jugador> jugadores) {
+	public void mostrarResultados(List<Jugador> jugadores,Jugador jugador) {
+		gano.setText("Gano"+" "+jugador.getNombre());
+		gano.setVisible(true);
 		boton1.setVisible(false);
 		boton2.setVisible(false);
 		boton3.setVisible(false);
@@ -318,6 +332,8 @@ public class PanelMiniJuegoNE extends JPanel {
 		boton8.setVisible(false);
 		boton9.setVisible(false);
 		tiempo.setVisible(false);
+		explotaste.setVisible(false);
+		nombexplotaste.setVisible(false);
 		botonAceptarResultados.setVisible(true);
 		turnoDe.setVisible(false);
 		textoResultado.setVisible(true);
@@ -346,7 +362,6 @@ public class PanelMiniJuegoNE extends JPanel {
 	}
 
 	public void setearTiempo(int t) {
-
 		Crono(t);
 	}
 	
@@ -381,5 +396,15 @@ public class PanelMiniJuegoNE extends JPanel {
 }
 	public void interrumpirTimer(){
 		bandera=1;
+	}
+
+	public void explotaste(String explotar,String jugador){
+		if(explotar.equals("Explotaste")) {
+			explotaste.setText("Has explotado");
+			nombexplotaste.setText(jugador);
+		}else {
+			explotaste.setText("Te salvaste");
+			nombexplotaste.setText(jugador);
+		}
 	}
 }
