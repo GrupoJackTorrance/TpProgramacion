@@ -51,6 +51,7 @@ public class PanelVentanaTablero extends JPanel {
 	private JLabel dado = new JLabel("");
 	private JLabel moneda = new JLabel("");
 	private JLabel numerodado = new JLabel("");
+	private JLabel nuevoObjeto = new JLabel("");
 	private JLabel tirodado = new JLabel("Tiro dado");
 	private JButton btntirodado = new JButton("Tiro dado");
 	private ImageIcon imagen2 = new ImageIcon(getClass().getResource("../Imagenes/moneda2.png"));
@@ -90,6 +91,8 @@ public class PanelVentanaTablero extends JPanel {
 		add(numerodado);
 		//boton para tirar dado
 		add(btntirodado);
+		
+		add(nuevoObjeto);
 
 		add(turnoJugador);
 
@@ -114,7 +117,7 @@ public class PanelVentanaTablero extends JPanel {
 		
 		btntirodado.setLocation(500,55);
 		
-	
+		nuevoObjeto.setLocation(400, 40);
 		textTurno.setLocation(400, 0);
 		textTurnoJugador.setLocation(400, 40);
 		
@@ -132,6 +135,7 @@ public class PanelVentanaTablero extends JPanel {
 		textdado.setFont(new Font("Tahoma", Font.BOLD, 15));
 		turnoDe.setFont(new Font("Tahoma", Font.BOLD, 15));
 		turnoJugador.setFont(new Font("Tahoma", Font.BOLD, 15));
+		nuevoObjeto.setFont(new Font("Tahoma", Font.BOLD, 15));
 		elegirLado.setFont(new Font("Tahoma", Font.BOLD, 15));
 		objetos.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
@@ -139,6 +143,8 @@ public class PanelVentanaTablero extends JPanel {
 		
 		textTurno.setFont(new Font("Dialog", Font.BOLD, 50));
 		textTurnoJugador.setFont(new Font("Dialog", Font.BOLD, 50));
+		
+		nuevoObjeto.setForeground(new Color(204,006,005));
 		
 		textTurno.setForeground(new Color(204,006,005));
 		textTurnoJugador.setForeground(new Color(204,006,005));
@@ -526,6 +532,16 @@ public class PanelVentanaTablero extends JPanel {
 			textPuntos.setVisible(false);
 			moneda.setVisible(false);
 			
+		}
+		
+		public void mostrarModificacionObjt(int cantidad, Jugador jugador) throws InterruptedException {
+			textPuntos.setLocation(400, 20);
+			textPuntos.setOpaque(false);
+			textPuntos.setFont(new Font("Tahoma", Font.BOLD, 30));
+			textPuntos.setText(jugador.getNombre()+" "+"Tienes un nuevo objeto");
+			textPuntos.setVisible(true);
+			Thread.sleep(1200);
+			textPuntos.setVisible(false);
 		}
 
 
