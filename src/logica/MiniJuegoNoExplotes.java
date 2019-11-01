@@ -67,12 +67,14 @@ public class MiniJuegoNoExplotes extends Minijuego {
 		System.out.println("Elegiste el detonador: " + numero);
 		cantNumerosIngresados++;
 		if (sortearNumero() > 3) {
-			System.out.println("Explotaste!\n"
-					+ jugadoresvivos.get(i).getNombre() + " ha muerto");
+			System.out.println("Explotaste!\n"+ jugadoresvivos.get(i).getNombre() + " ha muerto");
+			this.ventana.getPanel().explotaste("Explotaste",jugadoresvivos.get(i).getNombre());
 			jugadoresmuertos.add(jugadoresvivos.remove(i));
 			cantJugados--;
-		} else
+		} else {
 			System.out.println("Te salvaste!");
+			this.ventana.getPanel().explotaste("no",jugadoresvivos.get(i).getNombre());
+		}
 		this.ventana.getPanel().detonadorActivado(boton);
 		i = (i < cantJugados - 1) ? i + 1 : 0;
 
@@ -85,6 +87,8 @@ public class MiniJuegoNoExplotes extends Minijuego {
 		}
 
 	}
+	
+	
 
 	public void seAcaboElTiempo() { //El jugador que tenia el turno muere y continua con el proximo turno
 		System.out
@@ -107,7 +111,7 @@ public class MiniJuegoNoExplotes extends Minijuego {
 	public void terminaJuego() {
 		this.ventana.getPanel().interrumpirTimer();
 		recompensaCastigo();
-		this.ventana.getPanel().mostrarResultados(this.jugadores);
+		this.ventana.getPanel().mostrarResultados(this.jugadores,this.jugadoresvivos.get(0));
 	}
 
 }
