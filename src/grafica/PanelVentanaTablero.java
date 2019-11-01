@@ -106,11 +106,11 @@ public class PanelVentanaTablero extends JPanel {
 		super.paintComponent(g);
 		g2 = (Graphics2D) g;
 
-		elegirLado.setLocation(200, 3);
-		btnAbajo.setLocation(300,55);
-		btnIzquierda.setLocation(210, 30);
-		btnDerecha.setLocation(370, 30);
-		btnArriba.setLocation(300, 30);
+		elegirLado.setLocation(300, 3);
+		btnAbajo.setLocation(400,55);
+		btnIzquierda.setLocation(310, 30);
+		btnDerecha.setLocation(470, 30);
+		btnArriba.setLocation(400, 30);
 		
 		btntirodado.setLocation(500,55);
 		
@@ -174,26 +174,25 @@ public class PanelVentanaTablero extends JPanel {
 					//figJugador.setFrame(jugador.pixelX, jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2);
 					if (h == 0) {
 						//g2.setPaint(Color.BLUE);
-						g2.drawImage(buho.getImage(),(int)jugador.pixelX, (int)jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
+						g2.drawImage(buho.getImage(),(int)jugador.pixelX+20, (int)jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
 						h++;
 					} else if (h == 1) {
 						//g2.setPaint(Color.ORANGE);
-						g2.drawImage(rana.getImage(),(int)jugador.pixelX, (int)jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
+						g2.drawImage(rana.getImage(),(int)jugador.pixelX-20, (int)jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
 						h++;
 					} else if (h == 2) {
 						//g2.setPaint(Color.PINK);
-						g2.drawImage(ave.getImage(),(int)jugador.pixelX, (int)jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
+						g2.drawImage(ave.getImage(),(int)jugador.pixelX, (int)jugador.pixelY+20, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
 						h++;
 					} else {
 						//g2.setPaint(Color.WHITE);
-						g2.drawImage(gato.getImage(),(int)jugador.pixelX, (int)jugador.pixelY, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
+						g2.drawImage(gato.getImage(),(int)jugador.pixelX, (int)jugador.pixelY-20, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2, null);
 					}
 					//g2.fill(figJugador);
 				}
 
 				int v = 0;
 				h = 0;
-				Ellipse2D figJugadorP = new Ellipse2D.Double(120, 100, anchoAlturaCasilla / 2, anchoAlturaCasilla / 2);
 				for (PixelJugador jugador : jugadoresGraficos) {
 					//figJugadorP.setFrame(30 + v, 600 , anchoAlturaCasilla / 4, anchoAlturaCasilla / 4);
 					if (h == 0) {
@@ -250,7 +249,7 @@ public class PanelVentanaTablero extends JPanel {
 	public void movimientoJugador(Jugador jugador, String direccion) throws InterruptedException {
 
 		int indexJugador = jugadores.indexOf(jugador);
-		long millis = (15);
+		long millis = (8);
 		double inicio;
 		double fin;
 		// muevo al jugador pixel por pixel desde el inicio hasta el fin
@@ -265,7 +264,7 @@ public class PanelVentanaTablero extends JPanel {
 				Thread.sleep(millis);
 			}
 			for (PixelJugador jugador2 : jugadoresGraficos) {
-				mismaPosicion(jugador2, jugadoresGraficos[indexJugador], indexJugador);
+				//mismaPosicion(jugador2, jugadoresGraficos[indexJugador], indexJugador);
 				repaint();
 			}
 		} else if (direccion.equals("abajo")) {
@@ -279,7 +278,7 @@ public class PanelVentanaTablero extends JPanel {
 				Thread.sleep(millis);
 			}
 			for (PixelJugador jugador2 : jugadoresGraficos) {
-				mismaPosicion(jugador2, jugadoresGraficos[indexJugador], indexJugador);
+				//mismaPosicion(jugador2, jugadoresGraficos[indexJugador], indexJugador);
 				repaint();
 			}
 		} else if (direccion.equals("izquierda")) {
@@ -316,17 +315,17 @@ public class PanelVentanaTablero extends JPanel {
 	}
 	
 	public void reestablecer(PixelJugador jugadorActual, int index) {
-		switch(index) {
+		/*switch(index) {
 			case 1:jugadorActual.setearUbicaciones(jugadorActual.pixelX-15, jugadorActual.pixelY);break;
 			case 2:jugadorActual.setearUbicaciones(jugadorActual.pixelX+15, jugadorActual.pixelY);break;
 			case 3:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY-15);break;
 			case 4:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY+15);break;
 			default:;break;
-		}
+		}*/
 	}
 	
 	public void mismaPosicion(PixelJugador jugadorComp, PixelJugador jugadorActual, int index) {
-		if(jugadorComp.pixelX == jugadorActual.pixelX && jugadorComp.pixelY == jugadorActual.pixelY && jugadorActual!=jugadorComp) {
+		/*if(jugadorComp.pixelX == jugadorActual.pixelX && jugadorComp.pixelY == jugadorActual.pixelY && jugadorActual!=jugadorComp) {
 			switch(index) {
 			case 1:jugadorActual.setearUbicaciones(jugadorActual.pixelX+15, jugadorActual.pixelY);break;
 			case 2:jugadorActual.setearUbicaciones(jugadorActual.pixelX-15, jugadorActual.pixelY);break;
@@ -334,7 +333,7 @@ public class PanelVentanaTablero extends JPanel {
 			case 4:jugadorActual.setearUbicaciones(jugadorActual.pixelX, jugadorActual.pixelY-15);break;
 			default:;break;
 			}
-		}
+		}*/
 	}
 
 	public void mostrarOpciones(String[] direcciones, Jugador jugador,int cantidad) throws InterruptedException {
