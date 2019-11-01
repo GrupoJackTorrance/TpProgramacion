@@ -111,7 +111,7 @@ public class MiniJuegoNoExplotes extends Minijuego {
 	public void terminaJuego() {
 		this.ventana.getPanel().interrumpirTimer();
 		recompensaCastigo();
-		this.ventana.getPanel().mostrarResultados(this.jugadores,this.jugadoresvivos.get(0));
+		this.ventana.getPanel().mostrarResultados(this.jugadores,this.jugadoresvivos);
 	}
 
 }
