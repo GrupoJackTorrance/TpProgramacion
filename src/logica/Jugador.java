@@ -6,6 +6,7 @@ public class Jugador implements Comparable<Jugador> {
 	private int nroTurno;
 	private String personaje;
 	private int puntos;
+	private int cantidadObjetos;
 	private EfectoDarObjeto obj1;
 	private EfectoDarObjeto obj2;
 	private EfectoDarObjeto obj3;
@@ -86,12 +87,16 @@ public class Jugador implements Comparable<Jugador> {
 
 
 	public void setObjEfectos(EfectoDarObjeto objEfectos) {
-		if(this.obj1.getIdObjeto() ==0)
+		if(this.obj1.getIdObjeto() ==0) {
 			setObj1(objEfectos);
-		else if(this.obj2.getIdObjeto() ==0)	
+			cantidadObjetos++;
+		}else if(this.obj2.getIdObjeto() ==0) {	
 			setObj2(objEfectos);
-		else	
+			cantidadObjetos++;
+		}else {	
 			setObj3(objEfectos);
+			cantidadObjetos++;
+		}
 	}
 
 	public void setObj2(EfectoDarObjeto obj2) {
@@ -206,17 +211,27 @@ public class Jugador implements Comparable<Jugador> {
 		if(this.getObj1().getIdObjeto() == obj) {
 			this.getObj1().aplicarObj(atacado, listaJugadores);
 			this.setObj1(new ObjSinEfecto());
+			cantidadObjetos--;
 		}
 		if(this.getObj2().getIdObjeto() == obj) {
 			this.getObj2().aplicarObj(atacado, listaJugadores);	
 			this.setObj2(new ObjSinEfecto());
+			cantidadObjetos--;
 		}
 		if(this.getObj3().getIdObjeto() == obj) {
 			this.getObj3().aplicarObj(atacado, listaJugadores);		
 			this.setObj3(new ObjSinEfecto());
+			cantidadObjetos--;
 		}
 		return true;
 		
+	}
+
+
+
+
+	public int getCantidadObjetos() {
+		return cantidadObjetos;
 	}
 	
 	
