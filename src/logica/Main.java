@@ -14,10 +14,10 @@ public class Main {
 		 * dado, hace los movimientos,etc.) Despues de cada ronda, se verifica que no se
 		 * llego al objetivo y sigue jugando o determina jugador. termina la partida
 		 */
-		Jugador jugador1 = new Jugador("pepe","Pedro264");
-		Jugador jugador2 = new Jugador("Dragon", "Maria46a");
-		Jugador jugador3 = new Jugador("Rana", "Julian32");
-		Jugador jugador4 = new Jugador("Mono", "Marlen16");
+		Jugador jugador1 = new Jugador("pepe","Pedro");
+		Jugador jugador2 = new Jugador("Dragon", "Maria");
+		Jugador jugador3 = new Jugador("Rana", "Julian");
+		Jugador jugador4 = new Jugador("Mono", "Marlen");
 		
 		EfectoDarObjeto robaPuntos = new ObjRobarPuntos();
 		EfectoDarObjeto duplicaPuntaje = new ObjDuplicarPuntaje();
