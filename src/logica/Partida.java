@@ -55,13 +55,14 @@ public class Partida {
 			terminaJuego = ronda.InicioRonda(this.jugadores, this.getTablero(), this.getPuntosObjetivo());
 			if(terminaJuego == false) {
 				Minijuego mini;
-				if(j%2==0)
-				{
+				if(j==0){
+					mini= new MiniJuegoNoExplotes(this.jugadores);
+				}else if(j==1) {
 					mini= new MiniJuegoAlaSuerte(this.jugadores);
 				}else {
 					mini= new MiniJuegoPalabras(this.jugadores);
-				}
-				 j++;
+					}
+				j=(int) (Math.random()*2);
 				synchronized(mini){
 					if(terminaMiniJuego==false)
 						mini.wait();
