@@ -319,8 +319,12 @@ public class PanelMiniJuegoNE extends JPanel {
 	}
 	
 
-	public void mostrarResultados(List<Jugador> jugadores,Jugador jugador) {
-		gano.setText("Gano"+" "+jugador.getNombre());
+	public void mostrarResultados(List<Jugador> jugadores,List<Jugador> jugadoresvivos) {
+		String mensaje="Ganaron:"+'\n';
+		for (Jugador jugador : jugadoresvivos) {
+			mensaje+=jugador.getNombre()+'\n';
+		}
+		gano.setText(mensaje);
 		gano.setVisible(true);
 		boton1.setVisible(false);
 		boton2.setVisible(false);
