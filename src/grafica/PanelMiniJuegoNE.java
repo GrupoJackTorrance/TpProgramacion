@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -15,9 +14,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,6 +31,7 @@ public class PanelMiniJuegoNE extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static int inter;
+	private static int inter2;
 	
 
 	private JButton boton1 = new JButton("1");
@@ -55,6 +55,7 @@ public class PanelMiniJuegoNE extends JPanel {
 	private JLabel jugador4 = new JLabel("");
 	private JLabel turnoJugador = new JLabel("");
 	private JLabel turnoDe = new JLabel("Turno de:");
+	private JLabel BOOM = new JLabel("BOOM!");
 	private Image img = null;
 	private JLabel explotaste = new JLabel("");
 	private JLabel nombexplotaste = new JLabel("");
@@ -67,6 +68,7 @@ public class PanelMiniJuegoNE extends JPanel {
 
 	public PanelMiniJuegoNE(MiniJuegoNoExplotes mini2) {
 		this.mini = mini2;
+		add(BOOM);
 		add(boton1);
 		add(boton2);
 		add(boton3);
@@ -76,11 +78,13 @@ public class PanelMiniJuegoNE extends JPanel {
 		add(boton7);
 		add(boton8);
 		add(boton9);
+		
+		
 		try {
 			img = ImageIO.read(new File("./fondos/fondobomba.jpg"));
 		} catch (IOException e) {
 			System.out
-					.println("no se encuentra la imagen para el fondo de miniJuego A la suerte");
+					.println("no se encuentra la imagen para el fondo de miniJuego Explosion");
 
 		}
 
@@ -92,8 +96,8 @@ public class PanelMiniJuegoNE extends JPanel {
 		// Texto de Modalidad
 
 		add(txtpnEnEsteMinijuego, BorderLayout.CENTER);
-		add(nombexplotaste);
-		add(explotaste);
+
+		
 		add(textoResultado);
 		add(elijaNum);
 		add(turnoJugador);
@@ -105,6 +109,9 @@ public class PanelMiniJuegoNE extends JPanel {
 		add(tiempo);
 		add(gano);
 		
+		
+		add(tiempo);
+
 		visibilizarModalidad();
 		Botones botonesListener = new Botones();
 		btnAceptar.addActionListener(botonesListener);
@@ -155,32 +162,27 @@ public class PanelMiniJuegoNE extends JPanel {
 		boton8.setSize(100, 50);
 		boton9.setSize(100, 50);
 		
-		gano.setLocation(600, 10);
-		gano.setFont(new Font("Courier", Font.BOLD, 35));
-		gano.setForeground(new Color(236, 255, 8));
-		
-		nombexplotaste.setLocation(600, 250);
-		nombexplotaste.setFont(new Font("Courier", Font.BOLD, 35));
-		nombexplotaste.setForeground(new Color(236, 255, 8));
-		
-		explotaste.setLocation(600, 200);
-		explotaste.setFont(new Font("Courier", Font.BOLD, 35));
-		explotaste.setForeground(new Color(236, 255, 8));
+		BOOM.setLocation(650, -60);
+		BOOM.setSize(200, 200);
+		BOOM.setFont(new Font("Courier",Font.BOLD,65));
+		BOOM.setForeground(Color.red);
 
 		tiempo.setFont(new Font("Courier",Font.BOLD,45));
-		tiempo.setLocation(200, 450);
-	    tiempo.setForeground(Color.YELLOW);
-	    
-		btnAceptar.setBackground(SystemColor.window);
-		btnAceptar.setIcon(new ImageIcon("1234.jpg"));
+		tiempo.setLocation(150, 450);
+	    tiempo.setForeground(Color.RED);
 
 		Dimension height = getSize();
 		g.drawImage(img, 0, 0, height.width, height.height, null);
 
 		txtpnEnEsteMinijuego.setFont(new Font("Tahoma",
 				Font.BOLD | Font.ITALIC, 20));
-		txtpnEnEsteMinijuego.setForeground(new Color(236, 255, 8));
-		txtpnEnEsteMinijuego.setText(mini.informarModalidad());
+		txtpnEnEsteMinijuego.setForeground(Color.white);
+		txtpnEnEsteMinijuego
+				.setText("En este minijuego, la meta es no explotar!\n"
+						+ "Cada jugador tomara turnos eligiendo un detonador.\n"
+						+ "-Cada detonador tiene una posibilidad de hacer explotar la dinamita que tiene\n"
+						+ "-Los ultimos jugadores vivos ganaran puntos. Los que explotan perderan puntos.\n"
+						+ "-El jugador que no elige a tiempo será castigado con la quita de puntos");
 		txtpnEnEsteMinijuego.setOpaque(false);
 
 		jugador1.setFont(new Font("Courier", Font.BOLD, 35));
@@ -282,6 +284,7 @@ public class PanelMiniJuegoNE extends JPanel {
 		boton8.setVisible(false);
 		boton9.setVisible(false);
 		tiempo.setVisible(true);
+		BOOM.setVisible(false);
 		botonAceptarResultados.setVisible(false);
 		textoResultado.setVisible(false);
 		elijaNum.setVisible(false);// s
@@ -317,6 +320,8 @@ public class PanelMiniJuegoNE extends JPanel {
 	public void detonadorActivado(JButton boton) {
 		boton.setVisible(false);	
 	}
+	
+	
 	
 
 	public void mostrarResultados(List<Jugador> jugadores,List<Jugador> jugadoresvivos) {
@@ -401,14 +406,33 @@ public class PanelMiniJuegoNE extends JPanel {
 	public void interrumpirTimer(){
 		bandera=1;
 	}
-
-	public void explotaste(String explotar,String jugador){
-		if(explotar.equals("Explotaste")) {
-			explotaste.setText("Has explotado");
-			nombexplotaste.setText(jugador);
-		}else {
-			explotaste.setText("Te salvaste");
-			nombexplotaste.setText(jugador);
-		}
+	
+	
+public void setearTiempoExplosion(int t) {
+		
+	cronoExplosion(t);
 	}
+	
+	public void cronoExplosion(int intervalo) {
+		Timer timer=new Timer();
+		inter2=intervalo;
+		BOOM.setVisible(true);
+		TimerTask tarea=new TimerTask() {
+
+			@Override
+			public void run() {
+				
+				
+				if(inter2==0)
+				{
+					timer.cancel();
+					BOOM.setVisible(false);
+				}
+				inter2--;
+				
+			}
+			
+		};
+		timer.scheduleAtFixedRate(tarea, 0, 1000);
+}
 }

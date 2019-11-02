@@ -42,7 +42,7 @@ public class MiniJuegoNoExplotes extends Minijuego {
 				+ "Cada jugador tomara turnos eligiendo un detonador\n"
 				+ "-Cada detonador tiene una posibilidad de hacer explotar la dinamita que tiene abajo\n"
 				+ "-Los ultimos jugadores vivos ganaran puntos. Los que explotan perderan puntos.\n"
-				+ "-El jugador que no elige a tiempo será castigado con la quita de puntos";
+				+ "-El jugador que no elige a tiempo serï¿½ castigado con la quita de puntos";
 		return modalidad;
 	}
 
@@ -66,14 +66,16 @@ public class MiniJuegoNoExplotes extends Minijuego {
 	public void elegirDetonador(int numero, JButton boton) {
 		System.out.println("Elegiste el detonador: " + numero);
 		cantNumerosIngresados++;
+		this.ventana.getPanel().interrumpirTimer();
 		if (sortearNumero() > 3) {
 			System.out.println("Explotaste!\n"+ jugadoresvivos.get(i).getNombre() + " ha muerto");
-			this.ventana.getPanel().explotaste("Explotaste",jugadoresvivos.get(i).getNombre());
+			//this.ventana.getPanel().explotaste("Explotaste",jugadoresvivos.get(i).getNombre());
+			this.ventana.getPanel().setearTiempoExplosion(1); //Pone el timer para que la palabra BOOM aparezca por 1 segundo
 			jugadoresmuertos.add(jugadoresvivos.remove(i));
 			cantJugados--;
 		} else {
 			System.out.println("Te salvaste!");
-			this.ventana.getPanel().explotaste("no",jugadoresvivos.get(i).getNombre());
+			//this.ventana.getPanel().explotaste("no",jugadoresvivos.get(i).getNombre());
 		}
 		this.ventana.getPanel().detonadorActivado(boton);
 		i = (i < cantJugados - 1) ? i + 1 : 0;
@@ -82,7 +84,6 @@ public class MiniJuegoNoExplotes extends Minijuego {
 			terminaJuego();
 		} else {
 			this.ventana.getPanel().setearNombreDeTurnoJugador(this.jugadoresvivos.get(i).getNombre());
-			this.ventana.getPanel().interrumpirTimer();
 			this.ventana.getPanel().setearTiempo(tiemporeset);
 		}
 

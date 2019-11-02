@@ -4,7 +4,6 @@ package logica;
 import java.util.LinkedList;
 import java.util.List;
 
-
 import grafica.VentanaResultado;
 
 public class Partida {
@@ -45,21 +44,22 @@ public class Partida {
 	 * DESAROLLO DE PARTIDA
 	 ******************************************/
 	public void InicioPartida() throws Exception {
-		int j=0;
 		this.tablero = this.elegirTablero(); // Designo tablero
 		//this.posicionesInciales(this.getJugadores()); // Posicion Inicial // NO HACE FALTA PORQUE LO SETEAMOS EN SALA
 		ronda = new Ronda(this.turnos); // Creo la ronda
 		determinarOrdenTurno(this.jugadores); // Jugadores por turno
+		int j = 0;
 		boolean terminaJuego = false;
+		Dado dado = new Dado();
 		for (int i = 0; i < rondaMax && terminaJuego == false; i++) {
 			terminaJuego = ronda.InicioRonda(this.jugadores, this.getTablero(), this.getPuntosObjetivo());
 			if(terminaJuego == false) {
-				Minijuego mini;
+				Minijuego mini = null;
 				if(j==0){
 					mini= new MiniJuegoNoExplotes(this.jugadores);
 				}else if(j==1) {
 					mini= new MiniJuegoAlaSuerte(this.jugadores);
-				}else {
+				}else if(j>4) {
 					mini= new MiniJuegoPalabras(this.jugadores);
 					}
 				j=(int) (Math.random()*2);
@@ -93,7 +93,7 @@ public class Partida {
 	private void determinarOrdenTurno(List<Jugador> listaJugadores) {
 		for (int i = 0; i < listaJugadores.size(); i++) {
 			listaJugadores.get(i).setNroTurno(i + 1);
-			listaJugadores.get(i).setPuntos(10); // ¿Para que?
+			listaJugadores.get(i).setPuntos(10); // ï¿½Para que?
 		}
 		/* Otra forma de modificar los turnos 
 			int j=1;
