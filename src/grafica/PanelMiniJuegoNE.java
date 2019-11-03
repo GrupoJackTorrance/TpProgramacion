@@ -166,7 +166,11 @@ public class PanelMiniJuegoNE extends JPanel {
 		BOOM.setSize(200, 200);
 		BOOM.setFont(new Font("Courier",Font.BOLD,65));
 		BOOM.setForeground(Color.red);
-
+		
+		gano.setLocation(50, 10);
+		gano.setFont(new Font("Courier",Font.BOLD,20));
+		gano.setForeground(Color.YELLOW);
+		
 		tiempo.setFont(new Font("Courier",Font.BOLD,45));
 		tiempo.setLocation(150, 450);
 	    tiempo.setForeground(Color.RED);
@@ -182,7 +186,7 @@ public class PanelMiniJuegoNE extends JPanel {
 						+ "Cada jugador tomara turnos eligiendo un detonador.\n"
 						+ "-Cada detonador tiene una posibilidad de hacer explotar la dinamita que tiene\n"
 						+ "-Los ultimos jugadores vivos ganaran puntos. Los que explotan perderan puntos.\n"
-						+ "-El jugador que no elige a tiempo ser· castigado con la quita de puntos");
+						+ "-El jugador que no elige a tiempo ser√° castigado con la quita de puntos");
 		txtpnEnEsteMinijuego.setOpaque(false);
 
 		jugador1.setFont(new Font("Courier", Font.BOLD, 35));
@@ -327,7 +331,7 @@ public class PanelMiniJuegoNE extends JPanel {
 	public void mostrarResultados(List<Jugador> jugadores,List<Jugador> jugadoresvivos) {
 		String mensaje="Ganaron:"+'\n';
 		for (Jugador jugador : jugadoresvivos) {
-			mensaje+=jugador.getNombre()+'\n';
+			mensaje+=jugador.getNombre()+", "+'\n';
 		}
 		gano.setText(mensaje);
 		gano.setVisible(true);
