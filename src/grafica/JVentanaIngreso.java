@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.awt.event.ActionEvent;
 
 public class JVentanaIngreso extends JFrame{
@@ -59,7 +63,22 @@ public class JVentanaIngreso extends JFrame{
 	}
 	
 	private void ingresarASala() {
-		new JVentanaTablero(textFieldUsuario.getText());
+//		new JVentanaTablero(textFieldUsuario.getText());
+		
+		try {
+			Socket miSocket = new Socket("127.0.0.1",10001);
+			
+			DataOutputStream info = new DataOutputStream(miSocket.getOutputStream());
+			
+			info.writeUTF(textFieldUsuario.getText());
+			
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
