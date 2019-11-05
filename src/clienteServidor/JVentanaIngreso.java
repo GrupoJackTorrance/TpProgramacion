@@ -1,77 +1,101 @@
-package grafica;
-
+package clienteServidor;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import com.google.gson.Gson;
+
+import logica.Jugador;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.awt.event.ActionEvent;
 
-public class JVentanaIngreso extends JFrame{
-	
+public class JVentanaIngreso extends JFrame {
+
 	private JPanel contentPane;
-	private JLabel label;
+	private JLabel label, labelUsuario, labelPersonaje;
 	private JButton botonIngreso;
-	private JTextField textFieldUsuario;
-	
+	private JTextField textFieldUsuario, nombrePersonaje;
+
 	public static void main(String[] args) {
 		JVentanaIngreso ventana = new JVentanaIngreso();
-		
+
 		ventana.setVisible(true);
 	}
-	
-	public JVentanaIngreso(){
+
+	public JVentanaIngreso() {
 		setResizable(false);
 		setTitle("Bienvenido al juego");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 227);
 		contentPane = new JPanel();
-		
+
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		label = new JLabel("Ingrese su nombre de usuario");
+
+		label = new JLabel("Ingrese su nombre de usuario y de personaje");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setVerticalAlignment(SwingConstants.CENTER);
-		label.setBounds(100, 40, 250, 30);
+		label.setBounds(100, 40, 300, 30);
 		contentPane.add(label);
 		
+		labelUsuario = new JLabel("Usuario: ");
+		labelUsuario.setBounds(100, 80, 80, 20);
+		add(labelUsuario);
 		textFieldUsuario = new JTextField();
 		textFieldUsuario.setBounds(184, 80, 86, 20);
 		contentPane.add(textFieldUsuario);
 		textFieldUsuario.setColumns(10);
 		
+		labelPersonaje = new JLabel("Personaje: ");
+		labelPersonaje.setBounds(100, 100, 80, 20);
+		add(labelPersonaje);
+		nombrePersonaje = new JTextField();
+		nombrePersonaje.setBounds(184, 100, 86, 20);
+		contentPane.add(nombrePersonaje);
+		textFieldUsuario.setColumns(10);
+
 		botonIngreso = new JButton("Aceptar");
 		botonIngreso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ingresarASala();
+				ingresarALobby();
 			}
 		});
 		botonIngreso.setBounds(130, 120, 200, 30);
 		contentPane.add(botonIngreso);
-		
+
 		setLocationRelativeTo(null);
 	}
-	
-	private void ingresarASala() {
+
+	private void ingresarALobby() {
 //		new JVentanaTablero(textFieldUsuario.getText());
-		
+
 		try {
-			Socket miSocket = new Socket("127.0.0.1",10001);
-			
+			Socket miSocket = new Socket("127.0.0.1", 10001);
+
 			DataOutputStream info = new DataOutputStream(miSocket.getOutputStream());
+			Jugador jugador= new Jugador(nombrePersonaje.getText(),textFieldUsuario.getText());
 			
-			info.writeUTF(textFieldUsuario.getText());
+			Gson gson = new Gson();
+			String mensaje= gson.toJson(jugador);
+			info.writeUTF(mensaje);
+			DataInputStream entrada = new DataInputStream(miSocket.getInputStream());
 			
+			
+			if(entrada.readUTF().equals("MostrarLobby")) {
+				new VentanaLobby(miSocket);
+			}
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

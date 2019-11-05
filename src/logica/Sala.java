@@ -8,6 +8,14 @@ public class Sala {
 	private int cantJugadores;
 	private String creador;
 	private int puntosObjetivo;
+	private String nombreSala;
+	public String getNombreSala() {
+		return nombreSala;
+	}
+
+	public void setNombreSala(String nombreSala) {
+		this.nombreSala = nombreSala;
+	}
 
 	private List<Jugador> jugadores = new LinkedList<Jugador>();
 
