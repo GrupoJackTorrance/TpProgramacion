@@ -53,6 +53,7 @@ class PanelLobby extends JPanel {
 		unirseSala=new JButton("Unirse a una sala");
 		crearSala=new JButton("Crear sala");
 		salir=new JButton("Salir");
+		aceptarSala=new JButton("Aceptar Sala");
 		Botones botones = new Botones();
 		etiquetaSalaEspera.setVisible(false);
 		add(etiquetaSalaEspera);
