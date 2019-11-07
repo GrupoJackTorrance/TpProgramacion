@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -58,7 +59,7 @@ class PanelLobby extends JPanel {
 	private static final long serialVersionUID = 2763110189112444391L;
 	JButton unirseSala,crearSala,salir,aceptarSala;
 	JComboBox<String> opcionesSalas= new JComboBox<String>();
-	JTextField etiquetaSalaEspera= new JTextField("Se creo la sala");
+	JLabel etiquetaSalaEspera= new JLabel("Se creo la sala");
 	HashMap <String,Sala> salasDisponibles= new HashMap<String,Sala>();
 	public PanelLobby() {
 		unirseSala=new JButton("Unirse a una sala");
@@ -169,7 +170,8 @@ public void visibilizarSalaEspera(String valoresActuales) {
 	Gson gson = builder.create();
 	etiquetaSalaEspera.setVisible(true);
 	Sala sala= gson.fromJson(valoresActuales, Sala.class);
-	
+	opcionesSalas.setVisible(true);
+	opcionesSalas.addItem(String.valueOf(sala.getId()));
 	
 }
 	
