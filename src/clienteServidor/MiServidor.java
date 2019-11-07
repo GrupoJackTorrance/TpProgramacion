@@ -1,7 +1,9 @@
 package clienteServidor;
 
 import java.io.DataInputStream;
+
 import logica.*;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Inet4Address;
@@ -14,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class MiServidor implements Runnable {
 	
@@ -45,7 +48,12 @@ public class MiServidor implements Runnable {
 			DataInputStream entrada = new DataInputStream(cliente.getInputStream());
 			
 			String jugador= entrada.readUTF();
-			Gson gson = new Gson();
+			
+			GsonBuilder builder = new GsonBuilder();
+			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+			Gson gson = builder.create();
+			
+//			Gson gson = new Gson();
 			
 			//System.out.println(nombrePersonaje);
 			

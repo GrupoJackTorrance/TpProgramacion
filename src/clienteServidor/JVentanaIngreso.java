@@ -6,12 +6,16 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import logica.AbstractAdapter;
+import logica.EfectoDarObjeto;
 import logica.Jugador;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -35,7 +39,7 @@ public class JVentanaIngreso extends JFrame {
 
 	public JVentanaIngreso() {
 		try {
-			this.miSocket = new Socket("192.168.0.55", 9936);
+			this.miSocket = new Socket("localhost", 9936); //"192.168.0.55"
 		} catch (UnknownHostException e) {
 			// TODO Bloque catch generado automáticamente
 			System.out.println(e.getMessage());
@@ -96,7 +100,10 @@ public class JVentanaIngreso extends JFrame {
 			DataOutputStream info = new DataOutputStream(miSocket.getOutputStream());
 			Jugador jugador= new Jugador(nombrePersonaje.getText(),textFieldUsuario.getText());
 			
-			Gson gson = new Gson();
+			GsonBuilder builder = new GsonBuilder();
+			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+			Gson gson = builder.create();
+//			Gson gson = new Gson();
 			String mensaje= gson.toJson(jugador);
 			info.writeUTF(mensaje);
 			DataInputStream entrada = new DataInputStream(miSocket.getInputStream());
