@@ -146,7 +146,9 @@ class HiloServidor extends Thread{
 		}
 	
 	public String determinarAccion(String mensajeCliente) {
-		Gson gson= new Gson();
+		//Gson gson= new Gson();
+		GsonBuilder builder = new GsonBuilder();
+		Gson gson = builder.create();
 		String mensajeAccion= gson.fromJson(mensajeCliente, PaqueteMensaje.class).getAccion();
 		if(mensajeAccion.equals("mostrarSalas"))
 			return "devolverSalas";
@@ -155,7 +157,10 @@ class HiloServidor extends Thread{
 		return "d";
 	}
 	public String hacerAccion(String accion,String mensajeCliente) {
-		Gson gson= new Gson();
+		//Gson gson= new Gson();
+		GsonBuilder builder = new GsonBuilder();
+		builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+		Gson gson = builder.create();
 		String respuesta = null;
 		if(accion.equals("devolverSalas")) {
 			respuesta=gson.toJson(salasDisponibles);

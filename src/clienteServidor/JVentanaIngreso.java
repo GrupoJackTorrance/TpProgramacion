@@ -26,6 +26,10 @@ import java.awt.event.ActionEvent;
 
 public class JVentanaIngreso extends JFrame {
 
+	/**
+	 * 
+	 */
+	private transient static final long serialVersionUID = 6618747801020234776L;
 	private JPanel contentPane;
 	private JLabel label, labelUsuario, labelPersonaje;
 	private JButton botonIngreso;

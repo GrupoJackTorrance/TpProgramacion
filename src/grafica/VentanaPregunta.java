@@ -21,7 +21,10 @@ import logica.ObjDescuentaPuntos;
 
 public class VentanaPregunta extends JFrame{
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 179689809780211501L;
 	private PanelPregunta panelPregunta;
 	
 	public VentanaPregunta() {
@@ -42,7 +45,11 @@ public class VentanaPregunta extends JFrame{
 
 	class PanelPregunta extends JPanel {
 
-		private static final long serialVersionUID = 1L;
+	
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6173184204656412828L;
 		private int resp;
 		JButton noAtaca = new JButton("No hacer nada");
 		JLabel cronometro= new JLabel();

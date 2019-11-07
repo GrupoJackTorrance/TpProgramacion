@@ -18,10 +18,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import logica.AbstractAdapter;
+import logica.EfectoDarObjeto;
 import logica.Sala;
 
 public class VentanaLobby  extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8896812117446574226L;
 	private static Socket socketCliente;	
 	
 	public static Socket getSocketCliente() {
@@ -45,6 +52,10 @@ public class VentanaLobby  extends JFrame{
 	}
 }
 class PanelLobby extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2763110189112444391L;
 	JButton unirseSala,crearSala,salir,aceptarSala;
 	JComboBox<String> opcionesSalas= new JComboBox<String>();
 	JTextField etiquetaSalaEspera= new JTextField("Se creo la sala");
@@ -92,7 +103,7 @@ class Botones implements ActionListener{
 			try {
 				//comunicarse con el servidor para pedirle la lista de Salas
 				DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
-				PaqueteMensaje mensaje= new PaqueteMensaje("MostrarSala",null);
+				PaqueteMensaje mensaje= new PaqueteMensaje("mostrarSalas",null);
 				Gson gson = new Gson();				
 				flujoSalida.writeUTF(gson.toJson(mensaje));				
 				// recibir Salas
@@ -114,7 +125,9 @@ class Botones implements ActionListener{
 			try {
 				DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
 				PaqueteMensaje mensaje= new PaqueteMensaje("crearSala", "nombreSala");
-				Gson gson = new Gson();
+				GsonBuilder builder = new GsonBuilder();
+				builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+				Gson gson = builder.create();
 				flujoSalida.writeUTF(gson.toJson(mensaje));
 				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 				String respuesta=flujoEntrada.readUTF();
@@ -151,7 +164,9 @@ class Botones implements ActionListener{
 	
 }
 public void visibilizarSalaEspera(String valoresActuales) {
-	Gson gson = new Gson();
+	GsonBuilder builder = new GsonBuilder();
+	builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+	Gson gson = builder.create();
 	etiquetaSalaEspera.setVisible(true);
 	Sala sala= gson.fromJson(valoresActuales, Sala.class);
 	

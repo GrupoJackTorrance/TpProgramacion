@@ -9,6 +9,7 @@ public class Sala {
 	private String creador;
 	private int puntosObjetivo;
 	private String nombreSala;
+	
 	public String getNombreSala() {
 		return nombreSala;
 	}
@@ -19,7 +20,7 @@ public class Sala {
 
 	private List<Jugador> jugadores = new LinkedList<Jugador>();
 
-	private Partida p1;
+	private Partida p1 =null;
 
 
 	/****************************
