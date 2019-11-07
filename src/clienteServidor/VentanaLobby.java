@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import com.google.gson.Gson;
 
@@ -33,7 +34,7 @@ public class VentanaLobby  extends JFrame{
 
 	PanelLobby panel= new PanelLobby();
 	public static void main(String[] args) {
-		VentanaLobby vemtana= new VentanaLobby(socketCliente);
+		//VentanaLobby ventana= new VentanaLobby(socketCliente);
 	}
 
 	public VentanaLobby(Socket socketCliente) {
@@ -44,21 +45,24 @@ public class VentanaLobby  extends JFrame{
 	}
 }
 class PanelLobby extends JPanel {
-	JButton unirseSala,crearSala,salir,aceptar;
+	JButton unirseSala,crearSala,salir,aceptarSala;
 	JComboBox<String> opcionesSalas= new JComboBox<String>();
+	JTextField etiquetaSalaEspera= new JTextField("Se creo la sala");
 	HashMap <String,Sala> salasDisponibles= new HashMap<String,Sala>();
 	public PanelLobby() {
 		unirseSala=new JButton("Unirse a una sala");
 		crearSala=new JButton("Crear sala");
 		salir=new JButton("Salir");
 		Botones botones = new Botones();
+		etiquetaSalaEspera.setVisible(false);
+		add(etiquetaSalaEspera);
 		unirseSala.addActionListener(botones);
 		crearSala.addActionListener(botones);
 		salir.addActionListener(botones);
 		opcionesSalas.setVisible(false);
-		aceptar.setVisible(false);
+		aceptarSala.setVisible(false);
 		add(opcionesSalas);
-		add(aceptar);
+		add(aceptarSala);
 		add(unirseSala);
 		add(crearSala);
 		add(salir);
@@ -76,7 +80,7 @@ public void mostrarSalasDisponibles() {
 	}
 	opcionesSalas.setLocation(200,200);
 	opcionesSalas.setVisible(true);
-	aceptar.setVisible(true);
+	aceptarSala.setVisible(true);
 	repaint();
 }
 class Botones implements ActionListener{
@@ -87,14 +91,17 @@ class Botones implements ActionListener{
 			try {
 				//comunicarse con el servidor para pedirle la lista de Salas
 				DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
-				flujoSalida.writeUTF("mostrarSala");
+				PaqueteMensaje mensaje= new PaqueteMensaje("MostrarSala",null);
+				Gson gson = new Gson();				
+				flujoSalida.writeUTF(gson.toJson(mensaje));				
 				// recibir Salas
 				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 				String entrada=flujoEntrada.readUTF();
-				Gson gson = new Gson();
+				
 				salasDisponibles=gson.fromJson(entrada,HashMap.class);				
 				mostrarSalasDisponibles();
 				flujoSalida.close();
+				flujoEntrada.close();
 				 
 				// cuando se apreta el boton " aceptar" se envia la opcione elegida		
 			} catch (IOException e1) {
@@ -103,14 +110,26 @@ class Botones implements ActionListener{
 			}
 		}
 		else if (e.getSource()== crearSala) {
-			System.out.println("crear");
+			try {
+				DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
+				PaqueteMensaje mensaje= new PaqueteMensaje("crearSala", "nombreSala");
+				Gson gson = new Gson();
+				flujoSalida.writeUTF(gson.toJson(mensaje));
+				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
+				String respuesta=flujoEntrada.readUTF();
+				visibilizarSalaEspera(respuesta);
+			} catch (IOException e1) {
+				// TODO Bloque catch generado automáticamente
+				e1.printStackTrace();
+			}
+			
 		}
        else if (e.getSource()== salir) {
 			System.out.println("salir");
 		}
-       else if ( e.getSource() == aceptar) {
+       else if ( e.getSource() == aceptarSala) {
     	   opcionesSalas.setVisible(false);
-    	   aceptar.setVisible(false);
+    	   aceptarSala.setVisible(false);
     	   String nombreSala= (String) opcionesSalas.getSelectedItem(); // es la opcion seleccionada en el momento que se apreto "aceptar"
     	   DataOutputStream flujoSalida;
 		try {
@@ -128,6 +147,13 @@ class Botones implements ActionListener{
        }
 		
 	}
+	
+}
+public void visibilizarSalaEspera(String valoresActuales) {
+	Gson gson = new Gson();
+	etiquetaSalaEspera.setVisible(true);
+	Sala sala= gson.fromJson(valoresActuales, Sala.class);
+	
 	
 }
 	

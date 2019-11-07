@@ -36,11 +36,12 @@ public class MiServidor implements Runnable {
 	@Override
 	public void run() {
 		try {
-			ServerSocket servidor = new ServerSocket(10001);
+			ServerSocket servidor = new ServerSocket(9936);
 			
 			while(true) {
+				System.out.println("esperando cliente");
 			Socket cliente = servidor.accept();
-			
+			System.out.println("LLEGO");
 			DataInputStream entrada = new DataInputStream(cliente.getInputStream());
 			
 			String jugador= entrada.readUTF();
@@ -56,17 +57,18 @@ public class MiServidor implements Runnable {
 			
 			DataOutputStream salida= new DataOutputStream(cliente.getOutputStream());
 			salida.writeUTF("MostrarLobby");
-		
-			
+			HiloServidor  hiloCliente = new HiloServidor(cliente,jugadorCliente);
+			hiloCliente.start();
+			System.out.println("fin del while");
 			}
 			
 		} catch (IOException e) {
 			
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			System.out.println(e.getMessage());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 	
@@ -103,7 +105,13 @@ class jugadorLobby{
 }
 
 class HiloServidor extends Thread{
-	Socket cliente;
+	private Socket cliente;
+	private Jugador jugador;
+
+	public HiloServidor(Socket cliente,Jugador jugador) {
+		this.cliente=cliente;
+		this.jugador=jugador;
+	}
 	@Override
 	public void run() {
 		try {
@@ -111,8 +119,12 @@ class HiloServidor extends Thread{
 			while(true) {
 			DataInputStream entrada = new DataInputStream(cliente.getInputStream());
 			String mensajeCliente= entrada.readUTF();
+			String accion =determinarAccion(mensajeCliente);
+			String respuesta=hacerAccion(accion,mensajeCliente);
+			//String respuesta=determinarMensajeRespuesta(accion);
 			DataOutputStream salida= new DataOutputStream(cliente.getOutputStream());
-			Gson gson = new Gson();
+			salida.writeUTF(respuesta);
+		
 		
 			}
 		} catch (IOException e) {
@@ -124,6 +136,35 @@ class HiloServidor extends Thread{
 			e.printStackTrace();
 		}
 		}
+	
+	public String determinarAccion(String mensajeCliente) {
+		Gson gson= new Gson();
+		String mensajeAccion= gson.fromJson(mensajeCliente, PaqueteMensaje.class).getAccion();
+		if(mensajeAccion.equals("mostrarSalas"))
+			return "devolverSalas";
+		else if( mensajeAccion.equals("crearSala"))
+			return "crearSala";
+		return "d";
 	}
-
+	public String hacerAccion(String accion,String mensajeCliente) {
+		Gson gson= new Gson();
+		String respuesta = null;
+		if(accion.equals("devolverSalas")) {
+			respuesta=gson.toJson(salasDisponibles);
+		}
+		else if(accion.equals("crearSala")) {
+			String nombreSala=(String) gson.fromJson(mensajeCliente,PaqueteMensaje.class).getObj();
+			Sala sala=jugador.crearSala(40,2);
+			salasDisponibles.put(nombreSala,sala);
+			respuesta=gson.toJson(sala);
+		}
+		else {
+			respuesta= "nada por ahora";
+		}
+		return respuesta;
+	}
+	public String determinarMensajeRespuesta(String accion) {
+		return accion;
+	}
+}
 }

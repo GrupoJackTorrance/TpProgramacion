@@ -26,14 +26,23 @@ public class JVentanaIngreso extends JFrame {
 	private JLabel label, labelUsuario, labelPersonaje;
 	private JButton botonIngreso;
 	private JTextField textFieldUsuario, nombrePersonaje;
+	Socket miSocket ;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnknownHostException, IOException {
 		JVentanaIngreso ventana = new JVentanaIngreso();
-
 		ventana.setVisible(true);
 	}
 
 	public JVentanaIngreso() {
+		try {
+			this.miSocket = new Socket("192.168.0.55", 9936);
+		} catch (UnknownHostException e) {
+			// TODO Bloque catch generado automáticamente
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			// TODO Bloque catch generado automáticamente
+			System.out.println(e.getMessage());
+		}
 		setResizable(false);
 		setTitle("Bienvenido al juego");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,7 +91,7 @@ public class JVentanaIngreso extends JFrame {
 //		new JVentanaTablero(textFieldUsuario.getText());
 
 		try {
-			Socket miSocket = new Socket("127.0.0.1", 10001);
+			
 
 			DataOutputStream info = new DataOutputStream(miSocket.getOutputStream());
 			Jugador jugador= new Jugador(nombrePersonaje.getText(),textFieldUsuario.getText());
@@ -91,17 +100,18 @@ public class JVentanaIngreso extends JFrame {
 			String mensaje= gson.toJson(jugador);
 			info.writeUTF(mensaje);
 			DataInputStream entrada = new DataInputStream(miSocket.getInputStream());
-			
-			
-			if(entrada.readUTF().equals("MostrarLobby")) {
+			String messajeJ=entrada.readUTF();
+			if(messajeJ.equals("MostrarLobby")) {
+				System.out.println("entro a la accion");
 				new VentanaLobby(miSocket);
 			}
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
