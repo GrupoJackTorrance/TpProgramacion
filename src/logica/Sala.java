@@ -18,6 +18,14 @@ public class Sala {
 		this.nombreSala = nombreSala;
 	}
 
+	public int getPuntosObj() {
+		return puntosObjetivo;
+	}
+	
+	public int getMaxPartidas() {
+		return maxPartidas;
+	}
+	
 	private List<Jugador> jugadores = new LinkedList<Jugador>();
 
 	private Partida p1 =null;
@@ -26,12 +34,23 @@ public class Sala {
 	/****************************
 	 * FUNCIONES DE SALA
 	 *******************************************************************/
-	public Sala(Jugador jugador, int puntosObjetivo, int maxPartidas) {
+	public Sala(Jugador jugador, int puntosObjetivo, int maxPartidas, String nombre, int cantJugadores) {
 		this.creador = jugador.getNombre();
 		this.puntosObjetivo = puntosObjetivo;
 		this.maxPartidas = maxPartidas;
+		nombreSala = nombre;
+		this.cantJugadores = cantJugadores;
 		addJugadorSala(jugador);
 	}
+	
+//	public Sala(Jugador jugador, int puntosObjetivo, int maxPartidas, String nombre, int cantJugadores) {
+//		this.creador = jugador.getNombre();
+//		this.puntosObjetivo = puntosObjetivo;
+//		this.maxPartidas = maxPartidas;
+//		this.nombreSala = nombre;
+//		this.cantJugadores = cantJugadores;
+//		addJugadorSala(jugador);
+//	}
 
 	public boolean addJugadorSala(Jugador jugador) {
 
