@@ -20,19 +20,15 @@ import com.google.gson.GsonBuilder;
 
 public class MiServidor implements Runnable {
 	
-	HashMap< Jugador, Socket> jugadoresLobby= new HashMap<Jugador, Socket>();
+	HashMap	<Jugador,HiloServidor> jugadoresLobby= new HashMap	<Jugador,HiloServidor>();
 	HashMap <String,Sala> salasDisponibles= new HashMap<String, Sala>();
 	List <String> salasDisponiblesClientes= new ArrayList<String>();
+	
 	public static void main(String[] args) throws Exception {
 		MiServidor log = new MiServidor();
-		
 	}
 	public MiServidor() throws Exception {
-		
-
-		
 		Thread hilo = new Thread(this);
-		
 		hilo.start();
 	}
 	
@@ -41,34 +37,34 @@ public class MiServidor implements Runnable {
 	public void run() {
 		try {
 			ServerSocket servidor = new ServerSocket(9836);
-			
 			while(true) {
 				System.out.println("esperando cliente");
-			Socket cliente = servidor.accept();
-			System.out.println("LLEGO");
-			DataInputStream entrada = new DataInputStream(cliente.getInputStream());
+				Socket cliente = servidor.accept();
+				
+				DataInputStream entrada = new DataInputStream(cliente.getInputStream());
 			
-			String jugador= entrada.readUTF();
-			
-			GsonBuilder builder = new GsonBuilder();
-			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
-			Gson gson = builder.create();
+				String jugador= entrada.readUTF();
+				System.out.println("LLEGO "+jugador);
+				GsonBuilder builder = new GsonBuilder();
+				builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+				Gson gson = builder.create();
 			
 //			Gson gson = new Gson();
 			
 			//System.out.println(nombrePersonaje);
 			
 			/* Acá habría que plasmar la lógica y los métodos que se ejecutan en el main? */ 
-			Jugador jugadorCliente =gson.fromJson(jugador,Jugador.class);
+				Jugador jugadorCliente =gson.fromJson(jugador,Jugador.class);
 			
-			// agrego al HashMap al jugador con su socket
-			jugadoresLobby.put(jugadorCliente, cliente);
 			
-			DataOutputStream salida= new DataOutputStream(cliente.getOutputStream());
-			salida.writeUTF("MostrarLobby");
-			HiloServidor  hiloCliente = new HiloServidor(cliente,jugadorCliente);
-			hiloCliente.start();
-			System.out.println("fin del while");
+			
+				DataOutputStream salida= new DataOutputStream(cliente.getOutputStream());
+				salida.writeUTF("MostrarLobby");
+				HiloServidor hiloCliente = new HiloServidor(cliente,jugadorCliente);
+				hiloCliente.start();
+				// agrego al HashMap al jugador con su socket
+				jugadoresLobby.put(jugadorCliente, hiloCliente);
+				System.out.println("fin del while");
 			}
 			
 		} catch (IOException e) {
@@ -82,10 +78,10 @@ public class MiServidor implements Runnable {
 	}
 	
 	
-public HashMap<Jugador, Socket> getJugadoresLobby() {
+public HashMap<Jugador, HiloServidor> getJugadoresLobby() {
 		return jugadoresLobby;
 	}
-	public void setJugadoresLobby(HashMap<Jugador, Socket> jugadoresLobby) {
+	public void setJugadoresLobby(HashMap<Jugador,HiloServidor> jugadoresLobby) {
 		this.jugadoresLobby = jugadoresLobby;
 	}
 
@@ -116,7 +112,10 @@ class jugadorLobby{
 class HiloServidor extends Thread{
 	private Socket cliente;
 	private Jugador jugador;
-
+	DataInputStream entrada;
+	DataOutputStream salida;
+	boolean corriendo=true; 
+	
 	public HiloServidor(Socket cliente,Jugador jugador) {
 		this.cliente=cliente;
 		this.jugador=jugador;
@@ -125,24 +124,24 @@ class HiloServidor extends Thread{
 	@Override
 	public void run() {
 		try {
-			
-			while(true) {
-			DataInputStream entrada = new DataInputStream(cliente.getInputStream());
-			String mensajeCliente= entrada.readUTF();
-			String accion =determinarAccion(mensajeCliente);
-			String respuesta=hacerAccion(accion,mensajeCliente);
-			//String respuesta=determinarMensajeRespuesta(accion);
-			DataOutputStream salida= new DataOutputStream(cliente.getOutputStream());
-			salida.writeUTF(respuesta);
-		
-		
+			while(corriendo) {
+				entrada = new DataInputStream(cliente.getInputStream());
+				salida= new DataOutputStream(cliente.getOutputStream());
+				String mensajeCliente= entrada.readUTF();
+				String accion =determinarAccion(mensajeCliente);
+				String respuesta=hacerAccion(accion,mensajeCliente);
+				//String respuesta=determinarMensajeRespuesta(accion);
+				salida.writeUTF(respuesta);
+				if(respuesta.equals("OK")) {
+					entrada.close();
+					salida.close();
+					corriendo=false;
+				}
+					
 			}
-		} catch (IOException e) {
-			
-			// TODO Auto-generated catch block
+		} catch (IOException e){
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		}
@@ -156,7 +155,7 @@ class HiloServidor extends Thread{
 			return "devolverSalas";
 		else if( mensajeAccion.equals("crearSala"))
 			return "crearSala";
-		return "d";
+		return "Salir";
 	}
 	public String hacerAccion(String accion,String mensajeCliente) {
 		//Gson gson= new Gson();
@@ -172,10 +171,11 @@ class HiloServidor extends Thread{
 			Sala sala=jugador.crearSala(40,2);
 			salasDisponibles.put(nombreSala,sala);
 			salasDisponiblesClientes.add(nombreSala);
-			respuesta=gson.toJson(sala);
+			respuesta=gson.toJson(nombreSala);
 		}
 		else {
-			respuesta= "nada por ahora";
+			jugadoresLobby.remove(jugador);
+			respuesta= "OK";
 		}
 		return respuesta;
 	}
