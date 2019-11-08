@@ -2,6 +2,7 @@ package clienteServidor;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class VentanaServidor extends JFrame{
 	static ServerSocket servidor;
@@ -19,12 +21,13 @@ public class VentanaServidor extends JFrame{
 	public VentanaServidor(ServerSocket servidor) {
 		this.servidor=servidor;
 		setVisible(true);
-		setLocation(10,20);
+		setLocation(10,100);
 		setSize(300, 300);
 		setTitle("Servidor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panelServidor=new PanelVentanaServidor();
 		add(panelServidor);
+		setLocationRelativeTo(null);
 	}
 	
 	public static void cerrarServidor() {
@@ -41,16 +44,14 @@ public class VentanaServidor extends JFrame{
 
 
 class PanelVentanaServidor extends JPanel {
-	private static final long serialVersionUID = 1L;
 	private JButton botonSalir;
-	private JTextArea texto;
-	private JScrollPane scroll = new JScrollPane(texto);
+	private JTextField texto;
+	JPanel panelSur = new JPanel(new GridLayout(1, 2));
 	
 	public PanelVentanaServidor() {
-		texto = new JTextArea("Servidor prendido");
+		texto = new JTextField("Servidor prendido");
+		texto.setEnabled(false);
 		botonSalir = new JButton("Apagar servidor");
-		add(scroll, BorderLayout.CENTER);
-		texto.setLineWrap(true);
 		botonSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VentanaServidor.cerrarServidor();
@@ -67,8 +68,8 @@ class PanelVentanaServidor extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		texto.setBounds(10, 10, 100, 20);
-		botonSalir.setBounds(10, 30, 80, 20);
+		texto.setBounds(10, 10, 170, 30);
+		botonSalir.setBounds(10, 150, 180, 20);
 	}
 	
 }
