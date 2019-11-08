@@ -6,14 +6,14 @@ import logica.*;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Inet4Address;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,6 +23,9 @@ public class MiServidor implements Runnable {
 	HashMap	<Jugador,HiloServidor> jugadoresLobby= new HashMap	<Jugador,HiloServidor>();
 	HashMap <String,Sala> salasDisponibles= new HashMap<String, Sala>();
 	List <String> salasDisponiblesClientes= new ArrayList<String>();
+	private static VentanaServidor ventana;
+	String respuesta;
+	
 	
 	public static void main(String[] args) throws Exception {
 		MiServidor log = new MiServidor();
@@ -37,14 +40,15 @@ public class MiServidor implements Runnable {
 	public void run() {
 		try {
 			ServerSocket servidor = new ServerSocket(9836);
-			while(true) {
+			ventana= new VentanaServidor(servidor);
+			do {
 				System.out.println("esperando cliente");
 				Socket cliente = servidor.accept();
 				
 				DataInputStream entrada = new DataInputStream(cliente.getInputStream());
 			
 				String jugador= entrada.readUTF();
-				System.out.println("LLEGO "+jugador);
+				
 				GsonBuilder builder = new GsonBuilder();
 				builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
 				Gson gson = builder.create();
@@ -55,9 +59,7 @@ public class MiServidor implements Runnable {
 			
 			/* Acá habría que plasmar la lógica y los métodos que se ejecutan en el main? */ 
 				Jugador jugadorCliente =gson.fromJson(jugador,Jugador.class);
-			
-			
-			
+				System.out.println("LLEGO EL CLIENTE "+jugadorCliente.getNombre());
 				DataOutputStream salida= new DataOutputStream(cliente.getOutputStream());
 				salida.writeUTF("MostrarLobby");
 				HiloServidor hiloCliente = new HiloServidor(cliente,jugadorCliente);
@@ -65,8 +67,8 @@ public class MiServidor implements Runnable {
 				// agrego al HashMap al jugador con su socket
 				jugadoresLobby.put(jugadorCliente, hiloCliente);
 				System.out.println("fin del while");
-			}
-			
+			}while(!servidor.isClosed());
+			desconectarTodos();
 		} catch (IOException e) {
 			
 			// TODO Auto-generated catch block
@@ -76,6 +78,9 @@ public class MiServidor implements Runnable {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	
+	
 	
 	
 public HashMap<Jugador, HiloServidor> getJugadoresLobby() {
@@ -116,9 +121,15 @@ class HiloServidor extends Thread{
 	DataOutputStream salida;
 	boolean corriendo=true; 
 	
+	
+	
 	public HiloServidor(Socket cliente,Jugador jugador) {
 		this.cliente=cliente;
 		this.jugador=jugador;
+	}
+	
+	public Socket getCliente() {
+		return cliente;
 	}
 	
 	@Override
@@ -157,6 +168,7 @@ class HiloServidor extends Thread{
 			return "crearSala";
 		return "Salir";
 	}
+	
 	public String hacerAccion(String accion,String mensajeCliente) {
 		//Gson gson= new Gson();
 		GsonBuilder builder = new GsonBuilder();
@@ -171,7 +183,7 @@ class HiloServidor extends Thread{
 			Sala sala=jugador.crearSala(40,2);
 			salasDisponibles.put(nombreSala,sala);
 			salasDisponiblesClientes.add(nombreSala);
-			respuesta=gson.toJson(nombreSala);
+			respuesta=gson.toJson(sala.getNombreSala()+" "+sala.getcantJugadores());
 		}
 		else {
 			jugadoresLobby.remove(jugador);
@@ -179,9 +191,28 @@ class HiloServidor extends Thread{
 		}
 		return respuesta;
 	}
+	
 	public String determinarMensajeRespuesta(String accion) {
 		return accion;
 	}
+
 }
+
+
+public void desconectarTodos() {
+	Set<Map.Entry<Jugador, HiloServidor>> set = jugadoresLobby.entrySet();
+	for (@SuppressWarnings("rawtypes")Entry entry : set) {
+		try {
+			HiloServidor h=(HiloServidor) entry.getValue();
+			h.getCliente().close();
+			jugadoresLobby.remove(entry.getKey());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
+
+
 }
 
