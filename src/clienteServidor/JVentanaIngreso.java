@@ -35,9 +35,10 @@ public class JVentanaIngreso extends JFrame {
 	private JButton botonIngreso;
 	private JTextField textFieldUsuario, nombrePersonaje;
 	Socket miSocket ;
+	static JVentanaIngreso ventana;
 
 	public static void main(String[] args) throws UnknownHostException, IOException {
-		JVentanaIngreso ventana = new JVentanaIngreso();
+		ventana = new JVentanaIngreso();
 		ventana.setVisible(true);
 	}
 
@@ -114,6 +115,7 @@ public class JVentanaIngreso extends JFrame {
 			String messajeJ=entrada.readUTF();
 			if(messajeJ.equals("MostrarLobby")) {
 				System.out.println("entro a la accion");
+				ventana.setVisible(false);
 				new VentanaLobby(miSocket);
 			}
 		} catch (UnknownHostException e) {
