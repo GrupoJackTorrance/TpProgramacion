@@ -184,6 +184,11 @@ class HiloServidor extends Thread{
 			salasDisponibles.put(nombreSala,sala);
 			salasDisponiblesClientes.add(nombreSala);
 			respuesta=gson.toJson(sala.getNombreSala()+" "+sala.getcantJugadores());
+		}else if(accion.equals("Unirse")) {
+			String nombreSala=(String) gson.fromJson(mensajeCliente,PaqueteMensaje.class).getObj();
+			Sala sala=salasDisponibles.get(nombreSala);
+			sala.addJugadorSala(jugador);
+			respuesta=gson.toJson(sala.getNombreSala());
 		}
 		else {
 			jugadoresLobby.remove(jugador);
