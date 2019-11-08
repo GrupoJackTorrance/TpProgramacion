@@ -28,22 +28,37 @@ import logica.AbstractAdapter;
 import logica.EfectoDarObjeto;
 import logica.Sala;
 
-public class VentanaLobby  extends JFrame{
+public class VentanaLobby extends JFrame{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8896812117446574226L;
 	private static Socket socketCliente;	
+	static PanelLobby panel= new PanelLobby();
 	
+	public PanelLobby getPanel() {
+		return panel;
+	}
+
+	public void setPanel(PanelLobby panel) {
+		this.panel = panel;
+	}
+
 	public static Socket getSocketCliente() {
 		return socketCliente;
 	}
 
+	public static void salir() {
+		VentanaLobby.panel.setVisible(false);
+		System.exit(0);
+	}
+	
+	
 	public static void setSocketCliente(Socket socketCliente) {
 		VentanaLobby.socketCliente = socketCliente;
 	}
 
-	PanelLobby panel= new PanelLobby();
+	
 	public static void main(String[] args) {
 		//VentanaLobby ventana= new VentanaLobby(socketCliente);
 	}
@@ -53,8 +68,10 @@ public class VentanaLobby  extends JFrame{
 		add(panel);
 		setSize(500,500);
 		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
+
 class PanelLobby extends JPanel {
 	/**
 	 * 
@@ -69,6 +86,8 @@ class PanelLobby extends JPanel {
 	private JTextField nombreSala,rondasMax, puntosObjetivos,cantJugadores;
 	private JLabel labelnombre,labelrondasMax, labelpuntosObjetivos, labelcantJugadores;
 	private JLabel salasDisp= new JLabel("Salas Disponibles");
+	
+	
 	
 	public PanelLobby() {
 		unirseSala=new JButton("Unirse a una sala");
@@ -139,6 +158,15 @@ public void paintComponent(Graphics g) {
 	salasDisp.setLocation(20,10);
 }
 
+public void cerrarConexion() {
+	try {
+		VentanaLobby.getSocketCliente().close();
+		VentanaLobby.salir();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+}
+
 public void mostrarSalasDisponibles() {
 	for (String salasDisp : salasDisponibles) {
 		opcionesSalas2.addElement(salasDisp);
@@ -181,6 +209,24 @@ class Botones implements ActionListener{
 		}
        else if (e.getSource()== salir) {
 			System.out.println("salir");
+			DataOutputStream flujoSalida;
+			try {
+				flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream()); 
+				PaqueteMensaje mensaje= new PaqueteMensaje("Salir",null);
+				Gson gson = new Gson();
+				flujoSalida.writeUTF(gson.toJson(mensaje));	
+				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
+				//String entrada=flujoEntrada.readUTF();
+				//if(entrada.equals("OK"))
+					cerrarConexion();
+				flujoEntrada.close();
+				flujoSalida.close();
+			}catch (IOException e2) {
+				// TODO Bloque catch generado automáticamente
+				e2.printStackTrace();
+			}
+			
+			
 		}
        else if ( e.getSource() == aceptarSala) {
     	   opcionesSalas.setVisible(false);
@@ -195,9 +241,8 @@ class Botones implements ActionListener{
 			Gson gson = new Gson();			
 			//String mensaje= gson.toJson(salasDisponibles.(nombreSala));
 			flujoSalida.writeUTF(nombreSala);
-			
+			flujoSalida.close();
 		} catch (IOException e2) {
-			// TODO Bloque catch generado automáticamente
 			e2.printStackTrace();
 		}
 		
@@ -205,16 +250,17 @@ class Botones implements ActionListener{
     	   	dejarDeMostrarFormulario();
     	   	try {
     	   	DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
-			PaqueteMensaje mensaje= new PaqueteMensaje("crearSala",nombreSala);
+    	   	PaqueteMensaje mensaje2= new PaqueteMensaje("crearSala",nombreSala.getText());
 			GsonBuilder builder = new GsonBuilder();
 			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
 			Gson gson = builder.create();
-			flujoSalida.writeUTF(gson.toJson(mensaje));
+			flujoSalida.writeUTF(gson.toJson(mensaje2));
 			DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 			String respuesta=flujoEntrada.readUTF();
 			//visibilizarSalaEspera(respuesta);
+			flujoEntrada.close();
+			flujoSalida.close();
     	   	} catch (IOException e1) {
-				// TODO Bloque catch generado automáticamente
 				e1.printStackTrace();
 			}
     	   
@@ -243,6 +289,7 @@ public void visualizarFormularioCrearSala() {
 	cantJugadores.setVisible(true);
 	aceptar.setVisible(true);
 }
+
 
 public void dejarDeMostrarFormulario() {
 	labelcantJugadores.setVisible(false);
@@ -276,5 +323,7 @@ public void visibilizarSalaEspera(String valoresActuales) {
 	//opcionesSalas.setVisible(true);
 	//opcionesSalas.addItem(String.valueOf(sala.getId()));
 }
+
+
 	
 }
