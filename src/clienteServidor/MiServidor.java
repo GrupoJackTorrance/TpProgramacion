@@ -22,6 +22,7 @@ public class MiServidor implements Runnable {
 	
 	HashMap< Jugador, Socket> jugadoresLobby= new HashMap<Jugador, Socket>();
 	HashMap <String,Sala> salasDisponibles= new HashMap<String, Sala>();
+	List <String> salasDisponiblesClientes= new ArrayList<String>();
 	public static void main(String[] args) throws Exception {
 		MiServidor log = new MiServidor();
 		
@@ -39,7 +40,7 @@ public class MiServidor implements Runnable {
 	@Override
 	public void run() {
 		try {
-			ServerSocket servidor = new ServerSocket(9936);
+			ServerSocket servidor = new ServerSocket(9836);
 			
 			while(true) {
 				System.out.println("esperando cliente");
@@ -120,6 +121,7 @@ class HiloServidor extends Thread{
 		this.cliente=cliente;
 		this.jugador=jugador;
 	}
+	
 	@Override
 	public void run() {
 		try {
@@ -163,12 +165,13 @@ class HiloServidor extends Thread{
 		Gson gson = builder.create();
 		String respuesta = null;
 		if(accion.equals("devolverSalas")) {
-			respuesta=gson.toJson(salasDisponibles);
+			respuesta=gson.toJson(salasDisponiblesClientes);
 		}
 		else if(accion.equals("crearSala")) {
 			String nombreSala=(String) gson.fromJson(mensajeCliente,PaqueteMensaje.class).getObj();
 			Sala sala=jugador.crearSala(40,2);
 			salasDisponibles.put(nombreSala,sala);
+			salasDisponiblesClientes.add(nombreSala);
 			respuesta=gson.toJson(sala);
 		}
 		else {
@@ -181,3 +184,4 @@ class HiloServidor extends Thread{
 	}
 }
 }
+

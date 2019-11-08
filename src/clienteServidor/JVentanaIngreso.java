@@ -43,7 +43,7 @@ public class JVentanaIngreso extends JFrame {
 
 	public JVentanaIngreso() {
 		try {
-			this.miSocket = new Socket("localhost", 9936); //"192.168.0.55"
+			this.miSocket = new Socket("localhost", 9836); //"192.168.0.55"
 		} catch (UnknownHostException e) {
 			// TODO Bloque catch generado automáticamente
 			System.out.println(e.getMessage());

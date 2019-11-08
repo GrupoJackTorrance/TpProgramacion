@@ -8,7 +8,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JButton;
@@ -60,7 +62,7 @@ class PanelLobby extends JPanel {
 	JButton unirseSala,crearSala,salir,aceptarSala;
 	JComboBox<String> opcionesSalas= new JComboBox<String>();
 	JLabel etiquetaSalaEspera= new JLabel("Se creo la sala");
-	HashMap <String,Sala> salasDisponibles= new HashMap<String,Sala>();
+	List<String>salasDisponibles= new ArrayList<String>();
 	public PanelLobby() {
 		unirseSala=new JButton("Unirse a una sala");
 		crearSala=new JButton("Crear sala");
@@ -88,9 +90,14 @@ public void paintComponent(Graphics g) {
 	
 }
 public void mostrarSalasDisponibles() {
-	for (Map.Entry<String,Sala> sala : salasDisponibles.entrySet()) {
-		opcionesSalas.addItem(sala.getValue().getNombreSala());
+	
+
+	for (String salasDisp : salasDisponibles) {
+		opcionesSalas.addItem(salasDisp);
+		
 	}
+		
+	
 	opcionesSalas.setLocation(200,200);
 	opcionesSalas.setVisible(true);
 	aceptarSala.setVisible(true);
@@ -111,7 +118,7 @@ class Botones implements ActionListener{
 				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 				String entrada=flujoEntrada.readUTF();
 				
-				salasDisponibles=gson.fromJson(entrada,HashMap.class);				
+				salasDisponibles=gson.fromJson(entrada,ArrayList.class);				
 				mostrarSalasDisponibles();
 				flujoSalida.close();
 				flujoEntrada.close();
@@ -132,7 +139,8 @@ class Botones implements ActionListener{
 				flujoSalida.writeUTF(gson.toJson(mensaje));
 				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 				String respuesta=flujoEntrada.readUTF();
-				visibilizarSalaEspera(respuesta);
+				
+				//visibilizarSalaEspera(respuesta);
 			} catch (IOException e1) {
 				// TODO Bloque catch generado automáticamente
 				e1.printStackTrace();
@@ -145,14 +153,16 @@ class Botones implements ActionListener{
        else if ( e.getSource() == aceptarSala) {
     	   opcionesSalas.setVisible(false);
     	   aceptarSala.setVisible(false);
+    	   
     	   String nombreSala= (String) opcionesSalas.getSelectedItem(); // es la opcion seleccionada en el momento que se apreto "aceptar"
     	   DataOutputStream flujoSalida;
+    	   
 		try {
 			flujoSalida = new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
 			// envio la sala seleccionada al servidor
 			Gson gson = new Gson();			
-			String mensaje= gson.toJson(salasDisponibles.get(nombreSala));
-			flujoSalida.writeUTF(mensaje);
+			//String mensaje= gson.toJson(salasDisponibles.(nombreSala));
+			flujoSalida.writeUTF(nombreSala);
 			
 		} catch (IOException e2) {
 			// TODO Bloque catch generado automáticamente
@@ -172,7 +182,6 @@ public void visibilizarSalaEspera(String valoresActuales) {
 	Sala sala= gson.fromJson(valoresActuales, Sala.class);
 	opcionesSalas.setVisible(true);
 	opcionesSalas.addItem(String.valueOf(sala.getId()));
-	
 }
 	
 }
