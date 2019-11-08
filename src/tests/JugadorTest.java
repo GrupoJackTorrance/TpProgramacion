@@ -1,4 +1,5 @@
 package tests;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -12,7 +13,7 @@ import logica.Sala;
 public class JugadorTest {
 	Jugador jugador;
 	Jugador jugador2;
-	List <Jugador> listaJugadores;
+	List<Jugador> listaJugadores = new LinkedList<Jugador>();
 	@Before //sirve para que antes de hacer cada test se empiece desde el escenario elegido
 	public void inicialize() {
 		jugador = new Jugador("pepe","pepe");

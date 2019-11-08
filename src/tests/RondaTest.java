@@ -29,26 +29,28 @@ public class RondaTest {
 		jugador1 = new Jugador("Perro","pepe3");
 		jugador2 = new Jugador("Mono","pepe4");
 		jugador3 = new Jugador("Rana","pepe2");
-		//jugador4 = new Jugador("Orca", "pepe1");
 		jugadores.add(jugador1);
 		jugadores.add(jugador2);
 		jugadores.add(jugador3);
-		//jugadores.add(jugador4);
 		tablero = new TableroNormal(jugadores);
 		ronda = new Ronda(3);
 	}
 	
 	@Test
 	public void verificarInicioRondaTest() throws Exception{
-		// Verificar que se pueda iniciar la ronda
-		assertEquals(false, ronda.InicioRonda(jugadores, tablero, puntosObjetivo));
+		
+		//Verificar que se pueda iniciar la ronda
+		//assertEquals(false, ronda.InicioRonda(jugadores, tablero, puntosObjetivo));
+		
 		// Verificar que termine la ronda cuando el turno sea mayor a la cantidad de
 		// jugadores
+		assertEquals(false, ronda.terminaRonda(3));
+		ronda.setTurno(4);
 		assertEquals(true, ronda.terminaRonda(3));
-		// Verificar que se termine la ronda cuando se llega a los puntos del objetivo
-		assertEquals(false, ronda.GanadorporObjetivo(3, 3, jugadores));
-		jugadores.get(0).setPuntos(5);
+		
 		//Compruebo que un jugador llego a los puntos para ganar la partida
+		assertEquals(false, ronda.GanadorporObjetivo(3, 3, jugadores));
+		jugadores.get(0).setPuntos(10);
 		assertEquals(true, ronda.GanadorporObjetivo(3, 3, jugadores));
 	}
 

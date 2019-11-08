@@ -50,4 +50,28 @@ public class Ronda {
 		
 	}
 
+	public int getTurno() {
+		return turno;
+	}
+
+	public void setTurno(int turno) {
+		this.turno = turno;
+	}
+
+	public int getCantTurnos() {
+		return cantTurnos;
+	}
+
+	public void setCantTurnos(int cantTurnos) {
+		this.cantTurnos = cantTurnos;
+	}
+
+	public int getContadorTurnos() {
+		return contadorTurnos;
+	}
+
+	public void setContadorTurnos(int contadorTurnos) {
+		this.contadorTurnos = contadorTurnos;
+	}
+
 }

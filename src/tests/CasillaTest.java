@@ -61,7 +61,6 @@ public class CasillaTest {
 		casilla.aplicarEfecto(jugador);
 		// veo que no se aplique efecto , ya que la casilla es sin efecto
 		Assert.assertEquals(20, jugador.getPuntos());
-		Assert.assertEquals(0, jugador.getObjEfectos());
 	}
 	
 
