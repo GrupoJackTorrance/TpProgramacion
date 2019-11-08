@@ -77,7 +77,7 @@ class PanelLobby extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 2763110189112444391L;
-	JButton unirseSala,crearSala,salir,aceptarSala,aceptar;
+	JButton unirseSala,crearSala,salir,aceptarSala,aceptar,iniciarPartida;
 	JList<String> opcionesSalas= new JList<String>();
 	JLabel etiquetaSalaEspera= new JLabel("Se creo la sala");
 	DefaultListModel<String> opcionesSalas2 = new DefaultListModel<String>();
@@ -87,9 +87,8 @@ class PanelLobby extends JPanel {
 	private JLabel labelnombre,labelrondasMax, labelpuntosObjetivos, labelcantJugadores;
 	private JLabel salasDisp= new JLabel("Salas Disponibles");
 	
-	
-	
 	public PanelLobby() {
+		iniciarPartida=new JButton("Iniciar Partida");
 		unirseSala=new JButton("Unirse a una sala");
 		crearSala=new JButton("Crear sala");
 		salir=new JButton("Salir");
@@ -106,6 +105,7 @@ class PanelLobby extends JPanel {
 		aceptarSala.setVisible(false);
 		aceptar.setVisible(false);
 		scrollLista.setVisible(false);
+		iniciarPartida.setVisible(false);
 		//componentes del formulario de crear sala
 		labelnombre= new JLabel("");
 		labelcantJugadores= new JLabel("");
@@ -138,6 +138,7 @@ class PanelLobby extends JPanel {
 		add(unirseSala);
 		add(crearSala);
 		add(salir);
+		add(iniciarPartida);
 		
 	}
 public void paintComponent(Graphics g) {
@@ -156,6 +157,7 @@ public void paintComponent(Graphics g) {
 	scrollLista.setBounds(20,50,300, 300);
 	scrollLista.setViewportView(opcionesSalas);
 	salasDisp.setLocation(20,10);
+	iniciarPartida.setBounds(20,50,200, 20);
 }
 
 public void cerrarConexion() {
@@ -234,11 +236,15 @@ class Botones implements ActionListener{
     	   int index= opcionesSalas.getSelectedIndex();
     	   String nombreSala= (String) opcionesSalas.getSelectedValue(); // es la opcion seleccionada en el momento que se apreto "aceptar"
     	   DataOutputStream flujoSalida;
+    	   visibilizarSalaEspera(nombreSala);
     	   
 		try {
 			flujoSalida = new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
 			// envio la sala seleccionada al servidor
-			Gson gson = new Gson();			
+			Gson gson = new Gson();
+			DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
+			String respuesta=flujoEntrada.readUTF();
+			
 			//String mensaje= gson.toJson(salasDisponibles.(nombreSala));
 			flujoSalida.writeUTF(nombreSala);
 			flujoSalida.close();
@@ -257,9 +263,10 @@ class Botones implements ActionListener{
 			flujoSalida.writeUTF(gson.toJson(mensaje2));
 			DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 			String respuesta=flujoEntrada.readUTF();
-			//visibilizarSalaEspera(respuesta);
+			visibilizarSalaEspera(respuesta);
 			flujoEntrada.close();
 			flujoSalida.close();
+			visibilizarSalaEspera(respuesta);
     	   	} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -314,14 +321,20 @@ public void visualizarUnirseASala() {
 	aceptarSala.setVisible(true);
 }
 
-public void visibilizarSalaEspera(String valoresActuales) {
-	GsonBuilder builder = new GsonBuilder();
-	builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
-	Gson gson = builder.create();
-	etiquetaSalaEspera.setVisible(true);
-	Sala sala= gson.fromJson(valoresActuales, Sala.class);
-	//opcionesSalas.setVisible(true);
-	//opcionesSalas.addItem(String.valueOf(sala.getId()));
+public void visibilizarSalaEspera(String sala) {
+	labelcantJugadores.setVisible(false);
+	labelpuntosObjetivos.setVisible(false);
+	labelrondasMax.setVisible(false);
+	labelnombre.setVisible(false);
+	nombreSala.setVisible(false);
+	rondasMax.setVisible(false);
+	puntosObjetivos.setVisible(false);
+	cantJugadores.setVisible(false);
+	aceptar.setVisible(false);
+	unirseSala.setVisible(false);
+	crearSala.setVisible(false);
+	salir.setVisible(false);
+	iniciarPartida.setVisible(true);
 }
 
 
