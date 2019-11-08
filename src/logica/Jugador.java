@@ -173,8 +173,9 @@ public class Jugador implements Comparable<Jugador> {
 		//this.update();
 	}
 
-	public Sala crearSala(int puntosObjetivo, int maxPartidas) {
-		Sala sala = new Sala(this, puntosObjetivo, maxPartidas);
+	public Sala crearSala(String nombre, int cantJugadores, int puntosObjetivo, int maxPartidas) {
+		Sala sala = new Sala(this, puntosObjetivo, maxPartidas, nombre, cantJugadores);
+		//return new Sala(this, puntosObjetivo, maxPartidas);
 		return sala;
 	}
 

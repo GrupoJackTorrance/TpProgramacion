@@ -178,10 +178,14 @@ class HiloServidor extends Thread{
 		String respuesta = null;
 		if(accion.equals("devolverSalas")) {
 			respuesta=gson.toJson(salasDisponiblesClientes);
+			//Sala[] desechable = gson.fromJson(respuesta, Sala[].class);
+//			int indice = (salasDisponiblesClientes.get(0).indexOf(","))-1;
+//			respuesta = salasDisponiblesClientes.get(0).substring(15,indice);
 		}
 		else if(accion.equals("crearSala")) {
 			String nombreSala=(String) gson.fromJson(mensajeCliente,PaqueteMensaje.class).getObj();
-			Sala sala=jugador.crearSala(40,2);
+			Sala s = gson.fromJson(nombreSala, Sala.class);
+			Sala sala=jugador.crearSala(s.getNombreSala(), s.getcantJugadores(),s.getPuntosObj(),s.getmaxPartidas());
 			salasDisponibles.put(nombreSala,sala);
 			salasDisponiblesClientes.add(nombreSala);
 			respuesta=gson.toJson(sala.getNombreSala()+" "+sala.getcantJugadores());

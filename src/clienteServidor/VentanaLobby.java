@@ -176,7 +176,7 @@ public void cerrarConexion() {
 
 public void mostrarSalasDisponibles() {
 	for (String salasDisp : salasDisponibles) {
-		opcionesSalas2.addElement(salasDisp);
+		opcionesSalas2.addElement(salasDisp.substring(15, salasDisp.indexOf(",")-1));
 	}
 	opcionesSalas.setModel(opcionesSalas2);
 	opcionesSalas.setLocation(200,200);
@@ -200,7 +200,7 @@ class Botones implements ActionListener{
 				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 				String entrada=flujoEntrada.readUTF();
 				
-				salasDisponibles=gson.fromJson(entrada,ArrayList.class);				
+				salasDisponibles=gson.fromJson(entrada,ArrayList.class);	
 				visualizarUnirseASala();
 				flujoSalida.close();
 				flujoEntrada.close();
@@ -260,7 +260,9 @@ class Botones implements ActionListener{
     	   	dejarDeMostrarFormulario();
     	   	try {
     	   	DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
-    	   	PaqueteMensaje mensaje2= new PaqueteMensaje("crearSala",nombreSala.getText());
+    	   	String jsonSala = "{'nombreSala':'"+nombreSala.getText()+"','cantJugadores':"+cantJugadores.getText()+",'maxPartidas':"+rondasMax.getText()+",'puntosObjetivo':"+puntosObjetivos.getText()+"}";
+    	   	PaqueteMensaje mensaje2= new PaqueteMensaje("crearSala",jsonSala);//nombreSala.getText());
+//    	   	PaqueteMensaje mensaje2= new PaqueteMensaje("crearSala",nombreSala.getText());
 			GsonBuilder builder = new GsonBuilder();
 			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
 			Gson gson = builder.create();
@@ -325,6 +327,7 @@ public void visualizarUnirseASala() {
 }
 
 public void visibilizarSalaEspera(String sala, String quien) {
+	System.out.println("Entro a la sala de espera");
 	labelcantJugadores.setVisible(false);
 	labelpuntosObjetivos.setVisible(false);
 	labelrondasMax.setVisible(false);
