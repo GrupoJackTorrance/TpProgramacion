@@ -177,22 +177,7 @@ class Botones implements ActionListener{
 			}
 		}
 		else if (e.getSource()== crearSala) {
-			try {
 				visualizarFormularioCrearSala();
-				DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
-				PaqueteMensaje mensaje= new PaqueteMensaje("crearSala", "nombreSala");
-				GsonBuilder builder = new GsonBuilder();
-				builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
-				Gson gson = builder.create();
-				flujoSalida.writeUTF(gson.toJson(mensaje));
-				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
-				String respuesta=flujoEntrada.readUTF();
-				//visibilizarSalaEspera(respuesta);
-			} catch (IOException e1) {
-				// TODO Bloque catch generado automáticamente
-				e1.printStackTrace();
-			}
-			
 		}
        else if (e.getSource()== salir) {
 			System.out.println("salir");
@@ -217,7 +202,21 @@ class Botones implements ActionListener{
 		}
 		
        }else if ( e.getSource() == aceptar) {
-    	   
+    	   	dejarDeMostrarFormulario();
+    	   	try {
+    	   	DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
+			PaqueteMensaje mensaje= new PaqueteMensaje("crearSala",nombreSala);
+			GsonBuilder builder = new GsonBuilder();
+			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+			Gson gson = builder.create();
+			flujoSalida.writeUTF(gson.toJson(mensaje));
+			DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
+			String respuesta=flujoEntrada.readUTF();
+			//visibilizarSalaEspera(respuesta);
+    	   	} catch (IOException e1) {
+				// TODO Bloque catch generado automáticamente
+				e1.printStackTrace();
+			}
     	   
        }
 		
@@ -243,6 +242,18 @@ public void visualizarFormularioCrearSala() {
 	puntosObjetivos.setVisible(true);
 	cantJugadores.setVisible(true);
 	aceptar.setVisible(true);
+}
+
+public void dejarDeMostrarFormulario() {
+	labelcantJugadores.setVisible(false);
+	labelpuntosObjetivos.setVisible(false);
+	labelrondasMax.setVisible(false);
+	labelnombre.setVisible(false);
+	nombreSala.setVisible(false);
+	rondasMax.setVisible(false);
+	puntosObjetivos.setVisible(false);
+	cantJugadores.setVisible(false);
+	aceptar.setVisible(false);
 }
 
 public void visualizarUnirseASala() {
