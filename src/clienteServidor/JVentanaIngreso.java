@@ -40,6 +40,7 @@ public class JVentanaIngreso extends JFrame {
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		ventana = new JVentanaIngreso();
 		ventana.setVisible(true);
+		ventana.setTitle("Ventana ingreso");
 	}
 
 	public JVentanaIngreso() {

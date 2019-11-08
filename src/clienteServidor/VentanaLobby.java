@@ -65,6 +65,7 @@ public class VentanaLobby extends JFrame{
 
 	public VentanaLobby(Socket socketCliente) {
 		this.socketCliente= socketCliente;
+		this.setTitle("Ventana Lobby");
 		add(panel);
 		setSize(500,500);
 		setVisible(true);

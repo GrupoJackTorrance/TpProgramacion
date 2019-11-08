@@ -44,6 +44,7 @@ public class MiServidor implements Runnable {
 			do {
 				System.out.println("esperando cliente");
 				Socket cliente = servidor.accept();
+				System.out.println("fallo?");
 				
 				DataInputStream entrada = new DataInputStream(cliente.getInputStream());
 			
