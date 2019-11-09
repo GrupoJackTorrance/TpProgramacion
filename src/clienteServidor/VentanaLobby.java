@@ -11,8 +11,15 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.*;
+import javax.swing.JTextField;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -58,7 +65,6 @@ public class VentanaLobby extends JFrame{
 
 	public VentanaLobby(Socket socketCliente) {
 		this.socketCliente= socketCliente;
-		this.setTitle("Ventana Lobby");
 		add(panel);
 		setSize(500,500);
 		setVisible(true);
@@ -71,7 +77,7 @@ class PanelLobby extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 2763110189112444391L;
-	JButton unirseSala,crearSala,salir,aceptarSala,aceptar,iniciarPartida;
+	JButton unirseSala,crearSala,salir,aceptarSala,aceptar,iniciarPartida,salirEspera;
 	JList<String> opcionesSalas= new JList<String>();
 	JLabel etiquetaSalaEspera= new JLabel("Se creo la sala");
 	DefaultListModel<String> opcionesSalas2 = new DefaultListModel<String>();
@@ -88,6 +94,7 @@ class PanelLobby extends JPanel {
 		salir=new JButton("Salir");
 		aceptarSala=new JButton("Aceptar Sala");
 		aceptar= new JButton("Aceptar");
+		salirEspera = new JButton("Salir");
 		Botones botones = new Botones();
 		etiquetaSalaEspera.setVisible(false);
 		add(etiquetaSalaEspera);
@@ -95,6 +102,7 @@ class PanelLobby extends JPanel {
 		unirseSala.addActionListener(botones);
 		crearSala.addActionListener(botones);
 		salir.addActionListener(botones);
+		aceptarSala.addActionListener(botones);
 		tinfoPartida= new JTextField();
 		tinfoPartida.setVisible(false);
 		opcionesSalas.setVisible(false);
@@ -102,6 +110,7 @@ class PanelLobby extends JPanel {
 		aceptar.setVisible(false);
 		scrollLista.setVisible(false);
 		iniciarPartida.setVisible(false);
+		salirEspera.setVisible(false);
 		//componentes del formulario de crear sala
 		labelnombre= new JLabel("");
 		labelcantJugadores= new JLabel("");
@@ -136,6 +145,7 @@ class PanelLobby extends JPanel {
 		add(crearSala);
 		add(salir);
 		add(iniciarPartida);
+		add(salirEspera);
 		
 	}
 public void paintComponent(Graphics g) {
@@ -154,8 +164,9 @@ public void paintComponent(Graphics g) {
 	scrollLista.setBounds(20,50,300, 300);
 	scrollLista.setViewportView(opcionesSalas);
 	salasDisp.setLocation(20,10);
-	iniciarPartida.setBounds(20,50,200, 20);
+	iniciarPartida.setBounds(250,400,200, 20);
 	tinfoPartida.setBounds(20,50,200, 100);
+	salirEspera.setBounds(100, 400, 100, 20);
 }
 
 public void cerrarConexion() {
@@ -188,25 +199,20 @@ class Botones implements ActionListener{
 				DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
 				PaqueteMensaje mensaje= new PaqueteMensaje("mostrarSalas",null);
 				Gson gson = new Gson();				
-				flujoSalida.writeUTF(gson.toJson(mensaje));				
+				flujoSalida.writeUTF(gson.toJson(mensaje));
 				// recibir Salas
 				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 				String entrada=flujoEntrada.readUTF();
 				
 				salasDisponibles=gson.fromJson(entrada,ArrayList.class);	
 				visualizarUnirseASala();
-				flujoSalida.close();
-				flujoEntrada.close();
+//				flujoSalida.close();
+//				flujoEntrada.close();
 				 
 				// cuando se apreta el boton " aceptar" se envia la opcione elegida		
 			} catch (IOException e1) {
 				// TODO Bloque catch generado automáticamente
-				JOptionPane.showMessageDialog(VentanaLobby.panel,
-						"No encontro el servidor.",
-						 "Error",
-						 JOptionPane.ERROR_MESSAGE);
-				
-				VentanaLobby.salir();
+				e1.printStackTrace();
 			}
 		}
 		else if (e.getSource()== crearSala) {
@@ -228,40 +234,40 @@ class Botones implements ActionListener{
 				flujoSalida.close();
 			}catch (IOException e2) {
 				// TODO Bloque catch generado automáticamente
-				JOptionPane.showMessageDialog(VentanaLobby.panel,
-						"No encontro el servidor.",
-						 "Error",
-						 JOptionPane.ERROR_MESSAGE);
-				
-				VentanaLobby.salir();
+				e2.printStackTrace();
 			}
 			
 			
 		}
        else if ( e.getSource() == aceptarSala) {
+    	   System.out.println("Se verifica que se puede ingresar a la sala seleccionada luego de presionar aceptar.");
     	   opcionesSalas.setVisible(false);
     	   aceptarSala.setVisible(false);
+    	   
     	   int index= opcionesSalas.getSelectedIndex();
     	   String nombreSala= (String) opcionesSalas.getSelectedValue(); // es la opcion seleccionada en el momento que se apreto "aceptar"
-    	   DataOutputStream flujoSalida;
+    	   //DataOutputStream flujoSalida;
+    	   
+    	   /*
+    	    flujoSalida.writeUTF(gson.toJson(mensaje2));
+			DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
+			String respuesta=flujoEntrada.readUTF();
+    	    */
+    	   
 		try {
-			flujoSalida = new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
+			DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
 			// envio la sala seleccionada al servidor
+			PaqueteMensaje mensaje= new PaqueteMensaje("Unirse", nombreSala);
+			System.out.println("Sala seleccionada: " + salasDisponibles.get(index));
 			Gson gson = new Gson();
 			DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 			
 			//String mensaje= gson.toJson(salasDisponibles.(nombreSala));
-			flujoSalida.writeUTF(nombreSala);
+			flujoSalida.writeUTF(gson.toJson(mensaje));
 			visibilizarSalaEspera(nombreSala,"unirse");
 			flujoSalida.close();
-			 
 		} catch (IOException e2) {
-			JOptionPane.showMessageDialog(VentanaLobby.panel,
-					"No encontro el servidor.",
-					 "Error",
-					 JOptionPane.ERROR_MESSAGE);
-			
-			VentanaLobby.salir();
+			e2.printStackTrace();
 		}
 		
        }else if ( e.getSource() == aceptar) {
@@ -281,15 +287,27 @@ class Botones implements ActionListener{
 			flujoSalida.close();
 			visibilizarSalaEspera(respuesta,"creadorSala");
     	   	} catch (IOException e1) {
-    	   		JOptionPane.showMessageDialog(VentanaLobby.panel,
-						"No encontro el servidor.",
-						 "Error",
-						 JOptionPane.ERROR_MESSAGE);
-				
-				VentanaLobby.salir();
+				e1.printStackTrace();
 			}
     	   
        }
+       else if (e.getSource()== salirEspera) {
+			System.out.println("Sale de la espera (se canso de esperar a q inicien la partida)");
+			DataOutputStream flujoSalida;
+			try {
+				flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream()); 
+				PaqueteMensaje mensaje= new PaqueteMensaje("sacarJugadorSala",nombreSala);
+				Gson gson = new Gson();
+				flujoSalida.writeUTF(gson.toJson(mensaje));	
+				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
+				//salirEspera
+			}catch (IOException e2) {
+				// TODO Bloque catch generado automáticamente
+				e2.printStackTrace();
+			}
+			
+			
+		}
 		
 	}
 	
@@ -353,13 +371,21 @@ public void visibilizarSalaEspera(String sala, String quien) {
 	unirseSala.setVisible(false);
 	crearSala.setVisible(false);
 	salir.setVisible(false);
+	salirEspera.setVisible(true);
 	tinfoPartida.setEditable(false);
 	tinfoPartida.setText(sala);
 	tinfoPartida.setVisible(true);
-	if(quien.equals("creadorSala"))
+	scrollLista.setVisible(false);
+	salasDisp.setVisible(false);
+	salasDisp.setText("Jugadores");
+	salasDisp.setVisible(true);
+	if(quien.equals("creadorSala")) 
 		iniciarPartida.setVisible(true);
 	else
 		System.out.println("tienes que esperar a que se inicie la partida");
+	
+	
+	
 	
 }
 

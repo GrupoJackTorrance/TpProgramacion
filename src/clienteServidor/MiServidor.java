@@ -44,7 +44,6 @@ public class MiServidor implements Runnable {
 			do {
 				System.out.println("esperando cliente");
 				Socket cliente = servidor.accept();
-				System.out.println("fallo?");
 				
 				DataInputStream entrada = new DataInputStream(cliente.getInputStream());
 			
@@ -167,6 +166,10 @@ class HiloServidor extends Thread{
 			return "devolverSalas";
 		else if( mensajeAccion.equals("crearSala"))
 			return "crearSala";
+		else if( mensajeAccion.equals("Unirse"))
+			return "Unirse";
+		else if( mensajeAccion.equals("sacarJugadorSala"))
+			return "sacarJugadorSala";
 		return "Salir";
 	}
 	
@@ -193,6 +196,12 @@ class HiloServidor extends Thread{
 			String nombreSala=(String) gson.fromJson(mensajeCliente,PaqueteMensaje.class).getObj();
 			Sala sala=salasDisponibles.get(nombreSala);
 			sala.addJugadorSala(jugador);
+			respuesta=gson.toJson(sala.getNombreSala());
+		}
+		else if(accion.equals("sacarJugadorSala")) {
+			String nombreSala=(String) gson.fromJson(mensajeCliente,PaqueteMensaje.class).getObj();
+			Sala sala=salasDisponibles.get(nombreSala);
+			sala.sacarJugadorSala(jugador);
 			respuesta=gson.toJson(sala.getNombreSala());
 		}
 		else {
@@ -225,4 +234,3 @@ public void desconectarTodos() {
 
 
 }
-
