@@ -5,6 +5,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -24,9 +27,13 @@ import javax.swing.JTextField;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import grafica.JVentanaTablero;
+import grafica.VentanaTablero;
 import logica.AbstractAdapter;
+import logica.Casilla;
 import logica.EfectoDarObjeto;
 import logica.Sala;
+import logica.Tablero;
 
 public class VentanaLobby extends JFrame{
 	/**
@@ -86,6 +93,10 @@ class PanelLobby extends JPanel {
 	private JTextField nombreSala,rondasMax, puntosObjetivos,cantJugadores,tinfoPartida;
 	private JLabel labelnombre,labelrondasMax, labelpuntosObjetivos, labelcantJugadores;
 	private JLabel salasDisp= new JLabel("Salas Disponibles");
+	private JLabel tcrearSala= new JLabel("Crear Sala");
+	private JLabel MensajeSalaEspera= new JLabel("Espere a que se Inicie la partida");
+	WindowListener exitListener;
+	static JVentanaTablero ventana;
 	
 	public PanelLobby() {
 		iniciarPartida=new JButton("Iniciar Partida");
@@ -98,11 +109,13 @@ class PanelLobby extends JPanel {
 		Botones botones = new Botones();
 		etiquetaSalaEspera.setVisible(false);
 		add(etiquetaSalaEspera);
+		iniciarPartida.addActionListener(botones);
+		salirEspera.addActionListener(botones);
+		aceptarSala.addActionListener(botones);
 		aceptar.addActionListener(botones);
 		unirseSala.addActionListener(botones);
 		crearSala.addActionListener(botones);
 		salir.addActionListener(botones);
-		aceptarSala.addActionListener(botones);
 		tinfoPartida= new JTextField();
 		tinfoPartida.setVisible(false);
 		opcionesSalas.setVisible(false);
@@ -138,6 +151,10 @@ class PanelLobby extends JPanel {
 		add(opcionesSalas);
 		salasDisp.setVisible(false);
 		add(salasDisp);
+		tcrearSala.setVisible(false);
+		add(tcrearSala);
+		MensajeSalaEspera.setVisible(false);
+		add(MensajeSalaEspera);
 		//Botones
 		add(aceptar);
 		add(aceptarSala);
@@ -164,9 +181,14 @@ public void paintComponent(Graphics g) {
 	scrollLista.setBounds(20,50,300, 300);
 	scrollLista.setViewportView(opcionesSalas);
 	salasDisp.setLocation(20,10);
+	tcrearSala.setLocation(20,10);
 	iniciarPartida.setBounds(250,400,200, 20);
+	MensajeSalaEspera.setBounds(100,250,200, 20);
 	tinfoPartida.setBounds(20,50,200, 100);
 	salirEspera.setBounds(100, 400, 100, 20);
+	unirseSala.setLocation(10, 10);
+	crearSala.setLocation(200, 10);
+	salir.setLocation(300, 10);
 }
 
 public void cerrarConexion() {
@@ -193,6 +215,26 @@ class Botones implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()== iniciarPartida) {
+			try {
+				//comunicarse con el servidor para iniciar partida
+				DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
+				PaqueteMensaje mensaje= new PaqueteMensaje("iniciar partida",nombreSala.getText());
+				Gson gson = new Gson();				
+				flujoSalida.writeUTF(gson.toJson(mensaje));
+				// recibe algo para iniciar la partida a nivel grafico
+				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
+				String entrada=flujoEntrada.readUTF();
+				if(entrada.equals("MostrarPartida")) {
+					System.out.println("entro a la verdadera accion");
+					ventana.setVisible(false);
+				}
+				
+			} catch (IOException e1) {
+				// TODO Bloque catch generado automáticamente
+				e1.printStackTrace();
+			}
+		}
 		if(e.getSource()== unirseSala) {
 			try {
 				//comunicarse con el servidor para pedirle la lista de Salas
@@ -206,8 +248,6 @@ class Botones implements ActionListener{
 				
 				salasDisponibles=gson.fromJson(entrada,ArrayList.class);	
 				visualizarUnirseASala();
-//				flujoSalida.close();
-//				flujoEntrada.close();
 				 
 				// cuando se apreta el boton " aceptar" se envia la opcione elegida		
 			} catch (IOException e1) {
@@ -230,8 +270,6 @@ class Botones implements ActionListener{
 				//String entrada=flujoEntrada.readUTF();
 				//if(entrada.equals("OK"))
 					cerrarConexion();
-				flujoEntrada.close();
-				flujoSalida.close();
 			}catch (IOException e2) {
 				// TODO Bloque catch generado automáticamente
 				e2.printStackTrace();
@@ -261,11 +299,9 @@ class Botones implements ActionListener{
 			System.out.println("Sala seleccionada: " + salasDisponibles.get(index));
 			Gson gson = new Gson();
 			DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
-			
 			//String mensaje= gson.toJson(salasDisponibles.(nombreSala));
 			flujoSalida.writeUTF(gson.toJson(mensaje));
 			visibilizarSalaEspera(nombreSala,"unirse");
-			flujoSalida.close();
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
@@ -283,8 +319,6 @@ class Botones implements ActionListener{
 			flujoSalida.writeUTF(gson.toJson(mensaje2));
 			DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 			String respuesta=flujoEntrada.readUTF();
-			flujoEntrada.close();
-			flujoSalida.close();
 			visibilizarSalaEspera(respuesta,"creadorSala");
     	   	} catch (IOException e1) {
 				e1.printStackTrace();
@@ -296,11 +330,10 @@ class Botones implements ActionListener{
 			DataOutputStream flujoSalida;
 			try {
 				flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream()); 
-				PaqueteMensaje mensaje= new PaqueteMensaje("sacarJugadorSala",nombreSala);
+				PaqueteMensaje mensaje= new PaqueteMensaje("sacarJugadorSala",nombreSala.getText());
 				Gson gson = new Gson();
 				flujoSalida.writeUTF(gson.toJson(mensaje));	
-				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
-				//salirEspera
+				visualizarLobby();
 			}catch (IOException e2) {
 				// TODO Bloque catch generado automáticamente
 				e2.printStackTrace();
@@ -321,7 +354,8 @@ public void visualizarFormularioCrearSala() {
 	labelcantJugadores.setText("Cant Jugadores:");
 	labelpuntosObjetivos.setText("Puntos Obj: ");
 	labelrondasMax.setText("Cant Rondas: ");
-	
+	tcrearSala.setFont(new Font("Tahoma", Font.BOLD, 15));
+	tcrearSala.setVisible(true);
 	labelcantJugadores.setVisible(true);
 	labelpuntosObjetivos.setVisible(true);
 	labelrondasMax.setVisible(true);
@@ -359,6 +393,7 @@ public void visualizarUnirseASala() {
 
 public void visibilizarSalaEspera(String sala, String quien) {
 	System.out.println("Entro a la sala de espera");
+	tcrearSala.setVisible(false);
 	labelcantJugadores.setVisible(false);
 	labelpuntosObjetivos.setVisible(false);
 	labelrondasMax.setVisible(false);
@@ -382,13 +417,34 @@ public void visibilizarSalaEspera(String sala, String quien) {
 	if(quien.equals("creadorSala")) 
 		iniciarPartida.setVisible(true);
 	else
-		System.out.println("tienes que esperar a que se inicie la partida");
-	
-	
-	
-	
+		MensajeSalaEspera.setVisible(true);
 }
 
+public void visualizarLobby() {
+	tcrearSala.setVisible(false);
+	labelcantJugadores.setVisible(false);
+	labelpuntosObjetivos.setVisible(false);
+	labelrondasMax.setVisible(false);
+	labelnombre.setVisible(false);
+	nombreSala.setVisible(false);
+	rondasMax.setVisible(false);
+	puntosObjetivos.setVisible(false);
+	cantJugadores.setVisible(false);
+	aceptar.setVisible(false);
+	unirseSala.setVisible(false);
+	crearSala.setVisible(false);
+	salir.setVisible(false);
+	salirEspera.setVisible(false);
+	tinfoPartida.setVisible(false);
+	scrollLista.setVisible(false);
+	salasDisp.setVisible(false);
+	iniciarPartida.setVisible(false);
+	MensajeSalaEspera.setVisible(false);
+	unirseSala.setVisible(true);
+	crearSala.setVisible(true);
+	salir.setVisible(true);
+	repaint();
+}
 
 	
 }
