@@ -31,21 +31,10 @@ public class TurnoTest {
 		listaJugadores.add(new Jugador("Mono","pepe4"));
 		listaJugadores.add(new Jugador("Rana","pepe2"));
 		listaJugadores.add(new Jugador("Orca","pepe1"));
-		tablero = new TableroNormal(listaJugadores);
 	}
 	
 	@Test
 	public void comprobarTurnoTest() throws Exception{
-		//Verificar que le devuelva el turno siguiente que le paso
-		//Se verifican las opciones cuando es con objeto o no
-		assertEquals(2, turno.turno(1, listaJugadores.get(0), tablero, listaJugadores));
-		
-		listaJugadores.get(1).setObjEfectos(new ObjDescuentaPuntos());
-		assertEquals(3, turno.turno(2, listaJugadores.get(1), tablero,  listaJugadores));
-		
-		listaJugadores.get(2).setObjEfectos(new ObjDescuentaPuntos());
-		assertEquals(4, turno.turno(3, listaJugadores.get(2), tablero, listaJugadores));
-		
 		// Verifico que setee bien el turno del jugador
 		turno.setNumeroTurno(2);
 		assertEquals(2, turno.getNumeroTurno());
