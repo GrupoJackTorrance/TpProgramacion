@@ -11,7 +11,7 @@ public class Turno {
 	private int delay;
 	private int entrada = 2;
 	private int puntosAnteriores;
-	
+	private int cantObjetos;
 
 	public Turno(int numeroTurno, int delay) {
 		this.numeroTurno = numeroTurno;
@@ -30,17 +30,19 @@ public class Turno {
 			System.out.println("Juega jugador: " + turno);
 			tablero.getVentanaTablero().getPanelTablero().empiezaTurno(jugador);
 			tablero.getVentanaTablero().getPanelTablero().setearTurnoJugador(jugador);
-			
+			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
+			cantObjetos= jugador.getCantidadObjetos();//OBJETOS ANTES DE MOVERSE
 			puntosAnteriores = jugador.getPuntos(); //PUNTOS DEL JUGADOR ANTES DE TIRAR EL DADO
 			
 			int cantidad = tablero.getVentanaTablero().getPanelTablero().tirodado(jugador);
 			//int cantidad = jugador.tirarDado();
 			tablero.getVentanaTablero().getPanelTablero().mostrardado(cantidad);
-			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
 			tablero.avanzarJugador(jugador, cantidad);
 			if(puntosAnteriores != jugador.getPuntos()) 
 				tablero.getVentanaTablero().getPanelTablero().mostrarModificacionPts(jugador.getPuntos() - puntosAnteriores,jugador);
 			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
+			if(cantObjetos != jugador.getCantidadObjetos())
+				tablero.getVentanaTablero().getPanelTablero().mostrarModificacionObjt(jugador.getCantidadObjetos()-cantObjetos, jugador);
 			// luego de tirar el dado y avanzar en casillero
 			int idObj;
 			if(jugador.getObjEfectos().getIdObjeto()!=0)
