@@ -97,6 +97,7 @@ class PanelVentanaSalaCreada extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		desplaza.setLocation(100, 10);
 		tituloJugadores.setBounds(10, 10, 150, 15);
 		jugadores.setBounds(300, 30, 150, 15);
 		cantRondas.setBounds(30, 70, 150, 15);
