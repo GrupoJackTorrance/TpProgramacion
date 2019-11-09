@@ -29,7 +29,7 @@ public class Main {
 		jugador1.setObjEfectos(duplicaPuntaje);
 	
 		int puntosobj = 40;
-		Sala sala = jugador1.crearSala("Test", 0, puntosobj, 20);
+		Sala sala = jugador1.crearSala("Test", 4, puntosobj, 20);
 
 		sala.addJugadorSala(jugador2);
 		sala.addJugadorSala(jugador3);
