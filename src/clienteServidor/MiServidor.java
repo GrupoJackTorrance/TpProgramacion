@@ -170,6 +170,8 @@ class HiloServidor extends Thread{
 			return "Unirse";
 		else if( mensajeAccion.equals("sacarJugadorSala"))
 			return "sacarJugadorSala";
+		else if(mensajeAccion.equals("iniciarPartida"))
+			return "muestraPartida";
 		return "Salir";
 	}
 	
@@ -204,6 +206,16 @@ class HiloServidor extends Thread{
 			sala.sacarJugadorSala(jugador);
 			respuesta=gson.toJson(sala.getNombreSala());
 		}
+		else if(accion.equals("crearSala")) {
+			String nombreSala=(String) gson.fromJson(mensajeCliente,PaqueteMensaje.class).getObj();
+			Sala sala=salasDisponibles.get(nombreSala);
+			Partida partida= new Partida(sala.getmaxPartidas(),sala.getPuntosObj(),sala.getcantJugadores(),sala.getJugadores2()); 
+			try {
+				partida.InicioPartida();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		else {
 			jugadoresLobby.remove(jugador);
 			respuesta= "OK";
@@ -226,7 +238,6 @@ public void desconectarTodos() {
 			h.getCliente().close();
 			jugadoresLobby.remove(entry.getKey());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
