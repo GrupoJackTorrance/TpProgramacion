@@ -5,6 +5,7 @@ import java.util.List;
 public class Sala {
 	private int id;
 	private int maxPartidas;
+	private int cantMaxJugadores;
 	private int cantJugadores;
 	private String creador;
 	private int puntosObjetivo;
@@ -39,7 +40,7 @@ public class Sala {
 		this.puntosObjetivo = puntosObjetivo;
 		this.maxPartidas = maxPartidas;
 		nombreSala = nombre;
-		this.cantJugadores = cantJugadores;
+		this.cantMaxJugadores = cantJugadores;
 		addJugadorSala(jugador);
 	}
 	
