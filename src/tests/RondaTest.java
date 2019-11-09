@@ -32,16 +32,11 @@ public class RondaTest {
 		jugadores.add(jugador1);
 		jugadores.add(jugador2);
 		jugadores.add(jugador3);
-		tablero = new TableroNormal(jugadores);
 		ronda = new Ronda(3);
 	}
 	
 	@Test
 	public void verificarInicioRondaTest() throws Exception{
-		
-		//Verificar que se pueda iniciar la ronda
-		//assertEquals(false, ronda.InicioRonda(jugadores, tablero, puntosObjetivo));
-		
 		// Verificar que termine la ronda cuando el turno sea mayor a la cantidad de
 		// jugadores
 		assertEquals(false, ronda.terminaRonda(3));
