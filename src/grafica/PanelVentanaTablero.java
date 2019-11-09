@@ -140,7 +140,7 @@ public class PanelVentanaTablero extends JPanel {
 		nuevoObjeto.setFont(new Font("Tahoma", Font.BOLD, 15));
 		elegirLado.setFont(new Font("Tahoma", Font.BOLD, 15));
 		objetos.setFont(new Font("Tahoma", Font.BOLD, 15));
-		comboBox.setLocation(100,45);
+		comboBox.setLocation(110,45);
 		numerodado.setFont(new Font("Tahoma", Font.BOLD,50));
 		
 		textTurno.setFont(new Font("Dialog", Font.BOLD, 50));
@@ -557,7 +557,7 @@ public class PanelVentanaTablero extends JPanel {
 				mensaje2= jugador.getObj2().getNombreObjeto();
 			if(jugador.getObj3().getIdObjeto()!= 0)
 				mensaje3= jugador.getObj3().getNombreObjeto();
-			objetos.setText("Objetos: " );
+			objetos.setText("Tus Objetos: ");
 			comboBox.setModel(new DefaultComboBoxModel(new String[] {mensaje1,mensaje2,mensaje3}));
 			objetos.setVisible(true);
 		}
