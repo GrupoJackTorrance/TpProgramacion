@@ -53,7 +53,7 @@ public class JugadorTest {
 	@Test
 	public void comprobarSalaTest() {
 		//Compruebo que se genere la Sala 
-		Sala sala = jugador.crearSala("nombre", 0, 10, 1);
+		Sala sala = jugador.crearSala("nombre", 2, 10, 1);
 		jugador2.entrarEnSala(sala);
 		//Compruebo que un jugador entre a la Sala
 		Assert.assertEquals(2, sala.getcantJugadores());
