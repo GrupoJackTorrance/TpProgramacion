@@ -102,6 +102,15 @@ public class Sala {
 			System.out.println(jugador);
 		}
 	}
+	
+	public List<Jugador> getJugadores2() {
+		return this.jugadores;
+	}
+	
+
+	public void setJugadores(List<Jugador> jugadores) {
+		this.jugadores = jugadores;
+	}
 
 	public String getCreador() {
 		return creador;
