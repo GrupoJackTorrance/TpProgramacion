@@ -20,14 +20,14 @@ public class VentanaServidor extends JFrame{
 	PanelVentanaServidor panelServidor;
 	public VentanaServidor(ServerSocket servidor) {
 		this.servidor=servidor;
-		setVisible(true);
 		setLocation(10,100);
 		setSize(300, 300);
 		setTitle("Servidor");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panelServidor=new PanelVentanaServidor();
 		add(panelServidor);
 		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
 	}
 	
 	public static void cerrarServidor() {
