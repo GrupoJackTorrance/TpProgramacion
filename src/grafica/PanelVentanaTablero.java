@@ -16,6 +16,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.*;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.*;
@@ -60,6 +61,7 @@ public class PanelVentanaTablero extends JPanel {
 	private ImageIcon rana; 
 	private ImageIcon ave;
 	private ImageIcon gato; 
+	JComboBox comboBox = new JComboBox();
 
 	public PanelVentanaTablero(Tablero tablero) {
 		
@@ -91,7 +93,7 @@ public class PanelVentanaTablero extends JPanel {
 		add(numerodado);
 		//boton para tirar dado
 		add(btntirodado);
-		
+		add(comboBox);
 		add(nuevoObjeto);
 
 		add(turnoJugador);
@@ -138,7 +140,7 @@ public class PanelVentanaTablero extends JPanel {
 		nuevoObjeto.setFont(new Font("Tahoma", Font.BOLD, 15));
 		elegirLado.setFont(new Font("Tahoma", Font.BOLD, 15));
 		objetos.setFont(new Font("Tahoma", Font.BOLD, 15));
-		
+		comboBox.setLocation(100,45);
 		numerodado.setFont(new Font("Tahoma", Font.BOLD,50));
 		
 		textTurno.setFont(new Font("Dialog", Font.BOLD, 50));
@@ -546,14 +548,17 @@ public class PanelVentanaTablero extends JPanel {
 
 
 		public void setearObjetos(Jugador jugador) {
-			String mensaje = "";
+			String mensaje1 = "";
+			String mensaje2 = "";
+			String mensaje3= "";
 			if(jugador.getObj1().getIdObjeto()!= 0)
-				mensaje+= jugador.getObj1().getNombreObjeto();
+				mensaje1= jugador.getObj1().getNombreObjeto();
 			if(jugador.getObj2().getIdObjeto()!= 0)
-				mensaje+= " , " + jugador.getObj2().getNombreObjeto();
+				mensaje2= jugador.getObj2().getNombreObjeto();
 			if(jugador.getObj3().getIdObjeto()!= 0)
-				mensaje+= " , " + jugador.getObj3().getNombreObjeto();
-			objetos.setText("Objetos: " + mensaje);
+				mensaje3= jugador.getObj3().getNombreObjeto();
+			objetos.setText("Objetos: " );
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {mensaje1,mensaje2,mensaje3}));
 			objetos.setVisible(true);
 		}
 	
