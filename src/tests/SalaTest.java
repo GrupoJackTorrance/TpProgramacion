@@ -18,7 +18,7 @@ public class SalaTest {
 	@Before
 	public void iniciar() {
 		jugador= new Jugador("pepa","pepa");
-		sala = new Sala(jugador,10,1, "nombre", 0);
+		sala = new Sala(jugador,10,1, "nombre", 2);
 		jugador2= new Jugador("pepy","pepy");
 		jugador3= new Jugador("pepo","pepo");
 		jugador4= new Jugador("pepu","pepu");
