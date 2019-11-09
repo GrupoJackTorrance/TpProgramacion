@@ -13,6 +13,7 @@ import logica.EfectoDarObjeto;
 import logica.Jugador;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
@@ -119,9 +120,14 @@ public class JVentanaIngreso extends JFrame {
 				ventana.setVisible(false);
 				new VentanaLobby(miSocket);
 			}
-		} catch (UnknownHostException e) {
+		} catch (NullPointerException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(this,
+					"No encontro el servidor.",
+					 "Error",
+					 JOptionPane.ERROR_MESSAGE);
+			
+			dispose();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();

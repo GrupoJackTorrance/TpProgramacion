@@ -11,15 +11,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.*;
-import javax.swing.JTextField;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -208,7 +201,12 @@ class Botones implements ActionListener{
 				// cuando se apreta el boton " aceptar" se envia la opcione elegida		
 			} catch (IOException e1) {
 				// TODO Bloque catch generado automáticamente
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(VentanaLobby.panel,
+						"No encontro el servidor.",
+						 "Error",
+						 JOptionPane.ERROR_MESSAGE);
+				
+				VentanaLobby.salir();
 			}
 		}
 		else if (e.getSource()== crearSala) {
@@ -230,7 +228,12 @@ class Botones implements ActionListener{
 				flujoSalida.close();
 			}catch (IOException e2) {
 				// TODO Bloque catch generado automáticamente
-				e2.printStackTrace();
+				JOptionPane.showMessageDialog(VentanaLobby.panel,
+						"No encontro el servidor.",
+						 "Error",
+						 JOptionPane.ERROR_MESSAGE);
+				
+				VentanaLobby.salir();
 			}
 			
 			
@@ -253,7 +256,12 @@ class Botones implements ActionListener{
 			flujoSalida.close();
 			 
 		} catch (IOException e2) {
-			e2.printStackTrace();
+			JOptionPane.showMessageDialog(VentanaLobby.panel,
+					"No encontro el servidor.",
+					 "Error",
+					 JOptionPane.ERROR_MESSAGE);
+			
+			VentanaLobby.salir();
 		}
 		
        }else if ( e.getSource() == aceptar) {
@@ -273,7 +281,12 @@ class Botones implements ActionListener{
 			flujoSalida.close();
 			visibilizarSalaEspera(respuesta,"creadorSala");
     	   	} catch (IOException e1) {
-				e1.printStackTrace();
+    	   		JOptionPane.showMessageDialog(VentanaLobby.panel,
+						"No encontro el servidor.",
+						 "Error",
+						 JOptionPane.ERROR_MESSAGE);
+				
+				VentanaLobby.salir();
 			}
     	   
        }
