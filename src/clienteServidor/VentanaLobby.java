@@ -219,13 +219,13 @@ class Botones implements ActionListener{
 			try {
 				//comunicarse con el servidor para iniciar partida
 				DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
-				PaqueteMensaje mensaje= new PaqueteMensaje("iniciar partida",nombreSala.getText());
+				PaqueteMensaje mensaje= new PaqueteMensaje("iniciarPartida",nombreSala.getText());
 				Gson gson = new Gson();				
 				flujoSalida.writeUTF(gson.toJson(mensaje));
 				// recibe algo para iniciar la partida a nivel grafico
 				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 				String entrada=flujoEntrada.readUTF();
-				if(entrada.equals("MostrarPartida")) {
+				if(entrada.equals("muestraPartida")) {
 					System.out.println("entro a la verdadera accion");
 					ventana.setVisible(false);
 				}
