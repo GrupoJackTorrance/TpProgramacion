@@ -64,10 +64,6 @@ public class MiServidor implements Runnable {
 
 				// System.out.println(nombrePersonaje);
 
-				/*
-				 * Acá habría que plasmar la lógica y los métodos que se
-				 * ejecutan en el main?
-				 */
 				Jugador jugadorCliente = gson.fromJson(jugador, Jugador.class);
 				System.out.println("LLEGO EL CLIENTE "
 						+ jugadorCliente.getNombre());
@@ -225,7 +221,7 @@ public class MiServidor implements Runnable {
 				
 			    String salaString =(String) gson.fromJson(mensajeCliente,PaqueteMensaje.class).getObj();
 				Sala s = gson.fromJson(salaString, Sala.class);
-				Sala sala = jugador.crearSala(s.getNombreSala(), s.getcantJugadores(),s.getPuntosObj(),s.getmaxPartidas());
+				Sala sala = jugador.crearSala(s.getNombreSala(), s.getCantMaxJugadores(),s.getPuntosObj(),s.getmaxPartidas());
 				salasDisponibles.put(sala.getNombreSala(),sala);
 				salasDisponiblesClientes.add(salaString);
 				respuesta=gson.toJson(sala.getNombreSala()+" "+sala.getcantJugadores());
@@ -235,8 +231,8 @@ public class MiServidor implements Runnable {
 				String salaString = (String) gson.fromJson(mensajeCliente,PaqueteMensaje.class).getObj();
 				Sala sala = salasDisponibles.get(salaString);
 				sala.addJugadorSala(jugador);
-				respuesta = gson.toJson(sala.getNombreSala());
-				
+				respuesta = gson.toJson("Sala: "+sala.getNombreSala()+"    Jugadores unidos: "+sala.getcantJugadores()+"/"+sala.getCantMaxJugadores());
+
 			} else if (accion.equals("sacarJugadorSala")) {
 				String salaString = (String) gson.fromJson(mensajeCliente,
 						PaqueteMensaje.class).getObj();

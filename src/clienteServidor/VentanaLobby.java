@@ -168,10 +168,10 @@ class PanelLobby extends JPanel {
 public void paintComponent(Graphics g) {
 	super.paintComponent(g);
 	
-	labelnombre.setBounds(100, 100, 86, 20);
-	labelcantJugadores.setBounds(100, 150, 100, 20);
-	labelpuntosObjetivos.setBounds(100, 200, 86, 20);
-	labelrondasMax.setBounds(100, 250, 86, 20);
+	labelnombre.setBounds(80, 100, 86, 20);
+	labelcantJugadores.setBounds(78, 150, 150, 20);
+	labelpuntosObjetivos.setBounds(80, 200, 86, 20);
+	labelrondasMax.setBounds(80, 250, 86, 20);
 	nombreSala.setBounds(200, 100, 86, 20);
 	cantJugadores.setBounds(200,150 , 86, 20);
 	puntosObjetivos.setBounds(200, 200, 86, 20);
@@ -184,7 +184,7 @@ public void paintComponent(Graphics g) {
 	tcrearSala.setLocation(20,10);
 	iniciarPartida.setBounds(250,400,200, 20);
 	MensajeSalaEspera.setBounds(100,250,200, 20);
-	tinfoPartida.setBounds(20,50,200, 100);
+	tinfoPartida.setBounds(20,50,250, 100);
 	salirEspera.setBounds(100, 400, 100, 20);
 	unirseSala.setLocation(10, 10);
 	crearSala.setLocation(200, 10);
@@ -245,11 +245,11 @@ class Botones implements ActionListener{
 				// recibir Salas
 				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 				String entrada=flujoEntrada.readUTF();
-				
-				salasDisponibles=gson.fromJson(entrada,ArrayList.class);	
+
+				salasDisponibles=gson.fromJson(entrada,ArrayList.class);
 				visualizarUnirseASala();
-				 
-				// cuando se apreta el boton " aceptar" se envia la opcione elegida		
+				
+				// cuando se apreta el boton " aceptar" se envia la opcion elegida	
 			} catch (IOException e1) {
 				// TODO Bloque catch generado automáticamente
 				e1.printStackTrace();
@@ -260,12 +260,12 @@ class Botones implements ActionListener{
 		}
        else if (e.getSource()== salir) {
 			System.out.println("salir");
-			DataOutputStream flujoSalida;
+			DataOutputStream flujoSalida; 
 			try {
 				flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream()); 
 				PaqueteMensaje mensaje= new PaqueteMensaje("Salir",null);
 				Gson gson = new Gson();
-				flujoSalida.writeUTF(gson.toJson(mensaje));	
+				flujoSalida.writeUTF(gson.toJson(mensaje));
 				DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 				//String entrada=flujoEntrada.readUTF();
 				//if(entrada.equals("OK"))
@@ -284,13 +284,7 @@ class Botones implements ActionListener{
     	   
     	   int index= opcionesSalas.getSelectedIndex();
     	   String nombreSala= (String) opcionesSalas.getSelectedValue(); // es la opcion seleccionada en el momento que se apreto "aceptar"
-    	   //DataOutputStream flujoSalida;
-    	   
-    	   /*
-    	    flujoSalida.writeUTF(gson.toJson(mensaje2));
-			DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
-			String respuesta=flujoEntrada.readUTF();
-    	    */
+//    	   String elegida = salasDisponibles.get
     	   
 		try {
 			DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
@@ -301,7 +295,9 @@ class Botones implements ActionListener{
 			DataInputStream flujoEntrada= new DataInputStream(VentanaLobby.getSocketCliente().getInputStream());
 			//String mensaje= gson.toJson(salasDisponibles.(nombreSala));
 			flujoSalida.writeUTF(gson.toJson(mensaje));
-			visibilizarSalaEspera(nombreSala,"unirse");
+//			visibilizarSalaEspera(nombreSala,"unirse");
+			String respuesta=flujoEntrada.readUTF();
+			visibilizarSalaEspera(respuesta,"unirse");
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
@@ -310,7 +306,7 @@ class Botones implements ActionListener{
     	   	dejarDeMostrarFormulario();
     	   	try {
     	   	DataOutputStream flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream());
-    	   	String jsonSala = "{'nombreSala':'"+nombreSala.getText()+"','cantJugadores':"+cantJugadores.getText()+",'maxPartidas':"+rondasMax.getText()+",'puntosObjetivo':"+puntosObjetivos.getText()+"}";
+    	   	String jsonSala = "{'nombreSala':'"+nombreSala.getText()+"','cantMaxJugadores':"+cantJugadores.getText()+",'maxPartidas':"+rondasMax.getText()+",'puntosObjetivo':"+puntosObjetivos.getText()+"}";
     	   	PaqueteMensaje mensaje2= new PaqueteMensaje("crearSala",jsonSala);//nombreSala.getText());
 //    	   	PaqueteMensaje mensaje2= new PaqueteMensaje("crearSala",nombreSala.getText());
 			GsonBuilder builder = new GsonBuilder();
@@ -332,7 +328,7 @@ class Botones implements ActionListener{
 				flujoSalida= new DataOutputStream(VentanaLobby.getSocketCliente().getOutputStream()); 
 				PaqueteMensaje mensaje= new PaqueteMensaje("sacarJugadorSala",nombreSala.getText());
 				Gson gson = new Gson();
-				flujoSalida.writeUTF(gson.toJson(mensaje));	
+				flujoSalida.writeUTF(gson.toJson(mensaje));
 				visualizarLobby();
 			}catch (IOException e2) {
 				// TODO Bloque catch generado automáticamente
@@ -351,7 +347,7 @@ public void visualizarFormularioCrearSala() {
 	crearSala.setVisible(false);
 	salir.setVisible(false);
 	labelnombre.setText("Nombre: ");
-	labelcantJugadores.setText("Cant Jugadores:");
+	labelcantJugadores.setText("Cant Max Jugadores:");
 	labelpuntosObjetivos.setText("Puntos Obj: ");
 	labelrondasMax.setText("Cant Rondas: ");
 	tcrearSala.setFont(new Font("Tahoma", Font.BOLD, 15));

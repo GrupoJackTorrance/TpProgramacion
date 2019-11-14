@@ -35,12 +35,12 @@ public class Sala {
 	/****************************
 	 * FUNCIONES DE SALA
 	 *******************************************************************/
-	public Sala(Jugador jugador, int puntosObjetivo, int maxPartidas, String nombre, int cantJugadores) {
+	public Sala(Jugador jugador, int puntosObjetivo, int maxPartidas, String nombre, int cantMaxJugadores) {
 		this.creador = jugador.getNombre();
 		this.puntosObjetivo = puntosObjetivo;
 		this.maxPartidas = maxPartidas;
 		nombreSala = nombre;
-		this.cantMaxJugadores = cantJugadores;
+		this.setCantMaxJugadores(cantMaxJugadores);
 		addJugadorSala(jugador);
 	}
 	
@@ -134,5 +134,13 @@ public class Sala {
 
 	public int getcantJugadores() {
 		return cantJugadores;
+	}
+
+	public int getCantMaxJugadores() {
+		return cantMaxJugadores;
+	}
+
+	public void setCantMaxJugadores(int cantMaxJugadores) {
+		this.cantMaxJugadores = cantMaxJugadores;
 	}
 }
