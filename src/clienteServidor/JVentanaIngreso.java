@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.awt.event.ActionEvent;
@@ -35,7 +36,8 @@ public class JVentanaIngreso extends JFrame {
 	private JLabel label, labelUsuario, labelPersonaje;
 	private JButton botonIngreso;
 	private JTextField textFieldUsuario, nombrePersonaje;
-	Socket miSocket ;
+	Socket socketClienteServidor ;
+	Socket socketServidorCliente;
 	static JVentanaIngreso ventana;
 
 	public static void main(String[] args) throws UnknownHostException, IOException {
@@ -46,7 +48,8 @@ public class JVentanaIngreso extends JFrame {
 
 	public JVentanaIngreso() {
 		try {
-			this.miSocket = new Socket("localhost", 9836); //"192.168.0.55"
+		
+			this.socketClienteServidor = new Socket("192.168.0.55", 9836); //"192.168.0.55"
 		} catch (UnknownHostException e) {
 			// TODO Bloque catch generado automáticamente
 			System.out.println(e.getMessage());
@@ -104,7 +107,7 @@ public class JVentanaIngreso extends JFrame {
 		try {
 			
 
-			DataOutputStream info = new DataOutputStream(miSocket.getOutputStream());
+			DataOutputStream info = new DataOutputStream(socketClienteServidor.getOutputStream());
 			Jugador jugador= new Jugador(nombrePersonaje.getText(),textFieldUsuario.getText());
 			
 			GsonBuilder builder = new GsonBuilder();
@@ -113,12 +116,14 @@ public class JVentanaIngreso extends JFrame {
 //			Gson gson = new Gson();
 			String mensaje= gson.toJson(jugador);
 			info.writeUTF(mensaje);
-			DataInputStream entrada = new DataInputStream(miSocket.getInputStream());
+			DataInputStream entrada = new DataInputStream(socketClienteServidor.getInputStream());
 			String messajeJ=entrada.readUTF();
 			if(messajeJ.equals("MostrarLobby")) {
 				System.out.println("entro a la accion");
 				ventana.setVisible(false);
-				new VentanaLobby(miSocket);
+				ServerSocket serverSocket= new ServerSocket(9837);
+				socketServidorCliente=serverSocket.accept();
+				new VentanaLobby(socketClienteServidor,socketServidorCliente);
 			}
 		} catch (NullPointerException e) {
 			// TODO Auto-generated catch block

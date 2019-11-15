@@ -6,6 +6,7 @@ import logica.*;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class MiServidor implements Runnable {
 	HashMap<Jugador, HiloServidor> jugadoresLobby = new HashMap<Jugador, HiloServidor>();
 	HashMap<String, Sala> salasDisponibles = new HashMap<String, Sala>();
 	List<String> salasDisponiblesClientes = new ArrayList<String>();
+	Socket clienteServidor;
+	Socket ServidorCliente;
 	private static VentanaServidor ventana;
 	String respuesta;
 
@@ -48,16 +51,15 @@ public class MiServidor implements Runnable {
 			ventana = new VentanaServidor(servidor);
 			do {
 				System.out.println("esperando cliente");
-				Socket cliente = servidor.accept();
-
-				DataInputStream entrada = new DataInputStream(
-						cliente.getInputStream());
+				clienteServidor = servidor.accept();
+				InetAddress ip = clienteServidor.getInetAddress();
+				
+				DataInputStream entrada = new DataInputStream(clienteServidor.getInputStream());
 
 				String jugador = entrada.readUTF();
 
 				GsonBuilder builder = new GsonBuilder();
-				builder.registerTypeAdapter(EfectoDarObjeto.class,
-						new AbstractAdapter());
+				builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
 				Gson gson = builder.create();
 
 				// Gson gson = new Gson();
@@ -65,13 +67,11 @@ public class MiServidor implements Runnable {
 				// System.out.println(nombrePersonaje);
 
 				Jugador jugadorCliente = gson.fromJson(jugador, Jugador.class);
-				System.out.println("LLEGO EL CLIENTE "
-						+ jugadorCliente.getNombre());
-				DataOutputStream salida = new DataOutputStream(
-						cliente.getOutputStream());
+				jugadorCliente.setUbicacion("Lobby");
+				System.out.println("LLEGO EL CLIENTE " + jugadorCliente.getNombre());
+				DataOutputStream salida = new DataOutputStream(clienteServidor.getOutputStream());
 				salida.writeUTF("MostrarLobby");
-				HiloServidor hiloCliente = new HiloServidor(cliente,
-						jugadorCliente);
+				HiloServidor hiloCliente = new HiloServidor(clienteServidor,ip, jugadorCliente,"Lobby");
 				hiloCliente.start();
 				// agrego al HashMap al jugador con su socket
 				jugadoresLobby.put(jugadorCliente, hiloCliente);
@@ -125,27 +125,41 @@ public class MiServidor implements Runnable {
 	}
 
 	class HiloServidor extends Thread {
-		private Socket cliente;
+		private Socket clienteServidor;
+		private Socket servidorCliente;
 		private Jugador jugador;
-		DataInputStream entrada;
-		DataOutputStream salida;
+		private DataInputStream entrada;
+		private DataOutputStream salida;
 		boolean corriendo = true;
+		private String ubicacion;
 
-		public HiloServidor(Socket cliente, Jugador jugador) {
-			this.cliente = cliente;
+		public HiloServidor(Socket clienteServidor, InetAddress ip, Jugador jugador,String ubicacion) throws IOException {
+			this.clienteServidor = clienteServidor;
+			this.servidorCliente = new Socket(ip, 9837); // "192.168.0.55";
 			this.jugador = jugador;
+			this.ubicacion=ubicacion;
+		}
+		public String getUbicacion() {
+			return this.ubicacion;
 		}
 
-		public Socket getCliente() {
-			return cliente;
+		public Jugador getJugador() {
+			return jugador;
+		}
+
+		public Socket getClienteServidor() {
+			return clienteServidor;
+		}
+		public Socket getSocketServidorCliente() {
+			return servidorCliente;
 		}
 
 		@Override
-		public void run() { 
+		public void run() {
 			try {
 				while (corriendo) {
-					entrada = new DataInputStream(cliente.getInputStream());
-					salida = new DataOutputStream(cliente.getOutputStream());
+					entrada = new DataInputStream(clienteServidor.getInputStream());
+					salida = new DataOutputStream(clienteServidor.getOutputStream());
 					String mensajeCliente = entrada.readUTF();
 					String accion = determinarAccion(mensajeCliente);
 					String respuesta = hacerAccion(accion, mensajeCliente);
@@ -169,8 +183,7 @@ public class MiServidor implements Runnable {
 			// Gson gson= new Gson();
 			GsonBuilder builder = new GsonBuilder();
 			Gson gson = builder.create();
-			String mensajeAccion = gson.fromJson(mensajeCliente,
-					PaqueteMensaje.class).getAccion();
+			String mensajeAccion = gson.fromJson(mensajeCliente, PaqueteMensaje.class).getAccion();
 			if (mensajeAccion.equals("mostrarSalas"))
 				return "devolverSalas";
 			else if (mensajeAccion.equals("crearSala"))
@@ -187,71 +200,74 @@ public class MiServidor implements Runnable {
 		public String hacerAccion(String accion, String mensajeCliente) {
 			// Gson gson= new Gson();
 			GsonBuilder builder = new GsonBuilder();
-			builder.registerTypeAdapter(EfectoDarObjeto.class,
-					new AbstractAdapter());
+			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
 			Gson gson = builder.create();
 			String respuesta = null;
 			if (accion.equals("devolverSalas")) {
+				this.ubicacion="viendoSalasDisponibles";
 				respuesta = gson.toJson(salasDisponiblesClientes);
 				// Sala[] desechable = gson.fromJson(respuesta, Sala[].class);
 				// int indice =
 				// (salasDisponiblesClientes.get(0).indexOf(","))-1;
 				// respuesta =
 				// salasDisponiblesClientes.get(0).substring(15,indice);
-				
+
 			} else if (accion.equals("crearSala")) {
 				/*
-				 * Esto codigo obtiene los atributos individuales de un Json
-				 * Ej)
-				 * Si tenemos esto como mensajeCliente... 
-				 * {"accion":"crearSala","obj":"{'nombreSala':'Salasa','cantJugadores':4,'maxPartidas':1,'puntosObjetivo':20}"}
+				 * Esto codigo obtiene los atributos individuales de un Json Ej) Si tenemos esto
+				 * como mensajeCliente... {"accion":"crearSala","obj":
+				 * "{'nombreSala':'Salasa','cantJugadores':4,'maxPartidas':1,'puntosObjetivo':20}"}
 				 * 
-				 * --> gson.fromJson(jobjetocompleto.get("obj").getAsString(), JsonObject.class);
-				 * obtiene a {'nombreSala':'Salasa','cantJugadores':4,'maxPartidas':1,'puntosObjetivo':20}
+				 * --> gson.fromJson(jobjetocompleto.get("obj").getAsString(),
+				 * JsonObject.class); obtiene a
+				 * {'nombreSala':'Salasa','cantJugadores':4,'maxPartidas':1,'puntosObjetivo':20}
 				 * 
-				 * --> getobj.get("nombreSala").getAsString(); 
-				 * obtiene a 'Salasa'
+				 * --> getobj.get("nombreSala").getAsString(); obtiene a 'Salasa'
 				 */
 				/*
-				JsonElement jelement = new JsonParser().parse(mensajeCliente);
-				JsonObject jobjetocompleto = jelement.getAsJsonObject(); 				
-			    JsonObject jSala = gson.fromJson(jobjetocompleto.get("obj").getAsString(), JsonObject.class);
-			    String nombreSala = jSala.get("nombreSala").getAsString();
+				 * JsonElement jelement = new JsonParser().parse(mensajeCliente); JsonObject
+				 * jobjetocompleto = jelement.getAsJsonObject(); JsonObject jSala =
+				 * gson.fromJson(jobjetocompleto.get("obj").getAsString(), JsonObject.class);
+				 * String nombreSala = jSala.get("nombreSala").getAsString();
 				 */
-				
-			    String salaString =(String) gson.fromJson(mensajeCliente,PaqueteMensaje.class).getObj();
+
+				String salaString = (String) gson.fromJson(mensajeCliente, PaqueteMensaje.class).getObj();
 				Sala s = gson.fromJson(salaString, Sala.class);
-				Sala sala = jugador.crearSala(s.getNombreSala(), s.getCantMaxJugadores(),s.getPuntosObj(),s.getmaxPartidas());
-				salasDisponibles.put(sala.getNombreSala(),sala);
+				Sala sala = jugador.crearSala(s.getNombreSala(), s.getCantMaxJugadores(), s.getPuntosObj(),
+						s.getmaxPartidas());
+				salasDisponibles.put(sala.getNombreSala(), sala);
 				salasDisponiblesClientes.add(salaString);
-				respuesta=gson.toJson(sala.getNombreSala()+" "+sala.getcantJugadores());
-				
+				respuesta = gson.toJson(sala.getNombreSala() + " " + sala.getcantJugadores());
+				this.ubicacion="CrearSala";
+				avisarCambio(this.jugador, new PaqueteMensaje("SalaNueva",salasDisponiblesClientes,"viendoSalasDisponibles" ));
+
 			} else if (accion.equals("Unirse")) {
-				
-				String salaString = (String) gson.fromJson(mensajeCliente,PaqueteMensaje.class).getObj();
+			
+				System.out.println("mi ubicacion: "+this.ubicacion);
+
+				String salaString = (String) gson.fromJson(mensajeCliente, PaqueteMensaje.class).getObj();
 				Sala sala = salasDisponibles.get(salaString);
 				sala.addJugadorSala(jugador);
-				respuesta = gson.toJson("Sala: "+sala.getNombreSala()+"    Jugadores unidos: "+sala.getcantJugadores()+"/"+sala.getCantMaxJugadores());
+				respuesta = gson.toJson("Sala: " + sala.getNombreSala() + "    Jugadores unidos: "
+						+ sala.getcantJugadores() + "/" + sala.getCantMaxJugadores());
 
 			} else if (accion.equals("sacarJugadorSala")) {
-				String salaString = (String) gson.fromJson(mensajeCliente,
-						PaqueteMensaje.class).getObj();
+				String salaString = (String) gson.fromJson(mensajeCliente, PaqueteMensaje.class).getObj();
 				Sala sala = salasDisponibles.get(salaString);
 				sala.sacarJugadorSala(jugador);
 				respuesta = gson.toJson(sala.getNombreSala());
-				
+
 			} else if (accion.equals("muestraPartida")) {
 				String salaString = (String) gson.fromJson(mensajeCliente, PaqueteMensaje.class).getObj();
 				Sala sala = salasDisponibles.get(salaString);
-				Partida partida = new Partida(sala.getmaxPartidas(),
-						sala.getPuntosObj(), sala.getcantJugadores(),
+				Partida partida = new Partida(sala.getmaxPartidas(), sala.getPuntosObj(), sala.getcantJugadores(),
 						sala.getJugadores2());
 				try {
 					partida.InicioPartida();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+
 			} else {
 				jugadoresLobby.remove(jugador);
 				respuesta = "OK";
@@ -263,6 +279,26 @@ public class MiServidor implements Runnable {
 			return accion;
 		}
 
+		public void avisarCambio(Jugador jugador, PaqueteMensaje paquete) {
+
+			Gson gson = new Gson();
+			String mensaje = gson.toJson(paquete);
+			DataOutputStream salida;
+			for (Map.Entry<Jugador, HiloServidor> cliente : jugadoresLobby.entrySet()) {
+				System.out.println("ubicacion de cliente: "+cliente.getValue().getUbicacion());
+				System.out.println("ubicacion destino: "+ paquete.getUbicacionDestino());
+				if (!cliente.getValue().getJugador().getNombre().equals(jugador.getNombre()) && cliente.getValue().getUbicacion().equals(paquete.getUbicacionDestino())) {
+					try {
+						salida = new DataOutputStream(cliente.getValue().getSocketServidorCliente().getOutputStream());
+						salida.writeUTF(mensaje);
+					} catch (IOException e) {
+						System.out.println(e.getMessage());
+					}
+
+				}
+			}
+		}
+
 	}
 
 	public void desconectarTodos() {
@@ -271,7 +307,7 @@ public class MiServidor implements Runnable {
 		Entry entry : set) {
 			try {
 				HiloServidor h = (HiloServidor) entry.getValue();
-				h.getCliente().close();
+				h.getClienteServidor().close();
 				jugadoresLobby.remove(entry.getKey());
 			} catch (IOException e) {
 				e.printStackTrace();

@@ -16,6 +16,21 @@ public class Jugador implements Comparable<Jugador> {
 	private int posicionAnteriorY;
 	private String nombre;
 	private Personaje miPersonaje;
+	private String ubicacion;
+
+	public String getUbicacion() {
+		return ubicacion;
+	}
+
+
+
+
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
+	}
+
+
+
 
 	public Jugador(String personaje,String nombre) {
 		
