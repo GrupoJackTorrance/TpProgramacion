@@ -97,7 +97,6 @@ public class VentanaLobby extends JFrame implements Runnable {
 				System.out.println("se recibio un mensaje desde el servidor");
 				PaqueteMensaje mensajeRecibido=gson.fromJson(mensaje, PaqueteMensaje.class);
 				rePintar(mensajeRecibido);
-				
 			}
 		} catch (IOException e1) {
 			// TODO Bloque catch generado automáticamente
@@ -110,8 +109,16 @@ public class VentanaLobby extends JFrame implements Runnable {
 		if(mensajeRecibido.accion.equals("SalaNueva")){
 			actualizarSalas(mensajeRecibido.getObj());
 		}
+		if(mensajeRecibido.accion.equals("NuevoJugadorSala")) {
+			actualizarJugadorSala((String)mensajeRecibido.getObj());
+		}
 		
 		
+	}
+
+	private void actualizarJugadorSala(String obj) {
+		panel.settinfoPartida(obj);
+		panel.visibilizarSalaEspera2(2);
 	}
 
 	private void actualizarSalas(Object obj) {		
@@ -146,6 +153,11 @@ class PanelLobby extends JPanel {
 		this.salasDisponibles=nuevas;
 		
 	}
+	
+	public  void settinfoPartida(String nuevo){
+		tinfoPartida.setText(nuevo);	
+	}
+	
 	public PanelLobby() {
 
 		iniciarPartida = new JButton("Iniciar Partida");
@@ -355,7 +367,7 @@ class PanelLobby extends JPanel {
 					flujoSalida.writeUTF(gson.toJson(mensaje));
 //			visibilizarSalaEspera(nombreSala,"unirse");
 					String respuesta = flujoEntrada.readUTF();
-					visibilizarSalaEspera(respuesta, "unirse");
+					visibilizarSalaEspera(respuesta,2, "unirse");
 				} catch (IOException e2) {
 					e2.printStackTrace();
 				}
@@ -377,7 +389,8 @@ class PanelLobby extends JPanel {
 					DataInputStream flujoEntrada = new DataInputStream(
 							VentanaLobby.getsocketClienteServidor().getInputStream());
 					String respuesta = flujoEntrada.readUTF();
-					visibilizarSalaEspera(respuesta, "creadorSala");
+					String infoSala = "Sala:"+respuesta+"   Jugadores: 1/"+cantJugadores.getSelectedItem();
+					visibilizarSalaEspera(infoSala,1, "creadorSala");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -392,7 +405,6 @@ class PanelLobby extends JPanel {
 					flujoSalida.writeUTF(gson.toJson(mensaje));
 					visualizarLobby();
 				} catch (IOException e2) {
-					// TODO Bloque catch generado automáticamente
 					e2.printStackTrace();
 				}
 
@@ -448,7 +460,7 @@ class PanelLobby extends JPanel {
 		aceptarSala.setVisible(true);
 	}
 
-	public void visibilizarSalaEspera(String sala, String quien) {
+	public void visibilizarSalaEspera(String sala,int cant, String quien) {
 		System.out.println("Entro a la sala de espera");
 		tcrearSala.setVisible(false);
 		labelcantJugadores.setVisible(false);
@@ -469,12 +481,46 @@ class PanelLobby extends JPanel {
 		tinfoPartida.setVisible(true);
 		scrollLista.setVisible(false);
 		salasDisp.setVisible(false);
-		salasDisp.setText("Jugadores");
+		salasDisp.setText("Sala");
 		salasDisp.setVisible(true);
+		if(cant==1)
+			iniciarPartida.setEnabled(false);
+		else
+			iniciarPartida.setEnabled(true);
+		
 		if (quien.equals("creadorSala"))
 			iniciarPartida.setVisible(true);
 		else
 			MensajeSalaEspera.setVisible(true);
+	}
+	
+	public void visibilizarSalaEspera2(int cant) {
+		System.out.println("Se repinto la sala de espera");
+		tcrearSala.setVisible(false);
+		labelcantJugadores.setVisible(false);
+		labelpuntosObjetivos.setVisible(false);
+		labelrondasMax.setVisible(false);
+		labelnombre.setVisible(false);
+		nombreSala.setVisible(false);
+		rondasMax.setVisible(false);
+		puntosObjetivos.setVisible(false);
+		cantJugadores.setVisible(false);
+		aceptar.setVisible(false);
+		unirseSala.setVisible(false);
+		crearSala.setVisible(false);
+		salir.setVisible(false);
+		salirEspera.setVisible(true);
+		tinfoPartida.setEditable(false);
+		tinfoPartida.setVisible(true);
+		scrollLista.setVisible(false);
+		salasDisp.setVisible(false);
+		salasDisp.setText("Sala");
+		salasDisp.setVisible(true);
+		if(cant==1)
+			iniciarPartida.setEnabled(false);
+		else
+			iniciarPartida.setEnabled(true);
+		repaint();
 	}
 
 	public void visualizarLobby() {
