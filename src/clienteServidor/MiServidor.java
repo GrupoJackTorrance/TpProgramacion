@@ -240,17 +240,16 @@ public class MiServidor implements Runnable {
 				respuesta = gson.toJson(sala.getNombreSala() + " " + sala.getcantJugadores());
 				this.ubicacion="CrearSala";
 				avisarCambio(this.jugador, new PaqueteMensaje("SalaNueva",salasDisponiblesClientes,"viendoSalasDisponibles" ));
-
+				this.ubicacion="EnSala"+sala.getNombreSala();
 			} else if (accion.equals("Unirse")) {
-			
 				System.out.println("mi ubicacion: "+this.ubicacion);
-
 				String salaString = (String) gson.fromJson(mensajeCliente, PaqueteMensaje.class).getObj();
 				Sala sala = salasDisponibles.get(salaString);
 				sala.addJugadorSala(jugador);
 				respuesta = gson.toJson("Sala: " + sala.getNombreSala() + "    Jugadores unidos: "
 						+ sala.getcantJugadores() + "/" + sala.getCantMaxJugadores());
-
+				avisarcambio2(this.jugador,new PaqueteMensaje("NuevoJugadorSala",respuesta,"EnSala"+sala.getNombreSala()),sala.getNombreSala());
+				this.ubicacion="EnSala"+sala.getNombreSala();
 			} else if (accion.equals("sacarJugadorSala")) {
 				String salaString = (String) gson.fromJson(mensajeCliente, PaqueteMensaje.class).getObj();
 				Sala sala = salasDisponibles.get(salaString);
@@ -279,6 +278,26 @@ public class MiServidor implements Runnable {
 			return accion;
 		}
 
+		private void avisarcambio2(Jugador jugador2, PaqueteMensaje paquete, String nombresala) {
+			Gson gson = new Gson();
+			String mensaje = gson.toJson(paquete);
+			DataOutputStream salida;
+			List<Jugador> jugadores = salasDisponibles.get(nombresala).getJugadores2();
+			for (Jugador jugador : jugadores) {
+				System.out.println("ubicacion de cliente: "+jugadoresLobby.get(jugador).getUbicacion());
+				System.out.println("ubicacion destino: "+ paquete.getUbicacionDestino());
+				if (jugadoresLobby.get(jugador).getUbicacion().equals(paquete.getUbicacionDestino())) {
+					try {
+						salida= new DataOutputStream(jugadoresLobby.get(jugador).getSocketServidorCliente().getOutputStream());
+						salida.writeUTF(mensaje);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+		}
+		
 		public void avisarCambio(Jugador jugador, PaqueteMensaje paquete) {
 
 			Gson gson = new Gson();
