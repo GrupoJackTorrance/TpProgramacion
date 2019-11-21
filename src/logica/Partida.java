@@ -1,6 +1,8 @@
 package logica;
 
 
+
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +17,7 @@ public class Partida {
 
 	private int rondaMax; // cantidad de rondas maximas para la partida
 	private int puntosObjetivo; // cantidad de puntos para ganar
-	private transient Tablero tablero; // Tablero de juego
+	public  Tablero tablero; // Tablero de juego
 	private List<Jugador> jugadores = new LinkedList<Jugador>(); // Lista de jugadores
 	private int turnos; // Cantidad de turnos que va haber segun los jugadores que haya
 	private static boolean terminaMiniJuego = false;
@@ -44,8 +46,9 @@ public class Partida {
 	 * DESAROLLO DE PARTIDA
 	 ******************************************/
 	public void InicioPartida() throws Exception {
-		this.tablero = this.elegirTablero(); // Designo tablero
+		//this.tablero = this.elegirTablero(); // Designo tablero // tablero lo designo fuera de iniciopartida
 		//this.posicionesInciales(this.getJugadores()); // Posicion Inicial // NO HACE FALTA PORQUE LO SETEAMOS EN SALA
+		
 		ronda = new Ronda(this.turnos); // Creo la ronda
 		determinarOrdenTurno(this.jugadores); // Jugadores por turno
 		int j = 0;
@@ -175,6 +178,10 @@ public class Partida {
 
 	public void setTurnos(int turnos) {
 		this.turnos = turnos;
+	}
+	
+	public void verTablero(){
+		this.tablero.verTablero();
 	}
 
 

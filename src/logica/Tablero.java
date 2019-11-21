@@ -3,7 +3,6 @@ package logica;
 import java.util.LinkedList;
 import java.util.List;
 
-
 import grafica.VentanaPregunta;
 import grafica.VentanaTablero;
 
@@ -16,8 +15,8 @@ public abstract class Tablero {
 
 
 	protected List<Jugador> jugadores=new LinkedList<Jugador>();
-	private VentanaPregunta ventana;
-	private VentanaTablero ventanaTablero;
+	private  VentanaPregunta ventana;
+	private  VentanaTablero ventanaTablero;
 
 
 	// ---------- C O N S T R U C T O R---------------------
@@ -148,6 +147,10 @@ public abstract class Tablero {
 
 	public List<Jugador> getJugadores() {
 		return this.jugadores;
+	}
+	
+	public void verTablero(){
+		this.ventanaTablero.verTablero();
 	}
 	
 

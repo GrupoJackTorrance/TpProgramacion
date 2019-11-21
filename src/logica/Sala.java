@@ -3,6 +3,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Sala {
+	
+
+
+
 	private int id;
 	private int maxPartidas;
 	private int cantMaxJugadores;
@@ -29,7 +33,7 @@ public class Sala {
 	
 	private List<Jugador> jugadores = new LinkedList<Jugador>();
 
-	private Partida p1 =null;
+	private Partida partida =null;
 
 
 	/****************************
@@ -85,8 +89,8 @@ public class Sala {
 	 *******************************************************************/
 	// Modificado: devuelve la partida creada
 	public Partida crearPartida() {
-		 p1 = new Partida(maxPartidas, puntosObjetivo, cantJugadores, jugadores);
-		return p1;
+		 partida = new Partida(maxPartidas, puntosObjetivo, cantJugadores, jugadores);
+		return partida;
 	}
 
 	public boolean eliminarPartida(Partida partida) {
@@ -142,5 +146,16 @@ public class Sala {
 
 	public void setCantMaxJugadores(int cantMaxJugadores) {
 		this.cantMaxJugadores = cantMaxJugadores;
+	}
+	public void setPartida(Partida p1) {
+		this.partida = p1;
+	}
+	
+	public Partida getPartida() {
+		return partida;
+	}
+	
+	public void iniciarPartida() throws Exception{
+		this.partida.InicioPartida();
 	}
 }

@@ -1,6 +1,5 @@
 package grafica;
 import java.awt.Color;
-
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -24,7 +23,10 @@ public class VentanaPregunta extends JFrame{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 179689809780211501L;
+	transient private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	private PanelPregunta panelPregunta;
 	
 	public VentanaPregunta() {

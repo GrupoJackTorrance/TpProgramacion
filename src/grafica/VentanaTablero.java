@@ -6,6 +6,10 @@ import logica.Tablero;
 
 public class VentanaTablero extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private PanelVentanaTablero panelTablero;
 	
 	public VentanaTablero(String titulo, int x, int y, Tablero tablero) {
@@ -20,4 +24,10 @@ public class VentanaTablero extends JFrame {
 	public PanelVentanaTablero getPanelTablero() {
 		return this.panelTablero;
 	}
+	public void verTablero() {
+		setVisible(true);
+		
+	}
+	
+	
 }

@@ -14,27 +14,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.*;
-import javax.swing.JTextField;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import clienteServidor.MiServidor.HiloServidor;
-
 import grafica.JVentanaTablero;
+import grafica.PanelVentanaTablero;
 import grafica.VentanaTablero;
 import logica.AbstractAdapter;
 import logica.Casilla;
 import logica.EfectoDarObjeto;
-import logica.Jugador;
+import logica.Partida;
 import logica.Sala;
 import logica.Tablero;
 
@@ -99,7 +92,7 @@ public class VentanaLobby extends JFrame implements Runnable {
 				rePintar(mensajeRecibido);
 			}
 		} catch (IOException e1) {
-			// TODO Bloque catch generado automáticamente
+			// TODO Bloque catch generado automï¿½ticamente
 			e1.printStackTrace();
 		}
 
@@ -112,7 +105,15 @@ public class VentanaLobby extends JFrame implements Runnable {
 		if(mensajeRecibido.accion.equals("NuevoJugadorSala")) {
 			actualizarJugadorSala((String)mensajeRecibido.getObj());
 		}
+		if(mensajeRecibido.accion.equals("InicioPartida")){
+			mostrarPartida((String)mensajeRecibido.getObj());
+		}
 		
+		
+	}
+
+	private void mostrarPartida(String SalaString) {
+		panel.mostrarPartida(SalaString);
 		
 	}
 
@@ -148,7 +149,8 @@ class PanelLobby extends JPanel {
 	private JComboBox<String> cantJugadores = new JComboBox<String>();
 
 	WindowListener exitListener;
-	static JVentanaTablero ventana;
+	PanelVentanaTablero ventana;
+	
 	public  void setSalaDisponibles(List<String> nuevas){
 		this.salasDisponibles=nuevas;
 		
@@ -157,6 +159,17 @@ class PanelLobby extends JPanel {
 	public  void settinfoPartida(String nuevo){
 		tinfoPartida.setText(nuevo);	
 	}
+	
+	public void mostrarPartida(String SalaString){
+		GsonBuilder builder = new GsonBuilder();
+		builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+		Gson gson = builder.create();
+		Sala sala = gson.fromJson(SalaString, Sala.class);
+				
+		this.ventana = sala.getPartida().getTablero().getVentanaTablero().getPanelTablero();
+		this.ventana.verTablero();
+	}
+	
 	
 	public PanelLobby() {
 
@@ -298,7 +311,7 @@ class PanelLobby extends JPanel {
 					}
 
 				} catch (IOException e1) {
-					// TODO Bloque catch generado automáticamente
+					// TODO Bloque catch generado automï¿½ticamente
 					e1.printStackTrace();
 				}
 			}
@@ -320,7 +333,7 @@ class PanelLobby extends JPanel {
 
 					// cuando se apreta el boton " aceptar" se envia la opcion elegida
 				} catch (IOException e1) {
-					// TODO Bloque catch generado automáticamente
+					// TODO Bloque catch generado automï¿½ticamente
 					e1.printStackTrace();
 				}
 			} else if (e.getSource() == crearSala) {
@@ -339,7 +352,7 @@ class PanelLobby extends JPanel {
 					// if(entrada.equals("OK"))
 					cerrarConexion();
 				} catch (IOException e2) {
-					// TODO Bloque catch generado automáticamente
+					// TODO Bloque catch generado automï¿½ticamente
 					e2.printStackTrace();
 				}
 

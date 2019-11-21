@@ -4,27 +4,24 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
-
 import java.awt.geom.Rectangle2D;
-
-
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.*;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.border.*;
 
 import logica.Jugador;
 import logica.Tablero;
 
 public class PanelVentanaTablero extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Tablero tablero;
 
@@ -602,6 +599,9 @@ public class PanelVentanaTablero extends JPanel {
 			return cantidadDado;
 		}
 		
+		public void verTablero(){
+			this.tablero.verTablero();
+		}
 		
 		
 		
