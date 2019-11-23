@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.*;
@@ -108,11 +109,9 @@ public class VentanaLobby extends JFrame implements Runnable {
 		
 	}
 
-	private void mostrarPartida(Object partid) {
-		Gson gson= new Gson();
+	private void mostrarPartida(Object partida) {
 		System.exit(1);
-		String part=gson.toJson(partid);
-		panel.mostrarPartida(part);
+		panel.mostrarPartida((String)partida);
 		
 	}
 
@@ -157,10 +156,21 @@ class PanelLobby extends JPanel {
 	}
 	
 	public void mostrarPartida(String partida){
-		Gson gson = new Gson();
-		Partida p = gson.fromJson(partida, Partida.class);
+		String nombrePartida=partida.split(";")[0];
+		int puntosObjetivo=Integer.parseInt(partida.split(";")[1]);
+		int maxRondas=Integer.parseInt(partida.split(";")[2]);
+		int cantJugadores=Integer.parseInt(partida.split(";")[3]);
+		List<Jugador> jugadores=new LinkedList<Jugador>();
+		int limite=(cantJugadores*2)+4;
+		for (int i = 4; i < limite; i+=2) {
+			Jugador n=new Jugador(partida.split(";")[i],partida.split(";")[i+1]);
+			jugadores.add(n);
+		}
+		Partida p= new Partida(nombrePartida,puntosObjetivo,maxRondas,cantJugadores,jugadores);
 		p.elegirTablero();
 		this.ventana = new VentanaTablero(p.getNombre(), 100, 100, p.tablero);
+		setVisible(false);
+		System.exit(1);
 		ventana.verTablero();
 	}
 	
