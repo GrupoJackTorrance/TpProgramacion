@@ -172,6 +172,7 @@ public class MiServidor implements Runnable {
 					salida.writeUTF(respuesta);
 					if(respuesta.equals("InicioPartida"))
 						jugadoresLobby.get(this.jugador).setCorriendo(false);
+					
 					if (respuesta.equals("OK")) {
 						entrada.close();
 						salida.close();
