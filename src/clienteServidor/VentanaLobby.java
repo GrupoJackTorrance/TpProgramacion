@@ -136,7 +136,7 @@ class PanelLobby extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 2763110189112444391L;
-	JButton unirseSala, crearSala, salir, aceptarSala, aceptar, iniciarPartida, salirEspera;
+	JButton unirseSala, crearSala, salir, aceptarSala, aceptarCrearSala, iniciarPartida, salirEspera;
 	JList<String> opcionesSalas = new JList<String>();
 	JLabel etiquetaSalaEspera = new JLabel("Se creo la sala");
 	DefaultListModel<String> opcionesSalas2 = new DefaultListModel<String>();
@@ -178,7 +178,7 @@ class PanelLobby extends JPanel {
 		crearSala = new JButton("Crear sala");
 		salir = new JButton("Salir");
 		aceptarSala = new JButton("Aceptar Sala");
-		aceptar = new JButton("Aceptar");
+		aceptarCrearSala = new JButton("Aceptar");
 		salirEspera = new JButton("Salir");
 		Botones botones = new Botones();
 		etiquetaSalaEspera.setVisible(false);
@@ -186,7 +186,7 @@ class PanelLobby extends JPanel {
 		iniciarPartida.addActionListener(botones);
 		salirEspera.addActionListener(botones);
 		aceptarSala.addActionListener(botones);
-		aceptar.addActionListener(botones);
+		aceptarCrearSala.addActionListener(botones);
 		unirseSala.addActionListener(botones);
 		crearSala.addActionListener(botones);
 		salir.addActionListener(botones);
@@ -194,7 +194,7 @@ class PanelLobby extends JPanel {
 		tinfoPartida.setVisible(false);
 		opcionesSalas.setVisible(false);
 		aceptarSala.setVisible(false);
-		aceptar.setVisible(false);
+		aceptarCrearSala.setVisible(false);
 		scrollLista.setVisible(false);
 		iniciarPartida.setVisible(false);
 		salirEspera.setVisible(false);
@@ -233,7 +233,7 @@ class PanelLobby extends JPanel {
 		MensajeSalaEspera.setVisible(false);
 		add(MensajeSalaEspera);
 		// Botones
-		add(aceptar);
+		add(aceptarCrearSala);
 		add(aceptarSala);
 		add(unirseSala);
 		add(crearSala);
@@ -254,7 +254,7 @@ class PanelLobby extends JPanel {
 		cantJugadores.setBounds(200, 150, 86, 20);
 		puntosObjetivos.setBounds(200, 200, 86, 20);
 		rondasMax.setBounds(200, 250, 86, 20);
-		aceptar.setBounds(350, 400, 100, 20);
+		aceptarCrearSala.setBounds(350, 400, 100, 20);
 		aceptarSala.setBounds(350, 400, 130, 20);
 		scrollLista.setBounds(20, 50, 300, 300);
 		scrollLista.setViewportView(opcionesSalas);
@@ -385,7 +385,7 @@ class PanelLobby extends JPanel {
 					e2.printStackTrace();
 				}
 
-			} else if (e.getSource() == aceptar) {
+			} else if (e.getSource() == aceptarCrearSala) {
 				dejarDeMostrarFormulario();
 				try {
 					Gson gson = new Gson();
@@ -456,7 +456,7 @@ class PanelLobby extends JPanel {
 		rondasMax.setVisible(false);
 		puntosObjetivos.setVisible(false);
 		cantJugadores.setVisible(false);
-		aceptar.setVisible(false);
+		aceptarCrearSala.setVisible(false);
 	}
 
 	public void visualizarUnirseASala() {
@@ -481,7 +481,7 @@ class PanelLobby extends JPanel {
 		rondasMax.setVisible(false);
 		puntosObjetivos.setVisible(false);
 		cantJugadores.setVisible(false);
-		aceptar.setVisible(false);
+		aceptarCrearSala.setVisible(false);
 		unirseSala.setVisible(false);
 		crearSala.setVisible(false);
 		salir.setVisible(false);
@@ -515,7 +515,7 @@ class PanelLobby extends JPanel {
 		rondasMax.setVisible(false);
 		puntosObjetivos.setVisible(false);
 		cantJugadores.setVisible(false);
-		aceptar.setVisible(false);
+		aceptarCrearSala.setVisible(false);
 		unirseSala.setVisible(false);
 		crearSala.setVisible(false);
 		salir.setVisible(false);
@@ -543,7 +543,7 @@ class PanelLobby extends JPanel {
 		rondasMax.setVisible(false);
 		puntosObjetivos.setVisible(false);
 		cantJugadores.setVisible(false);
-		aceptar.setVisible(false);
+		aceptarCrearSala.setVisible(false);
 		unirseSala.setVisible(false);
 		crearSala.setVisible(false);
 		salir.setVisible(false);
