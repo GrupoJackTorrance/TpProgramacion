@@ -11,7 +11,7 @@ import com.google.gson.FieldAttributes;
 public class MyExclusionStrategy implements ExclusionStrategy {
 
 	  public boolean shouldSkipClass(Class<?> clase) {
-	    return clase == JFrame.class;
+	    return clase == JFrame.class || clase == JPanel.class ;
 	  }
 
 	  public boolean shouldSkipField(FieldAttributes fieldAttributes)

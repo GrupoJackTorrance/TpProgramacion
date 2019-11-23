@@ -1,5 +1,7 @@
 package clienteServidor;
 
+import grafica.VentanaTablero;
+
 import java.io.DataInputStream;
 
 import logica.*;
@@ -16,6 +18,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.tools.JavaFileObject;
 
 import com.google.gson.Gson;
@@ -201,6 +205,8 @@ public class MiServidor implements Runnable {
 			// Gson gson= new Gson();
 			GsonBuilder builder = new GsonBuilder().setExclusionStrategies(new MyExclusionStrategy());
 			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+//			builder.registerTypeAdapter(JPanel.class, new AbstractAdapter());
+//			builder.registerTypeAdapter(JFrame.class, new AbstractAdapter());
 			Gson gson = builder.create();
 			String respuesta = null;
 			if (accion.equals("devolverSalas")) {
@@ -280,9 +286,10 @@ public class MiServidor implements Runnable {
 				//salasDisponibles.put(salaString, sala);
 				
 				//Empiezo el hilo de la partida
-				
+//				gson = builder.excludeFieldsWithoutExposeAnnotation().create();
 				HiloPartida hiloPartida = new HiloPartida(sala,"SalaEspera");
 				hiloPartida.start();
+
 				avisarCambio(this.jugador,new PaqueteMensaje("InicioPartida",gson.toJson(sala.getNombreSala()),"EnSala"+sala.getNombreSala()));
 				respuesta = "InicioPartida";
 					
@@ -299,7 +306,11 @@ public class MiServidor implements Runnable {
 		}
 
 		private void avisarcambio2(Jugador jugador2, PaqueteMensaje paquete, String nombresala) {
-			Gson gson = new Gson();
+			GsonBuilder builder = new GsonBuilder();
+//			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter()).setExclusionStrategies(new MyExclusionStrategy());
+			builder.setExclusionStrategies(new MyExclusionStrategy());
+			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+			Gson gson = builder.create();
 			String mensaje = gson.toJson(paquete);
 			DataOutputStream salida;
 			List<Jugador> jugadores = salasDisponibles.get(nombresala).getJugadores2();
@@ -320,7 +331,11 @@ public class MiServidor implements Runnable {
 		
 		public void avisarCambio(Jugador jugador, PaqueteMensaje paquete) {
 
-			Gson gson = new Gson();
+			GsonBuilder builder = new GsonBuilder();
+//			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter()).setExclusionStrategies(new MyExclusionStrategy());
+			builder.setExclusionStrategies(new MyExclusionStrategy());
+			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+			Gson gson = builder.create();
 			String mensaje = gson.toJson(paquete);
 			DataOutputStream salida;
 			for (Map.Entry<Jugador, HiloServidor> cliente : jugadoresLobby.entrySet()) {

@@ -17,7 +17,7 @@ public class Partida {
 
 	private int rondaMax; // cantidad de rondas maximas para la partida
 	private int puntosObjetivo; // cantidad de puntos para ganar
-	public  Tablero tablero; // Tablero de juego
+	public  transient Tablero tablero; // Tablero de juego
 	private List<Jugador> jugadores = new LinkedList<Jugador>(); // Lista de jugadores
 	private int turnos; // Cantidad de turnos que va haber segun los jugadores que haya
 	private static boolean terminaMiniJuego = false;

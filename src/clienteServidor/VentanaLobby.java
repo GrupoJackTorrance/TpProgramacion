@@ -27,6 +27,8 @@ import grafica.VentanaTablero;
 import logica.AbstractAdapter;
 import logica.Casilla;
 import logica.EfectoDarObjeto;
+import logica.Jugador;
+import logica.MyExclusionStrategy;
 import logica.Partida;
 import logica.Sala;
 import logica.Tablero;
@@ -92,7 +94,7 @@ public class VentanaLobby extends JFrame implements Runnable {
 				rePintar(mensajeRecibido);
 			}
 		} catch (IOException e1) {
-			// TODO Bloque catch generado automï¿½ticamente
+			// TODO Bloque catch generado automáticamente
 			e1.printStackTrace();
 		}
 
@@ -105,15 +107,15 @@ public class VentanaLobby extends JFrame implements Runnable {
 		if(mensajeRecibido.accion.equals("NuevoJugadorSala")) {
 			actualizarJugadorSala((String)mensajeRecibido.getObj());
 		}
-		if(mensajeRecibido.accion.equals("InicioPartida")){
+		if(mensajeRecibido.accion.equals("AbrirVentana")){
 			mostrarPartida((String)mensajeRecibido.getObj());
 		}
 		
 		
 	}
 
-	private void mostrarPartida(String SalaString) {
-		panel.mostrarPartida(SalaString);
+	private void mostrarPartida(String partida) {
+		panel.mostrarPartida(partida);
 		
 	}
 
@@ -149,7 +151,7 @@ class PanelLobby extends JPanel {
 	private JComboBox<String> cantJugadores = new JComboBox<String>();
 
 	WindowListener exitListener;
-	PanelVentanaTablero ventana;
+	VentanaTablero ventana;
 	
 	public  void setSalaDisponibles(List<String> nuevas){
 		this.salasDisponibles=nuevas;
@@ -160,14 +162,12 @@ class PanelLobby extends JPanel {
 		tinfoPartida.setText(nuevo);	
 	}
 	
-	public void mostrarPartida(String SalaString){
-		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+	public void mostrarPartida(String partida){
+		GsonBuilder builder = new GsonBuilder().registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
 		Gson gson = builder.create();
-		Sala sala = gson.fromJson(SalaString, Sala.class);
-				
-		this.ventana = sala.getPartida().getTablero().getVentanaTablero().getPanelTablero();
-		this.ventana.verTablero();
+		Partida p = gson.fromJson(partida, Partida.class);
+		p.elegirTablero();
+		this.ventana = new VentanaTablero("partido1", 100, 100, p.tablero);
 	}
 	
 	
@@ -311,7 +311,7 @@ class PanelLobby extends JPanel {
 					}
 
 				} catch (IOException e1) {
-					// TODO Bloque catch generado automï¿½ticamente
+					// TODO Bloque catch generado automáticamente
 					e1.printStackTrace();
 				}
 			}
@@ -333,7 +333,7 @@ class PanelLobby extends JPanel {
 
 					// cuando se apreta el boton " aceptar" se envia la opcion elegida
 				} catch (IOException e1) {
-					// TODO Bloque catch generado automï¿½ticamente
+					// TODO Bloque catch generado automáticamente
 					e1.printStackTrace();
 				}
 			} else if (e.getSource() == crearSala) {
@@ -352,7 +352,7 @@ class PanelLobby extends JPanel {
 					// if(entrada.equals("OK"))
 					cerrarConexion();
 				} catch (IOException e2) {
-					// TODO Bloque catch generado automï¿½ticamente
+					// TODO Bloque catch generado automáticamente
 					e2.printStackTrace();
 				}
 
