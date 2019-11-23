@@ -444,7 +444,7 @@ class PanelLobby extends JPanel {
 		puntosObjetivos.setVisible(true);
 		cantJugadores.setVisible(true);
 
-		aceptar.setVisible(true);
+		aceptarCrearSala.setVisible(true);
 	}
 
 	public void dejarDeMostrarFormulario() {
