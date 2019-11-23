@@ -14,7 +14,7 @@ public class Partida {
 	 * PARAMETROS DE PARTIDA
 	 ***********************************/
 	// /int estado; PARA SABER SI UNA PARTIDA SE ENCUENTRA ACTIVA O NO
-
+	private String nombre; 
 	private int rondaMax; // cantidad de rondas maximas para la partida
 	private int puntosObjetivo; // cantidad de puntos para ganar
 	public  transient Tablero tablero; // Tablero de juego
@@ -183,6 +183,15 @@ public class Partida {
 	public void verTablero(){
 		//this.tablero.verTablero();
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 
 
 }
