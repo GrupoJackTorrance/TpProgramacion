@@ -29,7 +29,7 @@ public class PartidaTest {
 	jugadores.add(jugador3);
 	jugadores.add(jugador4);
 	
-	partida = new Partida(10, 30, 4, jugadores);
+	partida = new Partida("Partida",10, 30, 4, jugadores);
 	
 	}
 	
