@@ -171,7 +171,7 @@ public class MiServidor implements Runnable {
 					// String respuesta=determinarMensajeRespuesta(accion);
 					salida.writeUTF(respuesta);
 					if(respuesta.equals("InicioPartida"))
-						jugadoresLobby.get(this.jugador).stop();
+						jugadoresLobby.get(this.jugador).setCorriendo(false);
 					if (respuesta.equals("OK")) {
 						entrada.close();
 						salida.close();
@@ -186,6 +186,13 @@ public class MiServidor implements Runnable {
 			}
 		}
 
+		public boolean isCorriendo() {
+			return corriendo;
+		}
+		public void setCorriendo(boolean corriendo) {
+			this.corriendo = corriendo;
+		}
+		
 		public String determinarAccion(String mensajeCliente) {
 			// Gson gson= new Gson();
 			GsonBuilder builder = new GsonBuilder();
@@ -294,8 +301,13 @@ public class MiServidor implements Runnable {
 				HiloPartida hiloPartida = new HiloPartida(sala,"SalaEspera");
 				hiloPartida.start();
 				agregarHilo(sala,hiloPartida);
-
-				avisarCambio(this.jugador,new PaqueteMensaje("InicioPartida",gson.toJson(sala.getPartida().getNombre()),"EnSala"+sala.getNombreSala()));
+				
+				String datosPartida=sala.getPartida().getNombre()+";"+sala.getPartida().getPuntosObjetivo()+";"+sala.getPartida().getRondaMax()+";"+sala.getPartida().getJugadores().size();
+				for (Jugador jugador : sala.getJugadores2()) {
+					datosPartida+=";"+jugador.getNombre()+";"+jugador.getPersonaje();
+				}
+				PaqueteMensaje mensaje = new PaqueteMensaje("InicioPartida", datosPartida,"EnSala"+sala.getNombreSala());
+				avisarCambio(this.jugador,mensaje);
 				respuesta = "InicioPartida";
 					
 
@@ -328,7 +340,7 @@ public class MiServidor implements Runnable {
 						salida = new DataOutputStream(cliente.getValue().getSocketServidorCliente().getOutputStream());
 						salida.writeUTF(mensaje);
 						if(mensaje.equals("InicioPartida"))
-							cliente.getValue().stop();
+							cliente.getValue().setCorriendo(false);
 					} catch (IOException e) {
 						System.out.println(e.getMessage());
 					}
