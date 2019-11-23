@@ -110,7 +110,6 @@ public class VentanaLobby extends JFrame implements Runnable {
 	}
 
 	private void mostrarPartida(Object partida) {
-		System.exit(1);
 		panel.mostrarPartida((String)partida);
 		
 	}
@@ -156,6 +155,7 @@ class PanelLobby extends JPanel {
 	}
 	
 	public void mostrarPartida(String partida){
+		System.out.println("llegue");
 		String nombrePartida=partida.split(";")[0];
 		int puntosObjetivo=Integer.parseInt(partida.split(";")[1]);
 		int maxRondas=Integer.parseInt(partida.split(";")[2]);
@@ -168,10 +168,14 @@ class PanelLobby extends JPanel {
 		}
 		Partida p= new Partida(nombrePartida,puntosObjetivo,maxRondas,cantJugadores,jugadores);
 		p.elegirTablero();
-		this.ventana = new VentanaTablero(p.getNombre(), 100, 100, p.tablero);
+		try {
+			p.InicioPartida();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		p.getTablero().getVentanaTablero().verTablero();
 		setVisible(false);
 		System.exit(1);
-		ventana.verTablero();
 	}
 	
 	
