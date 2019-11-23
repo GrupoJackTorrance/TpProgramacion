@@ -34,10 +34,6 @@ import logica.Sala;
 import logica.Tablero;
 
 public class VentanaLobby extends JFrame implements Runnable {
-	/**
-	 * 
-	 */
-
 	private static final long serialVersionUID = 8896812117446574226L;
 	private static Socket socketClienteServidor;
 	private static Socket socketServidorCliente;
@@ -69,7 +65,6 @@ public class VentanaLobby extends JFrame implements Runnable {
 	}
 
 	public VentanaLobby(Socket socketClienteServidor, Socket socketServidorCliente) {
-		
 		this.socketClienteServidor = socketClienteServidor;
 		this.socketServidorCliente=socketServidorCliente;
 		Thread hiloCliente = new Thread(this);
@@ -94,7 +89,6 @@ public class VentanaLobby extends JFrame implements Runnable {
 				rePintar(mensajeRecibido);
 			}
 		} catch (IOException e1) {
-			// TODO Bloque catch generado automáticamente
 			e1.printStackTrace();
 		}
 
@@ -107,21 +101,24 @@ public class VentanaLobby extends JFrame implements Runnable {
 		if(mensajeRecibido.accion.equals("NuevoJugadorSala")) {
 			actualizarJugadorSala((String)mensajeRecibido.getObj());
 		}
-		if(mensajeRecibido.accion.equals("AbrirVentana")){
-			mostrarPartida((String)mensajeRecibido.getObj());
+		if(mensajeRecibido.accion.equals("InicioPartida")){
+			mostrarPartida(mensajeRecibido.getObj());
 		}
 		
 		
 	}
 
-	private void mostrarPartida(String partida) {
-		panel.mostrarPartida(partida);
+	private void mostrarPartida(Object partid) {
+		Gson gson= new Gson();
+		System.exit(1);
+		String part=gson.toJson(partid);
+		panel.mostrarPartida(part);
 		
 	}
 
 	private void actualizarJugadorSala(String obj) {
 		panel.settinfoPartida(obj);
-		panel.visibilizarSalaEspera2(2);
+		panel.repintarSalaEspera(2);
 	}
 
 	private void actualizarSalas(Object obj) {		
@@ -132,9 +129,6 @@ public class VentanaLobby extends JFrame implements Runnable {
 }
 
 class PanelLobby extends JPanel {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2763110189112444391L;
 	JButton unirseSala, crearSala, salir, aceptarSala, aceptarCrearSala, iniciarPartida, salirEspera;
 	JList<String> opcionesSalas = new JList<String>();
@@ -163,11 +157,11 @@ class PanelLobby extends JPanel {
 	}
 	
 	public void mostrarPartida(String partida){
-		GsonBuilder builder = new GsonBuilder().registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
-		Gson gson = builder.create();
+		Gson gson = new Gson();
 		Partida p = gson.fromJson(partida, Partida.class);
 		p.elegirTablero();
-		this.ventana = new VentanaTablero("partido1", 100, 100, p.tablero);
+		this.ventana = new VentanaTablero(p.getNombre(), 100, 100, p.tablero);
+		ventana.verTablero();
 	}
 	
 	
@@ -309,7 +303,11 @@ class PanelLobby extends JPanel {
 					String entrada = flujoEntrada.readUTF();
 					if (entrada.equals("InicioPartida")) {
 						System.out.println("entro a la verdadera accion");
-						ventana.setVisible(false);
+						String partida= gson.fromJson(entrada, String.class);
+						setVisible(false);
+						System.exit(1);
+						String part=gson.toJson(partida);
+						VentanaLobby.panel.mostrarPartida(part);
 					}
 
 				} catch (IOException e1) {
@@ -506,7 +504,7 @@ class PanelLobby extends JPanel {
 			MensajeSalaEspera.setVisible(true);
 	}
 	
-	public void visibilizarSalaEspera2(int cant) {
+	public void repintarSalaEspera(int cant) {
 		System.out.println("Se repinto la sala de espera");
 		tcrearSala.setVisible(false);
 		labelcantJugadores.setVisible(false);
