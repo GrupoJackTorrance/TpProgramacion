@@ -232,11 +232,15 @@ public class MiServidor implements Runnable {
 				 */
 
 				String salaString = (String) gson.fromJson(mensajeCliente, PaqueteMensaje.class).getObj();
-				Sala s = gson.fromJson(salaString, Sala.class);
-				Sala sala = jugador.crearSala(s.getNombreSala(), s.getCantMaxJugadores(), s.getPuntosObj(),
-						s.getmaxPartidas());
+				String nombreSala=salaString.split(";")[0];
+				int cantMaxJugadores=Integer.parseInt(salaString.split(";")[1]);
+				int puntosObjetivo=Integer.parseInt(salaString.split(";")[2]);
+				int maxPartidas=Integer.parseInt(salaString.split(";")[3]);
+							
+				
+				Sala sala = jugador.crearSala(nombreSala, cantMaxJugadores, puntosObjetivo, maxPartidas);
 				salasDisponibles.put(sala.getNombreSala(), sala);
-				salasDisponiblesClientes.add(salaString);
+				salasDisponiblesClientes.add(nombreSala);
 				respuesta = gson.toJson(sala.getNombreSala() + " " + sala.getcantJugadores());
 				this.ubicacion="CrearSala";
 				avisarCambio(this.jugador, new PaqueteMensaje("SalaNueva",salasDisponiblesClientes,"viendoSalasDisponibles" ));
@@ -246,8 +250,8 @@ public class MiServidor implements Runnable {
 			
 			else if (accion.equals("Unirse")) {
 				System.out.println("mi ubicacion: "+this.ubicacion);
-				String salaString = (String) gson.fromJson(mensajeCliente, PaqueteMensaje.class).getObj();
-				Sala sala = salasDisponibles.get(salaString);
+				String nombreSala = (String) gson.fromJson(mensajeCliente, PaqueteMensaje.class).getObj();
+				Sala sala = salasDisponibles.get(nombreSala);
 				sala.addJugadorSala(jugador);
 				respuesta = gson.toJson("Sala: " + sala.getNombreSala() + "    Jugadores unidos: "
 						+ sala.getcantJugadores() + "/" + sala.getCantMaxJugadores());
@@ -279,7 +283,7 @@ public class MiServidor implements Runnable {
 				
 				HiloPartida hiloPartida = new HiloPartida(sala,"SalaEspera");
 				hiloPartida.start();
-				avisarCambio(this.jugador,new PaqueteMensaje("InicioPartida",gson.toJson(sala),"EnSala"+sala.getNombreSala()));
+				avisarCambio(this.jugador,new PaqueteMensaje("InicioPartida",gson.toJson(sala.getNombreSala()),"EnSala"+sala.getNombreSala()));
 				respuesta = "InicioPartida";
 					
 

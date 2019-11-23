@@ -305,7 +305,7 @@ class PanelLobby extends JPanel {
 					DataInputStream flujoEntrada = new DataInputStream(
 							VentanaLobby.getsocketClienteServidor().getInputStream());
 					String entrada = flujoEntrada.readUTF();
-					if (entrada.equals("muestraPartida")) {
+					if (entrada.equals("InicioPartida")) {
 						System.out.println("entro a la verdadera accion");
 						ventana.setVisible(false);
 					}
@@ -388,16 +388,13 @@ class PanelLobby extends JPanel {
 			} else if (e.getSource() == aceptar) {
 				dejarDeMostrarFormulario();
 				try {
+					Gson gson = new Gson();
 					DataOutputStream flujoSalida = new DataOutputStream(
 							VentanaLobby.getsocketClienteServidor().getOutputStream());
-					String jsonSala = "{'nombreSala':'" + nombreSala.getText() + "','cantMaxJugadores':"
-							+ cantJugadores.getSelectedItem() + ",'maxPartidas':" + rondasMax.getText()
-							+ ",'puntosObjetivo':" + puntosObjetivos.getText() + "}";
-					PaqueteMensaje mensaje2 = new PaqueteMensaje("crearSala", jsonSala);// nombreSala.getText());
-//    	   	PaqueteMensaje mensaje2= new PaqueteMensaje("crearSala",nombreSala.getText());
-					GsonBuilder builder = new GsonBuilder();
-					builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
-					Gson gson = builder.create();
+					String datosSala =nombreSala.getText()+";"+cantJugadores.getSelectedItem()+";"+puntosObjetivos.getText()+";"+rondasMax.getText();
+									
+					PaqueteMensaje mensaje2 = new PaqueteMensaje("crearSala", datosSala);// nombreSala.getText());
+//   
 					flujoSalida.writeUTF(gson.toJson(mensaje2));
 					DataInputStream flujoEntrada = new DataInputStream(
 							VentanaLobby.getsocketClienteServidor().getInputStream());
