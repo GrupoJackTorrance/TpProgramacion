@@ -32,11 +32,12 @@ public class Partida {
 	 * CONSTRUCTOR DE PARTIDA
 	 *******************************************/
 	// Generamos la partida
-	public Partida(int rondaMax, int puntosObjetivo, int cantJugadores, List<Jugador> listaJugadores) {
+	public Partida(String nombre,int rondaMax, int puntosObjetivo, int cantJugadores, List<Jugador> listaJugadores) {
 		this.turnos = cantJugadores;
 		this.puntosObjetivo = puntosObjetivo;
 		this.rondaMax = rondaMax;
 		this.jugadores = listaJugadores;
+		this.nombre=nombre;
 
 	}
 
