@@ -32,6 +32,7 @@ import com.google.gson.JsonParser;
 public class MiServidor implements Runnable {
 
 	HashMap<Jugador, HiloServidor> jugadoresLobby = new HashMap<Jugador, HiloServidor>();
+	HashMap<Jugador, HiloPartida> jugadoresSala = new HashMap<Jugador, HiloPartida>();
 	HashMap<String, Sala> salasDisponibles = new HashMap<String, Sala>();
 	List<String> salasDisponiblesClientes = new ArrayList<String>();
 	Socket clienteServidor;
@@ -169,6 +170,8 @@ public class MiServidor implements Runnable {
 					String respuesta = hacerAccion(accion, mensajeCliente);
 					// String respuesta=determinarMensajeRespuesta(accion);
 					salida.writeUTF(respuesta);
+					if(respuesta.equals("InicioPartida"))
+						jugadoresLobby.get(this.jugador).stop();
 					if (respuesta.equals("OK")) {
 						entrada.close();
 						salida.close();
@@ -261,7 +264,7 @@ public class MiServidor implements Runnable {
 				sala.addJugadorSala(jugador);
 				respuesta = gson.toJson("Sala: " + sala.getNombreSala() + "    Jugadores unidos: "
 						+ sala.getcantJugadores() + "/" + sala.getCantMaxJugadores());
-				avisarcambio2(this.jugador,new PaqueteMensaje("NuevoJugadorSala",respuesta,"EnSala"+sala.getNombreSala()),sala.getNombreSala());
+				avisarCambio(this.jugador,new PaqueteMensaje("NuevoJugadorSala",respuesta,"EnSala"+sala.getNombreSala()));
 				this.ubicacion="EnSala"+sala.getNombreSala();
 			} 
 			
@@ -283,14 +286,16 @@ public class MiServidor implements Runnable {
 				Sala sala = salasDisponibles.get(salaString); 
 				sala.crearPartida();
 				sala.getPartida().tablero= sala.getPartida().elegirTablero(); //seteo el tablero
+				
 				//salasDisponibles.put(salaString, sala);
 				
 				//Empiezo el hilo de la partida
 //				gson = builder.excludeFieldsWithoutExposeAnnotation().create();
 				HiloPartida hiloPartida = new HiloPartida(sala,"SalaEspera");
 				hiloPartida.start();
+				agregarHilo(sala,hiloPartida);
 
-				avisarCambio(this.jugador,new PaqueteMensaje("InicioPartida",gson.toJson(sala.getNombreSala()),"EnSala"+sala.getNombreSala()));
+				avisarCambio(this.jugador,new PaqueteMensaje("InicioPartida",gson.toJson(sala.getPartida().getNombre()),"EnSala"+sala.getNombreSala()));
 				respuesta = "InicioPartida";
 					
 
@@ -304,26 +309,7 @@ public class MiServidor implements Runnable {
 		public String determinarMensajeRespuesta(String accion) {
 			return accion;
 		}
-
-		private void avisarcambio2(Jugador jugador2, PaqueteMensaje paquete, String nombresala) {
-			Gson gson= new Gson();
-			String mensaje = gson.toJson(paquete);
-			DataOutputStream salida;
-			List<Jugador> jugadores = salasDisponibles.get(nombresala).getJugadores2(); // se le pide a las sala la lista de los jugadores en esa Sala
-			for (Jugador jugador : jugadores) {
-				System.out.println("ubicacion de cliente: "+jugadoresLobby.get(jugador).getUbicacion());
-				System.out.println("ubicacion destino: "+ paquete.getUbicacionDestino());
-				if (jugadoresLobby.get(jugador).getUbicacion().equals(paquete.getUbicacionDestino())) {
-					try {
-						salida= new DataOutputStream(jugadoresLobby.get(jugador).getSocketServidorCliente().getOutputStream());
-						salida.writeUTF(mensaje);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-			
-		}
+		
 		
 		public void avisarCambio(Jugador jugador, PaqueteMensaje paquete) {
 
@@ -341,6 +327,8 @@ public class MiServidor implements Runnable {
 					try {
 						salida = new DataOutputStream(cliente.getValue().getSocketServidorCliente().getOutputStream());
 						salida.writeUTF(mensaje);
+						if(mensaje.equals("InicioPartida"))
+							cliente.getValue().stop();
 					} catch (IOException e) {
 						System.out.println(e.getMessage());
 					}
@@ -349,6 +337,13 @@ public class MiServidor implements Runnable {
 			}
 		}
 
+	}
+	
+	public void agregarHilo(Sala sala,HiloPartida partida) {
+		List<Jugador> jugadores = salasDisponibles.get(sala.getNombreSala()).getJugadores2();
+		for (Jugador jugador : jugadores) {
+			jugadoresSala.put(jugador, partida);
+		}
 	}
 	
 	class HiloPartida  extends Thread {
@@ -399,7 +394,6 @@ public class MiServidor implements Runnable {
 				this.sala.iniciarPartida();
 			}
 			return respuesta = "OK";
-
 		}
 	}
 
