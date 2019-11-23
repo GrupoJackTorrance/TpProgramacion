@@ -181,7 +181,7 @@ public class Partida {
 	}
 	
 	public void verTablero(){
-		this.tablero.verTablero();
+		//this.tablero.verTablero();
 	}
 
 

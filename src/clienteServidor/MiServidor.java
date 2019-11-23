@@ -306,14 +306,10 @@ public class MiServidor implements Runnable {
 		}
 
 		private void avisarcambio2(Jugador jugador2, PaqueteMensaje paquete, String nombresala) {
-			GsonBuilder builder = new GsonBuilder();
-//			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter()).setExclusionStrategies(new MyExclusionStrategy());
-			builder.setExclusionStrategies(new MyExclusionStrategy());
-			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
-			Gson gson = builder.create();
+			Gson gson= new Gson();
 			String mensaje = gson.toJson(paquete);
 			DataOutputStream salida;
-			List<Jugador> jugadores = salasDisponibles.get(nombresala).getJugadores2();
+			List<Jugador> jugadores = salasDisponibles.get(nombresala).getJugadores2(); // se le pide a las sala la lista de los jugadores en esa Sala
 			for (Jugador jugador : jugadores) {
 				System.out.println("ubicacion de cliente: "+jugadoresLobby.get(jugador).getUbicacion());
 				System.out.println("ubicacion destino: "+ paquete.getUbicacionDestino());

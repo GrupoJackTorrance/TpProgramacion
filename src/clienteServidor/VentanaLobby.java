@@ -280,7 +280,9 @@ class PanelLobby extends JPanel {
 
 	public void mostrarSalasDisponibles() {
 		for (String salasDisp : salasDisponibles) {
-			opcionesSalas2.addElement(salasDisp.substring(15, salasDisp.indexOf(",") - 1));
+			//opcionesSalas2.addElement(salasDisp.substring(15, salasDisp.indexOf(",") - 1));
+			opcionesSalas2.addElement(salasDisp);
+		
 		}
 		opcionesSalas.setModel(opcionesSalas2);
 		opcionesSalas.setLocation(200, 200);
@@ -376,9 +378,9 @@ class PanelLobby extends JPanel {
 					Gson gson = new Gson();
 					DataInputStream flujoEntrada = new DataInputStream(
 							VentanaLobby.getsocketClienteServidor().getInputStream());
-					// String mensaje= gson.toJson(salasDisponibles.(nombreSala));
+					
 					flujoSalida.writeUTF(gson.toJson(mensaje));
-//			visibilizarSalaEspera(nombreSala,"unirse");
+//		
 					String respuesta = flujoEntrada.readUTF();
 					visibilizarSalaEspera(respuesta,2, "unirse");
 				} catch (IOException e2) {
