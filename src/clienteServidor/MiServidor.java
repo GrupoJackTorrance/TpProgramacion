@@ -52,7 +52,7 @@ public class MiServidor implements Runnable {
 	@Override
 	public void run() {
 		try {
-			ServerSocket servidor = new ServerSocket(9836);
+			ServerSocket servidor = new ServerSocket(9836);//9836
 			ventana = new VentanaServidor(servidor);
 			do {
 				System.out.println("esperando cliente");
@@ -375,7 +375,7 @@ public class MiServidor implements Runnable {
 		@Override
 		public void run() {
 			try {
-				while (corriendo) {
+//				while (corriendo) {
 //					entrada = new DataInputStream(clienteServidor.getInputStream());
 //					salida = new DataOutputStream(clienteServidor.getOutputStream());
 //					String mensajeCliente = entrada.readUTF();
@@ -387,7 +387,7 @@ public class MiServidor implements Runnable {
 //						corriendo = false;
 //					}
 					this.sala.iniciarPartida();
-				}
+//				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {

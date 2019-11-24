@@ -173,9 +173,10 @@ class PanelLobby extends JPanel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		p.getTablero().getVentanaTablero().verTablero();
 		setVisible(false);
 		System.exit(1);
+		p.getTablero().getVentanaTablero().verTablero();
+		
 	}
 	
 	
@@ -517,6 +518,8 @@ class PanelLobby extends JPanel {
 		else
 			MensajeSalaEspera.setVisible(true);
 	}
+	
+
 	
 	public void repintarSalaEspera(int cant) {
 		System.out.println("Se repinto la sala de espera");
