@@ -260,7 +260,7 @@ public class MiServidor implements Runnable {
 				salasDisponiblesClientes.add(nombreSala);
 				respuesta = gson.toJson(sala.getNombreSala() + " " + sala.getcantJugadores());
 				this.ubicacion="CrearSala";
-				avisarCambio(this.jugador, new PaqueteMensaje("SalaNueva",salasDisponiblesClientes,"viendoSalasDisponibles" ));
+				ManejadorDeImputOutput.avisarCambio(this.jugador, new PaqueteMensaje("SalaNueva",salasDisponiblesClientes,"viendoSalasDisponibles" ),jugadoresLobby);
 				this.ubicacion="EnSala"+sala.getNombreSala();
 			}
 			
@@ -272,7 +272,7 @@ public class MiServidor implements Runnable {
 				sala.addJugadorSala(jugador);
 				respuesta = gson.toJson("Sala: " + sala.getNombreSala() + "    Jugadores unidos: "
 						+ sala.getcantJugadores() + "/" + sala.getCantMaxJugadores());
-				avisarCambio(this.jugador,new PaqueteMensaje("NuevoJugadorSala",respuesta,"EnSala"+sala.getNombreSala()));
+				ManejadorDeImputOutput.avisarCambio(this.jugador,new PaqueteMensaje("NuevoJugadorSala",respuesta,"EnSala"+sala.getNombreSala()),jugadoresLobby);
 				this.ubicacion="EnSala"+sala.getNombreSala();
 			} 
 			
@@ -308,7 +308,7 @@ public class MiServidor implements Runnable {
 					datosPartida+=";"+jugador.getNombre()+";"+jugador.getPersonaje();
 				}
 				PaqueteMensaje mensaje = new PaqueteMensaje("InicioPartida", datosPartida,"EnSala"+sala.getNombreSala());
-				avisarCambio(this.jugador,mensaje);
+				ManejadorDeImputOutput.avisarCambio(this.jugador,mensaje,jugadoresLobby);
 				respuesta = "InicioPartida";
 					
 
@@ -324,31 +324,7 @@ public class MiServidor implements Runnable {
 		}
 		
 		
-		public void avisarCambio(Jugador jugador, PaqueteMensaje paquete) {
 
-			GsonBuilder builder = new GsonBuilder();
-//			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter()).setExclusionStrategies(new MyExclusionStrategy());
-			builder.setExclusionStrategies(new MyExclusionStrategy());
-			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
-			Gson gson = builder.create();
-			String mensaje = gson.toJson(paquete);
-			DataOutputStream salida;
-			for (Map.Entry<Jugador, HiloServidor> cliente : jugadoresLobby.entrySet()) {
-				System.out.println("ubicacion de cliente: "+cliente.getValue().getUbicacion());
-				System.out.println("ubicacion destino: "+ paquete.getUbicacionDestino());
-				if (!cliente.getValue().getJugador().getNombre().equals(jugador.getNombre()) && cliente.getValue().getUbicacion().equals(paquete.getUbicacionDestino())) {
-					try {
-						salida = new DataOutputStream(cliente.getValue().getSocketServidorCliente().getOutputStream());
-						salida.writeUTF(mensaje);
-						if(mensaje.equals("InicioPartida"))
-							cliente.getValue().setCorriendo(false);
-					} catch (IOException e) {
-						System.out.println(e.getMessage());
-					}
-
-				}
-			}
-		}
 
 	}
 	
@@ -375,6 +351,7 @@ public class MiServidor implements Runnable {
 		@Override
 		public void run() {
 			try {
+				this.sala.iniciarPartida();
 //				while (corriendo) {
 //					entrada = new DataInputStream(clienteServidor.getInputStream());
 //					salida = new DataOutputStream(clienteServidor.getOutputStream());
@@ -386,7 +363,6 @@ public class MiServidor implements Runnable {
 //						salida.close();
 //						corriendo = false;
 //					}
-					this.sala.iniciarPartida();
 //				}
 			} catch (IOException e) {
 				e.printStackTrace();
