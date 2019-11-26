@@ -81,7 +81,6 @@ public class VentanaLobby extends JFrame implements Runnable {
 		Gson gson= new Gson();
 
 		try {
-
 			DataInputStream flujoEntrada = new DataInputStream(socketServidorCliente.getInputStream());
 			while (true) {
 				String mensaje = flujoEntrada.readUTF();
@@ -96,6 +95,7 @@ public class VentanaLobby extends JFrame implements Runnable {
 	}
 
 	private void rePintar(PaqueteMensaje mensajeRecibido) {
+		System.out.println("Entrada: "+mensajeRecibido.getObj());
 		if(mensajeRecibido.accion.equals("SalaNueva")){
 			actualizarSalas(mensajeRecibido.getObj());
 		}
@@ -103,14 +103,14 @@ public class VentanaLobby extends JFrame implements Runnable {
 			actualizarJugadorSala((String)mensajeRecibido.getObj());
 		}
 		if(mensajeRecibido.accion.equals("InicioPartida")){
-			mostrarPartida(mensajeRecibido.getObj());
+			mostrarPartida((String)mensajeRecibido.getObj());
 		}
 		
 		
 	}
 
-	private void mostrarPartida(Object partida) {
-		panel.mostrarPartida((String)partida);
+	private void mostrarPartida(String partida) {
+		panel.mostrarPartida(partida);
 		
 	}
 
@@ -156,27 +156,31 @@ class PanelLobby extends JPanel {
 	
 	public void mostrarPartida(String partida){
 		System.out.println("llegue");
+		System.out.println(partida);
 		String nombrePartida=partida.split(";")[0];
-		int puntosObjetivo=Integer.parseInt(partida.split(";")[1]);
-		int maxRondas=Integer.parseInt(partida.split(";")[2]);
+		int maxRondas=Integer.parseInt(partida.split(";")[1]);
+		int puntosObjetivo=Integer.parseInt(partida.split(";")[2]);
 		int cantJugadores=Integer.parseInt(partida.split(";")[3]);
 		List<Jugador> jugadores=new LinkedList<Jugador>();
 		int limite=(cantJugadores*2)+4;
+		
 		for (int i = 4; i < limite; i+=2) {
 			Jugador n=new Jugador(partida.split(";")[i],partida.split(";")[i+1]);
 			jugadores.add(n);
 		}
-		Partida p= new Partida(nombrePartida,puntosObjetivo,maxRondas,cantJugadores,jugadores);
-		p.elegirTablero();
+		
+		Partida p = new Partida(nombrePartida,maxRondas,puntosObjetivo,cantJugadores,jugadores);
+		Tablero table=p.elegirTablero();
+		p.setTablero(table);		
+		p.getTablero().getVentanaTablero().verTablero();
 		try {
 			p.InicioPartida();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		setVisible(false);
 		System.exit(1);
-		p.getTablero().getVentanaTablero().verTablero();
-		
 	}
 	
 	
@@ -316,17 +320,17 @@ class PanelLobby extends JPanel {
 					DataInputStream flujoEntrada = new DataInputStream(
 							VentanaLobby.getsocketClienteServidor().getInputStream());
 					String entrada = flujoEntrada.readUTF();
-					if (entrada.equals("InicioPartida")) {
+					if (entrada.split(";")[0].equals("InicioPartida")) {
 						System.out.println("entro a la verdadera accion");
-						String partida= gson.fromJson(entrada, String.class);
-						setVisible(false);
-						System.exit(1);
-						String part=gson.toJson(partida);
+						String partida=(String)entrada;
+						String part=partida.substring(partida.indexOf(';')+1);
+						System.out.println(part);
 						VentanaLobby.panel.mostrarPartida(part);
+						//setVisible(false);
+						//System.exit(1);
 					}
 
 				} catch (IOException e1) {
-					// TODO Bloque catch generado automáticamente
 					e1.printStackTrace();
 				}
 			}
@@ -348,7 +352,6 @@ class PanelLobby extends JPanel {
 
 					// cuando se apreta el boton " aceptar" se envia la opcion elegida
 				} catch (IOException e1) {
-					// TODO Bloque catch generado automáticamente
 					e1.printStackTrace();
 				}
 			} else if (e.getSource() == crearSala) {
@@ -367,7 +370,6 @@ class PanelLobby extends JPanel {
 					// if(entrada.equals("OK"))
 					cerrarConexion();
 				} catch (IOException e2) {
-					// TODO Bloque catch generado automáticamente
 					e2.printStackTrace();
 				}
 
@@ -408,7 +410,7 @@ class PanelLobby extends JPanel {
 							VentanaLobby.getsocketClienteServidor().getOutputStream());
 					String datosSala =nombreSala.getText()+";"+cantJugadores.getSelectedItem()+";"+puntosObjetivos.getText()+";"+rondasMax.getText();
 									
-					PaqueteMensaje mensaje2 = new PaqueteMensaje("crearSala", datosSala);// nombreSala.getText());
+					PaqueteMensaje mensaje2 = new PaqueteMensaje("crearSala",datosSala);// nombreSala.getText());
 //   
 					flujoSalida.writeUTF(gson.toJson(mensaje2));
 					DataInputStream flujoEntrada = new DataInputStream(
@@ -438,6 +440,7 @@ class PanelLobby extends JPanel {
 		}
 
 	}
+	
 
 	public void visualizarFormularioCrearSala() {
 		unirseSala.setVisible(false);
