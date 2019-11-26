@@ -29,10 +29,6 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 
 public class JVentanaIngreso extends JFrame {
-
-	/**
-	 * 
-	 */
 	private transient static final long serialVersionUID = 6618747801020234776L;
 	private JPanel contentPane;
 	private JLabel label, labelUsuario, labelPersonaje, labelContraseña;
@@ -54,13 +50,11 @@ public class JVentanaIngreso extends JFrame {
 	public JVentanaIngreso() {
 		try {
 			
-			this.socketClienteServidor = new Socket("localhost", 9836); //"192.168.0.55"
+			this.socketClienteServidor = new Socket("192.168.0.28", 9836); //"192.168.0.55"
 			System.out.println(this.socketClienteServidor);
 		} catch (UnknownHostException e) {
-			// TODO Bloque catch generado automáticamente
 			System.out.println(e.getMessage());
 		} catch (IOException e) {
-			// TODO Bloque catch generado automáticamente
 			System.out.println(e.getMessage());
 		}
 		setResizable(false);
@@ -141,20 +135,19 @@ public class JVentanaIngreso extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
-	private void ingresarALobby() {
+	private void ingresarALobby(){
 //		new JVentanaTablero(textFieldUsuario.getText());
 
 		try {
-			
-
 			DataOutputStream info = new DataOutputStream(socketClienteServidor.getOutputStream());
-			Jugador jugador= new Jugador(nombrePersonaje.getText(),textFieldUsuario.getText());
+			//Jugador jugador= new Jugador(nombrePersonaje.getText(),textFieldUsuario.getText());
 			
-			GsonBuilder builder = new GsonBuilder();
-			builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
-			Gson gson = builder.create();
-//			Gson gson = new Gson();
-			String mensaje= gson.toJson(jugador);
+		//	GsonBuilder builder = new GsonBuilder();
+			//builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+			//Gson gson = builder.create();
+			Gson gson = new Gson();
+			System.out.println(nombrePersonaje.getText()+";"+textFieldUsuario.getText());
+			String mensaje= gson.toJson(nombrePersonaje.getText()+";"+textFieldUsuario.getText());
 			info.writeUTF(mensaje);
 			DataInputStream entrada = new DataInputStream(socketClienteServidor.getInputStream());
 			String messajeJ=entrada.readUTF();
@@ -166,7 +159,6 @@ public class JVentanaIngreso extends JFrame {
 				new VentanaLobby(socketClienteServidor,socketServidorCliente);
 			}
 		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(this,
 					"No encontro el servidor.",
 					 "Error",
@@ -174,8 +166,6 @@ public class JVentanaIngreso extends JFrame {
 			
 			dispose();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
 	}
