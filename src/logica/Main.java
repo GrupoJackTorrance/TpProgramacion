@@ -35,6 +35,9 @@ public class Main {
 		sala.addJugadorSala(jugador3);
 		sala.addJugadorSala(jugador4);
 		Partida partida1 = sala.crearPartida();
+		Tablero table=partida1.elegirTablero();
+		partida1.setTablero(table);		
+		partida1.getTablero().getVentanaTablero().verTablero();
 //		String sonido="sonidos/playing_the_game.wav";
 //		InputStream in= new FileInputStream(sonido);
 //		AudioStream audio= new AudioStream(in);
