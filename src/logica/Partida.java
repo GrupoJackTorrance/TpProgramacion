@@ -28,6 +28,14 @@ public class Partida {
 
 	/**********************************************************************************************/
 
+	public Ronda getRonda() {
+		return ronda;
+	}
+
+	public void setRonda(Ronda ronda) {
+		this.ronda = ronda;
+	}
+
 	/*****************************
 	 * CONSTRUCTOR DE PARTIDA
 	 *******************************************/
@@ -79,11 +87,11 @@ public class Partida {
 			
 		}
 		this.OrdenarporPuntos(jugadores);
-		//this.tablero.getVentanaTablero().dispose();
+		this.tablero.getVentanaTablero().dispose();
 		this.resultados= new VentanaResultado();
 		this.resultados.setVisible(true);
 		this.resultados.resultadosVentana(jugadores);
-		this.mostrarPosicionesFinales(); // Muestro Resultado final
+		this.mostrarPosicionesFinales();  // Muestro Resultado final
 	}
 		
 	
@@ -94,7 +102,7 @@ public class Partida {
 	 *******************************/
 	// Designa el orden de los turnos y tambien puntos iniciales para cada
 	// jugador equitativamente
-	private void determinarOrdenTurno(List<Jugador> listaJugadores) {
+	public void determinarOrdenTurno(List<Jugador> listaJugadores) {
 		for (int i = 0; i < listaJugadores.size(); i++) {
 			listaJugadores.get(i).setNroTurno(i + 1);
 			listaJugadores.get(i).setPuntos(10); // �Para que?
