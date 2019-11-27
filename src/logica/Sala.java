@@ -89,7 +89,7 @@ public class Sala {
 	 *******************************************************************/
 	// Modificado: devuelve la partida creada
 	public Partida crearPartida() {
-		 partida = new Partida(nombreSala,maxPartidas, puntosObjetivo, cantJugadores, jugadores);
+		partida = new Partida(nombreSala,maxPartidas, puntosObjetivo, cantJugadores, jugadores);
 		return partida;
 	}
 
