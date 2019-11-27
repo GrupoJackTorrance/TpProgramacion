@@ -180,8 +180,8 @@ class PanelLobby extends JPanel {
 		Tablero table=p.elegirTablero();
 		p.setTablero(table);		
 		p.getTablero().getVentanaTablero().verTablero();
-		p.setRonda(new Ronda(p.getTurnos())); // Creo la ronda
-		p.determinarOrdenTurno(p.getJugadores()); // Jugadores por turno
+		p.setRonda(new Ronda(p.getTurnos())); 
+		p.determinarOrdenTurno(p.getJugadores());
 		boolean terminaJuego = false;
 		Dado dado = new Dado();
 	}
