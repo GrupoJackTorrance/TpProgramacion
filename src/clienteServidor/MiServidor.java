@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.server.SocketSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -170,14 +171,15 @@ public class MiServidor implements Runnable {
 					String accion = determinarAccion(mensajeCliente);
 					String respuesta = hacerAccion(accion, mensajeCliente);
 					// String respuesta=determinarMensajeRespuesta(accion);
-					salida.writeUTF(respuesta);
 					if(respuesta.equals("InicioPartida"))
 						jugadoresLobby.get(this.jugador).setCorriendo(false);
-					
-					if (respuesta.equals("OK")) {
-						entrada.close();
-						salida.close();
-						corriendo = false;
+					else {
+						salida.writeUTF(respuesta);
+						if (respuesta.equals("OK")) {
+							entrada.close();
+							salida.close();
+							corriendo = false;
+						}
 					}
 
 				}
@@ -300,7 +302,15 @@ public class MiServidor implements Runnable {
 				
 				//Empiezo el hilo de la partida
 //				gson = builder.excludeFieldsWithoutExposeAnnotation().create();
-				HiloPartida hiloPartida = new HiloPartida(sala,"SalaEspera");
+				HashMap<Jugador,Socket> clienteServidor=new HashMap<Jugador,Socket>();
+				HashMap<Jugador,Socket> servidorCliente=new HashMap<Jugador,Socket>();
+				for(Jugador jugador : sala.getJugadores2()) {
+					clienteServidor.put(jugador,jugadoresLobby.get(jugador).clienteServidor);
+					servidorCliente.put(jugador,jugadoresLobby.get(jugador).servidorCliente);
+				}
+				
+				
+				HiloPartida hiloPartida = new HiloPartida(sala,clienteServidor,servidorCliente);
 				hiloPartida.start();
 				agregarHilo(sala,hiloPartida);
 				
@@ -312,7 +322,7 @@ public class MiServidor implements Runnable {
 				}
 				
 				PaqueteMensaje mensaje = new PaqueteMensaje("InicioPartida",datosPartida,"EnSala"+sala.getNombreSala());
-				ManejadorDeImputOutput.avisarCambio(this.jugador,mensaje,jugadoresLobby);
+				ManejadorDeImputOutput.avisarCambio(new Jugador("NULL","NULL"),mensaje,jugadoresLobby);
 				respuesta ="InicioPartida"+";"+datosPartida;
 			} else {
 				jugadoresLobby.remove(jugador);
@@ -341,12 +351,15 @@ public class MiServidor implements Runnable {
 		private DataInputStream entrada;
 		private DataOutputStream salida;
 		boolean corriendo = true;
-		private String ubicacion;
 		private Sala sala;
+		HashMap<Jugador,Socket> clienteServidor;
+		HashMap<Jugador,Socket> servidorCliente;
+		
 
-		public HiloPartida (Sala sala, String ubicacion) throws IOException {
+		public HiloPartida (Sala sala, HashMap clienteServidor, HashMap servidorCliente) throws IOException {
 			this.sala = sala;
-			this.ubicacion=ubicacion;
+			this.clienteServidor=clienteServidor;
+			this.servidorCliente=servidorCliente;
 		}
 
 		
