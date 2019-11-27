@@ -36,7 +36,7 @@ public class Turno {
 			
 			int cantidad = tablero.getVentanaTablero().getPanelTablero().tirodado(jugador);
 			//int cantidad = jugador.tirarDado();
-			tablero.getVentanaTablero().getPanelTablero().mostrardado(cantidad);
+			//tablero.getVentanaTablero().getPanelTablero().mostrardado(cantidad);
 			tablero.avanzarJugador(jugador, cantidad);
 			if(puntosAnteriores != jugador.getPuntos()) 
 				tablero.getVentanaTablero().getPanelTablero().mostrarModificacionPts(jugador.getPuntos() - puntosAnteriores,jugador);
