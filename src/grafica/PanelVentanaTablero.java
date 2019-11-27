@@ -580,11 +580,11 @@ public class PanelVentanaTablero extends JPanel {
 			synchronized (jugador) {
 				jugador.wait();
 			}
-			mostrarTiraDado();
+			mostrarTiraDado(cantidadDado);
 			return cantidadDado;
 		}
 		
-		public void mostrarTiraDado() throws InterruptedException {
+		public void mostrarTiraDado(int datoDado) throws InterruptedException {
 			tirodado.setLocation(500,55);
 			tirodado.setVisible(true);
 			dado.setIcon(new ImageIcon(getClass().getResource("../Imagenes/gif_mario.gif")));
@@ -592,7 +592,7 @@ public class PanelVentanaTablero extends JPanel {
 			dado.setVisible(true);
 			Thread.sleep(2000);
 			tirodado.setText("Avanza");
-			numerodado.setText(cantidadDado+" ");
+			numerodado.setText(datoDado+" ");
 			numerodado.setLocation(500,60);
 			dado.setVisible(false);
 			numerodado.setVisible(true);
