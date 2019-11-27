@@ -79,7 +79,7 @@ public class Partida {
 			
 		}
 		this.OrdenarporPuntos(jugadores);
-		this.tablero.getVentanaTablero().dispose();
+		//this.tablero.getVentanaTablero().dispose();
 		this.resultados= new VentanaResultado();
 		this.resultados.setVisible(true);
 		this.resultados.resultadosVentana(jugadores);
