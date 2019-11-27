@@ -316,8 +316,8 @@ class PanelLobby extends JPanel {
 					PaqueteMensaje mensaje = new PaqueteMensaje("iniciarPartida", nombreSala.getText());
 					Gson gson = new Gson();
 					flujoSalida.writeUTF(gson.toJson(mensaje));
-					// recibe algo para iniciar la partida a nivel grafico
-					DataInputStream flujoEntrada = new DataInputStream(
+					/*// recibe algo para iniciar la partida a nivel grafico
+					/*DataInputStream flujoEntrada = new DataInputStream(
 							VentanaLobby.getsocketClienteServidor().getInputStream());
 					String entrada = flujoEntrada.readUTF();
 					if (entrada.split(";")[0].equals("InicioPartida")) {
@@ -328,7 +328,8 @@ class PanelLobby extends JPanel {
 						VentanaLobby.panel.mostrarPartida(part);
 						//setVisible(false);
 						//System.exit(1);
-					}
+						
+					}*/
 
 				} catch (IOException e1) {
 					e1.printStackTrace();
