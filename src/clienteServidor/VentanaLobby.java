@@ -27,10 +27,12 @@ import grafica.PanelVentanaTablero;
 import grafica.VentanaTablero;
 import logica.AbstractAdapter;
 import logica.Casilla;
+import logica.Dado;
 import logica.EfectoDarObjeto;
 import logica.Jugador;
 import logica.MyExclusionStrategy;
 import logica.Partida;
+import logica.Ronda;
 import logica.Sala;
 import logica.Tablero;
 
@@ -55,6 +57,10 @@ public class VentanaLobby extends JFrame implements Runnable {
 	public static void salir() {
 		VentanaLobby.panel.setVisible(false);
 		System.exit(0);
+	}
+	
+	public void cerrarVentana() {
+		dispose();
 	}
 
 	public static void setsocketClienteServidor(Socket socketClienteServidor) {
@@ -103,6 +109,7 @@ public class VentanaLobby extends JFrame implements Runnable {
 			actualizarJugadorSala((String)mensajeRecibido.getObj());
 		}
 		if(mensajeRecibido.accion.equals("InicioPartida")){
+			cerrarVentana();
 			mostrarPartida((String)mensajeRecibido.getObj());
 		}
 		
@@ -173,14 +180,10 @@ class PanelLobby extends JPanel {
 		Tablero table=p.elegirTablero();
 		p.setTablero(table);		
 		p.getTablero().getVentanaTablero().verTablero();
-		try {
-			p.InicioPartida();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		setVisible(false);
-		System.exit(1);
+		p.setRonda(new Ronda(p.getTurnos())); // Creo la ronda
+		p.determinarOrdenTurno(p.getJugadores()); // Jugadores por turno
+		boolean terminaJuego = false;
+		Dado dado = new Dado();
 	}
 	
 	
