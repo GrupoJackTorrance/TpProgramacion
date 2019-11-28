@@ -45,5 +45,30 @@ public class ManejadorDeImputOutput {
 			}
 		}
 	}
+	
+	public static void avisarCambioPartida(Jugador jugador, PaqueteMensaje paquete,HashMap<Jugador,Socket> servidorCliente) {
+		GsonBuilder builder = new GsonBuilder();
+//		builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter()).setExclusionStrategies(new MyExclusionStrategy());
+		builder.setExclusionStrategies(new MyExclusionStrategy());
+		builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
+		Gson gson = builder.create();
+		String mensaje = gson.toJson(paquete);
+		DataOutputStream salida;
+		for (Map.Entry<Jugador,Socket> cliente : servidorCliente.entrySet()) {
+			System.out.println("ubicacion de cliente: "+cliente.getKey().getUbicacion());
+			System.out.println("ubicacion destino: "+ paquete.getUbicacionDestino());
+			if (!cliente.getKey().getNombre().equals(jugador.getNombre()) && cliente.getKey().getUbicacion().equals(paquete.getUbicacionDestino())) {
+				try {
+					salida = new DataOutputStream(cliente.getValue().getOutputStream());
+					salida.writeUTF(mensaje);
+				} catch (IOException e) {
+					System.out.println(e.getMessage());
+				}
+
+			}
+		}
+	}
+
+	
 
 }
