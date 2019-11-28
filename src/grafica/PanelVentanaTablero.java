@@ -558,9 +558,9 @@ public class PanelVentanaTablero extends JPanel {
 			objetos.setVisible(true);
 		}
 	
-		public void empiezaTurno(Jugador jugador) throws InterruptedException {
+		public void empiezaTurno(String jugador) throws InterruptedException {
 			textTurno.setText("Empieza: ");
-			textTurnoJugador.setText(jugador.getNombre()+" ");
+			textTurnoJugador.setText(jugador+" ");
 			textTurno.setVisible(true);
 			textTurnoJugador.setVisible(true);
 			Thread.sleep(1000);
@@ -580,7 +580,7 @@ public class PanelVentanaTablero extends JPanel {
 			synchronized (jugador) {
 				jugador.wait();
 			}
-			mostrarTiraDado(cantidadDado);
+			/***mostrarTiraDado(cantidadDado);***/
 			return cantidadDado;
 		}
 		
