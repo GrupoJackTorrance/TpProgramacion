@@ -28,13 +28,14 @@ public class Turno {
 		case 4:
 			System.out.println("Empieza turno");
 			System.out.println("Juega jugador: " + turno);
-			tablero.getVentanaTablero().getPanelTablero().empiezaTurno(jugador);
+			tablero.getVentanaTablero().getPanelTablero().empiezaTurno(jugador.getNombre());
 			tablero.getVentanaTablero().getPanelTablero().setearTurnoJugador(jugador);
 			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
 			cantObjetos= jugador.getCantidadObjetos();//OBJETOS ANTES DE MOVERSE
 			puntosAnteriores = jugador.getPuntos(); //PUNTOS DEL JUGADOR ANTES DE TIRAR EL DADO
 			
 			int cantidad = tablero.getVentanaTablero().getPanelTablero().tirodado(jugador);
+			tablero.getVentanaTablero().getPanelTablero().mostrarTiraDado(cantidad);
 			//int cantidad = jugador.tirarDado();
 			//tablero.getVentanaTablero().getPanelTablero().mostrardado(cantidad);
 			tablero.avanzarJugador(jugador, cantidad);
