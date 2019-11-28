@@ -40,7 +40,6 @@ public class VentanaServidor extends JFrame{
 			servidor.close();
 			System.exit(0);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace(); 
 		}
 	}
