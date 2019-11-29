@@ -21,7 +21,16 @@ public class Partida {
 	private List<Jugador> jugadores = new LinkedList<Jugador>(); // Lista de jugadores
 	private int turnos; // Cantidad de turnos que va haber segun los jugadores que haya
 	private static boolean terminaMiniJuego = false;
-	private transient VentanaResultado resultados;
+	private VentanaResultado resultados;
+	
+	public VentanaResultado getResultados() {
+		return resultados;
+	}
+
+	public void setResultados(VentanaResultado resultados) {
+		this.resultados = resultados;
+	}
+
 	private Ronda ronda; 
 
 
@@ -73,7 +82,7 @@ public class Partida {
 					mini= new MiniJuegoAlaSuerte(this.jugadores);
 				}else if(j>4) {
 					mini= new MiniJuegoPalabras(this.jugadores);
-					}
+				}
 				j=(int) (Math.random()*2);
 				synchronized(mini){
 					if(terminaMiniJuego==false)
