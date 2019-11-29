@@ -94,10 +94,9 @@ public class VentanaLobby extends JFrame implements Runnable {
 				PaqueteMensaje mensajeRecibido=gson.fromJson(mensaje, PaqueteMensaje.class);
 				rePintar(mensajeRecibido);
 			}
-		} catch (IOException e1) {
+		}catch (IOException e1){
 			e1.printStackTrace();
 		}
-
 	}
 
 	private void rePintar(PaqueteMensaje mensajeRecibido) {
@@ -110,7 +109,7 @@ public class VentanaLobby extends JFrame implements Runnable {
 		}
 		if(mensajeRecibido.accion.equals("InicioPartida")){
 			cerrarVentana();
-			/**corriendo=false;***/
+			corriendo=false;
 			mostrarPartida((String)mensajeRecibido.getObj());
 		}	
 	}
