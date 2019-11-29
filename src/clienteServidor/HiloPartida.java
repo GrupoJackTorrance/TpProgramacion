@@ -48,23 +48,28 @@ public class HiloPartida extends Thread {
 				salida.writeUTF(mens);
 				System.out.println("aca");
 				String msj= gson.fromJson(entrada.readUTF(),String.class);
-				String mensajeCliente =msj+";"+Integer.toString(index);//espera recibir numero del dado tirado y enviamos el turno del jugador
+				String mensajeCliente ="4;"+Integer.toString(index);//espera recibir numero del dado tirado y enviamos el turno del jugador
 				mensaje.setAccion("muestraDado");
 				mensaje.setObj(mensajeCliente);
 				System.out.println("aca");
 				ManejadorDeImputOutput.avisarCambioPartida(new Jugador("NULL","NULL"),mensaje,servidorCliente);//replicar para simular tirada de dado
-				
-//				String mensajeCliente = entrada.readUTF();
-//				String respuesta = hacerAccion(mensajeCliente);
-//				salida.writeUTF(respuesta);
-//				if (respuesta.equals("termino partida")) {
-//					entrada.close();
-//					salida.close();
-//					corriendo = false;
-			/*	contadorTurno++;
+				msj= gson.fromJson(entrada.readUTF(),String.class);
+				mensaje.setAccion("muestraVentanaAtaca");
+				mensaje.setObj(Integer.toString(index));
+				mens=gson.toJson(mensaje);
+				salida.writeUTF(mens);
+				msj= gson.fromJson(entrada.readUTF(),String.class);
+				if(Integer.parseInt(msj)!=0) {	
+					mensaje.setAccion("idObj");
+					int jugadorAtacado= contadorTurno % sala.getPartida().getJugadores().size();
+					mensaje.setObj(msj+";"+jugadorAtacado+";"+index);
+					ManejadorDeImputOutput.avisarCambioPartida(new Jugador("NULL","NULL"),mensaje,servidorCliente);
+					Thread.sleep(2000);
+				}
+				contadorTurno++;
 				if(contadorTurno>sala.getPartida().getTurnos())
 					contadorTurno=1;
-			}	
+			/*}	
 		/*} catch (IOException e){
 			e.printStackTrace();*/
 		} catch (Exception e) {
