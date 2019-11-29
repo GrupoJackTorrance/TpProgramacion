@@ -80,7 +80,7 @@ public class PanelLobby extends JPanel {
 		p.getTablero().getVentanaTablero().verTablero();
 		p.setRonda(new Ronda(p.getTurnos())); 
 		p.determinarOrdenTurno(p.getJugadores());
-		/***VentanaPartida ventanaJuego= new VentanaPartida(VentanaLobby.getSocketClienteServidor(),VentanaLobby.getSocketServidorCliente(),p,new Dado());***/
+		VentanaPartida ventanaJuego= new VentanaPartida(VentanaLobby.getSocketClienteServidor(),VentanaLobby.getSocketServidorCliente(),p,new Dado());
 	}
 	
 	
