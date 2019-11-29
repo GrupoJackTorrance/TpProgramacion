@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import com.google.gson.Gson;
 
+import grafica.VentanaResultado;
 import logica.Jugador;
 import logica.Sala;
 
@@ -30,24 +31,27 @@ public class HiloPartida extends Thread {
 	
 	@Override
 	public void run() {
-		/*PROBABLE*/
 		 try {
 			int contadorRonda=0;
 			contadorTurno=1;
+			int index;
+			String msj;
 			Gson gson= new Gson();
-			while (corriendo && contadorRonda <sala.getPartida().getRondaMax()) {
-				int index=contadorTurno-1;
+			while (corriendo && contadorRonda <sala.getPartida().getRondaMax()) {/*EMPIEZA WHILE*/
+				System.out.println("TURNO "+contadorTurno);
+				index=contadorTurno-1;
 				turno=sala.getJugadores2().get(index);
 				String datosTurno=turno.getNombre();
 				PaqueteMensaje mensaje = new PaqueteMensaje("EmpiezaTurno",datosTurno,"EnSala"+sala.getNombreSala());
 				ManejadorDeImputOutput.avisarCambioPartida(new Jugador("NULL","NULL"),mensaje,servidorCliente);
-				entrada = new DataInputStream(clienteServidor.get(turno).getInputStream());
+				entrada = new DataInputStream(servidorCliente.get(turno).getInputStream());
 				salida = new DataOutputStream(servidorCliente.get(turno).getOutputStream());
+				System.out.println("IPCLIENTE"+clienteServidor.get(turno).getInetAddress()+"IPSERVIDOR"+servidorCliente.get(turno).getInetAddress());
 				mensaje.setAccion("muestraTiraDado");
 				String mens=gson.toJson(mensaje);
 				salida.writeUTF(mens);
 				System.out.println("aca");
-				String msj= gson.fromJson(entrada.readUTF(),String.class);
+				//msj= gson.fromJson(entrada.readUTF(),String.class);
 				String mensajeCliente ="5;"+Integer.toString(index);//espera recibir numero del dado tirado y enviamos el turno del jugador
 				mensaje.setAccion("muestraDado");
 				mensaje.setObj(mensajeCliente);
@@ -59,7 +63,9 @@ public class HiloPartida extends Thread {
 				mensaje.setObj(Integer.toString(index));
 				mens=gson.toJson(mensaje);
 				salida.writeUTF(mens);
-				msj= gson.fromJson(entrada.readUTF(),String.class);
+				System.out.println("respuesta");
+				//msj= gson.fromJson(entrada.readUTF(),String.class);
+				msj="0";
 				if(Integer.parseInt(msj)!=0) {	
 					mensaje.setAccion("idObj");
 					int jugadorAtacado= contadorTurno % sala.getPartida().getJugadores().size();
@@ -72,7 +78,12 @@ public class HiloPartida extends Thread {
 					contadorTurno=1;
 					contadorRonda++;
 				}
-		}
+		}/*FIN WHILE*/
+			
+			System.out.println("TERMINO JUEGO");
+			PaqueteMensaje mensaje = new PaqueteMensaje("termino",null,"EnSala"+sala.getNombreSala());
+			ManejadorDeImputOutput.avisarCambioPartida(new Jugador("NULL","NULL"),mensaje,servidorCliente);
+			
 		} catch (IOException e){
 			e.printStackTrace();
 		} catch (Exception e) {
