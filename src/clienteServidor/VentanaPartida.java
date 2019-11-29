@@ -98,21 +98,22 @@ public class VentanaPartida implements Runnable {
 		int idObj=Integer.parseInt(obj.split(";")[0]);
 		int indexAtacado= Integer.parseInt(obj.split(";")[1]);
 		int indexturno= Integer.parseInt(obj.split(";")[2]);
-		if (!partida.getJugadores().get(indexturno).usarObjeto(partida.getJugadores().get(indexAtacado),partida.getJugadores(), idObj)) {
-			JOptionPane.showMessageDialog(null, "No se pudo atacar a "+ partida.getJugadores().get(indexAtacado).getNombre() +" porque no tiene objetos");
-		}
+		System.out.println("Antes: "+partida.getJugadores().get(indexAtacado).getPuntos());
+		partida.getJugadores().get(indexturno).usarObjeto(partida.getJugadores().get(indexAtacado),partida.getJugadores(), idObj);
+		System.out.println("Despues "+partida.getJugadores().get(indexAtacado).getPuntos());
+		partida.getTablero().getVentanaTablero().getPanelTablero().repaint();
 	}
 
 	private void muestraAtaca(String turno)  {
 		int index=Integer.parseInt(turno);
 		int respuesta;
 			try {
-				if(partida.getJugadores().get(index).getObjEfectos().getIdObjeto()!=0)
-					respuesta=partida.getTablero().deseaAtacar(partida.getJugadores().get(index));
-				else
-					respuesta=0;
+				System.out.println("muestraAtaque");
+				respuesta=partida.getTablero().deseaAtacar(partida.getJugadores().get(index));
+				
 				DataOutputStream flujoSalida = new DataOutputStream(socketClienteServidor.getOutputStream());
 				flujoSalida.writeUTF(Integer.toString(respuesta));
+				System.out.println("muestraAtaquefin");
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -121,18 +122,19 @@ public class VentanaPartida implements Runnable {
 	private void muestraDado(String mensaje) throws IOException {
 		int cant=Integer.parseInt(mensaje.split(";")[0]);
 		int index=Integer.parseInt(mensaje.split(";")[1]);
+		int indexMiJugador=Integer.parseInt(mensaje.split(";")[2]);
 		Jugador jugador=partida.getJugadores().get(index);
 		try {
 			partida.getTablero().getVentanaTablero().getPanelTablero().mostrarTiraDado(cant);
 			int cantObjetosAnteriores= jugador.getCantidadObjetos();//OBJETOS ANTES DE MOVERSE
 			int puntosAnteriores = jugador.getPuntos(); //PUNTOS DEL JUGADOR ANTES DE TIRAR EL DADO
 			partida.getTablero().avanzarJugador(jugador, cant);
+			partida.getTablero().getVentanaTablero().getPanelTablero().setearObjetos(partida.getJugadores().get(indexMiJugador));
 			if(puntosAnteriores != jugador.getPuntos()) 
 				partida.getTablero().getVentanaTablero().getPanelTablero().mostrarModificacionPts(jugador.getPuntos() - puntosAnteriores,jugador);
 			if(cantObjetosAnteriores != jugador.getCantidadObjetos())
 				partida.getTablero().getVentanaTablero().getPanelTablero().mostrarModificacionObjt(jugador.getCantidadObjetos()-cantObjetosAnteriores, jugador);
-			DataOutputStream flujoSalida = new DataOutputStream(socketClienteServidor.getOutputStream());
-			flujoSalida.writeUTF("PuedeSeguir");
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -153,7 +155,11 @@ public class VentanaPartida implements Runnable {
 
 	private void empiezaTurno(String infoTurno) {		
 		try {
-			partida.getTablero().getVentanaTablero().getPanelTablero().empiezaTurno(infoTurno);
+			String turno=infoTurno.split(";")[0];
+			int indexMiJugador=Integer.parseInt(infoTurno.split(";")[1]);
+			partida.getTablero().getVentanaTablero().getPanelTablero().empiezaTurno(turno);
+			partida.getTablero().getVentanaTablero().getPanelTablero().setearTurnoJugador(turno);
+			partida.getTablero().getVentanaTablero().getPanelTablero().setearObjetos(partida.getJugadores().get(indexMiJugador));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
