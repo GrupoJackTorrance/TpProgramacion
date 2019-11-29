@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
+import grafica.VentanaResultado;
 import logica.Dado;
 import logica.Jugador;
 import logica.Partida;
@@ -91,9 +92,23 @@ public class VentanaPartida implements Runnable {
 		if(mensajeRecibido.accion.equals("idObj")) {
 			Ataque((String)mensajeRecibido.getObj());
 		}
+		if(mensajeRecibido.accion.equals("termino")) {
+			terminoPartida();
+		}
 
 		
 	}
+	
+	private void terminoPartida() {
+		System.out.println("termino");
+		partida.OrdenarporPuntos(partida.getJugadores());
+		partida.setResultados(new VentanaResultado());
+		partida.getTablero().getVentanaTablero().dispose();
+		partida.getResultados().setVisible(true);
+		partida.getResultados().resultadosVentana(partida.getJugadores());
+		partida.mostrarPosicionesFinales();
+	}
+	
 
 	private void Ataque(String obj) {
 		int idObj=Integer.parseInt(obj.split(";")[0]);
@@ -113,10 +128,10 @@ public class VentanaPartida implements Runnable {
 			try {
 				System.out.println("muestraAtaque");
 				respuesta=partida.getTablero().deseaAtacar(partida.getJugadores().get(index));	
-				DataOutputStream flujoSalida = new DataOutputStream(socketClienteServidor.getOutputStream());
-				flujoSalida.writeUTF(Integer.toString(respuesta));
+				//DataOutputStream flujoSalida = new DataOutputStream(socketClienteServidor.getOutputStream());
+				//flujoSalida.writeUTF(Integer.toString(respuesta));
 				System.out.println("muestraAtaquefin");
-			} catch (IOException | InterruptedException e) {
+			} catch (/*IOException |*/ InterruptedException e) {
 				e.printStackTrace();
 			}
 	}
@@ -148,9 +163,10 @@ public class VentanaPartida implements Runnable {
 	private void muestraTiraDado() throws IOException {
 		try {
 			int cant=partida.getTablero().getVentanaTablero().getPanelTablero().tirodado(new Jugador("NULL","NULL"));
-			DataOutputStream flujoSalida = new DataOutputStream(socketClienteServidor.getOutputStream());
-			flujoSalida.writeUTF(Integer.toString(cant));
+			//DataOutputStream flujoSalida = new DataOutputStream(socketClienteServidor.getOutputStream());
+			//flujoSalida.writeUTF(Integer.toString(cant));
 			System.out.println("cantidad enviada");
+			System.out.println("IPSERVIDOR: "+socketClienteServidor.getInetAddress());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -166,7 +182,7 @@ public class VentanaPartida implements Runnable {
 			partida.getTablero().getVentanaTablero().getPanelTablero().empiezaTurno(turno);
 			partida.getTablero().getVentanaTablero().getPanelTablero().setearTurnoJugador(turno);
 			partida.getTablero().getVentanaTablero().getPanelTablero().setearObjetos(partida.getJugadores().get(indexMiJugador));
-			System.out.println("NombreMio: "+partida.getJugadores().get(indexMiJugador).getPersonaje());
+			System.out.println("NombreMio4: "+partida.getJugadores().get(indexMiJugador).getPersonaje());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
