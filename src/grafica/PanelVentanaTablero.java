@@ -499,9 +499,9 @@ public class PanelVentanaTablero extends JPanel {
 		}
 	}
 
-		public void setearTurnoJugador(Jugador jugador) {
+		public void setearTurnoJugador(String jugador) {
 			turnoDe.setVisible(true);
-			turnoJugador.setText(jugador.getNombre());
+			turnoJugador.setText(jugador);
 			turnoJugador.setVisible(true);
 		}
 
