@@ -55,12 +55,17 @@ public class ManejadorDeImputOutput {
 		builder.setExclusionStrategies(new MyExclusionStrategy());
 		builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter());
 		Gson gson = builder.create();
-		String mensaje = gson.toJson(paquete);
 		DataOutputStream salida;
+		int i=0;
 		for (Map.Entry<Jugador,Socket> cliente : servidorCliente.entrySet()) {
 			System.out.println("Partida");
 			System.out.println("ubicacion de cliente: "+cliente.getKey().getUbicacion());
 			System.out.println("ubicacion destino: "+ paquete.getUbicacionDestino());
+			if(paquete.getAccion().equals("EmpiezaTurno") || paquete.getAccion().equals("muestraDado")) {
+				paquete.setObj(paquete.getObj()+";"+i);
+				i++;
+			}
+			String mensaje = gson.toJson(paquete);
 			if (!cliente.getKey().getNombre().equals(jugador.getNombre()) && cliente.getKey().getUbicacion().equals(paquete.getUbicacionDestino())) {
 				try {
 					salida = new DataOutputStream(cliente.getValue().getOutputStream());
