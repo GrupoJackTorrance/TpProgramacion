@@ -257,7 +257,7 @@ public class MiServidor implements Runnable {
 				//cargo la sala con la nueva partida
 				Sala sala = salasDisponibles.get(salaString); 
 				Partida p=sala.crearPartida();
-				/****p.determinarOrdenTurno(sala.getJugadores2());***/
+				p.determinarOrdenTurno(sala.getJugadores2());
 				
 				
 				//Empiezo el hilo de la partida
