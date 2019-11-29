@@ -212,6 +212,8 @@ public class MiServidor implements Runnable {
 				return "sacarJugadorSala";
 			else if (mensajeAccion.equals("iniciarPartida"))
 				return "muestraPartida";
+			else if (mensajeAccion.equals("detener"))
+				return "detener";
 			return "Salir";
 		}
 
@@ -221,7 +223,8 @@ public class MiServidor implements Runnable {
 			if (accion.equals("devolverSalas")) {
 				this.ubicacion="viendoSalasDisponibles";
 				respuesta = gson.toJson(salasDisponiblesClientes);
-
+			} else if (accion.equals("detener")) {
+				respuesta="OK";
 			} else if (accion.equals("crearSala")) {
 				String salaString = (String) gson.fromJson(mensajeCliente, PaqueteMensaje.class).getObj();
 				String nombreSala=salaString.split(";")[0];
@@ -249,6 +252,7 @@ public class MiServidor implements Runnable {
 						+ sala.getcantJugadores() + "/" + sala.getCantMaxJugadores());
 				ManejadorDeImputOutput.avisarCambio(this.jugador,new PaqueteMensaje("NuevoJugadorSala",respuesta,"EnSala"+sala.getNombreSala()),jugadoresLobby);
 				this.ubicacion="EnSala"+sala.getNombreSala();
+				
 			} 
 			
 			
@@ -273,7 +277,7 @@ public class MiServidor implements Runnable {
 				//Empiezo el hilo de la partida
 				HashMap<Jugador,Socket> clienteServidor=new HashMap<Jugador,Socket>();
 				HashMap<Jugador,Socket> servidorCliente=new HashMap<Jugador,Socket>();
-				for(Jugador jugador : sala.getJugadores2()) {
+				for(Jugador jugador : sala.getJugadores2()){
 					jugador.setUbicacion("EnSala"+sala.getNombreSala());
 					clienteServidor.put(jugador,jugadoresLobby.get(jugador).clienteServidor);
 					servidorCliente.put(jugador,jugadoresLobby.get(jugador).servidorCliente);
@@ -281,7 +285,6 @@ public class MiServidor implements Runnable {
 				
 				
 				HiloPartida hiloPartida = new HiloPartida(sala,clienteServidor,servidorCliente);
-				hiloPartida.start();
 				agregarHilo(sala,hiloPartida);
 				
 				String datosPartida=sala.getPartida().getNombre()+";"+sala.getPartida().getRondaMax()+";"+sala.getPartida().getPuntosObjetivo()+";"+sala.getPartida().getJugadores().size();
@@ -290,11 +293,10 @@ public class MiServidor implements Runnable {
 					
 					datosPartida+=";"+jugador.getNombre()+";"+jugador.getPersonaje();
 				}
-				
-				
 				PaqueteMensaje mensaje = new PaqueteMensaje("InicioPartida",datosPartida,"EnSala"+sala.getNombreSala());
 				ManejadorDeImputOutput.avisarCambio(new Jugador("NULL","NULL"),mensaje,jugadoresLobby);
 				respuesta ="InicioPartida"+";"+datosPartida;
+				hiloPartida.start();
 			} else {
 				jugadoresLobby.remove(jugador);
 				respuesta = "OK";
