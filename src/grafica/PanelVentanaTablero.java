@@ -485,7 +485,6 @@ public class PanelVentanaTablero extends JPanel {
 			}
 			if (e.getSource() == btntirodado) {
 				btntirodado.setVisible(false);
-				
 				try {
 					cantidadDado=tiraDado2(jugador);
 				} catch (InterruptedException e1) {
@@ -563,7 +562,7 @@ public class PanelVentanaTablero extends JPanel {
 			textTurnoJugador.setText(jugador+" ");
 			textTurno.setVisible(true);
 			textTurnoJugador.setVisible(true);
-			Thread.sleep(1000);
+			Thread.sleep(4000);
 			textTurno.setVisible(false);
 			textTurnoJugador.setVisible(false);
 		}
