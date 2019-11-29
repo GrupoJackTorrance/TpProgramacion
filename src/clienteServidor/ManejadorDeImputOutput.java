@@ -57,14 +57,17 @@ public class ManejadorDeImputOutput {
 		Gson gson = builder.create();
 		DataOutputStream salida;
 		int i=0;
+		PaqueteMensaje original= new PaqueteMensaje(paquete.getAccion(),paquete.getObj()); 
 		for (Map.Entry<Jugador,Socket> cliente : servidorCliente.entrySet()) {
 			System.out.println("Partida");
-			System.out.println("ubicacion de cliente: "+cliente.getKey().getUbicacion());
+			System.out.println("ubicacion de cliente: "+cliente.getKey().getUbicacion()+" Nombre: "+cliente.getKey().getNombre());
 			System.out.println("ubicacion destino: "+ paquete.getUbicacionDestino());
 			if(paquete.getAccion().equals("EmpiezaTurno") || paquete.getAccion().equals("muestraDado")) {
-				paquete.setObj(paquete.getObj()+";"+i);
-				i++;
+				paquete.setObj(original.getObj()+";"+i);
+				System.out.println("ValordeI: "+i);
 			}
+			i++;
+			System.out.println("Mensaje: "+(String)paquete.getObj());
 			String mensaje = gson.toJson(paquete);
 			if (!cliente.getKey().getNombre().equals(jugador.getNombre()) && cliente.getKey().getUbicacion().equals(paquete.getUbicacionDestino())) {
 				try {
