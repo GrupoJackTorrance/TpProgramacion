@@ -34,10 +34,13 @@ public class ManejadorDeImputOutput {
 			System.out.println("ubicacion destino: "+ paquete.getUbicacionDestino());
 			if (!cliente.getValue().getJugador().getNombre().equals(jugador.getNombre()) && cliente.getValue().getUbicacion().equals(paquete.getUbicacionDestino())) {
 				try {
+					
 					salida = new DataOutputStream(cliente.getValue().getSocketServidorCliente().getOutputStream());
 					salida.writeUTF(mensaje);
-					if(mensaje.equals("InicioPartida"))
+					if(paquete.accion.equals("InicioPartida")) {
 						cliente.getValue().setCorriendo(false);
+						System.out.println("se cerraron los hilos servidores");
+					}
 				} catch (IOException e) {
 					System.out.println(e.getMessage());
 				}
@@ -55,6 +58,7 @@ public class ManejadorDeImputOutput {
 		String mensaje = gson.toJson(paquete);
 		DataOutputStream salida;
 		for (Map.Entry<Jugador,Socket> cliente : servidorCliente.entrySet()) {
+			System.out.println("Partida");
 			System.out.println("ubicacion de cliente: "+cliente.getKey().getUbicacion());
 			System.out.println("ubicacion destino: "+ paquete.getUbicacionDestino());
 			if (!cliente.getKey().getNombre().equals(jugador.getNombre()) && cliente.getKey().getUbicacion().equals(paquete.getUbicacionDestino())) {
