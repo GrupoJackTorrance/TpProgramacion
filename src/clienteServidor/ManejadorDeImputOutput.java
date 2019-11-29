@@ -21,7 +21,7 @@ public class ManejadorDeImputOutput {
 	
 	
 	public static void avisarCambio(Jugador jugador, PaqueteMensaje paquete,HashMap<Jugador, HiloServidor> jugadoresLobby) {
-
+	System.out.println("AVISAR CAMBIO");
 		GsonBuilder builder = new GsonBuilder();
 //		builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter()).setExclusionStrategies(new MyExclusionStrategy());
 		builder.setExclusionStrategies(new MyExclusionStrategy());
@@ -38,6 +38,10 @@ public class ManejadorDeImputOutput {
 					salida = new DataOutputStream(cliente.getValue().getSocketServidorCliente().getOutputStream());
 					salida.writeUTF(mensaje);
 					if(paquete.accion.equals("InicioPartida")) {
+						DataOutputStream salidacerrar = new DataOutputStream(cliente.getValue().getClienteServidor().getOutputStream());
+						PaqueteMensaje paq= new PaqueteMensaje("detener",null);
+						String men=gson.toJson(paq);
+						salida.writeUTF(men);
 						cliente.getValue().setCorriendo(false);
 						System.out.println("se cerraron los hilos servidores");
 					}
@@ -50,6 +54,7 @@ public class ManejadorDeImputOutput {
 	}
 	
 	public static void avisarCambioPartida(Jugador jugador, PaqueteMensaje paquete,HashMap<Jugador,Socket> servidorCliente) {
+		System.out.println("AVISAR CAMBIO PARTIDA");
 		GsonBuilder builder = new GsonBuilder();
 //		builder.registerTypeAdapter(EfectoDarObjeto.class, new AbstractAdapter()).setExclusionStrategies(new MyExclusionStrategy());
 		builder.setExclusionStrategies(new MyExclusionStrategy());
