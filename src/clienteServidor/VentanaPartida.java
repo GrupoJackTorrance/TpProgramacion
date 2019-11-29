@@ -19,6 +19,7 @@ public class VentanaPartida implements Runnable {
 	private static Socket socketServidorCliente;
 	private static Partida partida;
 	private Dado dado;
+	int indexMiJugador;
 	
 	public VentanaPartida(Socket socketClienteServidor, Socket socketServidorCliente,Partida partida,Dado dado) {
 		this.socketClienteServidor = socketClienteServidor;
@@ -100,7 +101,9 @@ public class VentanaPartida implements Runnable {
 		int indexturno= Integer.parseInt(obj.split(";")[2]);
 		System.out.println("Antes: "+partida.getJugadores().get(indexAtacado).getPuntos());
 		partida.getJugadores().get(indexturno).usarObjeto(partida.getJugadores().get(indexAtacado),partida.getJugadores(), idObj);
-		System.out.println("Despues "+partida.getJugadores().get(indexAtacado).getPuntos());
+		System.out.println("Despues "+partida.getJugadores().get(indexAtacado).getPuntos());	
+		if(partida.getJugadores().get(indexMiJugador).getNombre().equals(partida.getJugadores().get(indexturno).getNombre()))
+			partida.getTablero().getVentanaTablero().getPanelTablero().setearObjetos(partida.getJugadores().get(indexturno));
 		partida.getTablero().getVentanaTablero().getPanelTablero().repaint();
 	}
 
@@ -109,8 +112,7 @@ public class VentanaPartida implements Runnable {
 		int respuesta;
 			try {
 				System.out.println("muestraAtaque");
-				respuesta=partida.getTablero().deseaAtacar(partida.getJugadores().get(index));
-				
+				respuesta=partida.getTablero().deseaAtacar(partida.getJugadores().get(index));	
 				DataOutputStream flujoSalida = new DataOutputStream(socketClienteServidor.getOutputStream());
 				flujoSalida.writeUTF(Integer.toString(respuesta));
 				System.out.println("muestraAtaquefin");
@@ -122,14 +124,16 @@ public class VentanaPartida implements Runnable {
 	private void muestraDado(String mensaje) throws IOException {
 		int cant=Integer.parseInt(mensaje.split(";")[0]);
 		int index=Integer.parseInt(mensaje.split(";")[1]);
-		int indexMiJugador=Integer.parseInt(mensaje.split(";")[2]);
 		Jugador jugador=partida.getJugadores().get(index);
 		try {
 			partida.getTablero().getVentanaTablero().getPanelTablero().mostrarTiraDado(cant);
 			int cantObjetosAnteriores= jugador.getCantidadObjetos();//OBJETOS ANTES DE MOVERSE
 			int puntosAnteriores = jugador.getPuntos(); //PUNTOS DEL JUGADOR ANTES DE TIRAR EL DADO
 			partida.getTablero().avanzarJugador(jugador, cant);
-			partida.getTablero().getVentanaTablero().getPanelTablero().setearObjetos(partida.getJugadores().get(indexMiJugador));
+			if(partida.getJugadores().get(indexMiJugador).getNombre().equals(partida.getJugadores().get(index).getNombre())) {
+				System.out.println("NombreMio: "+partida.getJugadores().get(indexMiJugador).getNombre()+" NombreTurno: "+partida.getJugadores().get(index).getNombre());
+				partida.getTablero().getVentanaTablero().getPanelTablero().setearObjetos(partida.getJugadores().get(indexMiJugador));
+			}
 			if(puntosAnteriores != jugador.getPuntos()) 
 				partida.getTablero().getVentanaTablero().getPanelTablero().mostrarModificacionPts(jugador.getPuntos() - puntosAnteriores,jugador);
 			if(cantObjetosAnteriores != jugador.getCantidadObjetos())
@@ -156,10 +160,13 @@ public class VentanaPartida implements Runnable {
 	private void empiezaTurno(String infoTurno) {		
 		try {
 			String turno=infoTurno.split(";")[0];
-			int indexMiJugador=Integer.parseInt(infoTurno.split(";")[1]);
+			indexMiJugador=2;
+			indexMiJugador=Integer.parseInt(infoTurno.split(";")[1]);
+			System.out.println("ValordeI: "+indexMiJugador);
 			partida.getTablero().getVentanaTablero().getPanelTablero().empiezaTurno(turno);
 			partida.getTablero().getVentanaTablero().getPanelTablero().setearTurnoJugador(turno);
 			partida.getTablero().getVentanaTablero().getPanelTablero().setearObjetos(partida.getJugadores().get(indexMiJugador));
+			System.out.println("NombreMio: "+partida.getJugadores().get(indexMiJugador).getPersonaje());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
