@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import com.google.gson.Gson;
 
 import logica.Dado;
@@ -72,7 +74,7 @@ public class VentanaPartida implements Runnable {
 
 	}
 	
-	private void rePintar(PaqueteMensaje mensajeRecibido) throws IOException {
+	private void rePintar(PaqueteMensaje mensajeRecibido) throws IOException  {
 		if(mensajeRecibido.accion.equals("EmpiezaTurno")){
 			empiezaTurno((String) mensajeRecibido.getObj());
 		}
@@ -82,18 +84,55 @@ public class VentanaPartida implements Runnable {
 		if(mensajeRecibido.accion.equals("muestraDado")) {
 			muestraDado((String)mensajeRecibido.getObj());
 		}
+		if(mensajeRecibido.accion.equals("muestraVentanaAtaca")) {
+			muestraAtaca((String)mensajeRecibido.getObj());
+		}
+		if(mensajeRecibido.accion.equals("idObj")) {
+			Ataque((String)mensajeRecibido.getObj());
+		}
+
+		
+	}
+
+	private void Ataque(String obj) {
+		int idObj=Integer.parseInt(obj.split(";")[0]);
+		int indexAtacado= Integer.parseInt(obj.split(";")[1]);
+		int indexturno= Integer.parseInt(obj.split(";")[2]);
+		if (!partida.getJugadores().get(indexturno).usarObjeto(partida.getJugadores().get(indexAtacado),partida.getJugadores(), idObj)) {
+			JOptionPane.showMessageDialog(null, "No se pudo atacar a "+ partida.getJugadores().get(indexAtacado).getNombre() +" porque no tiene objetos");
+		}
+	}
+
+	private void muestraAtaca(String turno)  {
+		int index=Integer.parseInt(turno);
+		int respuesta;
+			try {
+				if(partida.getJugadores().get(index).getObjEfectos().getIdObjeto()!=0)
+					respuesta=partida.getTablero().deseaAtacar(partida.getJugadores().get(index));
+				else
+					respuesta=0;
+				DataOutputStream flujoSalida = new DataOutputStream(socketClienteServidor.getOutputStream());
+				flujoSalida.writeUTF(Integer.toString(respuesta));
+			} catch (IOException | InterruptedException e) {
+				e.printStackTrace();
+			}
 	}
 
 	private void muestraDado(String mensaje) throws IOException {
 		int cant=Integer.parseInt(mensaje.split(";")[0]);
 		int index=Integer.parseInt(mensaje.split(";")[1]);
+		Jugador jugador=partida.getJugadores().get(index);
 		try {
 			partida.getTablero().getVentanaTablero().getPanelTablero().mostrarTiraDado(cant);
-			int cantObjetos= partida.getJugadores().get(index).getCantidadObjetos();//OBJETOS ANTES DE MOVERSE
-			int puntosAnteriores = partida.getJugadores().get(index).getPuntos(); //PUNTOS DEL JUGADOR ANTES DE TIRAR EL DADO
-			partida.getTablero().avanzarJugador(partida.getJugadores().get(index), cant);
+			int cantObjetosAnteriores= jugador.getCantidadObjetos();//OBJETOS ANTES DE MOVERSE
+			int puntosAnteriores = jugador.getPuntos(); //PUNTOS DEL JUGADOR ANTES DE TIRAR EL DADO
+			partida.getTablero().avanzarJugador(jugador, cant);
+			if(puntosAnteriores != jugador.getPuntos()) 
+				partida.getTablero().getVentanaTablero().getPanelTablero().mostrarModificacionPts(jugador.getPuntos() - puntosAnteriores,jugador);
+			if(cantObjetosAnteriores != jugador.getCantidadObjetos())
+				partida.getTablero().getVentanaTablero().getPanelTablero().mostrarModificacionObjt(jugador.getCantidadObjetos()-cantObjetosAnteriores, jugador);
 			DataOutputStream flujoSalida = new DataOutputStream(socketClienteServidor.getOutputStream());
-			flujoSalida.writeUTF(Integer.toString(cantObjetos)+";"+Integer.toString(puntosAnteriores));
+			flujoSalida.writeUTF("PuedeSeguir");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
