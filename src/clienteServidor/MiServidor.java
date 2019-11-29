@@ -140,6 +140,14 @@ public class MiServidor implements Runnable {
 		public String getUbicacion() {
 			return this.ubicacion;
 		}
+		
+		public DataInputStream getEntrada() {
+			return entrada;
+		}
+		
+		public DataOutputStream getSalida() {
+			return salida;
+		}
 
 		public Jugador getJugador() {
 			return jugador;
@@ -156,9 +164,11 @@ public class MiServidor implements Runnable {
 		public void run() {
 			try {
 				while (corriendo) {
+					System.out.println("hilo servidor activo");
 					entrada = new DataInputStream(clienteServidor.getInputStream());
 					salida = new DataOutputStream(clienteServidor.getOutputStream());
 					String mensajeCliente = entrada.readUTF();
+					System.out.println(mensajeCliente+" enHIloServidor");
 					String accion = determinarAccion(mensajeCliente);
 					String respuesta = hacerAccion(accion, mensajeCliente);
 					if(respuesta.equals("InicioPartida"))
@@ -264,6 +274,7 @@ public class MiServidor implements Runnable {
 				HashMap<Jugador,Socket> clienteServidor=new HashMap<Jugador,Socket>();
 				HashMap<Jugador,Socket> servidorCliente=new HashMap<Jugador,Socket>();
 				for(Jugador jugador : sala.getJugadores2()) {
+					jugador.setUbicacion("EnSala"+sala.getNombreSala());
 					clienteServidor.put(jugador,jugadoresLobby.get(jugador).clienteServidor);
 					servidorCliente.put(jugador,jugadoresLobby.get(jugador).servidorCliente);
 				}
@@ -276,9 +287,10 @@ public class MiServidor implements Runnable {
 				String datosPartida=sala.getPartida().getNombre()+";"+sala.getPartida().getRondaMax()+";"+sala.getPartida().getPuntosObjetivo()+";"+sala.getPartida().getJugadores().size();
 				
 				for (Jugador jugador : sala.getJugadores2()){
-					System.out.println(jugador);
+					
 					datosPartida+=";"+jugador.getNombre()+";"+jugador.getPersonaje();
 				}
+				
 				
 				PaqueteMensaje mensaje = new PaqueteMensaje("InicioPartida",datosPartida,"EnSala"+sala.getNombreSala());
 				ManejadorDeImputOutput.avisarCambio(new Jugador("NULL","NULL"),mensaje,jugadoresLobby);
