@@ -32,10 +32,10 @@ public class HiloPartida extends Thread {
 	public void run() {
 		/*PROBABLE*/
 		 try {
-			int i=0;
+			int contadorRonda=0;
 			contadorTurno=1;
 			Gson gson= new Gson();
-			/*while (corriendo && i <sala.getPartida().getRondaMax()) {*/
+			while (corriendo && contadorRonda <sala.getPartida().getRondaMax()) {
 				int index=contadorTurno-1;
 				turno=sala.getJugadores2().get(index);
 				String datosTurno=turno.getNombre();
@@ -68,11 +68,13 @@ public class HiloPartida extends Thread {
 					Thread.sleep(2000);
 				}
 				contadorTurno++;
-				if(contadorTurno>sala.getPartida().getTurnos())
+				if(contadorTurno>sala.getPartida().getTurnos()) {
 					contadorTurno=1;
-			/*}	
-		/*} catch (IOException e){
-			e.printStackTrace();*/
+					contadorRonda++;
+				}
+		}
+		} catch (IOException e){
+			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
