@@ -48,12 +48,13 @@ public class HiloPartida extends Thread {
 				salida.writeUTF(mens);
 				System.out.println("aca");
 				String msj= gson.fromJson(entrada.readUTF(),String.class);
-				String mensajeCliente ="4;"+Integer.toString(index);//espera recibir numero del dado tirado y enviamos el turno del jugador
+				String mensajeCliente ="5;"+Integer.toString(index);//espera recibir numero del dado tirado y enviamos el turno del jugador
 				mensaje.setAccion("muestraDado");
 				mensaje.setObj(mensajeCliente);
 				System.out.println("aca");
 				ManejadorDeImputOutput.avisarCambioPartida(new Jugador("NULL","NULL"),mensaje,servidorCliente);//replicar para simular tirada de dado
-				msj= gson.fromJson(entrada.readUTF(),String.class);
+				Thread.sleep(3000);
+				//msj= gson.fromJson(entrada.readUTF(),String.class);//FIJARSE NO LO RECIBE BIEN /***SEGUIR DESDE ACA****/
 				mensaje.setAccion("muestraVentanaAtaca");
 				mensaje.setObj(Integer.toString(index));
 				mens=gson.toJson(mensaje);
