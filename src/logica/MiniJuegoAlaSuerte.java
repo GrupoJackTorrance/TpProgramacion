@@ -59,10 +59,23 @@ public class MiniJuegoAlaSuerte extends Minijuego {
 
 	// para agregar seleccionado a la lista de numeros ingresados
 	public void agregarNumero(int numero) {
-		this.numerosIngresados[this.i]=numero;
-		System.out.println("llego el numero: "+ numero);
-		this.i++;
-		this.cantJugados--;
+			this.numerosIngresados[this.i]=numero;
+			System.out.println("llego el numero: "+ numero);
+			Dado dado=new Dado();
+			this.cantJugados--;
+		while(cantJugados>0){
+			this.i++;
+			int num=dado.tirar();
+			this.ventana.getPanel().mostrarElegido(num);
+			System.out.println("llego el numero: "+ num);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			this.numerosIngresados[this.i]=num;
+			this.cantJugados--;
+		}
 		if(this.cantJugados==0) {
 			recompensaCastigo();
 			this.ventana.getPanel().mostrarResultados(this.jugadores);
