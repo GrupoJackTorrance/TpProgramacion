@@ -540,6 +540,17 @@ public class PanelVentanaTablero extends JPanel {
 			Thread.sleep(1200);
 			textPuntos.setVisible(false);
 		}
+		
+		public void mostrarAtaque(Jugador jugadorAtacado,String obj,Jugador jugadorTurno) throws InterruptedException {
+			textPuntos.setLocation(400, 20);
+			textPuntos.setOpaque(false);
+			textPuntos.setFont(new Font("Tahoma", Font.BOLD, 20));
+			textPuntos.setText(jugadorTurno.getNombre()+" utilizo objeto "+obj+" sobre "+jugadorAtacado.getNombre());
+			textPuntos.setVisible(true);
+			Thread.sleep(1200);
+			textPuntos.setVisible(false);
+		}
+		
 
 
 		public void setearObjetos(Jugador jugador) {
