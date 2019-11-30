@@ -77,12 +77,12 @@ public class Partida {
 			if(terminaJuego == false) {
 				Minijuego mini = null;
 				if(j==0){
-					mini= new MiniJuegoNoExplotes(this.jugadores);
-				}else if(j==1) {
 					mini= new MiniJuegoAlaSuerte(this.jugadores);
-				}else if(j>4) {
+				}else if(j==1) {
+					mini= new  MiniJuegoNoExplotes(this.jugadores);
+				}/*else if(j>4) {
 					mini= new MiniJuegoPalabras(this.jugadores);
-				}
+				}*/
 				j=(int) (Math.random()*2);
 				synchronized(mini){
 					if(terminaMiniJuego==false)
