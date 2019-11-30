@@ -82,6 +82,7 @@ public class PanelMiniJuegoAlaSuerte extends JPanel {
 		
 		//dado giratorio
 		add(dado);
+		dadoresultado.setVisible(true);
 		add(dadoresultado);
 		
 		add(textoResultado);
@@ -104,6 +105,7 @@ public class PanelMiniJuegoAlaSuerte extends JPanel {
 		boton6.addActionListener(botonesListener);
 		botonAceptarResultados.addActionListener(botonesListener);
 	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		txtpnEnEsteMinijuego.setFont(new Font("Courier",Font.BOLD,20));
@@ -142,6 +144,7 @@ public class PanelMiniJuegoAlaSuerte extends JPanel {
 		
 		
 		dadoresultado.setOpaque(false);
+		
 		dadoresultado.setLocation(700,00);
 		dadoresultado.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		dadoresultado.setForeground(new Color(102, 204, 204));
@@ -175,6 +178,7 @@ public class PanelMiniJuegoAlaSuerte extends JPanel {
 		botonAceptarResultados.setSize(200, 50);
 		
 	}
+	
 	class Botones implements ActionListener{
 
 		@Override
@@ -222,6 +226,7 @@ public class PanelMiniJuegoAlaSuerte extends JPanel {
 		}
 		
 	}
+	
 	
 	public void visibilizarModalidad() {
 		System.out.println("mostrando modalidad");
@@ -297,6 +302,17 @@ public class PanelMiniJuegoAlaSuerte extends JPanel {
 	
 	public void mostrarNumero(int numeroSorteado) {
 		dadoresultado.setText("El numero sorteado fue: "+numeroSorteado+" ");
+	}
+	
+	public void mostrarElegido(int numero) {
+		dadoresultado.setText("El numero elegido fue: "+numero+" ");
+		repaint();
+		try {
+			Thread.sleep(2000);
+			dadoresultado.setText("");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setearNombreDeTurnoJugador(String nombre) {
