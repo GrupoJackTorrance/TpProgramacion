@@ -45,7 +45,7 @@ public class HiloPartida extends Thread {
 				String datosTurno=turno.getNombre();
 				PaqueteMensaje mensaje = new PaqueteMensaje("EmpiezaTurno",datosTurno,"EnSala"+sala.getNombreSala());
 				ManejadorDeImputOutput.avisarCambioPartida(new Jugador("NULL","NULL"),mensaje,servidorCliente);
-				entrada = new DataInputStream(servidorCliente.get(turno).getInputStream());
+				entrada = new DataInputStream(clienteServidor.get(turno).getInputStream());
 				salida = new DataOutputStream(servidorCliente.get(turno).getOutputStream());
 				System.out.println("IPCLIENTE"+clienteServidor.get(turno).getInetAddress()+"IPSERVIDOR"+servidorCliente.get(turno).getInetAddress());
 				mensaje.setAccion("muestraTiraDado");
