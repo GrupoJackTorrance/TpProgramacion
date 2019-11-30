@@ -10,14 +10,13 @@ import grafica.VentanaTablero;
 
 public abstract class Tablero {
 	private String nombre;
-	protected Casilla  mapa[][];
-	public abstract Casilla[][] getMapa(); 
+	protected Casilla mapa[][];
 
+	public abstract Casilla[][] getMapa();
 
-	protected List<Jugador> jugadores=new LinkedList<Jugador>();
-	private  VentanaPregunta ventana;
-	private  VentanaTablero ventanaTablero;
-
+	protected List<Jugador> jugadores = new LinkedList<Jugador>();
+	private VentanaPregunta ventana;
+	private VentanaTablero ventanaTablero;
 
 	// ---------- C O N S T R U C T O R---------------------
 	public Tablero(List<Jugador> jugadores) {
@@ -27,45 +26,73 @@ public abstract class Tablero {
 		// EfectoRestarPuntos rojo
 		// EfectoNeutro azul
 		// EfectoDarObjeto amarillo
-		ventanaTablero=new VentanaTablero("tablero", 20, 20,this);
-	
+		ventanaTablero = new VentanaTablero("tablero", 20, 20, this);
+
 	}
-	
+
 	public int avanzarJugador(Jugador jugador, int cantidad) throws InterruptedException {
 
-		while (cantidad > 0 ) {
-			if(mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion() == false) {
-			if (puedeAvanzar(jugador, "izquierda")) {
-				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-				jugador.setLugarTableroY(jugador.getLugarTableroY() - 1);
-				this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador,"izquierda");
-			} else if (puedeAvanzar(jugador, "derecha")) {
-				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-				jugador.setLugarTableroY(jugador.getLugarTableroY() + 1);
-				this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador,"derecha");
-			} else if (puedeAvanzar(jugador, "arriba")) {
-				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-				jugador.setLugarTableroX(jugador.getLugarTableroX() - 1);
-				this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador,"arriba");
-			} else if (puedeAvanzar(jugador, "abajo")) {
-				jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
-				jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
-				jugador.setLugarTableroX(jugador.getLugarTableroX() + 1);
-				this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador,"abajo");
-			}
-			}
-			else
-				this.getVentanaTablero().getPanelTablero().mostrarOpciones(obtenerOpciones(jugador), jugador,cantidad);
-			
+		while (cantidad > 0) {
+			System.out.println("cantidad:"+cantidad);
+			if (mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].getEsUnion() == false) {
+				if (puedeAvanzar(jugador, "izquierda")) {
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroY(jugador.getLugarTableroY() - 1);
+					this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador, "izquierda");
+				} else if (puedeAvanzar(jugador, "derecha")) {
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroY(jugador.getLugarTableroY() + 1);
+					this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador, "derecha");
+				} else if (puedeAvanzar(jugador, "arriba")) {
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroX(jugador.getLugarTableroX() - 1);
+					this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador, "arriba");
+				} else if (puedeAvanzar(jugador, "abajo")) {
+					jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+					jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+					jugador.setLugarTableroX(jugador.getLugarTableroX() + 1);
+					this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador, "abajo");
+				}
+
+			} else {
+				if (jugador.getTipo().equals("IA")){
+					String[] direcciones = obtenerOpciones(jugador);
+					if (direcciones[2].equals("derecha")) {
+						jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+						jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+						jugador.setLugarTableroY(jugador.getLugarTableroY() + 1);
+						this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador, "derecha");
+						
+					} else if (direcciones[2].equals("izquierda")) {
+						jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+						jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+						jugador.setLugarTableroY(jugador.getLugarTableroY() - 1);
+						this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador, "izquierda");
+					} else if (direcciones[2].equals("arriba")) {
+						jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+						jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+						jugador.setLugarTableroX(jugador.getLugarTableroX() - 1);
+						this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador, "arriba");
+					}
+					else if(direcciones[2].equals("abajo")) {
+						jugador.setPosicionAnteriorX(jugador.getLugarTableroX());
+						jugador.setPosicionAnteriorY(jugador.getLugarTableroY());
+						jugador.setLugarTableroX(jugador.getLugarTableroX() + 1);
+						this.getVentanaTablero().getPanelTablero().movimientoJugador(jugador, "abajo");
+					}
+				}else {
+					this.getVentanaTablero().getPanelTablero().mostrarOpciones(obtenerOpciones(jugador), jugador, cantidad);
+				}
+				}
 			cantidad--;
 		}
-		
+
 		if (cantidad == 0)
 			mapa[jugador.getLugarTableroX()][jugador.getLugarTableroY()].aplicarEfecto(jugador);
-			this.getVentanaTablero().getPanelTablero().repaint();
+		this.getVentanaTablero().getPanelTablero().repaint();
 		return cantidad;
 	}
 
@@ -77,7 +104,7 @@ public abstract class Tablero {
 			i++;
 			opciones[i] = ((Integer) jugador.getLugarTableroY()).toString();
 			i++;
-			opciones[i] ="arriba";
+			opciones[i] = "arriba";
 			i++;
 		}
 		if (puedeAvanzar(jugador, "abajo")) {
@@ -134,6 +161,7 @@ public abstract class Tablero {
 
 		return false;
 	}
+
 	public int deseaAtacar(Jugador jugador) throws InterruptedException {
 		ventana = new VentanaPregunta();
 		this.ventana.setVisible(true);
@@ -143,15 +171,13 @@ public abstract class Tablero {
 	public VentanaTablero getVentanaTablero() {
 		return ventanaTablero;
 	}
-	
 
 	public List<Jugador> getJugadores() {
 		return this.jugadores;
 	}
-	
-	public void verTablero(){
+
+	public void verTablero() {
 		this.ventanaTablero.verTablero();
 	}
-	
 
 }
