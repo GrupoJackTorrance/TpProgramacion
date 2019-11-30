@@ -11,7 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +34,8 @@ public class PanelMiniJuegoNE extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private static int inter;
 	private static int inter2;
-	
+	private HashMap<String,JButton> botones= new HashMap<String,JButton>(); 
+	private HashMap<JButton,Boolean> botonesStatus= new HashMap<JButton,Boolean>();
 
 	private JButton boton1 = new JButton("1");
 	private JButton boton2 = new JButton("2");
@@ -67,6 +70,25 @@ public class PanelMiniJuegoNE extends JPanel {
 	private int tiempor=7; 
 
 	public PanelMiniJuegoNE(MiniJuegoNoExplotes mini2) {
+		botones.put("1", boton1);
+		botones.put("2", boton2);
+		botones.put("3", boton3);
+		botones.put("4", boton4);
+		botones.put("5", boton5);
+		botones.put("6", boton6);
+		botones.put("7", boton7);
+		botones.put("8", boton8);
+		botones.put("9", boton9);
+		botonesStatus.put(boton1,true);
+		botonesStatus.put(boton2,true);
+		botonesStatus.put(boton3,true);
+		botonesStatus.put(boton4,true);
+		botonesStatus.put(boton5,true);
+		botonesStatus.put(boton6,true);
+		botonesStatus.put(boton7,true);
+		botonesStatus.put(boton8,true);
+		botonesStatus.put(boton9,true);
+		
 		this.mini = mini2;
 		add(BOOM);
 		add(boton1);
@@ -209,9 +231,11 @@ public class PanelMiniJuegoNE extends JPanel {
 		botonAceptarResultados.setLocation(500, 175);
 		botonAceptarResultados.setSize(200, 50);
 
+		
 	}
 
 	class Botones implements ActionListener {
+	
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -298,8 +322,8 @@ public class PanelMiniJuegoNE extends JPanel {
 		jugador4.setVisible(false);
 		turnoJugador.setVisible(false);
 		turnoDe.setVisible(false);
-
 	}
+	
 
 	private void visibilizarMiniJuego() {
 		System.out.println("mostrando minijuego");
@@ -322,9 +346,18 @@ public class PanelMiniJuegoNE extends JPanel {
 	}
 
 	public void detonadorActivado(JButton boton) {
-		boton.setVisible(false);	
+		boton.setVisible(false);
+		botonesStatus.remove(boton);
+		botonesStatus.put(boton, false);
 	}
 	
+	public JButton VerDetonadoresSintocar() {
+		for (Map.Entry<JButton,Boolean> boton : botonesStatus.entrySet()) {
+			if(!boton.getValue())
+				return boton.getKey();
+		}
+		return boton1;
+	}
 	
 	
 
