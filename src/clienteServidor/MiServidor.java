@@ -68,6 +68,7 @@ public class MiServidor implements Runnable {
 				 System.out.println("nombre: "+ nombre);
 				 System.out.println("personaje: "+personaje);
 				Jugador jugadorCliente = new Jugador(personaje, nombre);
+				jugadorCliente.setTipo("Normal");
 				jugadorCliente.setUbicacion("Lobby");
 				System.out.println("LLEGO EL CLIENTE " + jugadorCliente.getNombre());
 				DataOutputStream salida = new DataOutputStream(clienteServidor.getOutputStream());
