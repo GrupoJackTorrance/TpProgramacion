@@ -11,6 +11,10 @@ public class Dado {
 		this.numero = randomGeneratorStub;
 
 	}
+	public  int tirarObj() {
+		return this.numero.obtenerAleatorioMenorQue(4)+1;
+	}
+	
 
 	public int tirar() {
 		return this.numero.obtenerAleatorioMenorQue(6) + 1; // El rango del dado es de 1 a 6
