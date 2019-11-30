@@ -33,28 +33,60 @@ public class Turno {
 			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
 			cantObjetos= jugador.getCantidadObjetos();//OBJETOS ANTES DE MOVERSE
 			puntosAnteriores = jugador.getPuntos(); //PUNTOS DEL JUGADOR ANTES DE TIRAR EL DADO
+			int cantidad;
+			if(turno==1)
+				cantidad = tablero.getVentanaTablero().getPanelTablero().tirodado(jugador);
+			else
+				cantidad=tablero.getVentanaTablero().getPanelTablero().tiraDado2(jugador);
 			
-			int cantidad = tablero.getVentanaTablero().getPanelTablero().tirodado(jugador);
 			tablero.getVentanaTablero().getPanelTablero().mostrarTiraDado(cantidad);
+			
 			//int cantidad = jugador.tirarDado();
 			//tablero.getVentanaTablero().getPanelTablero().mostrardado(cantidad);
-			tablero.avanzarJugador(jugador, cantidad);
+			
+				tablero.avanzarJugador(jugador, cantidad);
+			
+		
+				
 			if(puntosAnteriores != jugador.getPuntos()) 
 				tablero.getVentanaTablero().getPanelTablero().mostrarModificacionPts(jugador.getPuntos() - puntosAnteriores,jugador);
 			tablero.getVentanaTablero().getPanelTablero().setearObjetos(jugador);
 			if(cantObjetos != jugador.getCantidadObjetos())
 				tablero.getVentanaTablero().getPanelTablero().mostrarModificacionObjt(jugador.getCantidadObjetos()-cantObjetos, jugador);
 			// luego de tirar el dado y avanzar en casillero
-			int idObj;
-			if(jugador.getObjEfectos().getIdObjeto()!=0)
+			int idObj=0;
+			String nombreObj="";
+			if(jugador.getTipo().equals("normal")) {
+			if(jugador.getObjEfectos().getIdObjeto()!=0 )
 				idObj = tablero.deseaAtacar(jugador);//Para preguntar si el jugador quiere atacar o no
 			else
 				idObj = 0;
+			}else {
+				Dado dado= new Dado();
+				int cant=dado.tirarObj();
+				if(jugador.getObj1().getIdObjeto()!=0 && cant==1){
+					idObj=jugador.getObj1().getIdObjeto();
+				
+				}else if (jugador.getObj2().getIdObjeto()!=0 && cant==2) {
+					idObj=jugador.getObj2().getIdObjeto();
+				}else if (jugador.getObj3().getIdObjeto()!=0 && cant==3) {
+					idObj=jugador.getObj3().getIdObjeto();
+				}
+			}
+			
+			if(idObj==1)
+				nombreObj="Descontar 5 puntos";
+			else if(idObj==2)
+				nombreObj="robar 8 puntos";
+			else if(idObj==3)
+				nombreObj="Duplica Puntaje";
+				
 			while (termino == false) {
 				do {
 					try {
 
 						while (termino == false) {
+							
 							if (idObj == 999 || idObj == 0)
 								termino = true;
 							else  {
@@ -63,10 +95,15 @@ public class Turno {
 										JOptionPane.showMessageDialog(null, "No se pudo atacar a "+ listaJugadores.get(jugadorAtacado).getNombre() +" porque no tiene objetos");
 										termino = true;
 									} else {
+										
+										tablero.getVentanaTablero().getPanelTablero().mostrarAtaque(listaJugadores.get(jugadorAtacado),nombreObj, jugador);
 										termino = true;
 										//tablero.getVentanaTablero().getPanelTablero().mostrarModificacionPts(listaJugadores.get(jugadorAtacado).getPuntos() - puntosAnteriores);
 									}
 							}
+							
+							
+							
 						}
 						System.out.println("*********************************************");
 						System.out.println("****************PROXIMO TURNO****************");
