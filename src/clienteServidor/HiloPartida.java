@@ -9,6 +9,7 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 
 import grafica.VentanaResultado;
+import logica.Dado;
 import logica.Jugador;
 import logica.Sala;
 
@@ -52,7 +53,12 @@ public class HiloPartida extends Thread {
 				salida.writeUTF(mens);
 				System.out.println("aca");
 				//msj= gson.fromJson(entrada.readUTF(),String.class);
-				String mensajeCliente ="5;"+Integer.toString(index);//espera recibir numero del dado tirado y enviamos el turno del jugador
+				Dado dado= new Dado();
+				int num=dado.tirar();
+				if(num==6) {
+					num--;
+				}
+				String mensajeCliente =num+";"+Integer.toString(index);//espera recibir numero del dado tirado y enviamos el turno del jugador
 				mensaje.setAccion("muestraDado");
 				mensaje.setObj(mensajeCliente);
 				System.out.println("aca");
