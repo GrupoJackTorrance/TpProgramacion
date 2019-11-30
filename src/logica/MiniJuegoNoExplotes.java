@@ -83,7 +83,10 @@ public class MiniJuegoNoExplotes extends Minijuego {
 		if (this.cantJugados <= 1 || cantNumerosIngresados == 9) {
 			terminaJuego();
 		} else {
+			
 			this.ventana.getPanel().setearNombreDeTurnoJugador(this.jugadoresvivos.get(i).getNombre());
+			/*if(this.jugadoresvivos.get(i).getTipo().equals("IA"))
+				elegirDetonador(10,ventana.getPanel().VerDetonadoresSintocar());*/
 			this.ventana.getPanel().setearTiempo(tiemporeset);
 		}
 
