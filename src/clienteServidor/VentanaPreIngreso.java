@@ -13,7 +13,6 @@ import javax.swing.SwingConstants;
 
 import logica.EfectoDarObjeto;
 import logica.Jugador;
-import logica.Main;
 import logica.ObjDescuentaPuntos;
 import logica.ObjDuplicarPuntaje;
 import logica.ObjRobarPuntos;
