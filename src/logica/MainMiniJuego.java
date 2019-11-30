@@ -15,8 +15,7 @@ public class MainMiniJuego {
 		jugadores.add(jugador2);
 		jugadores.add(jugador3);
 		jugadores.add(jugador4);
-		Minijuego mini= new MiniJuegoNoExplotes(jugadores);
-		
+		Minijuego mini= new MiniJuegoAlaSuerte(jugadores);
 	}
 
 }
