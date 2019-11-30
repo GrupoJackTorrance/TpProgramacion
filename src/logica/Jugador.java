@@ -17,9 +17,19 @@ public class Jugador implements Comparable<Jugador> {
 	private String nombre;
 	private Personaje miPersonaje;
 	private String ubicacion;
+	private String tipo;
 
 	public String getUbicacion() {
 		return ubicacion;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 
